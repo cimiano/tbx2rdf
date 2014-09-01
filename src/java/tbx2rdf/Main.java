@@ -44,9 +44,9 @@ public class Main {
         final Mappings mappings;
 
         //Uncomment the next line for a fast test
-        // args = new String[1];
-        // args[0] = "samples/test.xml";
-
+         args = new String[1];
+         args[0] = "samples/simple1.xml";
+        
         if (args.length == 0) {
             System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)?");
             System.out.println("If no OUTPUT_FILE is provided, then <INPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
