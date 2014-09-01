@@ -30,7 +30,7 @@ public class TermNote extends impIDLangTypeTgtDtyp {
         if(type == null) {
             System.err.println("Null type ignored!");            
         } else if(type instanceof IndividualMapping) {
-            System.err.println("Using individual mapping as a proprerty! <" + type.getURL() + ">");
+            System.err.println("Using individual mapping as a property! <" + type.getURL() + ">");
             parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
         } else if(type instanceof ObjectPropertyMapping) {
             parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));

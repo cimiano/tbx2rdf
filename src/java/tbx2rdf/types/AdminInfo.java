@@ -40,7 +40,7 @@ public class AdminInfo extends impIDLangTypeTgtDtyp {
                 parent.addProperty(DCTerms.source, model.createResource(target));
             }
         } else if(type instanceof IndividualMapping) {
-            System.err.println("Using individual mapping as a proprerty! <" + type.getURL() + ">");
+            System.err.println("Using individual mapping as a property! <" + type.getURL() + ">");
             parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
         } else {
             throw new RuntimeException("Unexpected mapping type: " + type);
