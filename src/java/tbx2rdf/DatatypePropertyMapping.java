@@ -35,7 +35,7 @@ public class DatatypePropertyMapping implements Mapping {
 	
 	public String toString()
 	{
-		return propertyURL + allowedValues;
+		return String.format("Datatype property: <%s> {%s}",propertyURL,allowedValues);
 	}
 	
 }
