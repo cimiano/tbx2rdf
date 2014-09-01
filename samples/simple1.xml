@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<martif type="TBX-Default" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>This is a TBX file downloaded from the IATE website. Address any enquiries to iate@cdt.europa.eu.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+      <termEntry id="IATE-14">
+        <descripGrp>
+          <descrip type="subjectField">1011</descrip>
+        </descripGrp>
+ 	<langSet xml:lang="en">
+          <tig>
+            <term>competence of the Member States</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+   </termEntry>
+</body>
+</text>	
