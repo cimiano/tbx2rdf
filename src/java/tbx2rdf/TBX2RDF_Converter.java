@@ -556,7 +556,7 @@ public class TBX2RDF_Converter {
         for(Element elem : children(node)) {
            final String name = elem.getTagName();
            if(name.equalsIgnoreCase("term")) {
-               processTerm(entry, node, mappings);
+               processTerm(entry, elem, mappings);
            } else if(name.equalsIgnoreCase("termNote")) {
                entry.TermNotes.add(new TermNoteGrp(processTermNote(elem, mappings), mappings.defaultLanguage, mappings));
            } else if(name.equalsIgnoreCase("termNoteGrp")) {
@@ -722,6 +722,7 @@ public class TBX2RDF_Converter {
                 processXReference(termCompList, e, mappings);
             }
         }
+        termCompList.termComp.add(termCompGrp);
     }
 
 
