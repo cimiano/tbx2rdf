@@ -37,7 +37,8 @@ public class Term extends Describable {
         for (LexicalEntry entry : Lex_entries) {
             final Resource entryRes = entry.getRes(model);
             parent.addProperty(ONTOLEX.entry, entryRes);
-            term.addProperty(ONTOLEX.lexicalizedSense, entryRes);
+            final Resource senseRes = entry.getSubRes(model, "Sense");
+            term.addProperty(ONTOLEX.lexicalizedSense, senseRes);
             entry.toRDF(model, term);
         }
 
