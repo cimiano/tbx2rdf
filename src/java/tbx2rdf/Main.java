@@ -42,10 +42,7 @@ public class Main {
 //        final HashMap<String, Lexicon> lexica = new HashMap<String, Lexicon>();
 //        final Set<Term> terms = new HashSet<Term>();
         final Mappings mappings;
-
-        //Uncomment the next line for a fast test
-         args = new String[1];
-         args[0] = "samples/simple1.xml";
+        
         
         if (args.length == 0) {
             System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)?");
