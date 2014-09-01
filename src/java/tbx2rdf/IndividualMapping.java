@@ -15,4 +15,9 @@ public class IndividualMapping implements Mapping {
     public String getURL() {
 	return url;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("Individiual <%s>", url);
+    }
 }

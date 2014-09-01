@@ -37,7 +37,7 @@ public class AdminInfo extends impIDLangTypeTgtDtyp {
                 parent.addProperty(DCTerms.source, model.createResource(target));
             }
         } else {
-            throw new RuntimeException("Unexpected mapping type");
+            throw new RuntimeException("Unexpected mapping type: " + type);
         }
     }
     

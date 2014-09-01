@@ -25,7 +25,7 @@ public class ObjectPropertyMapping implements Mapping{
 	
    public String toString()
    {
-	   return propertyURL + XML_Attribute;
+	   return String.format("ObjectProperty <%s>^^<%s>",propertyURL, XML_Attribute);
    }
 	
 	
