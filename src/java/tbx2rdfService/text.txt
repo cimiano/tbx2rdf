@@ -1,0 +1,186 @@
+@prefix tbx:   <http://lider-project.eu/tbx#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc:   <http://purl.org/dc/terms/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix ontolex: <http://www.w3.org/ns/ontolex#> .
+@prefix provo:  <http://www.w3.org/ns/prov#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp/> .
+@prefix void: <http://www.w3.org/TR/void/> .
+
+
+_:dataset rdf:type void:Dataset ;
+dc:contributor <http://www.lider-project.eu/> .
+
+
+
+_:Term_2151845 rdf:type skos:Concept;
+tbx:subjectField "TaaS-1500";
+ontolex:lexicalizedBy _:Sense_LE_2151845EN1;
+ontolex:lexicalizedBy _:Sense_LE_2151845LV1.
+
+_:Lexicon_lv rdf:type ontolex:Lexicon;
+ontolex:language "lv";
+ontolex:entry _:Lex_LE_2151845LV1.
+
+_:LE_2151845LV1 rdf:type ontolex:LexicalEntry;
+ontolex:language "lv";
+tbx:status "approved";
+dc:source "http://www.eurotermbank.com/search.aspx?text=World%20Wide%20Web&langfrom=en&langto=lv&where=etb&advanced=false#pos=1";
+ontolex:sense _:Sense_LE_2151845LV1;
+ontolex:canonicalForm _:CanonicalForm_LE_2151845LV1;
+tbx:xref _:LE_2151845LV1_XRef_1.
+
+_:CanonicalForm_LE_2151845LV1 ontolex:writtenRep "globālais tīmeklis"@lv.
+
+_:LE_2151845LV1_XRef_1 rdf:type tbx:XReference;
+ tbx:target "http://www.eurotermbank.com/Collection.aspx?collectionid=390#1121964";
+ tbx:type "xSource";
+ tbx:value "Angļu–latviešu–krievu informātikas termini".
+
+
+_:LE_2151845LV1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-08" ;
+ provo:wasAssociatedWith "Extracted automatically by TaaS";
+ tbx:transactionType "origination"
+] .
+
+_:LE_2151845LV1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-16T14:50:42.018Z" ;
+ provo:wasAssociatedWith "GornostayT";
+ tbx:transactionType "approval"
+] .
+
+_:LE_2151845LV1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-16T14:59:00.814Z" ;
+ provo:wasAssociatedWith "GornostayT";
+ tbx:transactionType "modification"
+] .
+
+
+
+
+_:Lexicon_en rdf:type ontolex:Lexicon;
+ontolex:language "en";
+ontolex:entry _:Lex_LE_2151845EN1.
+
+_:LE_2151845EN1 rdf:type ontolex:LexicalEntry;
+ontolex:language "en";
+tbx:status "approved";
+ontolex:definition "A set of interlinked documents in a hypertext system. The user enters the web through a home page.";
+dc:source "http://www.eurotermbank.com/search.aspx?text=World%20Wide%20Web&langfrom=en&langto=lv&where=etb&advanced=false#pos=1";
+ontolex:sense _:Sense_LE_2151845EN1;
+ontolex:canonicalForm _:CanonicalForm_LE_2151845EN1;
+decomp:constituent _:LE_2151845EN1_Component_1;
+decomp:constituent _:LE_2151845EN1_Component_2;
+decomp:constituent _:LE_2151845EN1_Component_3;
+ontolex:otherForm _:LE_2151845EN1_Form_1;
+ontolex:otherForm _:LE_2151845EN1_Form_2;
+ontolex:otherForm _:LE_2151845EN1_Form_3;
+tbx:context _:LE_2151845EN1_Context_1;
+tbx:context _:LE_2151845EN1_Context_2;
+tbx:context _:LE_2151845EN1_Context_3.
+
+_:CanonicalForm_LE_2151845EN1 ontolex:writtenRep "World Wide Web"@en;
+tbx:MSD "NNP NNP NNP".
+
+_:LE_2151845EN1_Component_1 decomp:identifies _:LE_World.
+_:LE_2151845EN1_Component_2 decomp:identifies _:LE_Wide.
+_:LE_2151845EN1_Component_3 decomp:identifies _:LE_Web.
+
+_:LE_2151845EN1_Form_1 ontolex:writtenRep "World Wide Web"@en;
+tbx:lemma "World Wide Web";
+tbx:normalizedMSD "NNP NNP NNP";
+tbx:normalizedForm "World Wide Web";
+tbx:surfaceForm "World Wide Web";
+tbx:context _:LE_2151845EN1_Context_1;
+tbx:surfaceMSD "NNP NNP NNP".
+
+_:LE_2151845EN1_Form_2 ontolex:writtenRep "World Wide Web"@en;
+tbx:lemma "World Wide Web";
+tbx:normalizedMSD "NNP NNP NNP";
+tbx:normalizedForm "World Wide Web";
+tbx:surfaceForm "World Wide Web";
+tbx:context _:LE_2151845EN1_Context_2;
+tbx:surfaceMSD "NNP NNP NNP".
+
+_:LE_2151845EN1_Form_3 ontolex:writtenRep "World Wide Web"@en;
+tbx:lemma "World Wide Web";
+tbx:normalizedMSD "NNP NNP NNP";
+tbx:normalizedForm "World Wide Web";
+tbx:surfaceForm "World Wide Web";
+tbx:context _:LE_2151845EN1_Context_3;
+tbx:surfaceMSD "NNP NNP NNP".
+
+
+_:LE_2151845EN1_Context_1 rdf:type tbx:Context;
+ tbx:description "nature of the World Wide Web for communication in";
+ tbx:target "About The Project.htm";
+ tbx:type "sourceIdentifier".
+
+_:LE_2151845EN1_Context_2 rdf:type tbx:Context;
+ tbx:description "viability of the World Wide Web is paramount. In";
+ tbx:target "About The Project.htm";
+ tbx:type "sourceIdentifier".
+
+_:LE_2151845EN1_Context_3 rdf:type tbx:Context;
+ tbx:description "driven by the World Wide Web Consortium (W3C), an";
+ tbx:target "About The Project.htm";
+ tbx:type "sourceIdentifier".
+
+
+_:LE_World rdf:type ontolex:LexicalEntry;
+ontolex:language "en";
+ontolex:sense _:Sense_LE_World;
+ontolex:canonicalForm _:CanonicalForm_LE_World.
+
+_:CanonicalForm_LE_World ontolex:writtenRep "World"@en;
+tbx:grammaticalNumber "singular";
+tbx:partOfSpeech "noun".
+
+_:LE_Wide rdf:type ontolex:LexicalEntry;
+ontolex:language "en";
+ontolex:sense _:Sense_LE_Wide;
+ontolex:canonicalForm _:CanonicalForm_LE_Wide.
+
+_:CanonicalForm_LE_Wide ontolex:writtenRep "Wide"@en;
+tbx:grammaticalNumber "singular";
+tbx:partOfSpeech "adjective".
+
+_:LE_Web rdf:type ontolex:LexicalEntry;
+ontolex:language "en";
+ontolex:sense _:Sense_LE_Web;
+ontolex:canonicalForm _:CanonicalForm_LE_Web.
+
+_:CanonicalForm_LE_Web ontolex:writtenRep "Web"@en;
+tbx:grammaticalNumber "singular";
+tbx:partOfSpeech "noun".
+
+
+_:LE_2151845EN1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-08" ;
+ provo:wasAssociatedWith "Extracted automatically by TaaS";
+ tbx:transactionType "origination"
+] .
+
+_:LE_2151845EN1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-16T14:50:08.467Z" ;
+ provo:wasAssociatedWith "GornostayT";
+ tbx:transactionType "approval"
+] .
+
+_:LE_2151845EN1 provo:wasGeneratedBy  [
+ a provo:Activity ;
+ provo:endedAtTime "2014-05-16T14:59:00.821Z" ;
+ provo:wasAssociatedWith "GornostayT";
+ tbx:transactionType "modification"
+] .
+
+
+
+

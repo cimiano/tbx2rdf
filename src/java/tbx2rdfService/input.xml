@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE martif SYSTEM "http://www.ttt.org/oscarstandards/tbx/TBXcoreStructV02.dtd">
+<martif type="TBX" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>LOD_experiment</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">http://www.ttt.org/oscarstandards/tbx/TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body><termEntry id="2151845">
+  <descrip type="subjectField">TaaS-1500</descrip>
+  <langSet xml:lang="lv" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <ntig>
+      <termGrp>
+        <term>globālais tīmeklis</term>
+        <termCompList type="lemma" />
+      </termGrp>
+      <xref target="http://www.eurotermbank.com/Collection.aspx?collectionid=390#1121964" type="xSource">Angļu–latviešu–krievu informātikas termini</xref>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <date>2014-05-08</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-05-16T14:50:42.018Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+      <admin type="sourceIdentifier">http://www.eurotermbank.com/search.aspx?text=World%20Wide%20Web&amp;langfrom=en&amp;langto=lv&amp;where=etb&amp;advanced=false#pos=1</admin>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-05-16T14:59:00.814Z</date>
+      </transacGrp>
+    </ntig>
+    <note>Microsoft Public Terminology Collection</note>
+  </langSet>
+  <langSet xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <ntig>
+      <termGrp>
+        <term>World Wide Web</term>
+        <termNote type="MSD">NNP NNP NNP</termNote>
+        <termCompList type="lemma">
+          <termCompGrp>
+            <termComp>World</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>Wide</termComp>
+            <termNote type="partOfSpeech">adjective</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>Web</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+        </termCompList>
+      </termGrp>
+      <descripGrp>
+        <descrip type="surface">World Wide Web</descrip>
+        <descripNote type="surfaceForm">World Wide Web</descripNote>
+        <descripNote type="surfaceMSD">NNP NNP NNP</descripNote>
+        <descripNote type="normalizedForm">World Wide Web</descripNote>
+        <descripNote type="normalizedMSD">NNP NNP NNP</descripNote>
+        <descripNote type="lemma">World Wide Web</descripNote>
+        <descripNote type="context">nature of the<hi>World Wide Web</hi>for communication in</descripNote>
+        <descripNote type="file">About The Project.htm</descripNote>
+      </descripGrp>
+      <descripGrp>
+        <descrip type="surface">World Wide Web</descrip>
+        <descripNote type="surfaceForm">World Wide Web</descripNote>
+        <descripNote type="surfaceMSD">NNP NNP NNP</descripNote>
+        <descripNote type="normalizedForm">World Wide Web</descripNote>
+        <descripNote type="normalizedMSD">NNP NNP NNP</descripNote>
+        <descripNote type="lemma">World Wide Web</descripNote>
+        <descripNote type="context">viability of the<hi>World Wide Web</hi>is paramount. In</descripNote>
+        <descripNote type="file">About The Project.htm</descripNote>
+      </descripGrp>
+      <descripGrp>
+        <descrip type="surface">World Wide Web</descrip>
+        <descripNote type="surfaceForm">World Wide Web</descripNote>
+        <descripNote type="surfaceMSD">NNP NNP NNP</descripNote>
+        <descripNote type="normalizedForm">World Wide Web</descripNote>
+        <descripNote type="normalizedMSD">NNP NNP NNP</descripNote>
+        <descripNote type="lemma">World Wide Web</descripNote>
+        <descripNote type="context">driven by the<hi>World Wide Web</hi>Consortium (W3C), an</descripNote>
+        <descripNote type="file">About The Project.htm</descripNote>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <date>2014-05-08</date>
+      </transacGrp>
+      <xref target="http://taas.eurotermbank.com/extractor" type="xSource" />
+      <descripGrp>
+        <descrip type="context">nature of the<hi>World Wide Web</hi>for communication in</descrip>
+        <admin target="About The Project.htm" type="sourceIdentifier" />
+      </descripGrp>
+      <descripGrp>
+        <descrip type="context">viability of the<hi>World Wide Web</hi>is paramount. In</descrip>
+        <admin target="About The Project.htm" type="sourceIdentifier" />
+      </descripGrp>
+      <descripGrp>
+        <descrip type="context">driven by the<hi>World Wide Web</hi>Consortium (W3C), an</descrip>
+        <admin target="About The Project.htm" type="sourceIdentifier" />
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-05-16T14:50:08.467Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+      <admin type="sourceIdentifier">http://www.eurotermbank.com/search.aspx?text=World%20Wide%20Web&amp;langfrom=en&amp;langto=lv&amp;where=etb&amp;advanced=false#pos=1</admin>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-05-16T14:59:00.821Z</date>
+      </transacGrp>
+    </ntig>
+    <note>Microsoft Public Terminology Collection</note>
+    <descrip type="definition">A set of interlinked documents in a hypertext system. The user enters the web through a home page.</descrip>
+  </langSet>
+</termEntry></body>
+  </text>
+</martif>
