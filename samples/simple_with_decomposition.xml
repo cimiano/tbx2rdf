@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE martif SYSTEM "http://www.ttt.org/oscarstandards/tbx/TBXcoreStructV02.dtd">
+<martif type="TBX" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>Small example to test decomposition</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">http://www.ttt.org/oscarstandards/tbx/TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body><termEntry id="2151845">
+  <descrip type="subjectField">TaaS-1500</descrip>
+   <langSet xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+    <ntig>
+      <termGrp>
+        <term>World Wide Web</term>
+        <termNote type="MSD">NNP NNP NNP</termNote>
+        <termCompList type="lemma">
+          <termCompGrp>
+            <termComp>World</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>Wide</termComp>
+            <termNote type="partOfSpeech">adjective</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>Web</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+        </termCompList>
+      </termGrp>
+    </ntig>
+   </langSet>
+</termEntry>
+</body>
+</text>
+</martif>
+	
+
+
