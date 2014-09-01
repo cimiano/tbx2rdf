@@ -47,7 +47,8 @@ public class Mappings {
                         set.add(values[i]);
                     }
                 }
-                mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new DatatypePropertyMapping(matcher.group(4), set));            } else if((matcher = mapping3.matcher(strLine)).find()) {
+                mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new DatatypePropertyMapping(matcher.group(4), set));
+            } else if((matcher = mapping3.matcher(strLine)).find()) {
 		mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new IndividualMapping(matcher.group(4)));
 	    } else {
 		throw new RuntimeException("Bad line in mapping file: " + strLine);
