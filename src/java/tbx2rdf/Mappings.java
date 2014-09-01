@@ -30,16 +30,15 @@ public class Mappings {
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String strLine;
-        Pattern mapping1 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t(\\S*?)\tOP\t(\\S*?)$");
-        Pattern mapping2 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t(\\S*?)\tDP(\t\\{(.*?)\\})?$");
-	Pattern mapping3 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t(\\S*?)");
+        Pattern mapping1 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*?)>\tOP\t(\\S*?)$");
+        Pattern mapping2 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*?)>\tDP(\t\\{(.*?)\\})?$");
+	Pattern mapping3 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*)>$");
         Set<String> set;
         String[] values;
         Matcher matcher;
         while ((strLine = br.readLine()) != null) {
             if((matcher = mapping1.matcher(strLine)).find()) {
                 mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new ObjectPropertyMapping(matcher.group(4), matcher.group(5)));
-                System.out.println("Getting out mapping: " + mappings.getMapping(matcher.group(1), matcher.group(2), matcher.group(3)));
             } else if((matcher = mapping2.matcher(strLine)).find()) {
                 set = new HashSet<String>();
                 if (matcher.group(6) != null) {
@@ -49,7 +48,6 @@ public class Mappings {
                     }
                 }
                 mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new DatatypePropertyMapping(matcher.group(4), set));
-                System.out.println("Getting out mapping: " + mappings.getMapping(matcher.group(1), matcher.group(2), matcher.group(3)));
             } else if((matcher = mapping3.matcher(strLine)).find()) {
 		mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new IndividualMapping(matcher.group(4)));
 	    } else {
