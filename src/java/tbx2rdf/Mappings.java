@@ -72,7 +72,7 @@ public class Mappings {
 	public void addMapping(String element, String attribute, String value, Mapping mapping)
 	{
 		
-		System.out.print("Adding mapping for: "+element+" "+attribute+" "+value+" "+mapping);
+		//System.out.print("Adding mapping for: "+element+" "+attribute+" "+value+" "+mapping);
 		
 		HashMap<String,HashMap<String,Mapping>> element2attr;
 		

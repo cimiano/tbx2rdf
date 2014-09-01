@@ -7,6 +7,7 @@ import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDF;
 import org.w3c.dom.NodeList;
 import tbx2rdf.DatatypePropertyMapping;
+import tbx2rdf.IndividualMapping;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
 import tbx2rdf.ObjectPropertyMapping;
@@ -22,7 +23,9 @@ public class AdminInfo extends impIDLangTypeTgtDtyp {
 
     @Override
     public void toRDF(Model model, Resource parent) {
-        if(type instanceof ObjectPropertyMapping) {
+        if(type == null) {
+            System.err.println("Null type ignored!");
+        } else if(type instanceof ObjectPropertyMapping) {
             parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
             if(value.getLength() > 0) {
                 parent.addProperty(RDF.value, nodelistToString(value), XMLLiteral);
@@ -36,6 +39,9 @@ public class AdminInfo extends impIDLangTypeTgtDtyp {
             if(target != null && !target.equals("")) {
                 parent.addProperty(DCTerms.source, model.createResource(target));
             }
+        } else if(type instanceof IndividualMapping) {
+            System.err.println("Using individual mapping as a proprerty! <" + type.getURL() + ">");
+            parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
         } else {
             throw new RuntimeException("Unexpected mapping type: " + type);
         }

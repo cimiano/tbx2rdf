@@ -838,10 +838,15 @@ public class TBX2RDF_Converter {
 
     private Mapping processType(Element sub, Mappings mappings, boolean required) {
         if(sub.hasAttribute("type")) {
-            return mappings.getMapping(sub.getTagName(), "type", sub.getAttribute("type"));
+            final Mapping m = mappings.getMapping(sub.getTagName(), "type", sub.getAttribute("type"));
+            if(m == null && required) {
+                System.err.println("Unrecognised mapping for <" + sub.getTagName() + " type=\"" + sub.getAttribute("type") + "\">");
+            }
+            return m;
         } else if(required) {
             throw new TBXFormatException("type expected");
         } else {
+            System.err.println("Null type on " + sub.getTagName());
             return null;
         }
     }
