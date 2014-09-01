@@ -380,7 +380,7 @@ public class TBX2RDF_Converter {
             } else if (name.equals("termNote")) {
                 entry.TermNotes.add(new TermNoteGrp(this.processTermNote(tig_child, mappings), mappings.defaultLanguage, mappings));
             } else {
-                processAuxInfo(entry, tig, mappings);
+                processAuxInfo(entry, tig_child, mappings);
             }
             i++;
         }

@@ -34,7 +34,7 @@ descrip	type	conceptPosition	<http://tbx2rdf.lider-project.eu/tbx#conceptPositio
 descrip	type	context	<http://tbx2rdf.lider-project.eu/tbx#context>
 descrip	type	coordinateConceptGeneric	<http://tbx2rdf.lider-project.eu/tbx#coordinateConceptGeneric>
 descrip	type	coordinateConceptPartitive	<http://tbx2rdf.lider-project.eu/tbx#coordinateConceptPartitive>
-descrip	type	definition	<http://tbx2rdf.lider-project.eu/tbx#definition>
+descrip	type	definition	<http://tbx2rdf.lider-project.eu/tbx#definition>    DP
 descrip	type	example	<http://tbx2rdf.lider-project.eu/tbx#example>
 descrip	type	explanation	<http://tbx2rdf.lider-project.eu/tbx#explanation>
 descrip	type	figure	<http://tbx2rdf.lider-project.eu/tbx#figure>

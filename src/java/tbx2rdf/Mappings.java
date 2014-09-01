@@ -30,9 +30,9 @@ public class Mappings {
         DataInputStream in = new DataInputStream(fstream);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String strLine;
-        Pattern mapping1 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*?)>\tOP\t(\\S*?)$");
-        Pattern mapping2 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*?)>\tDP(\t\\{(.*?)\\})?$");
-	Pattern mapping3 = Pattern.compile("^(\\S*?)\t(\\S*?)\t(\\S*?)\t<(\\S*)>$");
+        Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP\\s*(\\S*?)$");
+        Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP(\\s*\\{(.*?)\\})?$");
+	Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>$");
         Set<String> set;
         String[] values;
         Matcher matcher;
