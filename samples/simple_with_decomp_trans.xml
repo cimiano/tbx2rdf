@@ -18,7 +18,6 @@
     <ntig>
       <termGrp>
         <term>World Wide Web</term>
-        <termNote type="MSD">NNP NNP NNP</termNote>
         <termCompList type="lemma">
           <termCompGrp>
             <termComp>World</termComp>

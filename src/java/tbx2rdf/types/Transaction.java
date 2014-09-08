@@ -5,6 +5,8 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
+
 import tbx2rdf.DatatypePropertyMapping;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
@@ -73,10 +75,34 @@ public class Transaction extends impIDLangTypeTgtDtyp {
     @Override
     public void toRDF(Model model, Resource parent) {
        if(type instanceof ObjectPropertyMapping) {
-            parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
-            if(!value.equals("")) {
-                parent.addProperty(RDF.value, value, lang);
-            }
+    	   
+    	   
+    	   if (((ObjectPropertyMapping) type).getTargetAtttribute() != null)
+    	   {
+    		   parent.addProperty(model.createProperty(type.getURL()), model.createResource(target));
+       		}
+    	   
+    	   else if (((ObjectPropertyMapping) type).getAllowedValues() != null)
+    	   {
+    		   if (((ObjectPropertyMapping) type).getAllowedValues().contains(value))
+        		{
+          		   parent.addProperty(model.createProperty(type.getURL()), model.createResource("tbx:"+value));
+
+        		}
+        		else
+        		{
+        			throw new RuntimeException("Undefined value: "+target+" for type"+ "<type>" +" in element TermNote!\n");
+        		}
+    	   }
+    	   
+       		else
+       		{
+       			Resource myRes = model.createResource("someNewResource");
+       		
+       			parent.addProperty(model.createProperty(type.getURL()), myRes );
+       			model.add(myRes,RDFS.label, model.createLiteral(value));
+       		}
+
         } else if(type instanceof DatatypePropertyMapping) {
             if(datatype != null) {
                 parent.addProperty(model.createProperty(type.getURL()), value, NodeFactory.getType(datatype));

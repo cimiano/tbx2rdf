@@ -1,18 +1,18 @@
-termNote	type	animacy	<http://lider-project.eu/tbx#animacy>	DP {animate,inanimate,otherAnimacy}
+termNote	type	animacy	<http://lider-project.eu/tbx#animacy>	OP	animate,inanimate,otherAnimacy}
 termNote	type	etymology	<http://lider-project.eu/tbx#etymology>	DP
-termNote	type	frequency	<http://lider-project.eu/tbx#frequency> DP {ommonlyUsed,infrequentlyUsed,rarelyUsed}
+termNote	type	frequency	<http://lider-project.eu/tbx#frequency>	OP	{commonlyUsed,infrequentlyUsed,rarelyUsed}
 termNote	type	geographicalUsage	<http://lider-project.eu/tbx#geographicalUsage>	DP
-termNote	type	grammaticalGender	<http://lider-project.eu/tbx#grammaticalGender>	DP {masculine,feminine,neuter,otherGender}
-termNote	type	grammaticalNumber	<http://lider-project.eu/tbx#grammaticalNumber>	DP {singular,plural,dual,mass,otherNumber}
+termNote	type	grammaticalGender	<http://lider-project.eu/tbx#grammaticalGender>	OP	{masculine,feminine,neuter,otherGender}
+termNote	type	grammaticalNumber	<http://lider-project.eu/tbx#grammaticalNumber>	OP	{singular,plural,dual,mass,otherNumber}
 termNote	type	grammaticalValency	<http://lider-project.eu/tbx#grammaticalValency>	DP
-termNote	type	language-planningQualifier	<http://lider-project.eu/tbx#languagePlanningQualifier>	DP	{recommendedTerm, nonstandardizedTerm,proposedTerm,newTerm}
-termNote	type	normativeAuthorization	<http://lider-project.eu/tbx#normativeAuthorization>	DP	{standardizedTerm,preferredTerm,admittedTerm,deprecatedTerm,supersededTerm,legalTerm,regulatedTerm}
-termNote	type	partOfSpeech	<http://lider-project.eu/tbx#partOfSpeech>
-termNote	type	proprietaryRestriction	<http://lider-project.eu/tbx#proprietaryRestriction>	DP	{trademark,serviceMark,tradeName}
-termNote	type	register	<http://lider-project.eu/tbx#register>	DP	{colloquialRegister,neutralRegister,technicalRegister,in-houseRegister,bench-levelRegister,slangRegister,vulgarRegister}
-termNote	type	temporalQualifier	<http://lider-project.eu/tbx#temporalQualifiery>	DP	{archaicTerm,outdatedTerm, obsoleteTerm}
+termNote	type	language-planningQualifier	<http://lider-project.eu/tbx#languagePlanningQualifier>	OP	{recommendedTerm, nonstandardizedTerm,proposedTerm,newTerm}
+termNote	type	normativeAuthorization	<http://lider-project.eu/tbx#normativeAuthorization>	OP	{standardizedTerm,preferredTerm,admittedTerm,deprecatedTerm,supersededTerm,legalTerm,regulatedTerm}
+termNote	type	partOfSpeech	<http://lider-project.eu/tbx#partOfSpeech>	OP	noun,verb,adjective,adverb,properNoun,other}
+termNote	type	proprietaryRestriction	<http://lider-project.eu/tbx#proprietaryRestriction>	OP	{trademark,serviceMark,tradeName}
+termNote	type	register	<http://lider-project.eu/tbx#register>	OP	{colloquialRegister,neutralRegister,technicalRegister,in-houseRegister,bench-levelRegister,slangRegister,vulgarRegister}
+termNote	type	temporalQualifier	<http://lider-project.eu/tbx#temporalQualifiery>	OP	{archaicTerm,outdatedTerm, obsoleteTerm}
 termNote	type	termLocation	<http://lider-project.eu/tbx#termLocation>	DP
-termNote	type	termProvenance	<http://lider-project.eu/tbx#termProvenance>	DP	{transdisciplinaryBorrowing,translingualBorrowing,loanTranslation,neologism}
+termNote	type	termProvenance	<http://lider-project.eu/tbx#termProvenance>	OP	{transdisciplinaryBorrowing,translingualBorrowing,loanTranslation,neologism}
 termNote	type	timeRestriction	<http://lider-project.eu/tbx#timeRestriction>	DP
 termNote	type	transferComment	<http://lider-project.eu/tbx#transferComment>	DP
 termNote	type	usageNote	<http://lider-project.eu/tbx#usageNote>	DP
@@ -25,11 +25,11 @@ termNote	directionality	undetermined	<http://lider-project.eu/tbx#undeterminedTr
 termNote	type	falseFriend	<http://lider-project.eu/tbx#falseFriend>		OP	target
 termNote	type	homograph	<http://lider-project.eu/tbx#homograph>	OP	target
 termNote	type	shortFormFor	<http://lider-project.eu/tbx#shortFormFor>	OP	target
-termNote	type	termType	<http://lider-project.eu/tbx#termType>	DP	{abbreviation,acronym,clippedTerm,commonName, entryTerm,equation,formula,fullForm,initialism,internationalism,internationalScientificTerm,logicalExpression,partNumber,phraseologicalUnit,transcribedForm,transliteratedForm,shortForm,shortcut,sku,standardText,string,symbol,synonym,synonymousPhrase,variant}
+termNote	type	termType	<http://lider-project.eu/tbx#termType>	OP	{abbreviation,acronym,clippedTerm,commonName, entryTerm,equation,formula,fullForm,initialism,internationalism,internationalScientificTerm,logicalExpression,partNumber,phraseologicalUnit,transcribedForm,transliteratedForm,shortForm,shortcut,sku,standardText,string,symbol,synonym,synonymousPhrase,variant}
 termNote	type	lionHotkey	<http://lider-project.eu/tbx#lionHotkey>	DP
 termNote	type	pronunciation	<http://lider-project.eu/tbx#pronunciation>	DP
 termNote	type	termStructure	<http://lider-project.eu/tbx#termStructure>	DP
-termNote	type	administrativeStatus	<http://lider-project.eu/tbx#administrativeStatus>	DP	{admittedTerm-admn-sts,deprecatedTerm-admn-sts,legalTerm-admn-sts,preferredTerm-admn-sts,regulatedTerm-admn-sts,standardizedTerm-admn-sts,supersededTerm-admn-sts}
+termNote	type	administrativeStatus	<http://lider-project.eu/tbx#administrativeStatus>	OP	admittedTerm-admn-sts,deprecatedTerm-admn-sts,legalTerm-admn-sts,preferredTerm-admn-sts,regulatedTerm-admn-sts,standardizedTerm-admn-sts,supersededTerm-admn-sts}
 descrip	type	audio	<http://lider-project.eu/tbx#audio>	OP	target
 descrip	type	characteristic	<http://lider-project.eu/tbx#characteristic>	DP
 descrip	type	definition	<http://lider-project.eu/tbx#definition>	DP
@@ -60,22 +60,22 @@ descrip	type	subordinateConceptPartitive	<http://lider-project.eu/tbx#subordinat
 descrip	type	superordinateConceptGeneric	<http://lider-project.eu/tbx#superordinateConceptGeneric>	OP	target
 descrip	type	superordinateConceptPartitive	<http://lider-project.eu/tbx#superordinateConceptPartitive>	OP	target
 descrip	type	temporallyRelatedConcept	<http://lider-project.eu/tbx#temporallyRelatedConcept>	OP	target
-descrip	type	classificationCode	<http://lider-project.eu/tbx#classificationCode>
+descrip	type	classificationCode	<http://lider-project.eu/tbx#classificationCode>	DP
 descrip	type	thesaurusDescriptor	<http://lider-project.eu/tbx#thesaurusDescriptor>	DP
 descrip	type	hyphenation	<http://lider-project.eu/tbx#hyphenation>		DP
 descrip	type	lemma	<http://lider-project.eu/tbx#lemma>	DP
 descrip	type	morphologicalElement	<http://lider-project.eu/tbx#morphologicalElement>	DP
 descrip	type	syllabification	<http://lider-project.eu/tbx#syllabification>	DP
-descrip	type	termElement	<http://lider-project.eu/tbx#termElement>		DP
-descrip	type	subjectField	<http://lider-project.eu/tbx#subjectField>		DP
-admin	type	conceptOrigin	<http://lider-project.eu/tbx#conceptOrigin>
+descrip	type	termElement	<http://lider-project.eu/tbx#termElement>	DP
+descrip	type	subjectField	<http://lider-project.eu/tbx#subjectField>	DP
+admin	type	conceptOrigin	<http://lider-project.eu/tbx#conceptOrigin>	DP
 admin	type	applicationSubset	<http://lider-project.eu/tbx#applicationSubset>	DP
 admin	type	businessUnitSubset	<http://lider-project.eu/tbx#businessUnitSubset>	DP
 admin	type	customerSubset	<http://lider-project.eu/tbx#customerSubset>	DP
 admin	type	environmentSubset	<http://lider-project.eu/tbx#environmentSubset>	DP
 admin	type	productSubset	<http://lider-project.eu/tbx#productSubset>	DP
 admin	type	projectSubset	<http://lider-project.eu/tbx#projectSubset>	DP
-admin	type	securitySubset	<http://lider-project.eu/tbx#securitySubset>	DP	{public,confidential}
+admin	type	securitySubset	<http://lider-project.eu/tbx#securitySubset>	OP	{public,confidential}
 admin	type	subsetOwner	<http://lider-project.eu/tbx#subsetOwner>		DP
 admin	type	indexHeading	<http://lider-project.eu/tbx#indexHeading>	DP
 admin	type	keyword	<http://lider-project.eu/tbx#keyword>	DP
@@ -84,19 +84,21 @@ admin	type	sortKey	<http://lider-project.eu/tbx#sortKey>	DP
 admin	type	annotatedNote	<http://lider-project.eu/tbx#annotatedNote>	DP
 admin	type	databaseType	<http://lider-project.eu/tbx#databaseType>	DP
 admin	type	domainExpert	<http://lider-project.eu/tbx#domainExpert>	DP
-admin	type	elementWorkingStatus	<http://lider-project.eu/tbx#elementWorkingStatus>	DP	{starterElement,workingElement, consolidatedElement,archiveElement,importedElement,exportedElement}
+admin	type	elementWorkingStatus	<http://lider-project.eu/tbx#elementWorkingStatus>	OP	{starterElement,workingElement, consolidatedElement,archiveElement,importedElement,exportedElement}
 admin	type	entrySource	<http://lider-project.eu/tbx#entrySource>		DP
 admin	type	originatingDatabase	<http://lider-project.eu/tbx#originatingDatabase>	DP
 admin	type	originatingInstitution	<http://lider-project.eu/tbx#originatingInstitution>	DP
 admin	type	originatingPerson	<http://lider-project.eu/tbx#originatingPerson>	DP
 admin	type	source	<http://lider-project.eu/tbx#source>	DP
 admin	type	sourceIdentifier	<http://lider-project.eu/tbx#sourceIdentifier>	DP
+admin	type	status	<http://myproperty/status>	DP
 adminNote	type	noteSource	<http://lider-project.eu/tbx#noteSource>	DP
-adminNote	type	sourceType	<http://lider-project.eu/tbx#sourceType>	DP	{parallelText,backgroundText}
+adminNote	type	sourceType	<http://lider-project.eu/tbx#sourceType>	OP	{parallelText,backgroundText}
 transacNote	type	responsibility	<http://lider-project.eu/tbx#responsibility>	DP
+transac	type	transactionType	<http://lider-project.eu/tbx#transactionType>	DP
 transacNote	type	usageCount	<http://lider-project.eu/tbx#usaageCount>		DP
-descripNote	type	contextType	<http://lider-project.eu/tbx#contextType>		DP	{definingContext,explanatoryContext, associativeContext,linguisticContext,metalinguisticContext,translatedContext}
-descripNote	type	definitionType	<http://lider-project.eu/tbx#definitionType>	DP	{intensionalDefinition,extensionalDefinition,partitiveDefinition,translatedDefinition}
+descripNote	type	contextType	<http://lider-project.eu/tbx#contextType>		OP	{definingContext,explanatoryContext,associativeContext,linguisticContext,metalinguisticContext,translatedContext}
+descripNote	type	definitionType	<http://lider-project.eu/tbx#definitionType>	OP	{intensionalDefinition,extensionalDefinition,partitiveDefinition,translatedDefinition}
 xref	type	corpusTrace	<http://lider-project.eu/tbx#corpusTrace>		OP	target
 xref	type	externalCrossReference	<http://lider-project.eu/tbx#externalCrossReference>	OP	target
 xref	type	xAudio	<http://lider-project.eu/tbx#xAudio>	OP	target
@@ -104,5 +106,6 @@ xref	type	xGraphic	<http://lider-project.eu/tbx#xGraphic>	OP	target
 xref	type	xMathML	<http://lider-project.eu/tbx#xMathML>	OP	target
 xref	type	xSource	<http://lider-project.eu/tbx#xSource>	OP	target
 xref	type	xVideo	<http://lider-project.eu/tbx#xVideo>	OP	target
-ref	type	crossReference	<http://lider-project.eu/tbx#crossReference>
+ref	type	crossReference	<http://lider-project.eu/tbx#crossReference>	OP	target
 ref	type	see	<http://lider-project.eu/tbx#see>	DP
+date	null	null	<http://www.w3.org/ns/prov#endedAtTime>	DP

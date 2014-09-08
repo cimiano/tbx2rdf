@@ -5,13 +5,11 @@ import java.util.Set;
 public class DatatypePropertyMapping implements Mapping {
 
 	String propertyURL;
+
 	
-	Set<String> allowedValues;
-	
-	public DatatypePropertyMapping(String url, Set<String> values)
+	public DatatypePropertyMapping(String url)
 	{
 		propertyURL = url;
-		allowedValues = values;
 	}
 	
 	
@@ -20,22 +18,11 @@ public class DatatypePropertyMapping implements Mapping {
 		return propertyURL;
 	}
 	
-	public Set<String> getAllowedValues()
-	{
-		return allowedValues;
-	}
-	
-	public boolean allowed(String value)
-	{
-	
-		if (allowedValues.isEmpty() || allowedValues.contains(value)) return true;
-	
-		return false;
-	}
+
 	
 	public String toString()
 	{
-		return String.format("Datatype property: <%s> {%s}",propertyURL,allowedValues);
+		return String.format("Datatype property: <%s> {%s}",propertyURL);
 	}
 	
 }

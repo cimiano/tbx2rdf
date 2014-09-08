@@ -1,15 +1,35 @@
 package tbx2rdf;
 
+import java.util.Set;
+
 public class ObjectPropertyMapping implements Mapping{
 
 	String propertyURL;
 	
-	String XML_Attribute;
+	String targetAttribute;
+	
+	Set<String>	allowedValues;
+	
 
 	public ObjectPropertyMapping(String url, String attribute)
 	{
 		propertyURL = url;
-		XML_Attribute = attribute;
+		targetAttribute = attribute;
+		allowedValues = null;
+	}
+	
+	public ObjectPropertyMapping(String url, Set<String> values)
+	{
+		propertyURL = url;
+		targetAttribute = null;
+		allowedValues = values;
+	}
+	
+	public ObjectPropertyMapping(String url)
+	{
+		propertyURL = url;
+		targetAttribute = null;
+		allowedValues = null;
 	}
 	
 	@Override
@@ -18,14 +38,27 @@ public class ObjectPropertyMapping implements Mapping{
 		return propertyURL;
 	}
 	
-	public String getXMLAttribute()
+	public String getTargetAtttribute()
 	{
-		return XML_Attribute;
+		return targetAttribute;
+	}
+	
+	public Set<String> getAllowedValues()
+	{
+		return allowedValues;
+	}
+	
+	public boolean allowed(String value)
+	{
+	
+		if (allowedValues.isEmpty() || allowedValues.contains(value)) return true;
+	
+		return false;
 	}
 	
    public String toString()
    {
-	   return String.format("ObjectProperty <%s>^^<%s>",propertyURL, XML_Attribute);
+	   return String.format("ObjectProperty <%s>^^<%s>",propertyURL, targetAttribute);
    }
 	
 	

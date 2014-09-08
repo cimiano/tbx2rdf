@@ -3,10 +3,13 @@ package tbx2rdf.types;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import tbx2rdf.DatatypePropertyMapping;
 import tbx2rdf.ObjectPropertyMapping;
+import tbx2rdf.vocab.PROVO;
 import tbx2rdf.vocab.TBX;
 
 /**
@@ -40,6 +43,7 @@ public class TransacGrp extends NoteLinkInfo {
             final Resource descripRes = getRes(model);
             resource.addProperty(TBX.transaction, descripRes);
             descripRes.addProperty(RDF.type, TBX.Transaction);
+            descripRes.addProperty(RDF.type, PROVO.Activity);
             super.toRDF(model, descripRes);
         }
     }

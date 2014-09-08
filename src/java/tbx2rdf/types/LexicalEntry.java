@@ -28,7 +28,7 @@ public class LexicalEntry extends Describable {
     }
 
 
-    final public List<TermCompList> Decomposition = new ArrayList<>();
+    final public List<TermCompList> Decomposition = new ArrayList<TermCompList>();
 
 
     final public List<TermNoteGrp> TermNotes = new ArrayList<TermNoteGrp>();
