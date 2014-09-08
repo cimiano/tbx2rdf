@@ -1,0 +1,139 @@
+<?xml version='1.0'?>
+<!DOCTYPE martif SYSTEM "TBXBasiccoreStructV02.dtd">
+<!-- VERSION HISTORY
+	version 1.1 (2008.12.23) - corrected XCS name to end in .xcs
+		version 1.2 (2009.01.23) - added a context source
+-->
+<!-- The following lines are required when validating this file against the TBX-Basic RNG schema.
+If you want to use this schema for validation, instead of the DTD, you must uncomment the following
+two lines, and comment-out the DOCTYPE statement on line 2.-->
+<!--<?oxygen SCHSchema="TBXBasicRNGV02.rng"?>-->
+<!--<?oxygen RNGSchema="TBXBasicRNGV02.rng" type="xml"?>-->
+<martif type="TBX-Basic" xml:lang="en-US">
+	<martifHeader>
+		<fileDesc>
+			<sourceDesc>
+				<p>This is a sample TBX-Basic file from the LISA Terminology Special Interest Group
+					(www.lisa.org/term). The entries in this file are for demonstration purposes
+					only and do not reflect actual terminology data. Any references to real
+					companies are fabricated for demonstration purposes only.</p>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<p type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs
+			</p>
+		</encodingDesc>
+	</martifHeader>
+	<text>
+		<body>
+			<!-- The following entry contains an unsupported type attribute "origin". The correct
+	value is "source". If you are validating this sample by using the DTD, this error will
+	not be found since attribute values are not controlled by the DTD. If you are validating
+	this sample by using the RNG schema, this error will be found. -->
+			<termEntry id="c1">
+				<descrip type="subjectField">manufacturing</descrip>
+				<descripGrp>
+					<descrip type="definition">This is a sample definition at the entry level.</descrip>
+					<admin type="origin">Terminology SIG</admin>
+				</descripGrp>
+				<transacGrp>
+					<transac type="transactionType">origination</transac>
+					<transacNote type="responsibility" target="US5001">Jane</transacNote>
+					<date>2007-07-22</date>
+				</transacGrp>
+				<transacGrp>
+					<transac type="transactionType">modification</transac>
+					<transacNote type="responsibility" target="US5002">John</transacNote>
+					<date>2007-07-23</date>
+				</transacGrp>
+				<note>This is a sample entry with some data categories at the entry level. </note>
+				<ref type="crossReference" target="c2">unscheduled operation</ref>
+				<xref type="externalCrossReference" target="http://www.lisa.org">LISA Web site</xref>
+				<xref type="xGraphic" target="http://www.lisa.org/logo.gif">LISA logo</xref>
+				<langSet xml:lang="en">
+					<tig>
+						<term>scheduled operation</term>
+						<termNote type="partOfSpeech">verb</termNote>
+						<termNote type="termType">fullForm</termNote>
+						<termNote type="grammaticalGender">masculine</termNote>
+						<termNote type="administrativeStatus">preferredTerm-admn-sts</termNote>
+						<termNote type="geographicalUsage">Canada</termNote>
+						<termNote type="termLocation">menuItem</termNote>
+						<descripGrp>
+						<descrip type="context">One hour is required between scheduled operations.</descrip>
+						<admin type="source">Tivoli Storage Manager Administrator's Guide</admin>
+						</descripGrp>
+						<admin type="customerSubset">IBM</admin>
+						<admin type="source">IBM</admin>
+						<admin type="projectSubset">Tivoli Storage Manager</admin>
+					</tig>
+				</langSet>
+			</termEntry>
+
+			<!-- The following entry contains an unsupported type attribute "pos." The correct value
+	is "partOfSpeech".  If you are validating this sample by using the DTD, this error will
+	not be found since attribute values are not controlled by the DTD. If you are validating
+	this sample by using the RNG schema, this error will be found. -->
+			<termEntry id="c2">
+				<descrip type="subjectField">manufacturing</descrip>
+				<langSet xml:lang="en">
+					<descrip type="definition">This is a sample definition at the language level.
+						This one has no source information required therefore it is not embedded in
+						a descripGrp.</descrip>
+					<tig>
+						<term>unscheduled operation</term>
+						<termNote type="termType">fullForm</termNote>
+						<termNote type="grammaticalGender">masculine</termNote>
+						<termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+						<termNote type="geographicalUsage">en-US</termNote>
+						<termNote type="pos">noun</termNote>
+						<termNote type="termLocation">radioButton</termNote>
+						<descrip type="context">Unscheduled operations should be recorded in a
+								log.</descrip>
+						<admin type="customerSubset">SAX Manufacturing</admin>
+						<admin type="source">Manufacturing Process Manual V2</admin>
+						<admin type="projectSubset">Service department</admin>
+						<admin type="customerSubset">SAX Manufacturing</admin>
+						<admin type="source">Manufacturing Process Manual V2</admin>
+						<admin type="projectSubset">Service department</admin>
+						<transacGrp>
+							<transac type="transactionType">origination</transac>
+							<transacNote type="responsibility" target="US5001">Jane</transacNote>
+							<date>2007-07-22</date>
+						</transacGrp>
+						<transacGrp>
+							<transac type="transactionType">modification</transac>
+							<transacNote type="responsibility" target="US5002">John</transacNote>
+							<date>2007-07-23</date>
+						</transacGrp>
+						<note>This is a sample entry with some data categories at the term or
+							language level</note>
+						<ref type="crossReference" target="c1">scheduled operation</ref>
+						<xref type="externalCrossReference" target="http://www.lisa.org">LISA Web
+							Site </xref>
+					</tig>
+				</langSet>
+			</termEntry>
+
+
+		</body>
+		<back>
+
+			<!-- Simple example of personal information in the backmatter.  -->
+
+			<refObjectList type="respPerson">
+				<refObject id="US5001">
+					<item type="fn">Jane Doe</item>
+					<item type="email">jane_doe@mymail.com</item>
+					<item type="role">approver</item>
+				</refObject>
+				<refObject id="US5002">
+					<item type="fn">John Smith</item>
+					<item type="email">john_smith@mymail.com</item>
+					<item type="role">inputter</item>
+				</refObject>
+			</refObjectList>
+
+		</back>
+	</text>
+</martif>
