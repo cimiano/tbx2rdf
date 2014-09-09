@@ -43,7 +43,7 @@ descrip	type	sampleSentence	<http://lider-project.eu/tbx#sampleSentence>	DP
 descrip	type	table	<http://lider-project.eu/tbx#table>	OP	target
 descrip	type	unit	<http://lider-project.eu/tbx#unit>		DP
 descrip	type	video	<http://lider-project.eu/tbx#video>	DP
-descrip	type	reliabilityCode	<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode>	DP
+descrip	type	reliabilityCode	<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode>	OP	{1,2,3,4,5,6,7,8,9,10}
 descrip	type	antonymConcept	<http://lider-project.eu/tbx#antonymConcept>	OP	target
 descrip	type	associatedConcept	<http://lider-project.eu/tbx#associatedConcept>	OP	target
 descrip	type	broaderConceptGeneric	<http://lider-project.eu/tbx#broaderConceptGeneric>	OP	target
@@ -108,4 +108,4 @@ xref	type	xSource	<http://lider-project.eu/tbx#xSource>	OP	target
 xref	type	xVideo	<http://lider-project.eu/tbx#xVideo>	OP	target
 ref	type	crossReference	<http://lider-project.eu/tbx#crossReference>	OP	target
 ref	type	see	<http://lider-project.eu/tbx#see>	DP
-date	null	null	<http://www.w3.org/ns/prov#endedAtTime>	DP
+date	null	transacGrp	<http://www.w3.org/ns/prov#endedAtTime>	DP

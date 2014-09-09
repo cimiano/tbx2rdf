@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE martif SYSTEM "http://www.ttt.org/oscarstandards/tbx/TBXcoreStructV02.dtd">
-<martif type="TBX" xml:lang="en">
+<martif type="TBX-Default" xml:lang="en">
   <martifHeader>
     <fileDesc>
       <sourceDesc>
-        <p>Small example to test decomposition and transactions</p>
+        <p>This is an excerpt of a TBX file downloaded from the IATE website. Address any enquiries to iate@cdt.europa.eu.</p>
       </sourceDesc>
     </fileDesc>
     <encodingDesc>
-      <p type="XCSURI">http://www.ttt.org/oscarstandards/tbx/TBXXCS.xcs</p>
+      <p type="XCSURI">TBXXCS.xcs</p>
     </encodingDesc>
   </martifHeader>
   <text>
-    <body><termEntry id="2151845">
-  <descrip type="subjectField">TaaS-1500</descrip>
-   <langSet xml:lang="en" xmlns:xml="http://www.w3.org/XML/1998/namespace">
+  <body><termEntry id="IATE-14">
+  <descrip type="subjectField">1011</descrip>
+   <langSet xml:lang="en">
     <ntig>
       <termGrp>
-        <term>World Wide Web</term>
+	 <term>competence of the Member States</term>
+         <termNote type="termType">fullForm</termNote>
+         <descrip type="reliabilityCode">3</descrip>
         <termCompList type="lemma">
           <termCompGrp>
-            <termComp>World</termComp>
+            <termComp>competence</termComp>
             <termNote type="partOfSpeech">noun</termNote>
             <termNote type="grammaticalNumber">singular</termNote>
           </termCompGrp>
           <termCompGrp>
-            <termComp>Wide</termComp>
-            <termNote type="partOfSpeech">adjective</termNote>
-            <termNote type="grammaticalNumber">singular</termNote>
+            <termComp>of</termComp>
+            <termNote type="partOfSpeech">other</termNote>
           </termCompGrp>
           <termCompGrp>
-            <termComp>Web</termComp>
+            <termComp>the</termComp>
+            <termNote type="partOfSpeech">other</termNote>
+          </termCompGrp>
+	   <termCompGrp>
+            <termComp>Member</termComp>
             <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="grammaticalNumber">singular</termNote>
+	     <termNote type="grammaticalNumber">singular</termNote>	
+          </termCompGrp>
+	   <termCompGrp>
+            <termComp>States</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">plural</termNote>
           </termCompGrp>
         </termCompList>
       </termGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
-        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <transacNote type="responsibility">PC</transacNote>
         <date>2014-05-08</date>
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">approval</transac>
-        <transacNote type="responsibility">GornostayT</transacNote>
+        <transacNote type="responsibility">PC</transacNote>
         <date>2014-05-16T14:50:42.018Z</date>
       </transacGrp>
       <admin type="status">approved</admin>
-      <admin type="sourceIdentifier">http://www.eurotermbank.com/search.aspx?text=World%20Wide%20Web&amp;langfrom=en&amp;langto=lv&amp;where=etb&amp;advanced=false#pos=1</admin>
       <transacGrp>
         <transac type="transactionType">modification</transac>
-        <transacNote type="responsibility">GornostayT</transacNote>
+        <transacNote type="responsibility">PC</transacNote>
         <date>2014-05-16T14:59:00.814Z</date>
       </transacGrp>
     </ntig>
