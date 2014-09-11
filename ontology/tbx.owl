@@ -1,0 +1,2028 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY terms "http://purl.org/dc/terms/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY ontolex "http://www.w3.org/ns/lemon/ontolex#" >
+    <!ENTITY skos "http://www.w3.org/2004/02/skos/core#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.lider-project.eu/tbx.owl#"
+     xml:base="http://www.lider-project.eu/tbx.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:ontolex="http://www.w3.org/ns/lemon/ontolex#"
+     xmlns:terms="http://purl.org/dc/terms/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    <owl:Ontology rdf:about="http://www.lider-project.eu/tbx.owl">
+        <rdfs:label xml:lang="en">TBX Ontology</rdfs:label>
+        <rdfs:comment xml:lang="en">This ontology describes some of the elements defined in the TBX (TermBase eXchange) format (ISO 30042), a system for the exchange of terminological data.
+
+This description is not complete, is not normative and is not supported by ISO or any other organization whatsoever. It is an initative of Universt&#228;t Bielefeld and Universidad Polit&#233;cnica de Madrid in the framework of the Lider project (http://www.lider-project.eu)</rdfs:comment>
+        <owl:imports rdf:resource="http://www.w3.org/ns/lemon/ontolex"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/lemon/vartrans.owl"/>
+        <owl:imports rdf:resource="http://www.w3.org/ns/prov#"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <owl:AnnotationProperty rdf:about="&rdfs;label"/>
+    <owl:AnnotationProperty rdf:about="&rdfs;comment"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#abbreviatedFormFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#abbreviatedFormFor">
+        <rdfs:comment xml:lang="en">A link used to identify a relation between a term that is an abbreviated form, and its full or expanded form. It may be coupled with a target attribute to point to the entry of the full or expanded form. For example, the term &quot;WWW&quot; could have a pointer to its full form &quot;World Wide Web&quot;.  The identification of a relation between an abbreviated term and its full form indicates which term in a terminological entry is the full form of the abbreviated term. In many languages, English abbreviations are commonly used, but the English full form may be avoided in favor of an equivalent full form in the language in question. In this case, the English abbreviation and the target language full form will both appear in the target language section of the entry.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#antonymConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#antonymConcept">
+        <rdfs:comment xml:lang="en">A concept that is opposite in meaning to the concept in the subject. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#antonymTerm -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#antonymTerm">
+        <rdfs:comment xml:lang="en">A term that designates a concept that is opposite in meaning to the subject term.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#associatedConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#associatedConcept">
+        <rdfs:comment xml:lang="en">A concept that exhibits a relation to the subject concept that can be established on the basis of non-hierarchical thematic connections.
+
+Defintion originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#bidirectionalTranslation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#bidirectionalTranslation">
+        <rdfs:comment xml:lang="en">A translation that is preferred in both directions, i.e. the term in the subject is a preferred translation of the term in the subject, and viceversa.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#translation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#broaderConceptGeneric -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#broaderConceptGeneric">
+        <rdfs:comment xml:lang="en">A concept two or more levels of abstraction higher than subject concept. Generic relations between concepts are &quot;is-a&quot; relations. This means that the narrower concept &quot;is an&quot; instance of its broader generic concept. For example, a dog is a canine animal, and a canine animal is a mammal. Therefore, mammal is a broader generic concept for dog.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#broaderConceptPartitive -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#broaderConceptPartitive">
+        <rdfs:comment xml:lang="en">A concept two or more levels of abstraction higher than subject concept in a part-whole or meronymic hierarchical concept system. For example, a floor board is part of a house (broader partitive concept), but it can be more narrowly defined as being part of the floor (superordinate partitive concept), which in turn is part of the house. Partitive relations between concepts are &quot;has-a&quot; relations. This means that the broader partitive concept &quot;has&quot; its narrower concepts as parts of itself.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#classificationCode -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#classificationCode">
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#conceptPosition -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#conceptPosition">
+        <rdfs:comment xml:lang="en">The position of a concept in a concept system.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#conceptRelation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#conceptRelation">
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#TerminologicalConcept"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#coordinateConceptGeneric -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#coordinateConceptGeneric">
+        <rdfs:comment xml:lang="en">A concept having the same nearest superordinate concept as the subject concept.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#coordinateConceptPartitive -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#coordinateConceptPartitive">
+        <rdfs:comment rdf:datatype="&xsd;string">A concept having the same nearest superordinate concept as the subject concept.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#corpusTrace -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#corpusTrace">
+        <rdfs:comment xml:lang="en">A notation indicating the location of an external contextual resource.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#crossReference -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#crossReference">
+        <rdfs:comment rdf:datatype="&xsd;string">A pointer to another related location, such as another entry or another term.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#XReference"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#externalCrossReference -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#externalCrossReference">
+        <rdfs:comment xml:lang="en">A term or other terminological resource that is external to the terminological database or TBX document instance.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#falseFriend -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#falseFriend">
+        <rdfs:comment xml:lang="en">A term in another language that appears to be semantically or morphologically similar to the subject term in the entry, but that does not represent the same concept. For example, in French, the term r&#233;aliser means &quot;to accomplish&quot;, and therefore, it is a false friend of the English term realize (i.e. to become conscious of).
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf
+
+</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#homograph -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#homograph">
+        <rdfs:comment xml:lang="en">A word that is spelled like the subject term in the entry, but that has a different meaning, and origin. Homographs are terms that have the same written form, but are derived from different etymological origins, for example, a port for boats and a port for computer peripherals.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#incommensurateTranslation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#incommensurateTranslation">
+        <rdfs:comment xml:lang="en">The relation between the term in the subject and the term in the object as translations is imperfect and should be used with care. In this case, the concepts are not equal. A &lt;termNote type=&quot;transferComment&quot;&gt; should be used to provide information about the difference between the concepts.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#translation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#indexHeading -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#indexHeading">
+        <rdfs:comment xml:lang="en">A term chosen to be used in an index to represent an item or a concept in a document.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#keyword -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#keyword">
+        <rdfs:comment xml:lang="en">A word or group of words, possibly in lexicographically standardized (lemmatized) form, taken out of the text of a document, which characterizes the text and enables its retrieval. For example, the terms data-category and terminological entry are keywords for this international standard. In a terminological database that contains the terminology of ISO 30042, they could be identified as keywords by using this element.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#monodirectionalTranslation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#monodirectionalTranslation">
+        <rdfs:comment xml:lang="en">A translation that is only preferred going from the source language.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#translation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#relatedConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#relatedConcept">
+        <rdfs:comment xml:lang="en">A concept that has an associative relation to another concept, such as teacher and school.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#relatedConceptBroader -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#relatedConceptBroader">
+        <rdfs:comment xml:lang="en">A concept that is broader at some level with respect to a related or associated concept, but without comprising any reference to a generic or partitive system.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#relatedConceptNarrower -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#relatedConceptNarrower">
+        <rdfs:comment xml:lang="en">A concept that is narrower at some level with respect to a related or associated concept, but without comprising any reference to a generic or partitive system.
+
+Definition taken from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#searchTerm -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#searchTerm">
+        <rdfs:comment xml:lang="en">A term entered in a term entry for purposes of retrieval.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#see -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#see">
+        <rdfs:comment xml:lang="en">An element that points to a location where additional information can be found.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#sequentiallyRelatedConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#sequentiallyRelatedConcept">
+        <rdfs:comment xml:lang="en">A concept that has a relation to the subject concept based on spatial or temporal proximity. Temporal relations and spatial relations can be sequential.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#shortFormFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#shortFormFor">
+        <rdfs:comment xml:lang="en">A linking element used to identify a relation between the subject term when it is a short form, and its full or expanded form.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#sortKey -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#sortKey">
+        <rdfs:comment xml:lang="en">A character string used for sorting and merging operations. A sort key can enable alphabetic or systematic access.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#spatiallyRelatedConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#spatiallyRelatedConcept">
+        <rdfs:comment xml:lang="en">A concept that has a relation of dependence with the subject concept, referring to objects based on their relative physical positions.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#subordinateConceptGeneric -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#subordinateConceptGeneric">
+        <rdfs:comment xml:lang="en">A concept that has a generic relation with the subject concept, and a broader intension.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#subordinateConceptPartitive -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#subordinateConceptPartitive">
+        <rdfs:comment xml:lang="en">A concept that has a partitive relation with the subject concept, and represents one of the parts of the subject concept.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#superordinateConceptGeneric -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#superordinateConceptGeneric">
+        <rdfs:comment xml:lang="en">A concept that has a generic relation with the subject concept, and a narrower intension.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#superordinateConceptPartitive -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#superordinateConceptPartitive">
+        <rdfs:comment xml:lang="en">A concept that has a partitive relation with the subject concept, and represents the sum of the parts; a comprehensive concept.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#temporallyRelatedConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#temporallyRelatedConcept">
+        <rdfs:comment xml:lang="en">A concept related to the subject concept through a sequential relation involving events in time.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptRelation"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+        <rdfs:range rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termRelation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#termRelation">
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#thesaurusDescriptor -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#thesaurusDescriptor">
+        <rdfs:comment xml:lang="en">The term in a thesaurus that can be used to represent a concept in a terminological entry.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#usageInfo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#transaction -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#transaction">
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Transaction"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&ontolex;Form"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalSense"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#translation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#translation">
+        <rdfs:comment xml:lang="en">A property linking a term to one of its preferred translations.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termRelation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#undeterminedTranslation -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#undeterminedTranslation">
+        <rdfs:comment xml:lang="en">A translation relation between two terms the scope and directionality of which is not determined.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#translation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#usageInfo -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#usageInfo">
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#xAudio -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#xAudio">
+        <rdfs:comment xml:lang="en">External audio file.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#xGraphic -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#xGraphic">
+        <rdfs:comment xml:lang="en">External graphic file.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#xMathML -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#xMathML">
+        <rdfs:comment xml:lang="en">A mathematical concept expressed in MathML.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#xSource -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#xSource">
+        <rdfs:comment xml:lang="en">An external source of information such as the source of a definition or context sentence.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#xVideo -->
+
+    <owl:ObjectProperty rdf:about="http://www.lider-project.eu/tbx.owl#xVideo">
+        <rdfs:comment xml:lang="en">External video file.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#crossReference"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topObjectProperty -->
+
+    <owl:ObjectProperty rdf:about="&owl;topObjectProperty"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#adminInfo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#adminInfo">
+        <rdfs:comment rdf:datatype="&xsd;string">assigns administrative information to a Term, TerminologicalConcept OR Lexicon</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#administrativeStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#administrativeStatus">
+        <rdfs:comment xml:lang="en">The status of a term within a certain working environment. The allowed values for this property are: admittedTerm-admn-sts,deprecatedTerm-admn-sts,legalTerm-admn-sts,preferredTerm-admn-sts,regulatedTerm-admn-sts,standardizedTerm-admn-sts,supersededTerm-admn-sts
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#animacy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#animacy">
+        <rdfs:comment xml:lang="en">The characteristic of a word indicating that in a given discourse community, its referent is considered to be alive or to possess a quality of volition or consciousness. The value of animacy shall be one of: animate, inanimate, otherAnimacy.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#annotatedNote -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#annotatedNote">
+        <rdfs:comment xml:lang="en">A property used to indicate the source of the note or other administrative information about the note. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#applicationSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#applicationSubset">
+        <rdfs:comment xml:lang="en">An identifier that indicates that the parent element to which it applies is associated with a specific application. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#audio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#audio">
+        <rdfs:comment xml:lang="en">A name or other identifier of an audio file: sound, spoken words, music, or other audible representations used to illustrate or explain terms or concepts.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#businessUnitSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#businessUnitSubset">
+        <rdfs:comment xml:lang="en">An identifier that indicates that the parent element to which it applies is associated with a specific department, division, or other unit of an enterprise. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#characteristic -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#characteristic">
+        <rdfs:comment xml:lang="en">An abstraction of a property of an object or of a set of objects. For example, flammability is a characteristic of fuel. Essential characteristics can be used to define concepts. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#componentProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#componentProperty">
+        <rdfs:comment rdf:datatype="&xsd;string">A name or other identifier of an audio file: sound, spoken words, music, or other audible representations used to illustrate or explain terms or concepts.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#conceptOrigin -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#conceptOrigin">
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#conceptProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#conceptProperty">
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#context -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#context">
+        <rdfs:comment rdf:datatype="&xsd;string">that is, they must be obtained from an existing source, and not created by the terminologist. Contexts are documented very frequently in terminology collections. Contexts can provide information for determining term usage and collocations. In TBX, the context as a term-related data-category. A context can be further categorized according to context type.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#contextType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#contextType">
+        <rdfs:comment xml:lang="en">The characterization of a context according to a set of theoretical or pragmatic types; the value of the range shall be one of the following: definingContext, explanatoryContext, associativeContext, linguisticContext, metalinguisticContext, translatedContext
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#customerSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#customerSubset">
+        <rdfs:comment xml:lang="en">An identifier that indicates that the parent element to which it applies is associated with a specific customer. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#databaseType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#databaseType">
+        <rdfs:comment xml:lang="en">An identifier that indicates the type of database from which the parent element originated. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#definition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#definition">
+        <rdfs:comment xml:lang="en">A representation of a concept by a descriptive statement which serves to differentiate that concept from related concepts.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#definitionType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#definitionType">
+        <rdfs:comment rdf:datatype="&xsd;string">The characterization of a definition according to a set of theoretical or pragmatic types. Tha value of the range shall be one of the following: intensionalDefinition, extensionalDefinition, partitiveDefinition, translatedDefinition
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#domainExpert -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#domainExpert">
+        <rdfs:comment xml:lang="en">Subject field specialist who provides information for a terminological entry, such as a definition or target language equivalent.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#elementWorkingStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#elementWorkingStatus">
+        <rdfs:comment xml:lang="en">A value indicating the level of completeness and accuracy of an element (field, record, entry) within a terminological collection. The range shall contain one of the following values: starterElement, workingElement, consolidatedElement, archiveElement, importedElement, exportedElement.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#entrySource -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#entrySource">
+        <rdfs:comment xml:lang="en">A database or file from which the entry was imported. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#environtmentSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#environtmentSubset">
+        <rdfs:comment xml:lang="en">An identifier that indicates a specific computer environment that the parent element is associated with. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#etymology -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#etymology">
+        <rdfs:comment xml:lang="en">Information on the origin of a word and the development of its meaning.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#example -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#example">
+        <rdfs:comment xml:lang="en">A text which illustrates a concept or a term, by providing an example of the object designated by the concept or term, and not necessarily containing the concept designation itself. Some databases use example as a label for contextual references.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf
+
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#explanation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#explanation">
+        <rdfs:comment xml:lang="en">A statement that describes and clarifies a concept and makes it understandable, but does not necessarily differentiate it from other concepts.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#figure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#figure">
+        <rdfs:comment xml:lang="en">A name or other description of a diagram, picture, or other graphic material used to illustrate a concept or group of concepts.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#frequency -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#frequency">
+        <rdfs:comment xml:lang="en">The relative commonness with which a term occurs. The value of the range of the property shall be commonlyUsed, infrequentlyUsed, rarelyUsed. The assessment of frequency of a term can be based on subjective criteria, or it can reflect computer analysis of text corpora.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#geographicalUsage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#geographicalUsage">
+        <rdfs:comment xml:lang="en">A code identifying any specific geographical area where the term is used, for instance, to differentiate between UK English and US English. Preferred values are language codes combined with geographical codes, from IETF RFC 4646 or its successor, as identified in IETF BCP 47. For example: en-US for American English. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#grammaticalGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#grammaticalGender">
+        <rdfs:comment xml:lang="en">The gender of the word. Values shall be one of: masculine, feminine, neuter, or otherGender.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#grammaticalNumber -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#grammaticalNumber">
+        <rdfs:comment xml:lang="en">A property of a term that indicates the number of objects referred to by the term. Values shall be one of: singular, plural, dual, mass, or otherNumber. For example, the terms rice and bread are mass nouns because there are no separate singular and plural forms. NOTE If the singular and the plural forms of a term do not designate the same concept, they should be recorded in separate entries.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#grammaticalValency -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#grammaticalValency">
+        <rdfs:comment xml:lang="en">The range of syntactic elements either required or permitted by a lexical unit. The valency of eat includes a subject (&quot;I&quot; in &quot;I am eating&quot;) and an object (&quot;cheese&quot; in &quot;I am eating cheese&quot;.) It can thus be said to be &quot;bivalent&quot;.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#hyphenation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#hyphenation">
+        <rdfs:comment xml:lang="en">indicates the parts of a term as it would be hyphenated, such as at the end of a line, according to a given set of rules.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#languagePlanningQualifier -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#languagePlanningQualifier">
+        <rdfs:comment xml:lang="en">A qualifier assigned to a provisional term within a language planning or descriptive terminology environment. Values shall be one of: recommendedTerm, nonstandardizedTerm, proposedTerm, or newTerm.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#lemma -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#lemma">
+        <rdfs:comment xml:lang="en">indicates the base form of the term or of the individual words that it comprises. A base form of a word or term, sometimes called a lemma, is the form that is used as the formal dictionary entry for the term. For nouns, the base form is frequently the nominative singular form (in languages that show variation by case). For adjectives it is the positive form of the adjective, as opposed to the comparative, and in some languages it is uninflected, whereas in others it is the masculine singular. For verbs, it is generally the infinitive.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#lionHotkey -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#lionHotkey">
+        <rdfs:comment xml:lang="en">(Localization hot key) The letter in a word that acts as a hotkey in a computer application. A hotkey is a key or a combination of keys on a computer keyboard that, when pressed at one time, performs a task (such as starting an application) as an alternative to using a mouse or other input device. Hotkeys are supported by many operating systems and applications. The hotkey is indicated by an ampersand in the term in software interface files, and by an underscore in the actual visual display.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#logicalSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#logicalSubset">
+        <rdfs:comment rdf:datatype="&xsd;string">used to assign a Term or TerminologicalConcept to some logical partition of the resource; currently a datatype property; should better be a object property, leading to the introduction of URIs for the partition or subset</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#morphologicalElement -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#morphologicalElement">
+        <rdfs:comment xml:lang="en">indicates the individual morphemes that comprise the term.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#normativeAuthorization -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#normativeAuthorization">
+        <rdfs:comment xml:lang="en">A term status qualifier assigned by an authoritative body, such as a standards body or a governmental entity with a regulatory function. Values shall be one of: standardizedTerm, preferredTerm,  admittedTerm, deprecatedTerm, supersededTerm, legalTerm, and regulatedTerm.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#noteSource -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#noteSource">
+        <rdfs:comment xml:lang="en">The source of a note.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#originatingDatabase -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#originatingDatabase">
+        <rdfs:comment xml:lang="en">The database from which the parent element originated. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#originatingInstitution -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#originatingInstitution">
+        <rdfs:comment xml:lang="en">An institution (i.e., company, government agency, etc.) that provided the information in the parent element. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#originatingPerson -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#originatingPerson">
+        <rdfs:comment xml:lang="en">An individual who provided the information in the parent element. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#otherBinaryData -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#otherBinaryData">
+        <rdfs:comment xml:lang="en">Any binary data not covered by the categories figure, audio, video, and table.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#parfOfSpeech -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#parfOfSpeech">
+        <rdfs:comment xml:lang="en">A category assigned to a word based on its grammatical and semantic properties. For example: noun, verb, or adjective. For example, the following values are permitted in the TBX-Basic TML: noun, verb, adjective, adverb, properNoun, other.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#processStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#processStatus">
+        <rdfs:comment rdf:datatype="&xsd;string">The status of a term with respect to its advancement within the terminology management process.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#productSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#productSubset">
+        <rdfs:comment xml:lang="en">An identifier assigned to a term, record, or entry to indicate that it is related to or used in a product. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#projectSubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#projectSubset">
+        <rdfs:comment xml:lang="en">An identifier assigned to a term, record, or entry to indicate that it is related to or used in a project. 
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#pronunciation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#pronunciation">
+        <rdfs:comment xml:lang="en">The representation of the manner by which a term is spoken. In TBX, pronunciation shall be represented in the International Phonetic Alphabet. A given term can have more than one pronunciation depending on the geographical area in which the term is used.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#proprietaryRestriction -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#proprietaryRestriction">
+        <rdfs:comment xml:lang="en">A restriction placed on a term for the purpose of protecting the right of an organization to the exclusive use of the term. Values shall be one of: trademark, serviceMark or tradeName.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#quantity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#quantity">
+        <rdfs:comment xml:lang="en">A measurable quantity associated with a concept.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf
+</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#range -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#range">
+        <rdfs:comment xml:lang="en">The pair of limits within which a quantity is measured, as expressed by stating the lower and upper permissible values.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#register -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#register">
+        <rdfs:comment xml:lang="en">Classification indicating the level of language assigned to a term. valid values shall be one of: colloquialRegister, neutralRegister, technicalRegister, in-houseRegister, bench-levelRegister,slangRegister,vulgarRegister.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#reliabilityCode -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#reliabilityCode">
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#responsibility -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#responsibility">
+        <rdfs:comment xml:lang="en">The name of a person or entity associated with a terminology management transaction.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Transaction"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#sampleSentence -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#sampleSentence">
+        <rdfs:comment xml:lang="en">A sentence composed (frequently by a terminologist or language planner) to illustrate the use of a term in cases where an authentic context is unavailable. Although contextual information should ideally be taken from actual texts written in the language in question, such contextual references may not exist for newly coined or suggested terms.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#securitySubset -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#securitySubset">
+        <rdfs:comment xml:lang="en">A classification of a term, record, or entry indicating that its distribution is restricted for security reasons. Sometimes, terms are not released to the public until the material that uses the term (product, service, etc.) is released to the public. Until that time, this element serves to protect the data from distribution. The range shall contain one of the following values:
+public, confidential</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#source -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#source">
+        <rdfs:comment xml:lang="en">A complete citation of the source of the information.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#sourceIdentifier -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#sourceIdentifier">
+        <rdfs:comment xml:lang="en">A pointer to a bibliographic entry that contains information about the source of the parent element.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#sourceType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#sourceType">
+        <rdfs:comment xml:lang="en">A property describing the source text, i.e. whether it is actual parallel text (text that is equivalent to text in another language) or background material. The range value shall be one of the following: parallelText, backgroundText.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#subjectField -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#subjectField">
+        <rdfs:comment rdf:datatype="&xsd;string">A field of special knowledge. Subject fields can be expressed in multiple levels, for example: Subject field (level 1): disease, Subject field (level 2): cancer, Subject field (level 3): non-Hodgkin&#39;s lymphoma. Subject fields shall be expressed in plainText, and preferably be selected from a defined set of picklist values.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#subsetOwner -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#subsetOwner">
+        <rdfs:comment xml:lang="en">The owner of the subset of terminological entries to which this entry belongs.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#logicalSubset"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                    <rdf:Description rdf:about="&ontolex;Lexicon"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#syllabification -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#syllabification">
+        <rdfs:comment xml:lang="en">indicates the individual syllables that comprise the term
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#table -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#table">
+        <rdfs:comment xml:lang="en">The name of a table that is used to describe a concept.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#temporalQualifier -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#temporalQualifier">
+        <rdfs:comment xml:lang="en">A property of a term with respect to its use over time. Values shall be one of: archaicTerm, outdatedTerm, obsoleteTerm.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termElement -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termElement">
+        <rdfs:comment xml:lang="en">indicates any other logically significant portion of the term
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:domain rdf:resource="&ontolex;LexicalEntry"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termLocation">
+        <rdfs:comment xml:lang="en">A location in a document, computer file, or other information medium, where the term frequently occurs, such as a user interface object (in software), a packaging element, a component in an industrial process, and so forth.  The following picklist values are recommended for software user interface locations in a Windows environment: checkBox, comboBox, comboBoxElement, dialogBox, groupBox, informativeMessage,interactiveMessage,menuItem,progressBar,pushButton,radioButton,slider,spinBox,tab,tableText,textBox,toolTip, and user-definedType.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termProperty">
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termProvenance -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termProvenance">
+        <rdfs:comment xml:lang="en">Classification of a term according to the methodology employed in creating the term. Values shall be one of: transdisciplinaryBorrowing, translingualBorrowing, loanTranslation, or neologism.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termStructure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termStructure">
+        <rdfs:comment rdf:datatype="&xsd;string">The structure of the components of a term, indicated using square brackets. For example, e.g. : [bank statement] [total] versus [bank] [statement total].</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#componentProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&ontolex;LexicalEntry"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#termType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#termType">
+        <rdfs:comment xml:lang="en">A categorization of a term with respect to formal representations of terms or where or how they are used, for example, acronym. Values shall be one of the following: abbreviation, acronym, clippedTerm, commonName, entryTerm,equation,formula,fullForm,initialism,internationalism,internationalScientificTerm,logicalExpression,partNumber,phraseologicalUnit,transcribedForm,transliteratedForm,shortForm,shortcut,sku,standardText,string,symbol,synonym,synonymousPhrase, and variant.
+Refer to ISO 12620 for definitions of the above term types.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#timeRestriction -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#timeRestriction">
+        <rdfs:comment xml:lang="en">The indication of a period of time during or since which a term was or has been subject to specified usage. For example, several European countries have redefined the requirements for certain university degrees in recent years. If, for instance, the requirements for a baccalaureate degree changed from three to four years in 1993, then any terminology entry defining the term used to designate this degree would have to specify the time restriction affecting the definition, which would be different before 1993 and after 1993. 
+
+Definition originating http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#transactionType -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#transactionType">
+        <rdfs:comment rdf:datatype="&xsd;string">A record that indicates the stage of the entry within the overall process of creation, approval, and use of a terminology entry.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Transaction"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#transferComment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#transferComment">
+        <rdfs:comment xml:lang="en">Note included in a term entry providing information on the degree of equivalence, directionality or other special features affecting equivalence between a term in one language and another term in a second language.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#unit -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#unit">
+        <rdfs:comment xml:lang="en">A precisely-specified quantity in terms of which the magnitudes of other quantities can be stated, such as meter or volt.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#usageCount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#usageCount">
+        <rdfs:comment xml:lang="en">The number of times an entry has been accessed.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#adminInfo"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#usageNote -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#usageNote">
+        <rdfs:comment xml:lang="en">A note containing information on the usage of the term.
+
+Definition originating from http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.lider-project.eu/tbx.owl#Term"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#termProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#video -->
+
+    <owl:DatatypeProperty rdf:about="http://www.lider-project.eu/tbx.owl#video">
+        <rdfs:comment xml:lang="en">A name or other description of recorded visual images used to represent or illustrate terminological information.
+
+Definition originating form http://www.ttt.org/oscarstandards/tbx/tbx_oscar.pdf</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://www.lider-project.eu/tbx.owl#conceptProperty"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.lider-project.eu/tbx.owl#Term"/>
+                    <rdf:Description rdf:about="&skos;TerminologicalConcept"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#topDataProperty -->
+
+    <owl:DatatypeProperty rdf:about="&owl;topDataProperty"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#Context -->
+
+    <owl:Class rdf:about="http://www.lider-project.eu/tbx.owl#Context">
+        <rdfs:comment rdf:datatype="&xsd;string">A context of usage of one term</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#Term -->
+
+    <owl:Class rdf:about="http://www.lider-project.eu/tbx.owl#Term">
+        <rdfs:subClassOf rdf:resource="&ontolex;LexicalEntry"/>
+        <rdfs:comment rdf:datatype="&xsd;string">A subclass of lexical entry representing a term as the language-specific realization of a TerminologicalConcept.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#TerminologicalConcept -->
+
+    <owl:Class rdf:about="http://www.lider-project.eu/tbx.owl#TerminologicalConcept">
+        <rdfs:subClassOf rdf:resource="&skos;TerminologicalConcept"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#Transaction -->
+
+    <owl:Class rdf:about="http://www.lider-project.eu/tbx.owl#Transaction">
+        <rdfs:comment rdf:datatype="&xsd;string">Representing a process that led to the creation, update or modification of a term.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.lider-project.eu/tbx.owl#XReference -->
+
+    <owl:Class rdf:about="http://www.lider-project.eu/tbx.owl#XReference">
+        <rdfs:comment rdf:datatype="&xsd;string">Representing an external reference.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/2004/02/skos/core#TerminologicalConcept -->
+
+    <owl:Class rdf:about="&skos;TerminologicalConcept">
+        <rdfs:comment rdf:datatype="&xsd;string">A language-independent concept.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/ns/lemon/ontolex#Form -->
+
+    <owl:Class rdf:about="&ontolex;Form"/>
+    
+
+
+    <!-- http://www.w3.org/ns/lemon/ontolex#LexicalEntry -->
+
+    <owl:Class rdf:about="&ontolex;LexicalEntry"/>
+    
+
+
+    <!-- http://www.w3.org/ns/lemon/ontolex#LexicalSense -->
+
+    <owl:Class rdf:about="&ontolex;LexicalSense"/>
+    
+
+
+    <!-- http://www.w3.org/ns/lemon/ontolex#Lexicon -->
+
+    <owl:Class rdf:about="&ontolex;Lexicon"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.0.0.1469) http://owlapi.sourceforge.net -->
+
