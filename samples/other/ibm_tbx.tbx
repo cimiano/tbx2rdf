@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE martif SYSTEM "TBXcoreStructV02.dtd">
+<!-- VERSION HISTORY
+	version 1.1 (2008.12.23) - corrected XCS name to end in .xcs
+-->
+<!-- The following lines are required when validating this file against the TBX RNG schema.
+    If you want to use this schema for validation, instead of the DTD, you must uncomment the following
+    two lines, and comment-out the DOCTYPE statement on line 2.-->
+<!--<?oxygen SCHSchema="TBX_RNGV02.rng"?>-->
+<!--<?oxygen RNGSchema="TBX_RNGV02.rng" type="xml"?>-->
+<martif type="TBX" xml:lang="en">
+    <martifHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>IBM Data</title>
+            </titleStmt>
+            <sourceDesc>
+                <p>from an IBM Terminology Sample</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <p type="XCSURI">TBXXCSV02.xcs</p>
+        </encodingDesc>
+    </martifHeader>
+    <text>
+        <body>
+            <termEntry id="c1">
+                <descrip type="subjectField">Software</descrip>
+                <descrip type="relatedConcept">navigation tree</descrip>
+                <descrip type="relatedConceptBroader">navigation</descrip>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Servers: eServer xSeries</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>navigation trail</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                        <descrip type="context">The trail at the top of the content frame is your
+                            navigation trail, sometimes called a branch.</descrip>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Servers: eServer xSeries</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>branch</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                        <descrip type="context">The trail at the top of the content frame in your
+                            navigation trail, sometimes called a branch.</descrip>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <admin type="productSubset">Servers: eServer xSeries</admin>
+                    <ntig>
+                        <termGrp>
+                            <term>historique de navigation</term>
+                            <termNote type="partOfSpeech">nom</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c2">
+                <descrip type="subjectField">Hardware \ Other Processing Units and Specialized
+                    Devices</descrip>
+                <descrip type="relatedConceptBroader">acceptor</descrip>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Retail Store Solutions</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>bill acceptor</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                        <descrip type="context">Accepts bill denominations of $1, $2, $5, $10, $20,
+                            $50 and $100. The bill acceptor cassette holds 600 bills. It detects and
+                            rejects counterfeit bills.</descrip>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <admin type="productSubset">Retail Store Solutions</admin>
+                    <ntig>
+                        <termGrp>
+                            <term>accepteur de billets</term>
+                            <termNote type="partOfSpeech">nom</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c3">
+                <descrip type="subjectField">Software \ Application Infrastructure Services \ System
+                    Management</descrip>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Software: Tivoli</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>scheduled operation</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                        <descrip type="context">Using the CAD to manage the scheduler requires very
+                            little memory between scheduled operations.</descrip>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <ntig>
+                        <termGrp>
+                            <term>opération planifiée</term>
+                            <termNote type="partOfSpeech">nom</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c4">
+                <descrip type="subjectField">Software</descrip>
+                <descrip type="relatedConceptBroader">gallery</descrip>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Other - Miscellaneous</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>samples gallery</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                        <descrip type="context">The program may contain sample source code or
+                            programs, which illustrate programming techniques. These samples are
+                            found in the samples gallery.</descrip>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <adminGrp>
+                        <admin type="sourceIdentifier">IBM publication</admin>
+                    </adminGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>galerie d'exemples</term>
+                            <termNote type="partOfSpeech">nom</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c5">
+                <descrip type="subjectField">General</descrip>
+                <langSet xml:lang="en">
+                    <admin type="productSubset">Retail Store Solutions</admin>
+                    <adminGrp>
+                        <admin type="sourceIdentifier">Translation Services Center</admin>
+                    </adminGrp>
+                    <descripGrp>
+                        <descrip type="definition">The area of a store comprising conventional lanes
+                            and IBM lanes with a paystation.</descrip>
+                    </descripGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>front end</term>
+                            <termNote type="partOfSpeech">noun</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="fr">
+                    <admin type="productSubset">Retail Store Solutions</admin>
+                    <ntig>
+                        <termGrp>
+                            <term>avant-guichet</term>
+                            <termNote type="partOfSpeech">nom</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+        </body>
+    </text>
+</martif>
