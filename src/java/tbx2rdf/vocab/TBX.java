@@ -43,7 +43,39 @@ public class TBX {
      public static Property termNote = defaultModel.createProperty("http://lider-project.eu/tbx#termNote");
      public static Property transaction = defaultModel.createProperty("http://lider-project.eu/tbx#transaction");
     
+     public static Property reliabilityCode = defaultModel.createProperty("http://lider-project.eu/tbx#reliabilityCode");
+     public static Property termType = defaultModel.createProperty("http://lider-project.eu/tbx#termType");
+     
+     public static Property partOfSpeech = defaultModel.createProperty("http://lider-project.eu/tbx#partOfSpeech");
+     public static Property grammaticalNumber = defaultModel.createProperty("http://lider-project.eu/tbx#grammaticalNumber");
     
+     public static Property transactionType = defaultModel.createProperty("http://lider-project.eu/tbx#transactionType");
+     
+     
+     public static Resource reliabilityCode1 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode1");
+     public static Resource reliabilityCode2 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode2");
+     public static Resource reliabilityCode3 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode3");
+     public static Resource reliabilityCode4 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode4");
+     public static Resource reliabilityCode5 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode5");
+     public static Resource reliabilityCode6 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode6");
+     public static Resource reliabilityCode7 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode7");
+     public static Resource reliabilityCode8 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode8");
+     public static Resource reliabilityCode9 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode9");
+     public static Resource reliabilityCode10 = defaultModel.createResource("http://lider-project.eu/tbx#reliabilityCode10");
+     
+     public static Resource noun = defaultModel.createResource("http://lider-project.eu/tbx#noun");
+     public static Resource properNoun = defaultModel.createResource("http://lider-project.eu/tbx#properNoun");
+     public static Resource adverb = defaultModel.createResource("http://lider-project.eu/tbx#adverb");
+     public static Resource adjective = defaultModel.createResource("http://lider-project.eu/tbx#adjective");
+     public static Resource verb = defaultModel.createResource("http://lider-project.eu/tbx#verb");
+     public static Resource other = defaultModel.createResource("http://lider-project.eu/tbx#other");
+     
+     public static Resource singular = defaultModel.createResource("http://lider-project.eu/tbx#singular");
+     public static Resource plural = defaultModel.createResource("http://lider-project.eu/tbx#plural");
+     
+     
+     
+     
     /**
      * Adds the most common prefixes to the generated model
      * 
