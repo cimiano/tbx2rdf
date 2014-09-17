@@ -6,7 +6,6 @@ import tbx2rdf.types.MartifHeader;
 import tbx2rdf.types.TBX_Terminology;
 import tbx2rdf.types.Descrip;
 import tbx2rdf.types.XReference;
-import tbx2rdf.types.Lexicon;
 import tbx2rdf.types.Term;
 import java.io.IOException;
 import java.io.Reader;
@@ -114,7 +113,9 @@ public class TBX2RDF_Converter {
         mappings.defaultLanguage = "en";
         for (Element e : children(root)) {
             if (e.getTagName().equalsIgnoreCase("text")) {
-                terminology.terms.addAll(processText(e, mappings));
+		    	for(Term t : processText(e, mappings)) {
+	                terminology.addTerm(t);
+				}
             } else if (!e.getTagName().equalsIgnoreCase("martifHeader")) {
                 unexpected(root);
             }
@@ -228,7 +229,6 @@ public class TBX2RDF_Converter {
 
         int langsetcount = 0;
 
-        processID(term, node);
 
         for (Element sub : children(node)) {
             final String name = sub.getTagName();
@@ -236,8 +236,8 @@ public class TBX2RDF_Converter {
             if (name.equalsIgnoreCase("langSet")) {
                 langsetcount++;
                 this.processLangSet(term, sub, mappings);
-            } else {
-                processAuxInfo(term, sub, mappings);
+	    } else {
+	                processAuxInfo(term, sub, mappings);
             }
         }
 
@@ -260,7 +260,7 @@ public class TBX2RDF_Converter {
         // target IDREF #IMPLIED 
         // datatype CDATA #IMPLIED
         //'>
-        final Reference ref = new Reference(processType(sub, mappings,true), sub.getAttribute("xml:lang"), mappings);
+        final Reference ref = new Reference(processType(sub, mappings,true), sub.getAttribute("xml:lang"), mappings, sub.getChildNodes());
         if(sub.hasAttribute("id")) {
             ref.setID(sub.getAttribute("id"));
         }
@@ -313,7 +313,7 @@ public class TBX2RDF_Converter {
      *
      * @return a LexicalEntry
      */
-    void processLangSet(Term term, Element langSet, Mappings mappings) {
+    Term processLangSet(Term term, Element langSet, Mappings mappings) {
 
     	// <!ELEMENT langSet ((%auxInfo;), (tig | ntig)+) >
         // <!ATTLIST langSet
@@ -321,17 +321,15 @@ public class TBX2RDF_Converter {
         // xml:lang CDATA #REQUIRED >
 
         LexicalEntry entry;
-
-        int termCount = 0;
-
-        processID(term, langSet);
-
         String language = getValueOfAttribute(langSet, "xml:lang");
 
         if (language == null) {
             throw new TBXFormatException("Language not specified for langSet!");
         }
+	
+        int termCount = 0;
 
+        processID(term, langSet);
 
         for(Element sub : children(langSet)) {
 
@@ -356,6 +354,7 @@ public class TBX2RDF_Converter {
             throw new TBXFormatException("No TIG nor NTIG in langSet !");
         }
 
+	return term;
     }
 
     void processTIG(LexicalEntry entry, Element tig, Mappings mappings) {
@@ -601,7 +600,7 @@ public class TBX2RDF_Converter {
            //<!ATTLIST transac
            //%impIDLangTypTgtDtyp;
            //>
-        final Transaction transaction = new Transaction(child.getTextContent(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
+        final Transaction transaction = new Transaction(child.getChildNodes(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(transaction, child, mappings);
         return transaction;
     }
@@ -612,7 +611,7 @@ public class TBX2RDF_Converter {
            //<!ATTLIST transacNote
            //%impIDLangTypTgtDtyp;
            //> 
-        final TransacNote transacNote = new TransacNote(child.getTextContent(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
+        final TransacNote transacNote = new TransacNote(child.getChildNodes(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(transacNote, child, mappings);
         transacGrp.transacNotes.add(transacNote);
     }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import tbx2rdf.Mappings;
 import tbx2rdf.types.abs.impIDLang;
+import tbx2rdf.vocab.SKOS;
 
 /**
  * This class represents a Lexical Entry

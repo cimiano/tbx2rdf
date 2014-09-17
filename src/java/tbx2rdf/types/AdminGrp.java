@@ -25,13 +25,12 @@ public class AdminGrp extends impID {
     }
 
     private boolean isEmpty() {
-        return notes.isEmpty() && refs.isEmpty() && xrefs.isEmpty() && 
-                (!(admin.type instanceof DatatypePropertyMapping) || admin.target == null || admin.target.equals("")) && 
-                (!(admin.type instanceof ObjectPropertyMapping) || admin.value == null || admin.value.getLength() == 0);
+        return notes.isEmpty() && refs.isEmpty() && xrefs.isEmpty();
     }
     
     @Override
     public void toRDF(Model model, Resource parent) {
+	admin.toRDF(model, parent);
         if(!isEmpty()) {
             final Resource adminRes = getRes(model);
             adminRes.addProperty(RDF.type, TBX.Admin);
@@ -45,10 +44,6 @@ public class AdminGrp extends impID {
             for(XReference ref : xrefs) {
                 ref.toRDF(model, adminRes);
             }
-            admin.toRDF(model, adminRes);
-        } else {
-            admin.toRDF(model, parent);
-            
         }
     }
    

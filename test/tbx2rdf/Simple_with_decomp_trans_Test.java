@@ -41,7 +41,7 @@ public class Simple_with_decomp_trans_Test {
     
     @Before
     public void setUp() throws Exception {      
-        final Mappings mappings = Mappings.readInMappings("mappings2.default");
+        final Mappings mappings = Mappings.readInMappings("mappings.default");
         final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/simple_with_decomp_trans.xml"), mappings);
         model = terminology.getModel("http://www.example.com/example#");  
     }

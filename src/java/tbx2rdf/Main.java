@@ -53,7 +53,7 @@ public class Main {
 
         String input_file = args[0];                                           //First argument, input file
         String output_file = input_file.replaceAll("\\.xml", "\\.rdf");
-        String mapping_file = "mappings2.default";
+        String mapping_file = "mappings.default";
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
             arg = args[i];

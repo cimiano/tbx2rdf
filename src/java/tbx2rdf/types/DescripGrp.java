@@ -24,16 +24,13 @@ public class DescripGrp extends NoteLinkInfo {
 
     private boolean isEmpty() {
         return descripNote.isEmpty() && AdminInfos.isEmpty() && References.isEmpty() &&
-                Transactions.isEmpty() && Xreferences.isEmpty() && 
-                (!(descrip.type instanceof ObjectPropertyMapping) || descrip.value.getLength() == 0) &&
-                (!(descrip.type instanceof DatatypePropertyMapping) || descrip.datatype == null || descrip.datatype.equals(""));
+                Transactions.isEmpty() && Xreferences.isEmpty();
     }
 
     @Override
     public void toRDF(Model model, Resource resource) {
-        if(isEmpty()) {
-            descrip.toRDF(model, resource);
-        } else {
+    descrip.toRDF(model, resource);
+        if(!isEmpty()) {
             final Resource descripRes = getRes(model);
             resource.addProperty(TBX.description, descripRes);
             descripRes.addProperty(RDF.type, TBX.Descrip);

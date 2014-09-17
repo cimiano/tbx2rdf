@@ -30,16 +30,13 @@ public class TransacGrp extends NoteLinkInfo {
     }
     private boolean isEmpty() {
         return transacNotes.isEmpty() && AdminInfos.isEmpty() && References.isEmpty() &&
-                Transactions.isEmpty() && Xreferences.isEmpty() && 
-                (!(transaction.type instanceof ObjectPropertyMapping) || transaction.value == null || transaction.value.equals("")) &&
-                (!(transaction.type instanceof DatatypePropertyMapping) || transaction.datatype == null || transaction.datatype.equals(""));
+                Transactions.isEmpty() && Xreferences.isEmpty();
     }
 
     @Override
     public void toRDF(Model model, Resource resource) {
-        if(isEmpty()) {
-            transaction.toRDF(model, resource);
-        } else {
+	transaction.toRDF(model, resource);
+        if(!isEmpty()) {
             final Resource descripRes = getRes(model);
             resource.addProperty(TBX.transaction, descripRes);
             descripRes.addProperty(RDF.type, TBX.Transaction);
