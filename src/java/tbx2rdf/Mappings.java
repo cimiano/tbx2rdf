@@ -1,12 +1,9 @@
 package tbx2rdf;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URL;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +24,12 @@ public class Mappings {
 	 * @return Nothing, but the global mappings HashMap is updated
 	 */
 	public static Mappings readInMappings(String mapping_file) throws IOException {
+		return readInMappings(new FileReader(mapping_file));
+	}
+
+	public static Mappings readInMappings(Reader fstream) throws IOException {
 		final Mappings mappings = new Mappings();
-		final FileInputStream fstream = new FileInputStream(mapping_file);
-		final DataInputStream in = new DataInputStream(fstream);
-		final BufferedReader br = new BufferedReader(new InputStreamReader(in));
+		final BufferedReader br = new BufferedReader(fstream);
 		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*<(\\S*?)>$");
 		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP(\\s*\\{(.*?)\\})?$");
 		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP$");
@@ -61,7 +60,7 @@ public class Mappings {
 				throw new RuntimeException("Bad line in mapping file: " + strLine);
 			}
 		}
-		in.close();
+		br.close();
 		return mappings;
 	}
 
