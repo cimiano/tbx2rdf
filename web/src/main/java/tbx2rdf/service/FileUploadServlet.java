@@ -1,4 +1,4 @@
-package tbx2rdfService;
+package tbx2rdf.service;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package tbx2rdfService;
+package tbx2rdf.service;
 
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
@@ -6,6 +6,7 @@ import java.io.InputStream;
 import tbx2rdf.TBX2RDF_Converter;
 import java.io.IOException;
 import java.io.PrintStream;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import static org.apache.commons.lang3.StringEscapeUtils.escapeHtml4;
 import tbx2rdf.Mappings;
@@ -28,7 +29,7 @@ public class tbx2rdfServlet extends HttpServlet {
      * @param req HTTP request
      * @param resp HTTP response
      */
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         String content = req.getParameter("content");
@@ -44,7 +45,7 @@ public class tbx2rdfServlet extends HttpServlet {
         String result0 = convert(content, resourceURI);
         formatOutput(resp,result0);
     }
-    
+
     /**
      * Formats the result the response 
      */
@@ -94,7 +95,7 @@ public class tbx2rdfServlet extends HttpServlet {
     public static String readTextFile(String filename) {
         String str = "";
         try {
-            InputStream in = tbx2rdfService.tbx2rdfServlet.class.getResourceAsStream(filename);
+            InputStream in = tbx2rdf.service.tbx2rdfServlet.class.getResourceAsStream(filename);
             BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
             String line = "";
             while ((line = br.readLine()) != null) {
