@@ -2,6 +2,7 @@ package tbx2rdf.types;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import tbx2rdf.Mappings;
 import tbx2rdf.types.abs.impIDLang;
@@ -21,7 +22,10 @@ public class TermComp extends impIDLang {
 
     @Override
     public void toRDF(Model model, Resource parent) {
-        parent.addProperty(RDFS.label, value, lang);
+		final Resource res = getRes(model);
+		parent.addProperty(ONTOLEX.identifies, res);
+		res.addProperty(RDF.type, ONTOLEX.LexicalEntry);
+        res.addProperty(RDFS.label, value, lang);
     }
     
     

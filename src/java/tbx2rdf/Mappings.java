@@ -31,7 +31,7 @@ public class Mappings {
 		final FileInputStream fstream = new FileInputStream(mapping_file);
 		final DataInputStream in = new DataInputStream(fstream);
 		final BufferedReader br = new BufferedReader(new InputStreamReader(in));
-		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*(\\S*?)$");
+		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*<(\\S*?)>$");
 		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP(\\s*\\{(.*?)\\})?$");
 		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP$");
 

@@ -26,22 +26,4 @@ public class Term extends Describable {
     {
         super(null, new Mappings());
     }
-    
-    /**
-     * Gets a Jena Model
-     * @return Jena Model with the term
-     */
-    public void toRDF(Model model, Resource parent) {
-        Resource term = getRes(model);
-        term.addProperty(RDF.type, TBX.SkosConcept);
-        for (LexicalEntry entry : Lex_entries) {
-            final Resource entryRes = entry.getRes(model);
-            parent.addProperty(ONTOLEX.entry, entryRes);
-            final Resource senseRes = entry.getSubRes(model, "Sense");
-            term.addProperty(ONTOLEX.lexicalizedSense, senseRes);
-            entry.toRDF(model, term);
-        }
-
-        super.toRDF(model, term);
-    }
 }

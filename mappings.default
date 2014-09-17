@@ -201,7 +201,7 @@ termNote	type	timeRestriction	<http://tbx2rdf.lider-project.eu/tbx#timeRestricti
 termNote	type	transferComment	<http://tbx2rdf.lider-project.eu/tbx#transferComment>	DP
 termNote	type	usageNote	<http://tbx2rdf.lider-project.eu/tbx#usageNote>	DP
 transac	type	transactionType	<http://tbx2rdf.lider-project.eu/tbx#transactionType>	DP
-transacNote	type	responsibility	<http://tbx2rdf.lider-project.eu/tbx#responsibility>	DP
+transacNote	type	responsibility	<http://www.w3.org/ns/prov#wasAssociatedWith>	DP
 transacNote	type	usageCount	<http://tbx2rdf.lider-project.eu/tbx#usaageCount>		DP
 xref	type	corpusTrace	<http://tbx2rdf.lider-project.eu/tbx#corpusTrace>		OP
 xref	type	externalCrossReference	<http://tbx2rdf.lider-project.eu/tbx#externalCrossReference>	OP

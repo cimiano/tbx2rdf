@@ -4,6 +4,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 import java.io.FileReader;
 import java.util.List;
@@ -67,7 +68,8 @@ public class Simple_with_decomp_trans_Test {
         final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.LexicalEntry).toList();
         for(Statement stat : stats) {
             final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-            assert(!stats2.isEmpty());
+            final List<Statement> stats3 = model.listStatements(stat.getSubject(), RDFS.label, (RDFNode)null).toList();
+            assert(!stats2.isEmpty() || !stats3.isEmpty());
         }
     }
     
@@ -79,7 +81,8 @@ public class Simple_with_decomp_trans_Test {
         final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.LexicalEntry).toList();
         for(Statement stat : stats) {
             final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.language, (RDFNode)null).toList();
-            assert(stats2.size() == 1);
+            final List<Statement> stats3 = model.listStatements(stat.getSubject(), RDFS.label, (RDFNode)null).toList();
+            assert(stats2.size() == 1 || !stats3.isEmpty());
         }
     }
     
@@ -157,188 +160,5 @@ public class Simple_with_decomp_trans_Test {
     }
     
     
-    
-    /* check that there are exactly three lexical entries
-     * 
-     */
-    @Test
-    public void checkNumberofEntries() throws Exception {
-        final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.LexicalEntry).toList();
-        
-        assert(stats.size() == 3);
-
-    }
-    
-    /* check that there are exactly six lexical entries
-     * 
-     */
-    @Test
-    public void checkNumberofLexicons() throws Exception {
-        final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.Lexicon).toList();
-        
-        assert(stats.size() == 6);
-
-    }
-    
-
-    
-    /* checks that there there are three lexical entries with the appropriate canonical form
-     */
-    @Test
-    public void checkDecomposition() throws Exception {
-    	
-    	
-    	final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.LexicalEntry).toList();
-        
-        Boolean found;
-        
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("competence of the Member States")) 
-            	{
-            		found = true;
-            		
-            		List<Statement> stats3 = model.listStatements(stmt.getSubject(), TBX.termType, (RDFNode)null).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            		stats3 = model.listStatements(stmt.getSubject(), TBX.reliabilityCode, TBX.reliabilityCode3).toList();
-                    
-            		assert (stats3.size() == 1);
-            	}
-            	
-            }
-        }
-        
-        assert(found);
-
-            
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("competence"))
-            	{	
-            		found = true;
-            		
-            		List<Statement> stats3 = model.listStatements(stmt.getSubject(), TBX.partOfSpeech, TBX.noun).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            		stats3 = model.listStatements(stmt.getSubject(), TBX.grammaticalNumber, TBX.singular).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            	}
-            }
-        }
-        
-        assert(found);
-                
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("of")) found = true;
-            }
-        }
-        
-        assert(found);
-        
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("the"))
-            	{
-            		found = true;
-            		
-            		List<Statement> stats3 = model.listStatements(stmt.getSubject(), TBX.partOfSpeech, TBX.other).toList();
-                    
-            		assert (stats3.size() == 1);
-
-            	}
-            }
-        }
-        
-        assert(found);
-    
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("Member"))
-            	{
-            		found = true;
-            		
-            		List<Statement> stats3 = model.listStatements(stmt.getSubject(), TBX.partOfSpeech, TBX.noun).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            		stats3 = model.listStatements(stmt.getSubject(), TBX.grammaticalNumber, TBX.singular).toList();
-                    
-            		assert (stats3.size() == 1);
-            	}
-            }
-        }
-        
-        assert(found);
-        
-        found = false;
-        
-        for(Statement stat : stats) {
-            final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.canonicalForm, (RDFNode)null).toList();
-           
-            assert (stats2.size() == 1);
-            
-            for (Statement stmt: stats2)
-            {
-            	if (stmt.getObject().asLiteral().getString().equals("States"))
-            	{
-            		found = true;
-            		
-            		List<Statement> stats3 = model.listStatements(stmt.getSubject(), TBX.partOfSpeech, TBX.noun).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            		stats3 = model.listStatements(stmt.getSubject(), TBX.grammaticalNumber, TBX.singular).toList();
-                    
-            		assert (stats3.size() == 1);
-            		
-            	}
-            }
-        }
-        
-        assert(found);
-    
-    	
-    }
+	// Removed tests as duplicates of Simple_with_decomposition_Test.java
 }
-
