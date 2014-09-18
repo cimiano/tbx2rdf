@@ -95,7 +95,8 @@ public class MartifHeader extends impID {
      */
     @Override
     public void toRDF(Model model, Resource parent) {
-        final Resource res = parent;
+        final Resource res = getRes(model);
+        
         res.addProperty(RDF.type, TBX.MartifHeader);
         if(fileDesc.titleStmt != null) {
             if(fileDesc.titleStmt.title_lang != null) {
