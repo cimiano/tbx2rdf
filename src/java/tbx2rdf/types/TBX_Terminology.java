@@ -55,6 +55,7 @@ public class TBX_Terminology {
 		}
 		final Resource dataset = model.createResource(resourceURI);
 		dataset.addProperty(DCTerms.type, this.type);
+		dataset.addProperty(RDF.type, model.createResource("http://www.w3.org/ns/dcat#Dataset"));
 		header.toRDF(model, dataset);
 
 		return model;

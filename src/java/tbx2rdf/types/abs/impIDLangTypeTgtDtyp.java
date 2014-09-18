@@ -59,8 +59,11 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
 				}
 			}
 		} else if (type instanceof DatatypePropertyMapping) {
+			final DatatypePropertyMapping dpm = (DatatypePropertyMapping)type;
 			if (datatype != null) {
 				parent.addProperty(model.createProperty(type.getURL()), nodelistToString(value), NodeFactory.getType(datatype));
+			} else if(dpm.getDatatypeURL() != null) { 
+				parent.addProperty(model.createProperty(type.getURL()), nodelistToString(value), NodeFactory.getType(dpm.getDatatypeURL()));
 			} else if (value.getLength() <= 1) {
 				parent.addProperty(model.createProperty(type.getURL()), nodelistToString(value), lang);
 			} else {

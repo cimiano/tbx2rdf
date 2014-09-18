@@ -32,7 +32,7 @@ public class Mappings {
 		final BufferedReader br = new BufferedReader(fstream);
 		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*<(\\S*?)>$");
 		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP(\\s*\\{(.*?)\\})?$");
-		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP$");
+		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP(\\s*<(.*?)>)?$");
 
 		String strLine;
 		Matcher matcher;
@@ -41,7 +41,7 @@ public class Mappings {
 			if ((matcher = mapping1.matcher(strLine)).find()) {
 				mappings.addMapping(matcher.group(1), new IndividualMapping(matcher.group(2)));
 			} else if ((matcher = mapping3.matcher(strLine)).find()) {
-				mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new DatatypePropertyMapping(matcher.group(4)));
+				mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), new DatatypePropertyMapping(matcher.group(4), matcher.group(6)));
 			} else if ((matcher = mapping2.matcher(strLine)).find()) {
 				final Set<String> set = new HashSet<String>();
 				if (matcher.group(6) != null) {

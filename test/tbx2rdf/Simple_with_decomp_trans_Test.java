@@ -109,6 +109,8 @@ public class Simple_with_decomp_trans_Test {
         for(Statement stat : stats) {
             final List<Statement> stats2 = model.listStatements(stat.getSubject(), PROVO.wasAssociatedWith, (RDFNode)null).toList();
             assert(stats2.size() == 1);
+			final List<Statement> stats3 = model.listStatements(stats2.get(0).getObject().asResource(), RDF.type, PROVO.Agent).toList();
+            assert(stats3.size() == 1);
         }
     }
     

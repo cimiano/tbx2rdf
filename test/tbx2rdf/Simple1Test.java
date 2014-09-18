@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -279,5 +280,12 @@ public class Simple1Test {
 
 		assert (found);
 
+	}
+
+	@Test public void testSubjectFieldNoLang() {
+		final List<Statement> stats = model.listStatements(null, TBX.subjectField, (String)null).toList();
+		for(Statement stat : stats) {
+			Assert.assertEquals("",stat.getObject().asLiteral().getLanguage());
+		}
 	}
 }

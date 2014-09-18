@@ -1,24 +1,12 @@
 package tbx2rdf.types;
 
-import com.hp.hpl.jena.datatypes.RDFDatatype;
-import com.hp.hpl.jena.graph.NodeFactory;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.DC_11;
 import com.hp.hpl.jena.vocabulary.RDF;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.vocab.TBX;
@@ -95,7 +83,7 @@ public class MartifHeader extends impID {
      */
     @Override
     public void toRDF(Model model, Resource parent) {
-        final Resource res = getRes(model);
+        final Resource res = parent;
         
         res.addProperty(RDF.type, TBX.MartifHeader);
         if(fileDesc.titleStmt != null) {

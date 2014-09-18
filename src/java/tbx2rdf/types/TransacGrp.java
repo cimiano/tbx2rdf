@@ -38,20 +38,17 @@ public class TransacGrp extends NoteLinkInfo {
 
 	@Override
 	public void toRDF(Model model, Resource resource) {
-		transaction.toRDF(model, resource);
-		if (!isEmpty()) {
-			final Resource descripRes = getRes(model);
-			resource.addProperty(TBX.transaction, descripRes);
-			descripRes.addProperty(RDF.type, TBX.Transaction);
-			descripRes.addProperty(RDF.type, PROVO.Activity);
-			if (date != null) {
-				descripRes.addProperty(PROVO.endedAtTime, date, NodeFactory.getType(XSD.dateTime.getURI()));
-			}
-			for(TransacNote note : transacNotes) {
-				note.toRDF(model, descripRes);
-			}
-			transaction.toRDF(model, descripRes);
-			super.toRDF(model, descripRes);
+		final Resource descripRes = getRes(model);
+		resource.addProperty(TBX.transaction, descripRes);
+		descripRes.addProperty(RDF.type, TBX.Transaction);
+		descripRes.addProperty(RDF.type, PROVO.Activity);
+		if (date != null) {
+			descripRes.addProperty(PROVO.endedAtTime, date, NodeFactory.getType(XSD.dateTime.getURI()));
 		}
+		for (TransacNote note : transacNotes) {
+			note.toRDF(model, descripRes);
+		}
+		transaction.toRDF(model, descripRes);
+		super.toRDF(model, descripRes);
 	}
 }
