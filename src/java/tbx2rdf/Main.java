@@ -84,6 +84,9 @@ public class Main {
         System.out.print("Doing the conversion\n");
         TBX_Terminology terminology = converter.convert(reader, mappings);
 
+        /// UNCOMMENT THE FOLLOWING LINE TO USE SAX PARSING
+ //       TBX_Terminology terminology2 = converter.convertLargeFile(input_file, mappings);
+
         //WRITE. This one has been obtained from 
         System.out.print("Writting output to " + output_file + "\n");
         final Model model = terminology.getModel("file:" + output_file);

@@ -1,5 +1,6 @@
 package tbx2rdf;
 
+import java.io.File;
 import tbx2rdf.types.LexicalEntry;
 import tbx2rdf.types.Describable;
 import tbx2rdf.types.MartifHeader;
@@ -47,6 +48,15 @@ import tbx2rdf.types.TransacNote;
 import tbx2rdf.types.Transaction;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
+import java.io.IOException;
+import java.util.List;
+ 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+ 
+import org.xml.sax.SAXException;
+
 
 /**
  * Entry point of the TBX2RDF converter
@@ -92,7 +102,32 @@ public class TBX2RDF_Converter {
     }
 
     /**
-     *
+     * Converts a XML TBX file by using SAX parsing (handling large files...)
+     * @param file Path to the input file
+     * @param mappings Mappings
+     * @return The TBX terminology
+     */
+    public TBX_Terminology convertLargeFile(String file, Mappings mappings) 
+    {
+        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+        try {
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            SAXHandler handler = new SAXHandler(mappings);
+            
+            saxParser.parse(new File(file), handler);
+    } catch (ParserConfigurationException | SAXException | IOException e) {
+        e.printStackTrace();
+    }        
+        return null;
+  //      return processMartif(root,mappings);
+    }
+    
+    
+    
+    /**
+     * Makes the conversion given a certain input and a set of mappings
+     * @param input Input 
+     * @param mappings Mappings
      */
     public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, SAXException, ParserConfigurationException, TBXFormatException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -108,6 +143,10 @@ public class TBX2RDF_Converter {
 
     }
 
+    /**
+     * Processes the whole TBX file from the root XML element (once built the DOM model)
+     * @param root The root element
+     */
     TBX_Terminology processMartif(Element root, Mappings mappings) throws IOException, SAXException {
         final TBX_Terminology terminology = new TBX_Terminology(root.getAttribute("type"), processMartifHeader(child(root, "martifHeader"), mappings));
         mappings.defaultLanguage = "en";
@@ -124,6 +163,11 @@ public class TBX2RDF_Converter {
         return terminology;
     }
 
+    /**
+     * Given a XML root element, processes the Martif Header
+     * @param root XML root element
+     * @param mappings Mappings
+     */
     MartifHeader processMartifHeader(Element root, Mappings mappings) throws IOException, SAXException {
         final MartifHeader header = new MartifHeader(processFileDescrip(child(root, "fileDesc"), mappings));
         processID(header, root);
@@ -141,7 +185,10 @@ public class TBX2RDF_Converter {
         return header;
     }
 
-    FileDesc processFileDescrip(Element root, Mappings mappings) throws IOException, SAXException {
+    /**
+     * Obtains a FileDesc object by parsing a XML element.
+     */
+    public FileDesc processFileDescrip(Element root, Mappings mappings) throws IOException, SAXException {
         final FileDesc fileDesc = new FileDesc();
 
         for (Element e : children(root)) {
