@@ -32,6 +32,8 @@ public class TBX_Terminology {
 		terms.add(term);
 	}
 
+        /**
+         */
 	public Model getModel(String resourceURI) {
 		Model model = ModelFactory.createDefaultModel();
 		TBX.addPrefixesToModel(model);

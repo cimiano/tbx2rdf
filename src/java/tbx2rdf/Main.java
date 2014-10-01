@@ -35,22 +35,22 @@ public class Main {
 //        final HashMap<String, Lexicon> lexica = new HashMap<String, Lexicon>();
 //        final Set<Term> terms = new HashSet<Term>();
         final Mappings mappings;
-        
-        
+
+
         if (args.length == 0) {
-            System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)?");
+            System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)? (--big=true)?");
             System.out.println("If no OUTPUT_FILE is provided, then <INPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
             System.out.println("If no MAPPING_FILE is provided, then mappings.default will be used.");
             return;
         }
-
+        boolean big = false;
         String input_file = args[0];                                           //First argument, input file
         String output_file = input_file.replaceAll("\\.xml", "\\.rdf");
         String mapping_file = "mappings.default";
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
             arg = args[i];
-            Pattern p = Pattern.compile("^--(output|mappings)=(.*?)$");
+            Pattern p = Pattern.compile("^--(output|mappings|big)=(.*?)$");
             Matcher matcher;
             matcher = p.matcher(arg);
             if (matcher.matches()) {
@@ -64,11 +64,16 @@ public class Main {
                     mapping_file = value;
                     System.out.print("MAPPING_FILE set to" + mapping_file + "\n");
                 }
+                if (key.equals("big")) {
+                    if (value.equals("true"))
+                        big = true;
+                    System.out.print("Processing large file\n");
+                }
             }
         }
 
         TBX2RDF_Converter converter = new TBX2RDF_Converter();
-        
+
         //READ MAPPINGS
         System.out.print("Using mapping file: " + mapping_file + "\n");
         mappings = Mappings.readInMappings(mapping_file);
@@ -76,21 +81,23 @@ public class Main {
         //READ XML
         System.out.print("Opening file " + input_file + "\n");
         BufferedReader reader = new BufferedReader(new FileReader(input_file));
-        
+
         // Document doc = Main.readXMLDocument(input_file);
         //  Document doc = db.parse(textstream);        //This is an alternative form, which @victor disregards as we won't always have a file (service etc.).
 
-        //CONVERT
-        System.out.print("Doing the conversion\n");
-        TBX_Terminology terminology = converter.convert(reader, mappings);
-
         /// UNCOMMENT THE FOLLOWING LINE TO USE SAX PARSING
- //       TBX_Terminology terminology2 = converter.convertLargeFile(input_file, mappings);
-
-        //WRITE. This one has been obtained from 
-        System.out.print("Writting output to " + output_file + "\n");
-        final Model model = terminology.getModel("file:" + output_file);
-        RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);
+        //      TBX_Terminology terminology2 = converter.convertLargeFile(input_file, mappings);
+        if (big) {
+            System.out.print("Doing the conversion of a big file\n");
+            TBX_Terminology terminology3 = converter.convertLargeFile3(input_file, mappings);
+        } else { //standard conversion
+            System.out.print("Doing the conversion\n");
+            TBX_Terminology terminology = converter.convert(reader, mappings);
+            //WRITE. This one has been obtained from 
+            System.out.print("Writting output to " + output_file + "\n");
+            final Model model = terminology.getModel("file:" + output_file);
+            RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);
+        }
 
     }
 
@@ -101,9 +108,9 @@ public class Main {
      */
     public static Document readXMLDocument(String input_file) {
         try {
-        	
-        	TBX2RDF_Converter converter = new TBX2RDF_Converter();
-        	
+
+            TBX2RDF_Converter converter = new TBX2RDF_Converter();
+
             BufferedReader reader = new BufferedReader(new FileReader(input_file));
             String line, textstream = "";
             while ((line = reader.readLine()) != null) {
@@ -119,5 +126,4 @@ public class Main {
             return null;
         }
     }
-    
 }
