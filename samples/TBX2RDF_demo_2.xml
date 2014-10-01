@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE martif SYSTEM "http://www.ttt.org/oscarstandards/tbx/TBXcoreStructV02.dtd">
+<martif type="TBX" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>Applied linguistics</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">https://demo.taas-project.eu/tbx/taas.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+	<termEntry id="TaaS-2643576">
+  <descrip type="subjectField">TaaS-2000</descrip>
+  <langSet xml:lang="en">
+    <ntig>
+      <termGrp>
+        <term>bilingual dictionary</term>
+        <termNote type="MSD">JJ NN</termNote>
+        <termCompList type="lemma">
+          <termCompGrp>
+            <termComp>bilingual</termComp>
+            <termNote type="partOfSpeech">adjective</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>dictionary</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+        </termCompList>
+      </termGrp>
+      <descripGrp>
+        <descrip type="surface">bilingual dictionary</descrip>
+        <descripNote type="surfaceForm">bilingual dictionary</descripNote>
+        <descripNote type="surfaceMSD">JJ NN</descripNote>
+        <descripNote type="normalizedForm">bilingual dictionary</descripNote>
+        <descripNote type="normalizedMSD">JJ NN</descripNote>
+        <descripNote type="lemma">bilingual dictionary</descripNote>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <date>2014-09-28</date>
+      </transacGrp>
+      <xref target="http://taas.eurotermbank.com/extractor" type="xSource" />
+      <descripGrp>
+        <descrip type="context">encyclopedia , monolingual versus<hi>bilingual dictionary</hi>, general versus technical</descrip>
+      </descripGrp>
+      <descripGrp>
+        <descrip type="context">use of the<hi>bilingual dictionary</hi>in all its</descrip>       
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T13:58:11.974Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+    </ntig>
+  </langSet>  
+</termEntry>
+<termEntry id="TaaS-2643577">
+  <descrip type="subjectField">TaaS-2000</descrip>
+  <langSet xml:lang="en">
+    <ntig>
+      <termGrp>
+        <term>unilingual</term>
+        <termNote type="MSD">JJ NN</termNote>
+        <termCompList type="lemma">
+          <termCompGrp>
+            <termComp>unilingual</termComp>
+            <termNote type="partOfSpeech">adjective</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>counterpart</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+        </termCompList>
+      </termGrp>
+      <descripGrp>
+        <descrip type="surface">unilingual counterpart</descrip>
+        <descripNote type="surfaceForm">unilingual counterpart</descripNote>
+        <descripNote type="surfaceMSD">JJ NN</descripNote>
+        <descripNote type="normalizedForm">unilingual counterpart</descripNote>
+        <descripNote type="normalizedMSD">JJ NN</descripNote>
+        <descripNote type="lemma">unilingual counterpart</descripNote>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <date>2014-09-28</date>
+      </transacGrp>
+      <xref target="http://taas.eurotermbank.com/extractor" type="xSource" />
+      <descripGrp>
+        <descrip type="context">respects than its<hi>unilingual counterpart</hi>, especially in</descrip>     
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T14:01:24.277Z</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T14:01:24.278Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+    </ntig>
+  </langSet> 
+</termEntry>
+<termEntry id="TaaS-2643589">
+  <descrip type="subjectField">TaaS-2000</descrip>
+  <langSet xml:lang="en">
+    <ntig>
+      <termGrp>
+        <term>specialized dictionary</term>
+        <termNote type="MSD">JJ NN</termNote>
+        <termCompList type="lemma">
+          <termCompGrp>
+            <termComp>specialized</termComp>
+            <termNote type="partOfSpeech">adjective</termNote>
+          </termCompGrp>
+          <termCompGrp>
+            <termComp>dictionary</termComp>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalNumber">singular</termNote>
+          </termCompGrp>
+        </termCompList>
+      </termGrp>
+      <descripGrp>
+        <descrip type="surface">specialized dictionaries</descrip>
+        <descripNote type="surfaceForm">specialized dictionaries</descripNote>
+        <descripNote type="surfaceMSD">JJ NNS</descripNote>
+        <descripNote type="normalizedForm">specialized dictionary</descripNote>
+        <descripNote type="normalizedMSD">JJ NN</descripNote>
+        <descripNote type="lemma">specialized dictionary</descripNote>
+      </descripGrp>
+      <descripGrp>
+        <descrip type="surface">specialized dictionary</descrip>
+        <descripNote type="surfaceForm">specialized dictionary</descripNote>
+        <descripNote type="surfaceMSD">JJ NN</descripNote>
+        <descripNote type="normalizedForm">specialized dictionary</descripNote>
+        <descripNote type="normalizedMSD">JJ NN</descripNote>
+        <descripNote type="lemma">specialized dictionary</descripNote>
+      </descripGrp>
+      <descripGrp>
+        <descrip type="surface">Specialized dictionary</descrip>
+        <descripNote type="surfaceForm">Specialized dictionary</descripNote>
+        <descripNote type="surfaceMSD">JJ NN</descripNote>
+        <descripNote type="normalizedForm">Specialized dictionary</descripNote>
+        <descripNote type="normalizedMSD">JJ NN</descripNote>
+        <descripNote type="lemma">specialized dictionary</descripNote>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Extracted automatically by TaaS</transacNote>
+        <date>2014-09-28</date>
+      </transacGrp>
+      <xref target="http://taas.eurotermbank.com/extractor" type="xSource" />
+      <descripGrp>
+        <descrip type="context">and evaluation of<hi>specialized dictionaries</hi>, i.e. dictionaries</descrip>       
+      </descripGrp>
+      <descripGrp>
+        <descrip type="context">usually called a<hi>specialized dictionary</hi>or LSP dictionary and</descrip>      
+      </descripGrp>
+      <descripGrp>
+        <descrip type="context">Monolingual learner 's dictionary<hi>Specialized dictionary</hi>( Picture dictionary ,</descrip>      
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T13:53:07.422Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+      <note>Orthographic variant: specialised dictionary</note>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T13:54:09.112Z</date>
+      </transacGrp>
+    </ntig>
+  </langSet>
+  <langSet xml:lang="lv">
+    <ntig>
+      <termGrp>
+        <term>specializēta vārdnīca</term>
+      </termGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T13:53:21.416Z</date>
+      </transacGrp>
+      <xref type="xSource" target="http://taas-project.eu/editor/GornostayT/4301" />
+      <transacGrp>
+        <transac type="transactionType">approval</transac>
+        <transacNote type="responsibility">GornostayT</transacNote>
+        <date>2014-09-28T13:53:21.421Z</date>
+      </transacGrp>
+      <admin type="status">approved</admin>
+    </ntig>
+  </langSet>
+</termEntry>
+</body>
+  </text>
+</martif>
