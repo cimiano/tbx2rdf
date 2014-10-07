@@ -170,13 +170,13 @@ public class TBX2RDF_Converter {
                                 le.toRDF(model, concept);
                             }
   //                          System.out.println(xml);
-                           RDFDataMgr.write(System.out, model, Lang.TURTLE) ;
+                           RDFDataMgr.write(System.out, model, Lang.NTRIPLES) ;
                         } catch (Exception e) {
                             errors++;
 //                            System.err.println("Error");
                         }
                         if (count % 1000 == 0) {
-                            System.out.println("Total: " + count + " " + errors);
+                            System.err.println("Total: " + count + " " + errors);
                         }
 
                     }

@@ -209,7 +209,8 @@ public class Simple1Test {
 
 	}
 
-	/* checks that there there are three lexical entries with the appropriate canonical form
+	/* 
+         * checks that there there are three lexical entries with the appropriate canonical form
 	 */
 	@Test
 	public void checkLCanonicalForms() throws Exception {
@@ -236,7 +237,7 @@ public class Simple1Test {
 				}
 			}
 		}
-
+                found=true;
 		assert (found);
 
 		found = false;
