@@ -11,7 +11,7 @@ public class DatatypePropertyMapping implements Mapping {
 	public DatatypePropertyMapping(String url, String datatypeURL)
 	{
 		propertyURL = url;
-		this.datatypeURL = url;
+		this.datatypeURL = datatypeURL;
 	}
 	
 	
