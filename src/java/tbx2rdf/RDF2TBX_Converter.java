@@ -64,6 +64,9 @@ public class RDF2TBX_Converter {
         return resultados;
     }
 
+    /**
+     * Launches a query
+     */
     public static Iterable<Map<String, RDFNode>> sparqlSelect(Model model, String querystr) {
         final QueryExecution qx = QueryExecutionFactory.create(QueryFactory.create(querystr), model);
         final ResultSet rs = qx.execSelect();
@@ -73,7 +76,6 @@ public class RDF2TBX_Converter {
                     public boolean hasNext() {
                         return rs.hasNext();
                     }
-
                     public Map<String, RDFNode> next() {
                         final Map<String, RDFNode> map = new HashMap<String, RDFNode>();
                         final QuerySolution qs = rs.next();
@@ -84,7 +86,6 @@ public class RDF2TBX_Converter {
                         }
                         return map;
                     }
-
                     public void remove() {
                         throw new UnsupportedOperationException();
                     }

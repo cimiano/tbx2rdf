@@ -160,7 +160,7 @@ public class TBX2RDF_Converter {
                             Term term = processTermEntry(root, mappings);
                             Model model = ModelFactory.createDefaultModel();
                             TBX.addPrefixesToModel(model);
-                            model.setNsPrefix("", "http://ejemplo.com#");
+                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu#");
 //                            System.out.println(term.toString());
                             final Resource concept = term.getRes(model);
                             concept.addProperty(RDF.type, SKOS.Concept);
@@ -182,7 +182,6 @@ public class TBX2RDF_Converter {
                     }
                     xml = "";
                 }
-                // System.out.println(line);
             }
             // note that Scanner suppresses exceptions
             if (sc.ioException() != null) {
@@ -204,7 +203,7 @@ public class TBX2RDF_Converter {
      * @param mappings Mappings
      * @return The TBX terminology
      */
-    public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
+  /*  public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();
@@ -217,7 +216,7 @@ public class TBX2RDF_Converter {
         return null;
         //      return processMartif(root,mappings);
     }
-
+*/
     /**
      * Makes the conversion given a certain input and a set of mappings
      * @param input Input 
