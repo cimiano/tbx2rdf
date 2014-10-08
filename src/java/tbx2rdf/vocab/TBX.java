@@ -83,7 +83,7 @@ public class TBX {
     public static void addPrefixesToModel(Model model)
     {
         model.setNsPrefix("tbx", "http://tbx2rdf.lider-project.eu/tbx#");
-        model.setNsPrefix("ontolex", "http://www.w3.org/ns/ontolex#");
+        model.setNsPrefix("ontolex", "http://www.w3.org/ns/lemon/ontolex#");
         model.setNsPrefix("skos", "http://www.w3.org/2004/02/skos/core#");
         model.setNsPrefix("odrl", "http://www.w3.org/ns/odrl/2/"); //http://w3.org/ns/odrl/2/
         model.setNsPrefix("dct", "http://purl.org/dc/terms/");
