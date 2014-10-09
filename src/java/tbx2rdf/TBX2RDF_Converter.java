@@ -218,7 +218,7 @@ public class TBX2RDF_Converter {
     }
 */
     /**
-     * Makes the conversion given a certain input and a set of mappings
+     * Makes the conversion given a certain input and a set of mappings. This is done with a 
      * @param input Input 
      * @param mappings Mappings
      */

@@ -9,13 +9,15 @@ import java.io.FileReader;
 import virtuoso.jena.driver.*;
 
 /**
- * Independent routines to upload triples to the Virtuoso RDF store
+ * Independent routines to upload triples to the Virtuoso RDF store. 
+ * They are not meant to be invoked from other parts of the TBX2RDF code, but to be invoked directly.
+ * 
  * @author Victor
  */
 public class VirtuosoUploader {
 
     static String user = "vrodriguez";
-    static String passwd = "oegvictor11"; //rodrVIC2!
+    static String passwd = "oegvictor11"; 
     static String url = "jdbc:virtuoso://lider2.dia.fi.upm.es:1112/";
     static String graph = "http://tbx2rdf.lider-project.eu/";
 
@@ -23,41 +25,31 @@ public class VirtuosoUploader {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-    // deleteAll();
-        //     testQuery();
-        uploadLargeFile();
-        //      String triple = "<http://victor.es> <http://purl.org/dc/elements/1.1/title> \"Cojonudisimo\" .\n <http://victor.es> <http://purl.org/dc/elements/1.1/title> \"MuyCojonudisimo\" . ";
-        //      addElements(graph, triple);
+        
+        // deleteAll();
+        uploadLargeFile("iate_3.nt");
+        
     }
     
+    /**
+     * Deletes all the triples in the graph.
+     */
     public static void deleteAll()
     {
-        /*String str="DELETE  { ?s ?p ?o } WHERE   { GRAPH <http://tbx2rdf.lider-project.eu/> {?s ?p ?o} } ";
-        VirtGraph set = new VirtGraph(url, user, passwd);
-        VirtuosoUpdateRequest vur = VirtuosoUpdateFactory.create(str, set);
-        vur.exec();
-        set.close();*/
-
         VirtGraph grafo = new VirtGraph (graph, url, user, passwd);
         grafo.clear();        
-        
     }
     
 
     /**
-     * Consulta para ver que está bien subido
+     * After this query, a large file will have been updated. 
+     * Triples are uploaded in groups of 20.
      * 
      * SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
      * 
-     * 
-     * 
-     * 
      */
-    
-    
-    public static void uploadLargeFile() {
-        File file = new File("iate_3.nt");
+    public static void uploadLargeFile(String filename) {
+        File file = new File(filename);
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
@@ -74,11 +66,9 @@ public class VirtuosoUploader {
                         if(contatotal%1000 == 0)
                         {
                             System.out.println("subidos " + contatotal);
-                            System.err.println("subidos " + contatotal);
                         }
                     } catch (Exception e) {
                         System.out.println("ERROR al subir \n" + pack);
-                        System.err.println("ERROR al subir \n" + pack);
                         e.printStackTrace();
                     }
                     conta = 0;
@@ -97,7 +87,6 @@ public class VirtuosoUploader {
      */
     public static void testQuery() {
         VirtGraph set = new VirtGraph(url, user, passwd);
-
         Query sparql = QueryFactory.create("SELECT ?s ?p ?o WHERE { ?s ?p ?o}");
 //        Query sparql = QueryFactory.create("SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100");
 //        SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
@@ -106,12 +95,10 @@ public class VirtuosoUploader {
         ResultSet results = vqe.execSelect();
         while (results.hasNext()) {
             QuerySolution result = results.nextSolution();
-//            RDFNode graph = result.get("graph");
             RDFNode s = result.get("s");
             RDFNode p = result.get("p");
             RDFNode o = result.get("o");
             System.out.println(" { " + s + " " + p + " " + o + " . }");
-//            System.out.println(graph + " { " + s + " " + p + " " + o + " . }");
         }
     }
 
@@ -133,6 +120,8 @@ public class VirtuosoUploader {
     }
 }
 /*
+ * ALTERNATIVE INSERTION QUERY FROM THE COMMAND LINE: 
+ * 
  * curl -i -d "INSERT IN GRAPH <http://tbx2rdf.lider-project.eu/> 
 { 
 <http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://tbx2rdf.lider-project.eu/tbx#termType> <http://tbx2rdf.lider-project.eu/tbx#fullForm> .
