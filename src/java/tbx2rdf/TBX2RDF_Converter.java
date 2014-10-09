@@ -52,8 +52,8 @@ import java.util.List;
 
 import java.util.Scanner;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+//import javax.xml.parsers.SAXParser;
+//import javax.xml.parsers.SAXParserFactory;
 
 import org.openjena.riot.Lang;
 import org.xml.sax.SAXException;
@@ -116,7 +116,7 @@ public class TBX2RDF_Converter {
         } catch (Exception e) {
             return null;
         }
-    }
+    } 
 
     /**
      * Converts a XML TBX file by using SAX parsing (handling large files...)
@@ -222,7 +222,7 @@ public class TBX2RDF_Converter {
      * @param input Input 
      * @param mappings Mappings
      */
-    public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, SAXException, ParserConfigurationException, TBXFormatException {
+    public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, ParserConfigurationException, TBXFormatException, SAXException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         //  InputStream stream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
@@ -236,6 +236,8 @@ public class TBX2RDF_Converter {
 
     }
 
+    
+    
     /**
      * Processes the whole TBX file from the root XML element (once built the DOM model)
      * @param root The root element
