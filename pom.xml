@@ -13,6 +13,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+	<repositories>
+    <!--other repositories if any-->
+    <repository>
+        <id>project.local</id>
+        <name>project</name>
+        <url>file:${project.basedir}/repo</url>
+    </repository>
+</repositories>
+
     <dependencies>
        <dependency>
             <groupId>junit</groupId>
@@ -37,7 +46,22 @@
 			<artifactId>crimson</artifactId>
 			<version>1.1.3</version>
 		</dependency>
-	
+<dependency>
+    <groupId>virt_jena</groupId>
+    <artifactId>virt_jena</artifactId>
+    <version>1.0</version>
+</dependency>	
+<dependency>
+    <groupId>virt_jena2</groupId>
+    <artifactId>virt_jena2</artifactId>
+    <version>1.0</version>
+</dependency>	
+<dependency>
+    <groupId>virtjdbc3</groupId>
+    <artifactId>virtjdbc3</artifactId>
+    <version>1.0</version>
+</dependency>	
+
     </dependencies>
 
     <build>
