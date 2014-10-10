@@ -89,7 +89,9 @@ public class Main {
         //      TBX_Terminology terminology2 = converter.convertLargeFile(input_file, mappings);
         if (big) {
             System.out.print("Doing the conversion of a big file\n");
-            TBX_Terminology terminology3 = converter.convertLargeFile3(input_file, mappings);
+            TBX_Terminology terminology3 = converter.convertAndSerializeLargeFile(input_file, mappings);
+            //Note: The output is serialized as the conversion is being done
+            
         } else { //standard conversion
             System.out.print("Doing the conversion\n");
             TBX_Terminology terminology = converter.convert(reader, mappings);

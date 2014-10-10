@@ -43,7 +43,7 @@ public class VirtuosoUploader {
 
     /**
      * After this query, a large file will have been updated. 
-     * Triples are uploaded in groups of 20.
+     * Triples are uploaded in groups of 20. A large text is rejected.
      * 
      * SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
      * 

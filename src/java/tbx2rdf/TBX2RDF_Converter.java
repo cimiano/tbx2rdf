@@ -119,18 +119,37 @@ public class TBX2RDF_Converter {
     } 
 
     /**
-     * Converts a XML TBX file by using SAX parsing (handling large files...)
+     * Converts a XML TBX file (handling large files...)
+     * 
      * @param file Path to the input file
      * @param mappings Mappings
      * @return The TBX terminology
      */
-    public TBX_Terminology convertLargeFile3(String file, Mappings mappings) {
+    public TBX_Terminology convertAndSerializeLargeFile(String file, Mappings mappings) {
         TBX2RDF_Converter converter = new TBX2RDF_Converter();
         FileInputStream inputStream = null;
         Scanner sc = null;
         boolean dentro = false;
         int count = 0;
         int errors = 0;
+        
+        //We first count the lexicons we have
+        try{
+            inputStream = new FileInputStream(file);
+            sc = new Scanner(inputStream, "UTF-8");
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+            count++;
+            }
+            inputStream.close();
+        }catch(Exception e)
+        {
+            e.addSuppressed(e);
+        }
+        System.out.println("Total lines: " + count);
+        count=0;
+        
+        
         try {
             inputStream = new FileInputStream(file);
             sc = new Scanner(inputStream, "UTF-8");
@@ -160,7 +179,7 @@ public class TBX2RDF_Converter {
                             Term term = processTermEntry(root, mappings);
                             Model model = ModelFactory.createDefaultModel();
                             TBX.addPrefixesToModel(model);
-                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu#");
+                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu/data/");
 //                            System.out.println(term.toString());
                             final Resource concept = term.getRes(model);
                             concept.addProperty(RDF.type, SKOS.Concept);
