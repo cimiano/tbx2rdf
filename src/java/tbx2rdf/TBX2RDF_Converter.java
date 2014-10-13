@@ -48,6 +48,7 @@ import tbx2rdf.types.Transaction;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import java.util.Scanner;
@@ -55,6 +56,8 @@ import javax.xml.parsers.ParserConfigurationException;
 //import javax.xml.parsers.SAXParser;
 //import javax.xml.parsers.SAXParserFactory;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.openjena.riot.Lang;
 import org.xml.sax.SAXException;
 import tbx2rdf.vocab.SKOS;
@@ -116,7 +119,7 @@ public class TBX2RDF_Converter {
         } catch (Exception e) {
             return null;
         }
-    } 
+    }
 
     /**
      * Converts a XML TBX file (handling large files...)
@@ -132,24 +135,33 @@ public class TBX2RDF_Converter {
         boolean dentro = false;
         int count = 0;
         int errors = 0;
-        
+
         //We first count the lexicons we have
-        try{
+        try {
+            InputStream xmlInput = new FileInputStream(file);
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            SAXHandler handler   = new SAXHandler(mappings);
+            saxParser.parse(xmlInput, handler);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
             inputStream = new FileInputStream(file);
             sc = new Scanner(inputStream, "UTF-8");
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-            count++;
+                count++;
             }
             inputStream.close();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.addSuppressed(e);
         }
         System.out.println("Total lines: " + count);
-        count=0;
-        
-        
+        count = 0;
+
+
         try {
             inputStream = new FileInputStream(file);
             sc = new Scanner(inputStream, "UTF-8");
@@ -162,11 +174,11 @@ public class TBX2RDF_Converter {
                     xml = line.substring(index) + "\n";
                 }
                 if (dentro == true && index == -1) {
-                    xml = xml + line+ "\n";
+                    xml = xml + line + "\n";
                 }
                 index = line.indexOf("</termEntry>");
                 if (index != -1) {
-                    xml = xml + line.substring(0, index)+ "\n";
+                    xml = xml + line.substring(0, index) + "\n";
                     count++;
 
                     Document doc = loadXMLFromString(xml);
@@ -183,13 +195,12 @@ public class TBX2RDF_Converter {
 //                            System.out.println(term.toString());
                             final Resource concept = term.getRes(model);
                             concept.addProperty(RDF.type, SKOS.Concept);
-                            term.toRDF(model,concept);
-                            for(LexicalEntry le : term.Lex_entries)
-                            {
+                            term.toRDF(model, concept);
+                            for (LexicalEntry le : term.Lex_entries) {
                                 le.toRDF(model, concept);
                             }
-  //                          System.out.println(xml);
-                           RDFDataMgr.write(System.out, model, Lang.NTRIPLES) ;
+                            //                          System.out.println(xml);
+                            RDFDataMgr.write(System.out, model, Lang.NTRIPLES);
                         } catch (Exception e) {
                             errors++;
 //                            System.err.println("Error");
@@ -222,20 +233,20 @@ public class TBX2RDF_Converter {
      * @param mappings Mappings
      * @return The TBX terminology
      */
-  /*  public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
-        SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-        try {
-            SAXParser saxParser = saxParserFactory.newSAXParser();
-            SAXHandler handler = new SAXHandler(mappings);
-
-            saxParser.parse(new File(file), handler);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-        //      return processMartif(root,mappings);
+    /*  public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
+    SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+    try {
+    SAXParser saxParser = saxParserFactory.newSAXParser();
+    SAXHandler handler = new SAXHandler(mappings);
+    
+    saxParser.parse(new File(file), handler);
+    } catch (ParserConfigurationException | SAXException | IOException e) {
+    e.printStackTrace();
     }
-*/
+    return null;
+    //      return processMartif(root,mappings);
+    }
+     */
     /**
      * Makes the conversion given a certain input and a set of mappings. This is done with a 
      * @param input Input 
@@ -255,8 +266,6 @@ public class TBX2RDF_Converter {
 
     }
 
-    
-    
     /**
      * Processes the whole TBX file from the root XML element (once built the DOM model)
      * @param root The root element
@@ -680,10 +689,9 @@ public class TBX2RDF_Converter {
         // <!ATTLIST transacGrp
         // id ID #IMPLIED >
         Element elemTransac = null;
-        try{
-            elemTransac=firstChild("transac", elem);
-        }catch(Exception e)
-        {
+        try {
+            elemTransac = firstChild("transac", elem);
+        } catch (Exception e) {
             return;
         }
         final TransacGrp transacGrp = new TransacGrp(processTransac(elemTransac, mappings));
