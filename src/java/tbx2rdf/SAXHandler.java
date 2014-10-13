@@ -75,7 +75,8 @@ public class SAXHandler extends DefaultHandler {
         {
             if (lexicons.containsKey(language))
                 continue;
-            final Resource lexicon = lexiconsModel.createResource(lexiconsModel.expandPrefix(":Lexicon_" + language));
+            final Resource lexicon = lexiconsModel.createResource("http://tbx2rdf.lider-project.eu/data/iate/" + language);
+//            final Resource lexicon = lexiconsModel.createResource(lexiconsModel.expandPrefix(":Lexicon_" + language));
             lexicon.addProperty(ONTOLEX.language, language).addProperty(RDF.type, ONTOLEX.Lexicon);
             lexicons.put(language, lexicon);        
         }
@@ -100,9 +101,14 @@ public class SAXHandler extends DefaultHandler {
         if (qName.equalsIgnoreCase("langSet")) {
             int index=attrs.getIndex("xml:lang");
             if (index!=-1)
-            {
                 languages.add(attrs.getValue(index));
-            }
+        }
+        if (qName.equalsIgnoreCase("martifHeader")) {
+            header = new MartifHeader();
+            int index=attrs.getIndex("xml:lang");
+            if (index!=-1)
+                languages.add(attrs.getValue(index));
+            
         }
         
         
@@ -142,13 +148,6 @@ public class SAXHandler extends DefaultHandler {
 
         }
         
-        if (qName.equalsIgnoreCase("martifHeader")) {
-            header = new MartifHeader();
-
-
-
-
-        }
 */
 
     }

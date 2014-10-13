@@ -34,11 +34,13 @@ public class TBX_Terminology {
 
         /**
          * Gets the Jena Model for a given URI (a file path, a URL, etc.)
+         * This approrach is only valid for small files
          */
 	public Model getModel(String resourceURI) {
 		Model model = ModelFactory.createDefaultModel();
 		TBX.addPrefixesToModel(model);
 		model.setNsPrefix("", resourceURI);
+                
 		final HashMap<String, Resource> lexicons = new HashMap<>();
 		for(Term term : terms) {
 			final Resource concept = term.getRes(model);
@@ -46,7 +48,8 @@ public class TBX_Terminology {
 			term.toRDF(model, concept);
 			for(LexicalEntry le : term.Lex_entries) {
 				if(!lexicons.containsKey(le.lang)) {
-					final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + le.lang));
+                                        final Resource lexicon = model.createResource("http://tbx2rdf.lider-project.eu/data/iate/" + le.lang);
+//					final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + le.lang));
 					lexicon.addProperty(ONTOLEX.language, le.lang).addProperty(RDF.type, ONTOLEX.Lexicon);
 					lexicons.put(le.lang, lexicon);
 				}
