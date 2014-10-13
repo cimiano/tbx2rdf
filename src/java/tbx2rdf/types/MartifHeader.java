@@ -121,7 +121,7 @@ public class MartifHeader extends impID {
             res.addProperty(TBX.encodingDesc, nodelistToString(encodingDesc), XMLLiteral);
         }
         if(revisionDesc != null) {
-            res.addProperty(TBX.revisionDesc, nodelistToString(encodingDesc), XMLLiteral);
+            res.addProperty(TBX.revisionDesc, nodelistToString(revisionDesc), XMLLiteral);
         }
 
     }
