@@ -33,6 +33,7 @@ public class TBX_Terminology {
 	}
 
         /**
+         * Gets the Jena Model for a given URI (a file path, a URL, etc.)
          */
 	public Model getModel(String resourceURI) {
 		Model model = ModelFactory.createDefaultModel();

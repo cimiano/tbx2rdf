@@ -29,7 +29,7 @@ import tbx2rdf.types.Term;
 import tbx2rdf.vocab.ONTOLEX;
 
 /**
- * This class makes the XML parsing of the TBX using the SAX model
+ * This class makes the XML parsing of the TBX using the SAX lexiconsModel
  */
 public class SAXHandler extends DefaultHandler {
 
@@ -58,17 +58,28 @@ public class SAXHandler extends DefaultHandler {
         return header;
     }
     
-    public Set<String> getLexicons()
+    
+    Model lexiconsModel = ModelFactory.createDefaultModel();
+    /**
+     * Gets the Jena model with the Lexicons.
+     */
+    public Model getLexiconsModel()
     {
-        final HashMap<String, Resource> lexicons = new HashMap<>();
-        Model model = ModelFactory.createDefaultModel();
+        return lexiconsModel;
+    }
+    public HashMap<String, Resource> getLexicons()
+    {
+        lexiconsModel = ModelFactory.createDefaultModel();
+        final HashMap<String, Resource> lexicons = new HashMap<>();    
         for(String language : languages)
         {
-            final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + language));
+            if (lexicons.containsKey(language))
+                continue;
+            final Resource lexicon = lexiconsModel.createResource(lexiconsModel.expandPrefix(":Lexicon_" + language));
             lexicon.addProperty(ONTOLEX.language, language).addProperty(RDF.type, ONTOLEX.Lexicon);
             lexicons.put(language, lexicon);        
         }
-        return languages;
+        return lexicons;
     }
 
     /**
@@ -80,7 +91,7 @@ public class SAXHandler extends DefaultHandler {
 
     
     
-    
+    //Set of all the languages present in the file
     Set<String> languages = new HashSet();
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attrs)
