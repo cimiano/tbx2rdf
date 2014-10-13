@@ -207,12 +207,31 @@ public class TBX2RDF_Converter {
         } catch (Exception e) {
         }
 
+        if (martifheader==null)
+            return null;
+        
         //First we serialize the header
         Model mdataset = ModelFactory.createDefaultModel();
+        
+        Property prights = mdataset.createProperty("http://purl.org/dc/terms/rights");
+        Property psource = mdataset.createProperty("http://purl.org/dc/terms/source");
+        Resource rrights = mdataset.createResource("http://iate.europa.eu/copyright.html");
+        Property pattribution= mdataset.createProperty("http://creativecommons.org/ns#attributionName");
+        
+        
         final Resource rdataset = mdataset.createResource(resourceURI);
-//            rdataset.addProperty(DCTerms.type, this.type);
+        rdataset.addProperty(DCTerms.type, handler.getMartifType());
+        
+        //This should be generalized
         rdataset.addProperty(RDF.type, mdataset.createResource("http://www.w3.org/ns/dcat#Dataset"));
+        rdataset.addProperty(prights, rrights);
+        rdataset.addProperty(psource, mdataset.createResource("http://iate.europa.eu/"));
+        rdataset.addProperty(pattribution, "Download IATE, European Union, 2014");
+        
+        
         martifheader.toRDF(mdataset, rdataset);
+        
+        
         RDFDataMgr.write(System.out, mdataset, Lang.NTRIPLES);
 
         //We declare that every lexicon belongs to 

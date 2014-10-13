@@ -51,7 +51,7 @@ public class TBX {
     
      public static Property transactionType = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#transactionType");
      
-     
+     //These are not being used!
      public static Resource reliabilityCode1 = defaultModel.createResource("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode1");
      public static Resource reliabilityCode2 = defaultModel.createResource("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode2");
      public static Resource reliabilityCode3 = defaultModel.createResource("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode3");

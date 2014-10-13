@@ -38,9 +38,12 @@ public class SAXHandler extends DefaultHandler {
     ///
     private MartifHeader header;
     ///Internal use
-    private String content = null;
     XmlDocumentBuilder consumer;
     XMLReader producer;
+    
+    //
+    private String martiftype="";
+    
 
     /**
      * Initializes the handler
@@ -56,6 +59,11 @@ public class SAXHandler extends DefaultHandler {
      */
     public MartifHeader getMartifHeader() {
         return header;
+    }
+    
+    public String getMartifType()
+    {
+        return martiftype;
     }
     
     
@@ -98,6 +106,12 @@ public class SAXHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attrs)
             throws SAXException {
         
+        if (qName.equalsIgnoreCase("martif")) {
+            int index=attrs.getIndex("type");
+            if (index!=-1)
+                martiftype=attrs.getValue(index);
+        }
+
         if (qName.equalsIgnoreCase("langSet")) {
             int index=attrs.getIndex("xml:lang");
             if (index!=-1)
@@ -105,10 +119,6 @@ public class SAXHandler extends DefaultHandler {
         }
         if (qName.equalsIgnoreCase("martifHeader")) {
             header = new MartifHeader();
-            int index=attrs.getIndex("xml:lang");
-            if (index!=-1)
-                languages.add(attrs.getValue(index));
-            
         }
         
         
