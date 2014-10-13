@@ -56,6 +56,10 @@ public class MartifHeader extends impID {
         this.fileDesc = fileDescrip;
     }
 
+    public MartifHeader() {
+        fileDesc = new FileDesc();
+    }
+
     public static class FileDesc {
         public TitleStmt titleStmt;
         public Element publicationStmt;

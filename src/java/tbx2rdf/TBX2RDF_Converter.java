@@ -1,5 +1,11 @@
 package tbx2rdf;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
+import java.io.File;
+import java.io.FileInputStream;
 import tbx2rdf.types.LexicalEntry;
 import tbx2rdf.types.Describable;
 import tbx2rdf.types.MartifHeader;
@@ -7,19 +13,14 @@ import tbx2rdf.types.TBX_Terminology;
 import tbx2rdf.types.Descrip;
 import tbx2rdf.types.XReference;
 import tbx2rdf.types.Term;
-import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.w3c.dom.Document;
@@ -28,7 +29,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import tbx2rdf.types.AdminGrp;
 import tbx2rdf.types.AdminInfo;
 import tbx2rdf.types.DescripGrp;
@@ -47,6 +47,21 @@ import tbx2rdf.types.TransacNote;
 import tbx2rdf.types.Transaction;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import java.util.Scanner;
+import javax.xml.parsers.ParserConfigurationException;
+//import javax.xml.parsers.SAXParser;
+//import javax.xml.parsers.SAXParserFactory;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import org.openjena.riot.Lang;
+import org.xml.sax.SAXException;
+import tbx2rdf.vocab.SKOS;
+import tbx2rdf.vocab.TBX;
 
 /**
  * Entry point of the TBX2RDF converter
@@ -92,9 +107,152 @@ public class TBX2RDF_Converter {
     }
 
     /**
-     *
+     * Gently loads a DOM XML document from a XML fragment.
+     * If it fails, it returns null;
      */
-    public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, SAXException, ParserConfigurationException, TBXFormatException {
+    public static Document loadXMLFromString(String xml) throws Exception {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            InputSource is = new InputSource(new StringReader(xml));
+            return builder.parse(is);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Converts a XML TBX file (handling large files...)
+     * 
+     * @param file Path to the input file
+     * @param mappings Mappings
+     * @return The TBX terminology
+     */
+    public TBX_Terminology convertAndSerializeLargeFile(String file, Mappings mappings) {
+        TBX2RDF_Converter converter = new TBX2RDF_Converter();
+        FileInputStream inputStream = null;
+        Scanner sc = null;
+        boolean dentro = false;
+        int count = 0;
+        int errors = 0;
+
+        //We first count the lexicons we have
+        try {
+            InputStream xmlInput = new FileInputStream(file);
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            SAXHandler handler   = new SAXHandler(mappings);
+            saxParser.parse(xmlInput, handler);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            inputStream = new FileInputStream(file);
+            sc = new Scanner(inputStream, "UTF-8");
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                count++;
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.addSuppressed(e);
+        }
+        System.out.println("Total lines: " + count);
+        count = 0;
+
+
+        try {
+            inputStream = new FileInputStream(file);
+            sc = new Scanner(inputStream, "UTF-8");
+            String xml = "";
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                int index = line.indexOf("<termEntry");
+                if (index != -1) {
+                    dentro = true;
+                    xml = line.substring(index) + "\n";
+                }
+                if (dentro == true && index == -1) {
+                    xml = xml + line + "\n";
+                }
+                index = line.indexOf("</termEntry>");
+                if (index != -1) {
+                    xml = xml + line.substring(0, index) + "\n";
+                    count++;
+
+                    Document doc = loadXMLFromString(xml);
+                    if (doc == null) {
+                        continue;
+                    }
+                    Element root = doc.getDocumentElement();
+                    if (root != null) {
+                        try {
+                            Term term = processTermEntry(root, mappings);
+                            Model model = ModelFactory.createDefaultModel();
+                            TBX.addPrefixesToModel(model);
+                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu/data/");
+//                            System.out.println(term.toString());
+                            final Resource concept = term.getRes(model);
+                            concept.addProperty(RDF.type, SKOS.Concept);
+                            term.toRDF(model, concept);
+                            for (LexicalEntry le : term.Lex_entries) {
+                                le.toRDF(model, concept);
+                            }
+                            //                          System.out.println(xml);
+                            RDFDataMgr.write(System.out, model, Lang.NTRIPLES);
+                        } catch (Exception e) {
+                            errors++;
+//                            System.err.println("Error");
+                        }
+                        if (count % 1000 == 0) {
+                            System.err.println("Total: " + count + " " + errors);
+                        }
+
+                    }
+                    xml = "";
+                }
+            }
+            // note that Scanner suppresses exceptions
+            if (sc.ioException() != null) {
+                throw sc.ioException();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (sc != null) {
+                sc.close();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Converts a XML TBX file by using SAX parsing (handling large files...)
+     * @param file Path to the input file
+     * @param mappings Mappings
+     * @return The TBX terminology
+     */
+    /*  public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
+    SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+    try {
+    SAXParser saxParser = saxParserFactory.newSAXParser();
+    SAXHandler handler = new SAXHandler(mappings);
+    
+    saxParser.parse(new File(file), handler);
+    } catch (ParserConfigurationException | SAXException | IOException e) {
+    e.printStackTrace();
+    }
+    return null;
+    //      return processMartif(root,mappings);
+    }
+     */
+    /**
+     * Makes the conversion given a certain input and a set of mappings. This is done with a 
+     * @param input Input 
+     * @param mappings Mappings
+     */
+    public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, ParserConfigurationException, TBXFormatException, SAXException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         //  InputStream stream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
@@ -108,14 +266,18 @@ public class TBX2RDF_Converter {
 
     }
 
+    /**
+     * Processes the whole TBX file from the root XML element (once built the DOM model)
+     * @param root The root element
+     */
     TBX_Terminology processMartif(Element root, Mappings mappings) throws IOException, SAXException {
         final TBX_Terminology terminology = new TBX_Terminology(root.getAttribute("type"), processMartifHeader(child(root, "martifHeader"), mappings));
         mappings.defaultLanguage = "en";
         for (Element e : children(root)) {
             if (e.getTagName().equalsIgnoreCase("text")) {
-		    	for(Term t : processText(e, mappings)) {
-	                terminology.addTerm(t);
-				}
+                for (Term t : processText(e, mappings)) {
+                    terminology.addTerm(t);
+                }
             } else if (!e.getTagName().equalsIgnoreCase("martifHeader")) {
                 unexpected(root);
             }
@@ -124,6 +286,11 @@ public class TBX2RDF_Converter {
         return terminology;
     }
 
+    /**
+     * Given a XML root element, processes the Martif Header
+     * @param root XML root element
+     * @param mappings Mappings
+     */
     MartifHeader processMartifHeader(Element root, Mappings mappings) throws IOException, SAXException {
         final MartifHeader header = new MartifHeader(processFileDescrip(child(root, "fileDesc"), mappings));
         processID(header, root);
@@ -141,7 +308,10 @@ public class TBX2RDF_Converter {
         return header;
     }
 
-    FileDesc processFileDescrip(Element root, Mappings mappings) throws IOException, SAXException {
+    /**
+     * Obtains a FileDesc object by parsing a XML element.
+     */
+    public FileDesc processFileDescrip(Element root, Mappings mappings) throws IOException, SAXException {
         final FileDesc fileDesc = new FileDesc();
 
         for (Element e : children(root)) {
@@ -215,16 +385,18 @@ public class TBX2RDF_Converter {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-   Term processTermEntry(Element node, Mappings mappings) {
+    /**
+     * Processes, from a node, a termEntry
+     */
+    Term processTermEntry(Element node, Mappings mappings) {
         // create new Term 
         // add subjectField
         // add ID
 
-    	// <!ELEMENT termEntry  ((%auxInfo;),(langSet+)) >
+        // <!ELEMENT termEntry  ((%auxInfo;),(langSet+)) >
         // <!ATTLIST termEntry
         // id ID #IMPLIED >
-    	// <!ENTITY % auxInfo '(descrip | descripGrp | admin | adminGrp | transacGrp | note | ref | xref)*' >
+        // <!ENTITY % auxInfo '(descrip | descripGrp | admin | adminGrp | transacGrp | note | ref | xref)*' >
         Term term = new Term();
 
         int langsetcount = 0;
@@ -236,8 +408,8 @@ public class TBX2RDF_Converter {
             if (name.equalsIgnoreCase("langSet")) {
                 langsetcount++;
                 this.processLangSet(term, sub, mappings);
-	    } else {
-	                processAuxInfo(term, sub, mappings);
+            } else {
+                processAuxInfo(term, sub, mappings);
             }
         }
 
@@ -249,40 +421,40 @@ public class TBX2RDF_Converter {
     }
 
     void processReference(NoteLinkInfo descr, Element sub, Mappings mappings) {
-    	// <!ELEMENT ref (#PCDATA) >
+        // <!ELEMENT ref (#PCDATA) >
         // <!ATTLIST ref
         //    %impIDLangTypTgtDtyp;
         // >
 
-    	//<!ENTITY % impIDLangTypTgtDtyp ' id ID #IMPLIED
+        //<!ENTITY % impIDLangTypTgtDtyp ' id ID #IMPLIED
         //xml:lang CDATA #IMPLIED 
         // type CDATA #REQUIRED 
         // target IDREF #IMPLIED 
         // datatype CDATA #IMPLIED
         //'>
-        final Reference ref = new Reference(processType(sub, mappings,true), sub.getAttribute("xml:lang"), mappings, sub.getChildNodes());
-        if(sub.hasAttribute("id")) {
+        final Reference ref = new Reference(processType(sub, mappings, true), sub.getAttribute("xml:lang"), mappings, sub.getChildNodes());
+        if (sub.hasAttribute("id")) {
             ref.setID(sub.getAttribute("id"));
         }
-        if(sub.hasAttribute("target")) {
+        if (sub.hasAttribute("target")) {
             ref.target = sub.getAttribute("target");
         }
-        if(sub.hasAttribute("datatype")) {
+        if (sub.hasAttribute("datatype")) {
             ref.datatype = sub.getAttribute("datatype");
         }
         descr.References.add(ref);
     }
 
     void processAdminGrp(NoteLinkInfo descr, Element node, Mappings mappings) {
-		// <!ELEMENT adminGrp (admin, (adminNote|note|ref|xref)*) >
+        // <!ELEMENT adminGrp (admin, (adminNote|note|ref|xref)*) >
         // <!ATTLIST adminGrp
         // id ID #IMPLIED >
 
 
-        processID((impID)descr, node);
-        
+        processID((impID) descr, node);
+
         int i = 0;
-        for(Element tig_child : children(node)) {
+        for (Element tig_child : children(node)) {
 
             String name = tig_child.getNodeName();
 
@@ -315,7 +487,7 @@ public class TBX2RDF_Converter {
      */
     Term processLangSet(Term term, Element langSet, Mappings mappings) {
 
-    	// <!ELEMENT langSet ((%auxInfo;), (tig | ntig)+) >
+        // <!ELEMENT langSet ((%auxInfo;), (tig | ntig)+) >
         // <!ATTLIST langSet
         // id ID #IMPLIED
         // xml:lang CDATA #REQUIRED >
@@ -326,12 +498,12 @@ public class TBX2RDF_Converter {
         if (language == null) {
             throw new TBXFormatException("Language not specified for langSet!");
         }
-	
+
         int termCount = 0;
 
         processID(term, langSet);
 
-        for(Element sub : children(langSet)) {
+        for (Element sub : children(langSet)) {
 
             final String name = sub.getNodeName();
 
@@ -354,19 +526,19 @@ public class TBX2RDF_Converter {
             throw new TBXFormatException("No TIG nor NTIG in langSet !");
         }
 
-	return term;
+        return term;
     }
 
     void processTIG(LexicalEntry entry, Element tig, Mappings mappings) {
 
-    	// <!ELEMENT tig (term, (termNote)*, %auxInfo;) >
+        // <!ELEMENT tig (term, (termNote)*, %auxInfo;) >
         // <!ATTLIST tig
         // id ID #IMPLIED >
         int i = 0;
 
         processID(entry, tig);
-
-        for(Element tig_child : children(tig)) {
+        Iterable<Element> children = children(tig);
+        for (Element tig_child : children) {
 
             String name = tig_child.getNodeName();
 
@@ -389,7 +561,7 @@ public class TBX2RDF_Converter {
     void processTerm(LexicalEntry entry, Element node,
             Mappings mappings) {
 
-		// <!ELEMENT term %basicText; >
+        // <!ELEMENT term %basicText; >
         // <!ATTLIST term
         // id ID #IMPLIED >
         entry.Lemma = node.getTextContent();
@@ -397,11 +569,11 @@ public class TBX2RDF_Converter {
 
     TermNote processTermNote(Element tig_child, Mappings mappings) {
 
-		// <!ELEMENT termNote %noteText; >
+        // <!ELEMENT termNote %noteText; >
         // <!ATTLIST termNote
         //    %impIDLangTypTgtDtyp;
         // >
-		// <!ENTITY % impIDLangTypTgtDtyp ' id ID #IMPLIED
+        // <!ENTITY % impIDLangTypTgtDtyp ' id ID #IMPLIED
         // xml:lang CDATA #IMPLIED type CDATA #REQUIRED target IDREF #IMPLIED datatype CDATA #IMPLIED
         // '>
         final TermNote note = new TermNote(tig_child.getChildNodes(), processType(tig_child, mappings, true), tig_child.getAttribute("xml:lang"), mappings);
@@ -411,12 +583,12 @@ public class TBX2RDF_Converter {
 
     void processNTIG(LexicalEntry entry, Node ntig, Mappings mappings) {
 
-		// <!ELEMENT ntig (termGrp, %auxInfo;) >
+        // <!ELEMENT ntig (termGrp, %auxInfo;) >
         // <!ATTLIST ntig
         // id ID #IMPLIED	
         // >
         int i = 0;
-        for(Element ntig_child : children(ntig)) {
+        for (Element ntig_child : children(ntig)) {
 
             String name = ntig_child.getNodeName();
 
@@ -435,7 +607,7 @@ public class TBX2RDF_Converter {
 
     void processXReference(NoteLinkInfo descr, Element node, Mappings mappings) {
 
-		// <!ELEMENT xref (#PCDATA) >
+        // <!ELEMENT xref (#PCDATA) >
         // <!ATTLIST xref
         // %impIDType;
         // target CDATA #REQUIRED >
@@ -453,16 +625,16 @@ public class TBX2RDF_Converter {
         // >
         // <!ATTLIST descripGrp
         //  id ID #IMPLIED >
-        
+
         DescripGrp descrip = new DescripGrp(processDescrip(firstChild("descrip", node), mappings));
         processID(descrip, node);
         // get first child that needs to be a descrip
         // process other children that can be: descripNote, admin, adminGroup, transacGrp, note, ref and xref
-        for(Element sub : children(node)) {
+        for (Element sub : children(node)) {
             final String name = sub.getTagName();
-            if(name.equalsIgnoreCase("descrip")) {
+            if (name.equalsIgnoreCase("descrip")) {
                 // ignore
-            } else if(name.equalsIgnoreCase("descripNote")) {
+            } else if (name.equalsIgnoreCase("descripNote")) {
                 processDescripNote(descrip, sub, mappings);
             } else if (name.equalsIgnoreCase("admin")) {
                 this.processAdmin(descrip, sub, mappings);
@@ -480,7 +652,7 @@ public class TBX2RDF_Converter {
                 throw new TBXFormatException("Unexpected subnode " + node.getTagName());
             }
         }
-        
+
         descr.Descriptions.add(descrip);
     }
 
@@ -513,13 +685,19 @@ public class TBX2RDF_Converter {
      */
     void processTransactionGroup(NoteLinkInfo descr, Element elem, Mappings mappings) {
 
-    	// <!ELEMENT transacGrp (transac, (transacNote|date|note|ref|xref)* ) >
+        // <!ELEMENT transacGrp (transac, (transacNote|date|note|ref|xref)* ) >
         // <!ATTLIST transacGrp
         // id ID #IMPLIED >
-        final TransacGrp transacGrp = new TransacGrp(processTransac(firstChild("transac", elem), mappings));
+        Element elemTransac = null;
+        try {
+            elemTransac = firstChild("transac", elem);
+        } catch (Exception e) {
+            return;
+        }
+        final TransacGrp transacGrp = new TransacGrp(processTransac(elemTransac, mappings));
 
         int i = 0;
-        for(Element child : children(elem)) {
+        for (Element child : children(elem)) {
 
             String name = child.getNodeName();
 
@@ -552,17 +730,17 @@ public class TBX2RDF_Converter {
         // <!ATTLIST termGrp
         //  id ID #IMPLIED
         //>
-        for(Element elem : children(node)) {
-           final String name = elem.getTagName();
-           if(name.equalsIgnoreCase("term")) {
-               processTerm(entry, elem, mappings);
-           } else if(name.equalsIgnoreCase("termNote")) {
-               entry.TermNotes.add(new TermNoteGrp(processTermNote(elem, mappings), mappings.defaultLanguage, mappings));
-           } else if(name.equalsIgnoreCase("termNoteGrp")) {
-               entry.TermNotes.add(processTermNoteGrp(elem, mappings));
-           } else if(name.equalsIgnoreCase("termCompList")) {
-               processTermCompList(entry, elem, mappings);
-           }
+        for (Element elem : children(node)) {
+            final String name = elem.getTagName();
+            if (name.equalsIgnoreCase("term")) {
+                processTerm(entry, elem, mappings);
+            } else if (name.equalsIgnoreCase("termNote")) {
+                entry.TermNotes.add(new TermNoteGrp(processTermNote(elem, mappings), mappings.defaultLanguage, mappings));
+            } else if (name.equalsIgnoreCase("termNoteGrp")) {
+                entry.TermNotes.add(processTermNoteGrp(elem, mappings));
+            } else if (name.equalsIgnoreCase("termCompList")) {
+                processTermCompList(entry, elem, mappings);
+            }
         }
     }
 
@@ -577,112 +755,111 @@ public class TBX2RDF_Converter {
 
     Descrip processDescrip(Element elem, Mappings mappings) {
         //<!ELEMENT descrip %noteText; >
-           //<!ATTLIST descrip
-           //%impIDLangTypTgtDtyp;
-           //>
+        //<!ATTLIST descrip
+        //%impIDLangTypTgtDtyp;
+        //>
         final Descrip descrip = new Descrip(elem.getChildNodes(), processType(elem, mappings, true), elem.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(descrip, elem, mappings);
         return descrip;
     }
 
     void processDescripNote(DescripGrp descrip, Element sub, Mappings mappings) {
-           // <!ELEMENT descripNote (#PCDATA) >
-           //<!ATTLIST descripNote
-           //%impIDLangTypTgtDtyp;
-           //> 
+        // <!ELEMENT descripNote (#PCDATA) >
+        //<!ATTLIST descripNote
+        //%impIDLangTypTgtDtyp;
+        //> 
         final DescripNote descripNote = new DescripNote(sub.getChildNodes(), processType(sub, mappings, true), sub.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(descripNote, sub, mappings);
         descrip.descripNote.add(descripNote);
     }
 
     Transaction processTransac(Element child, Mappings mappings) {
-           //  <!ELEMENT transac (#PCDATA) >
-           //<!ATTLIST transac
-           //%impIDLangTypTgtDtyp;
-           //>
+        //  <!ELEMENT transac (#PCDATA) >
+        //<!ATTLIST transac
+        //%impIDLangTypTgtDtyp;
+        //>
         final Transaction transaction = new Transaction(child.getChildNodes(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(transaction, child, mappings);
         return transaction;
     }
 
     void processTransacNote(TransacGrp transacGrp, Element child, Mappings mappings) {
-    
-           //<!ELEMENT transacNote (#PCDATA) >
-           //<!ATTLIST transacNote
-           //%impIDLangTypTgtDtyp;
-           //> 
+
+        //<!ELEMENT transacNote (#PCDATA) >
+        //<!ATTLIST transacNote
+        //%impIDLangTypTgtDtyp;
+        //> 
         final TransacNote transacNote = new TransacNote(child.getChildNodes(), processType(child, mappings, true), child.getAttribute("xml:lang"), mappings);
         processImpIDLangTypeTgtDType(transacNote, child, mappings);
         transacGrp.transacNotes.add(transacNote);
     }
 
     void processDate(TransacGrp transacGrp, Element child, Mappings mappings) {
-           //  <!ELEMENT date (#PCDATA) >
-           //<!ATTLIST date
-           //id ID #IMPLIED
-           //> 
+        //  <!ELEMENT date (#PCDATA) >
+        //<!ATTLIST date
+        //id ID #IMPLIED
+        //> 
         transacGrp.date = child.getTextContent();
     }
 
     TermNoteGrp processTermNoteGrp(Element elem, Mappings mappings) {
-           //  <!ELEMENT termNoteGrp (termNote, %noteLinkInfo;) >
-           //<!ATTLIST termNoteGrp
-           //id ID #IMPLIED
-           //> 
-       final TermNoteGrp termNoteGrp = new TermNoteGrp(processTermNote(firstChild("termNote", elem)
-               , mappings), elem.getAttribute("xml:lang"), mappings);
-       for(Element e : children(elem))  {
+        //  <!ELEMENT termNoteGrp (termNote, %noteLinkInfo;) >
+        //<!ATTLIST termNoteGrp
+        //id ID #IMPLIED
+        //> 
+        final TermNoteGrp termNoteGrp = new TermNoteGrp(processTermNote(firstChild("termNote", elem), mappings), elem.getAttribute("xml:lang"), mappings);
+        for (Element e : children(elem)) {
             final String name = e.getTagName();
-            if(name.equalsIgnoreCase("termNote")) {
+            if (name.equalsIgnoreCase("termNote")) {
                 // Do nothing
-            } else if(name.equalsIgnoreCase("admin")) {
+            } else if (name.equalsIgnoreCase("admin")) {
                 processAdmin(termNoteGrp, e, mappings);
-            } else if(name.equalsIgnoreCase("adminGrp")) {
+            } else if (name.equalsIgnoreCase("adminGrp")) {
                 processAdminGrp(termNoteGrp, e, mappings);
-             } else if(name.equalsIgnoreCase("transacGrp")) {
+            } else if (name.equalsIgnoreCase("transacGrp")) {
                 processTransactionGroup(termNoteGrp, e, mappings);
-             } else if(name.equalsIgnoreCase("note")) {
+            } else if (name.equalsIgnoreCase("note")) {
                 processNote(termNoteGrp, e, mappings);
-             } else if(name.equalsIgnoreCase("ref")) {
+            } else if (name.equalsIgnoreCase("ref")) {
                 processReference(termNoteGrp, e, mappings);
-             } else if(name.equalsIgnoreCase("xref")) {
+            } else if (name.equalsIgnoreCase("xref")) {
                 processXReference(termNoteGrp, e, mappings);
-             }
-       }
-       return termNoteGrp;
+            }
+        }
+        return termNoteGrp;
     }
 
     void processTermCompList(LexicalEntry entry, Element elem, Mappings mappings) {
-           // <!ELEMENT termCompList ((%auxInfo;), (termComp | termCompGrp)+) >
-           //<!ATTLIST termCompList
-           //id ID #IMPLIED
-           //type CDATA #REQUIRED
-           //>
+        // <!ELEMENT termCompList ((%auxInfo;), (termComp | termCompGrp)+) >
+        //<!ATTLIST termCompList
+        //id ID #IMPLIED
+        //type CDATA #REQUIRED
+        //>
         final TermCompList termCompList = new TermCompList(mappings.getMapping("termCompList", "type", elem.getAttribute("type")));
         processID(termCompList, elem);
-        for(Element e : children(elem)) {
+        for (Element e : children(elem)) {
             final String name = e.getTagName();
-            if(name.equalsIgnoreCase("termComp")) {
+            if (name.equalsIgnoreCase("termComp")) {
                 final TermComp termComp = processTermComp(e, mappings);
                 termCompList.termComp.add(new TermCompGrp(termComp, null, mappings));
-            } else if(name.equalsIgnoreCase("termCompGrp")) {
+            } else if (name.equalsIgnoreCase("termCompGrp")) {
                 processTermCompGrp(termCompList, e, mappings);
-            } else if(name.equalsIgnoreCase("admin")) {
+            } else if (name.equalsIgnoreCase("admin")) {
                 processAdmin(termCompList, e, mappings);
-            } else if(name.equalsIgnoreCase("adminGrp")) {
+            } else if (name.equalsIgnoreCase("adminGrp")) {
                 processAdminGrp(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("transacGrp")) {
+            } else if (name.equalsIgnoreCase("transacGrp")) {
                 processTransactionGroup(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("note")) {
+            } else if (name.equalsIgnoreCase("note")) {
                 processNote(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("ref")) {
+            } else if (name.equalsIgnoreCase("ref")) {
                 processReference(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("xref")) {
+            } else if (name.equalsIgnoreCase("xref")) {
                 processXReference(termCompList, e, mappings);
-             } 
+            }
         }
         entry.Decomposition.add(termCompList);
-        
+
     }
 
     TermComp processTermComp(Element e, Mappings mappings) {
@@ -701,30 +878,28 @@ public class TBX2RDF_Converter {
         //id ID #IMPLIED
         //>
         final TermCompGrp termCompGrp = new TermCompGrp(processTermComp(firstChild("termComp", elem), mappings), null, mappings);
-        for(Element e : children(elem)) {
+        for (Element e : children(elem)) {
             final String name = e.getTagName();
-            if(name.equalsIgnoreCase("termNote")) {
+            if (name.equalsIgnoreCase("termNote")) {
                 termCompGrp.termNoteGrps.add(new TermNoteGrp(processTermNote(e, mappings), null, mappings));
-            } else if(name.equalsIgnoreCase("termNoteGrp")) {
+            } else if (name.equalsIgnoreCase("termNoteGrp")) {
                 termCompGrp.termNoteGrps.add(processTermNoteGrp(e, mappings));
-            } else if(name.equalsIgnoreCase("admin")) {
+            } else if (name.equalsIgnoreCase("admin")) {
                 processAdmin(termCompList, e, mappings);
-            } else if(name.equalsIgnoreCase("adminGrp")) {
+            } else if (name.equalsIgnoreCase("adminGrp")) {
                 processAdminGrp(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("transacGrp")) {
+            } else if (name.equalsIgnoreCase("transacGrp")) {
                 processTransactionGroup(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("note")) {
+            } else if (name.equalsIgnoreCase("note")) {
                 processNote(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("ref")) {
+            } else if (name.equalsIgnoreCase("ref")) {
                 processReference(termCompList, e, mappings);
-             } else if(name.equalsIgnoreCase("xref")) {
+            } else if (name.equalsIgnoreCase("xref")) {
                 processXReference(termCompList, e, mappings);
             }
         }
         termCompList.termComp.add(termCompGrp);
     }
-
-
 
     /**
      * Gets the value of an XML attribute
@@ -777,33 +952,33 @@ public class TBX2RDF_Converter {
     }
 
     private void processID(impID elem, Element node) {
-        if(node.hasAttribute("id")) {
+        if (node.hasAttribute("id")) {
             elem.setID(node.getAttribute("id"));
         }
     }
 
     private void processImpIDLangTypeTgtDType(impIDLangTypeTgtDtyp ref, Element sub, Mappings mappings) {
-       // <!ENTITY % impIDLangTypTgtDtyp '
-       //  id ID #IMPLIED
-       //  xml:lang CDATA #IMPLIED
-       //  type CDATA #REQUIRED
-       //  target IDREF #IMPLIED
-       //  datatype CDATA #IMPLIED
-       // '>
-        if(sub.hasAttribute("id")) {
+        // <!ENTITY % impIDLangTypTgtDtyp '
+        //  id ID #IMPLIED
+        //  xml:lang CDATA #IMPLIED
+        //  type CDATA #REQUIRED
+        //  target IDREF #IMPLIED
+        //  datatype CDATA #IMPLIED
+        // '>
+        if (sub.hasAttribute("id")) {
             ref.setID(sub.getAttribute("id"));
         }
-        if(sub.hasAttribute("target")) {
+        if (sub.hasAttribute("target")) {
             ref.target = sub.getAttribute("target");
         }
-        if(sub.hasAttribute("datatype")) {
+        if (sub.hasAttribute("datatype")) {
             ref.datatype = sub.getAttribute("datatype");
         }
     }
 
     private void processAuxInfo(Describable term, Element sub, Mappings mappings) {
-       //   <!ENTITY % auxInfo '(descrip | descripGrp | admin | adminGrp | transacGrp | note | ref
-       //        | xref)*' >
+        //   <!ENTITY % auxInfo '(descrip | descripGrp | admin | adminGrp | transacGrp | note | ref
+        //        | xref)*' >
         final String name = sub.getTagName();
         if (name.equalsIgnoreCase("descrip")) {
             term.Descriptions.add(new DescripGrp(processDescrip(sub, mappings)));
@@ -824,26 +999,26 @@ public class TBX2RDF_Converter {
         } else {
             throw new TBXFormatException("Element " + name + " not defined by TBX standard");
         }
-        
+
     }
 
     public Element firstChild(String name, Element node) {
         final NodeList nl = node.getElementsByTagName(name);
-        if(nl.getLength() > 0) {
-            return (Element)nl.item(0);
+        if (nl.getLength() > 0) {
+            return (Element) nl.item(0);
         } else {
             throw new TBXFormatException("Expected child named " + name);
         }
     }
 
     private Mapping processType(Element sub, Mappings mappings, boolean required) {
-        if(sub.hasAttribute("type")) {
+        if (sub.hasAttribute("type")) {
             final Mapping m = mappings.getMapping(sub.getTagName(), "type", sub.getAttribute("type"));
-            if(m == null && required) {
+            if (m == null && required) {
                 System.err.println("Unrecognised mapping for <" + sub.getTagName() + " type=\"" + sub.getAttribute("type") + "\">");
             }
             return m;
-        } else if(required) {
+        } else if (required) {
             throw new TBXFormatException("type expected");
         } else {
             System.err.println("Null type on " + sub.getTagName());
