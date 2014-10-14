@@ -44,7 +44,7 @@ public class TBX {
      public static Property transaction = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#transaction");
     
      public static Property reliabilityCode = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode");
-     public static Property termType = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#termType");
+     public static Property termType = defaultModel.createProperty("http://www.lexinfo.net/ontology/2.0/lexinfo#termType");//http://tbx2rdf.lider-project.eu/tbx#termType
      
      public static Property partOfSpeech = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#partOfSpeech");
      public static Property grammaticalNumber = defaultModel.createProperty("http://tbx2rdf.lider-project.eu/tbx#grammaticalNumber");
