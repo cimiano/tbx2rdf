@@ -29,7 +29,8 @@ import tbx2rdf.types.Term;
 import tbx2rdf.vocab.ONTOLEX;
 
 /**
- * This class makes the XML parsing of the TBX using the SAX lexiconsModel
+ * This class makes the XML parsing of the TBX using the SAX lexiconsModel.
+ * It only captures the lexicons and the Martif Header
  */
 public class SAXHandler extends DefaultHandler {
 
