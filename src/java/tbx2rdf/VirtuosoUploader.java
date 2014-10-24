@@ -26,7 +26,7 @@ public class VirtuosoUploader {
      */
     public static void main(String[] args) {
      //    deleteAll();
-        uploadLargeFile("iate_2.nt");
+        uploadLargeFile("iate_3.nt");
         
     }
     
