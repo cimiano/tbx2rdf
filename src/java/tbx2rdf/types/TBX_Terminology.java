@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import tbx2rdf.Main;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
 
@@ -48,7 +49,7 @@ public class TBX_Terminology {
 			term.toRDF(model, concept);
 			for(LexicalEntry le : term.Lex_entries) {
 				if(!lexicons.containsKey(le.lang)) {
-                                        final Resource lexicon = model.createResource("http://tbx2rdf.lider-project.eu/data/iate/" + le.lang);
+                                        final Resource lexicon = model.createResource(Main.DATA_NAMESPACE + le.lang);
 //					final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + le.lang));
 					lexicon.addProperty(ONTOLEX.language, le.lang).addProperty(RDF.type, ONTOLEX.Lexicon);
 					lexicons.put(le.lang, lexicon);

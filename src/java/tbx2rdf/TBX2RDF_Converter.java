@@ -135,7 +135,8 @@ public class TBX2RDF_Converter {
      * @return The TBX terminology
      */
     public TBX_Terminology convertAndSerializeLargeFile(String file, Mappings mappings) {
-        String resourceURI = "http://tbx2rdf.lider-project.eu/data/iate/";
+//        String resourceURI = "http://tbx2rdf.lider-project.eu/data/iate/";
+        String resourceURI = new String(Main.DATA_NAMESPACE);
         TBX2RDF_Converter converter = new TBX2RDF_Converter();
         FileInputStream inputStream = null;
         Scanner sc = null;
@@ -276,7 +277,8 @@ public class TBX2RDF_Converter {
                             Term term = processTermEntry(root, mappings);
                             Model model = ModelFactory.createDefaultModel();
                             TBX.addPrefixesToModel(model);
-                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu/data/");
+                            model.setNsPrefix("", Main.DATA_NAMESPACE);
+//                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu/data/");
                             final Resource rterm = term.getRes(model);
                             rterm.addProperty(RDF.type, SKOS.Concept);
                             term.toRDF(model, rterm);

@@ -84,7 +84,7 @@ public class SAXHandler extends DefaultHandler {
         {
             if (lexicons.containsKey(language))
                 continue;
-            final Resource lexicon = lexiconsModel.createResource("http://tbx2rdf.lider-project.eu/data/iate/" + language);
+            final Resource lexicon = lexiconsModel.createResource(Main.DATA_NAMESPACE + language);
 //            final Resource lexicon = lexiconsModel.createResource(lexiconsModel.expandPrefix(":Lexicon_" + language));
             lexicon.addProperty(ONTOLEX.language, language).addProperty(RDF.type, ONTOLEX.Lexicon);
             lexicons.put(language, lexicon);        
