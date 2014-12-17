@@ -478,6 +478,8 @@ public class TBX2RDF_Converter {
 
         int langsetcount = 0;
 
+        String sid=node.getAttribute("id");
+        term.setID(sid);
 
         for (Element sub : children(node)) {
             final String name = sub.getTagName();

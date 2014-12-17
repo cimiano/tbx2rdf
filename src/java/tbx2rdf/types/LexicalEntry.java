@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import tbx2rdf.Mappings;
+import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.abs.impIDLang;
 import tbx2rdf.vocab.SKOS;
 
@@ -54,8 +55,10 @@ public class LexicalEntry extends Describable {
     
         term.addProperty(RDF.type, ONTOLEX.LexicalEntry);
 
-        term.addProperty(ONTOLEX.language, lang);
-
+//        term.addProperty(ONTOLEX.language, lang);
+        Resource rlan=LexvoManager.mgr.getLexvoFromISO2(lang);
+        term.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+        
         final Resource sense = getSubRes(model, "Sense");
 
         sense.addProperty(ONTOLEX.reference, parent);

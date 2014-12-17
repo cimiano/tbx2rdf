@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import tbx2rdf.Main;
+import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
 
@@ -51,7 +52,10 @@ public class TBX_Terminology {
 				if(!lexicons.containsKey(le.lang)) {
                                         final Resource lexicon = model.createResource(Main.DATA_NAMESPACE + le.lang);
 //					final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + le.lang));
-					lexicon.addProperty(ONTOLEX.language, le.lang).addProperty(RDF.type, ONTOLEX.Lexicon);
+                                        Resource rlan=LexvoManager.mgr.getLexvoFromISO2(le.lang);
+                                        lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+//					lexicon.addProperty(ONTOLEX.language, le.lang);
+                                        lexicon.addProperty(RDF.type, ONTOLEX.Lexicon);
 					lexicons.put(le.lang, lexicon);
 				}
 				final Resource lexicon = lexicons.get(le.lang);
