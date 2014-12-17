@@ -1,11 +1,17 @@
 package tbx2rdf.types;
 
+//JENA
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
+//Java
 import java.util.ArrayList;
 import java.util.List;
+//tbx2rdf
 import tbx2rdf.Mappings;
 
+/**
+ * 
+ */
 public class Describable extends NoteLinkInfo {
 
 	// This interface corresponds to an XML Element in the tbx spec that can have auxInfo

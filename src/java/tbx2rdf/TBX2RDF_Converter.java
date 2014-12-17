@@ -1,20 +1,7 @@
 package tbx2rdf;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.DCTerms;
-import com.hp.hpl.jena.vocabulary.RDF;
-import java.io.File;
+//JAVA
 import java.io.FileInputStream;
-import tbx2rdf.types.LexicalEntry;
-import tbx2rdf.types.Describable;
-import tbx2rdf.types.MartifHeader;
-import tbx2rdf.types.TBX_Terminology;
-import tbx2rdf.types.Descrip;
-import tbx2rdf.types.XReference;
-import tbx2rdf.types.Term;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -23,14 +10,47 @@ import java.util.Collection;
 import java.util.HashSet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+//JENA
+import org.openjena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.DCTerms;
+import com.hp.hpl.jena.vocabulary.RDF;
+
+//TBX2RDF
+import tbx2rdf.datasets.iate.SubjectFields;
+import tbx2rdf.vocab.ONTOLEX;
+import tbx2rdf.vocab.SKOS;
+import tbx2rdf.vocab.TBX;
+import tbx2rdf.types.LexicalEntry;
+import tbx2rdf.types.Describable;
+import tbx2rdf.types.MartifHeader;
+import tbx2rdf.types.TBX_Terminology;
+import tbx2rdf.types.Descrip;
+import tbx2rdf.types.XReference;
+import tbx2rdf.types.Term;
 import tbx2rdf.types.AdminGrp;
 import tbx2rdf.types.AdminInfo;
 import tbx2rdf.types.DescripGrp;
@@ -49,25 +69,9 @@ import tbx2rdf.types.TransacNote;
 import tbx2rdf.types.Transaction;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import tbx2rdf.vocab.DC;
+import tbx2rdf.vocab.IATE;
 
-import java.util.Map;
-import java.util.Scanner;
-import javax.xml.parsers.ParserConfigurationException;
-//import javax.xml.parsers.SAXParser;
-//import javax.xml.parsers.SAXParserFactory;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-import org.openjena.riot.Lang;
-import org.xml.sax.SAXException;
-import tbx2rdf.vocab.ONTOLEX;
-import tbx2rdf.vocab.SKOS;
-import tbx2rdf.vocab.TBX;
 
 /**
  * Entry point of the TBX2RDF converter
@@ -135,9 +139,8 @@ public class TBX2RDF_Converter {
      * @return The TBX terminology
      */
     public TBX_Terminology convertAndSerializeLargeFile(String file, Mappings mappings) {
-//        String resourceURI = "http://tbx2rdf.lider-project.eu/data/iate/";
         String resourceURI = new String(Main.DATA_NAMESPACE);
-        TBX2RDF_Converter converter = new TBX2RDF_Converter();
+       // TBX2RDF_Converter converter = new TBX2RDF_Converter();
         FileInputStream inputStream = null;
         Scanner sc = null;
         boolean dentro = false;
@@ -157,23 +160,6 @@ public class TBX2RDF_Converter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-        /*
-        try {
-        inputStream = new FileInputStream(file);
-        sc = new Scanner(inputStream, "UTF-8");
-        while (sc.hasNextLine()) {
-        String line = sc.nextLine();
-        count++;
-        }
-        inputStream.close();
-        } catch (Exception e) {
-        e.addSuppressed(e);
-        }
-        System.out.println("Total lines: " + count);
-         */
         count = 0;
 
         MartifHeader martifheader = null;
@@ -214,26 +200,26 @@ public class TBX2RDF_Converter {
         //First we serialize the header
         Model mdataset = ModelFactory.createDefaultModel();
         
-        Property prights = mdataset.createProperty("http://purl.org/dc/terms/rights");
-        Property psource = mdataset.createProperty("http://purl.org/dc/terms/source");
-        Resource rrights = mdataset.createResource("http://iate.europa.eu/copyright.html");
-        Property pattribution= mdataset.createProperty("http://creativecommons.org/ns#attributionName");
-        
-        
+        //The whole dataset!
         final Resource rdataset = mdataset.createResource(resourceURI);
         rdataset.addProperty(DCTerms.type, handler.getMartifType());
         
         //This should be generalized
         rdataset.addProperty(RDF.type, mdataset.createResource("http://www.w3.org/ns/dcat#Dataset"));
-        rdataset.addProperty(prights, rrights);
-        rdataset.addProperty(psource, mdataset.createResource("http://iate.europa.eu/"));
-        rdataset.addProperty(pattribution, "Download IATE, European Union, 2014");
+        rdataset.addProperty(DC.rights, IATE.rights);
+        rdataset.addProperty(DC.source, IATE.iate);
+        rdataset.addProperty(DC.attribution, "Download IATE, European Union, 2014");
         
         
         martifheader.toRDF(mdataset, rdataset);
         
-        
         RDFDataMgr.write(System.out, mdataset, Lang.NTRIPLES);
+        
+        
+        Model msubjectFields = SubjectFields.generateSubjectFields();
+        RDFDataMgr.write(System.out, msubjectFields, Lang.NTRIPLES);
+        
+        
 
         //We declare that every lexicon belongs to 
         Iterator it = lexicons.entrySet().iterator();
@@ -379,6 +365,8 @@ public class TBX2RDF_Converter {
         return terminology;
     }
 
+    
+    
     /**
      * Given a XML root element, processes the Martif Header
      * @param root XML root element

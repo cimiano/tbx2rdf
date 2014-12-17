@@ -70,6 +70,13 @@
     </dependencies>
 
     <build>
+	  <resources>
+		<resource>
+		  <directory>src/java</directory>
+		  <excludes><exclude>**/*.java</exclude></excludes>
+		</resource>
+	  </resources>
+  
         <sourceDirectory>src/java</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
         <plugins>
@@ -95,7 +102,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>

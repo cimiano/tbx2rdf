@@ -1,10 +1,14 @@
-package tbx2rdf.iate;
+package tbx2rdf.datasets.iate;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -17,37 +21,39 @@ import java.util.StringTokenizer;
  */
 public class SubjectFields {
 
-    private Map mapa = new HashMap();
     
     public static void main(String[] args)  {
         System.out.println("Subject Fields");
         SubjectFields sf= new SubjectFields();
-        sf.init();
-        String rdf = sf.getTriples();
-        System.out.println(rdf);
+        List<SubjectField> lsf=sf.readInternalFile();
     } 
     
-    public String getTriples()
+    /**
+     * Loads and generates resources for the subject fields
+     * @return A Jena model
+     */
+    public static Model generateSubjectFields()
     {
-        String s="";
-        Iterator it = mapa.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry e = (Map.Entry)it.next();
-            System.out.println(e.getKey() + " " + e.getValue());
-        }        
-        return s;
+        SubjectFields sfs= new SubjectFields();
+        List<SubjectField> lsf=sfs.readInternalFile();
+        Model model = ModelFactory.createDefaultModel();
+        for(SubjectField sf : lsf)
+        {
+            sf.toRDF(model, null);
+        }
+        return model;
     }
+    
     
 
     /**
      * Reads the list of subject fields
      */
-    public void init()
+    public List<SubjectField> readInternalFile()
     {
+        List<SubjectField> lsf = new ArrayList();
         try{
-            InputStream in = this.getClass().getResourceAsStream("a.txt");
-            if (in==null)
-                System.out.println("jhioder");
+            InputStream in = this.getClass().getResourceAsStream("subjectFields.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String str="";
             while ((str = br.readLine()) != null) {
@@ -56,12 +62,14 @@ public class SubjectFields {
                     continue;
                 String s1=tokens.nextToken();
                 String s2=tokens.nextToken();
-                mapa.put(s1, s2);
+                lsf.add(new SubjectField(s1,s2));
             }
         }catch(Exception e)
         {
             e.printStackTrace();
+            return lsf;
         }
+        return lsf;
     }
     
 }
