@@ -33,6 +33,7 @@ public class Mappings {
 		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*<(\\S*?)>$");
 		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP(\\s*\\{(.*?)\\})?$");
 		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP(\\s*<(.*?)>)?$");
+		final Pattern mapping4 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*EX(\\s*\\{(.*?)\\})?$");
 
 		String strLine;
 		Matcher matcher;
@@ -56,7 +57,14 @@ public class Mappings {
 					mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), objectPropertyMapping);
 					
 				}
-			} else {
+			} else if((matcher = mapping4.matcher(strLine)).find())
+                        {
+                            final ExceptionMapping em = new ExceptionMapping(matcher.group(4), "");
+                            mappings.addMapping(matcher.group(1), matcher.group(2), matcher.group(3), em);
+          //                  System.out.println("XXXXXXXXXXXXX " + matcher.group(1) + " "+matcher.group(2)+" "+matcher.group(3)+" "+matcher.group(4) );
+                            
+                        }
+                        else {
 				throw new RuntimeException("Bad line in mapping file: " + strLine);
 			}
 		}
@@ -70,7 +78,6 @@ public class Mappings {
 
 	public Mappings() {
 		mappings = new HashMap<String, HashMap<String, HashMap<String, Mapping>>>();
-
 	}
 
 	public void addMapping(String name, IndividualMapping target) {
@@ -102,6 +109,12 @@ public class Mappings {
 
 	}
 
+        /**
+         * Gets the mapping for an element, attribute and value
+         * @param element XML element, for example "descrip"
+         * @param attribute XML attribute, for example, "subjectField"
+         * @param value String literal with the value
+         */
 	public Mapping getMapping(String element, String attribute, String value) {
 		HashMap<String, HashMap<String, Mapping>> element2attr;
 

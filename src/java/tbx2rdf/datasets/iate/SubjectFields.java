@@ -21,6 +21,9 @@ import java.util.StringTokenizer;
  */
 public class SubjectFields {
 
+
+    public static Map<String, String> mapa = new HashMap();
+    public static Map<String, SubjectField> mapauris = new HashMap();
     
     public static void main(String[] args)  {
         System.out.println("Subject Fields");
@@ -35,9 +38,9 @@ public class SubjectFields {
     public static Model generateSubjectFields()
     {
         SubjectFields sfs= new SubjectFields();
-        List<SubjectField> lsf=sfs.readInternalFile();
+        List<SubjectField> subjectFields=sfs.readInternalFile();
         Model model = ModelFactory.createDefaultModel();
-        for(SubjectField sf : lsf)
+        for(SubjectField sf : subjectFields)
         {
             sf.toRDF(model, null);
         }
@@ -62,7 +65,10 @@ public class SubjectFields {
                     continue;
                 String s1=tokens.nextToken();
                 String s2=tokens.nextToken();
-                lsf.add(new SubjectField(s1,s2));
+                mapa.put(s1,s2);
+                SubjectField sf=new SubjectField(s1,s2);
+                mapauris.put(s1,sf);
+                lsf.add(sf);
             }
         }catch(Exception e)
         {

@@ -2,18 +2,22 @@ package tbx2rdf.types.abs;
 
 import com.hp.hpl.jena.graph.NodeFactory;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDFS;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
 import org.w3c.dom.NodeList;
 import tbx2rdf.DatatypePropertyMapping;
+import tbx2rdf.ExceptionMapping;
 import tbx2rdf.IndividualMapping;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
 import tbx2rdf.ObjectPropertyMapping;
 import tbx2rdf.TBXFormatException;
+import tbx2rdf.vocab.TBX;
 
 /**
  *
@@ -69,7 +73,23 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
 			} else {
 				parent.addProperty(model.createProperty(type.getURL()), nodelistToString(value), XMLLiteral);
 			}
-		} else {
+		} else if (type instanceof ExceptionMapping){
+                    final ExceptionMapping em = (ExceptionMapping)type;
+                    try {
+                        Class<?> c = Class.forName("tbx2rdf.ExceptionMethods");
+                        Object o = c.newInstance();
+                        Class[] paramTypes = new Class[1];
+                        paramTypes[0]=String.class;
+                        Method m = c.getDeclaredMethod(em.getURL(), paramTypes);
+                        String res=(String) m.invoke(o, nodelistToString(value));
+                        Resource r=model.createResource(res);
+                        parent.addProperty(TBX.subjectField,r);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+//                    Method  method = c.getDeclaredMethod ("method name", parameterTypes)
+                }
+                else {
 			throw new RuntimeException("Unexpected mapping type");
 		}
 

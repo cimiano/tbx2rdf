@@ -199,20 +199,15 @@ public class TBX2RDF_Converter {
         
         //First we serialize the header
         Model mdataset = ModelFactory.createDefaultModel();
-        
         //The whole dataset!
         final Resource rdataset = mdataset.createResource(resourceURI);
         rdataset.addProperty(DCTerms.type, handler.getMartifType());
-        
         //This should be generalized
         rdataset.addProperty(RDF.type, mdataset.createResource("http://www.w3.org/ns/dcat#Dataset"));
         rdataset.addProperty(DC.rights, IATE.rights);
         rdataset.addProperty(DC.source, IATE.iate);
         rdataset.addProperty(DC.attribution, "Download IATE, European Union, 2014");
-        
-        
         martifheader.toRDF(mdataset, rdataset);
-        
         RDFDataMgr.write(System.out, mdataset, Lang.NTRIPLES);
         
         
@@ -264,7 +259,6 @@ public class TBX2RDF_Converter {
                             Model model = ModelFactory.createDefaultModel();
                             TBX.addPrefixesToModel(model);
                             model.setNsPrefix("", Main.DATA_NAMESPACE);
-//                            model.setNsPrefix("", "http://tbx2rdf.lider-project.eu/data/");
                             final Resource rterm = term.getRes(model);
                             rterm.addProperty(RDF.type, SKOS.Concept);
                             term.toRDF(model, rterm);
@@ -277,6 +271,7 @@ public class TBX2RDF_Converter {
                             RDFDataMgr.write(System.out, model, Lang.NTRIPLES);
                         } catch (Exception e) {
                             errors++;
+//                            e.printStackTrace();
 //                            System.err.println("Error");
                         }
                         if (count % 1000 == 0) {
@@ -1041,6 +1036,9 @@ public class TBX2RDF_Converter {
         }
     }
 
+    /**
+     * 
+     */
     private void processImpIDLangTypeTgtDType(impIDLangTypeTgtDtyp ref, Element sub, Mappings mappings) {
         // <!ENTITY % impIDLangTypTgtDtyp '
         //  id ID #IMPLIED
@@ -1057,6 +1055,10 @@ public class TBX2RDF_Converter {
         }
         if (sub.hasAttribute("datatype")) {
             ref.datatype = sub.getAttribute("datatype");
+        }
+        if (sub.hasAttribute("subjectField"))
+        {
+//            System.out.println("uy");
         }
     }
 

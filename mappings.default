@@ -61,7 +61,7 @@ descrip	type	relatedConceptNarrower	<http://tbx2rdf.lider-project.eu/tbx#related
 descrip	type	reliabilityCode	<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode>	DP
 descrip	type	sampleSentence	<http://tbx2rdf.lider-project.eu/tbx#sampleSentence>	DP
 descrip	type	sequentallyRelatedConcept	<http://tbx2rdf.lider-project.eu/tbx#sequentallyRelatedConcept>	OP
-descrip	type	subjectField	<http://tbx2rdf.lider-project.eu/tbx#subjectField>	DP <http://www.w3.org/2001/XMLSchema#string>
+descrip	type	subjectField	<subjectField>	EX
 descrip	type	subordinateConceptGeneric	<http://tbx2rdf.lider-project.eu/tbx#subordinateConceptGeneric>	OP
 descrip	type	subordinateConceptPartitive	<http://tbx2rdf.lider-project.eu/tbx#subordinateConceptPartitive>	OP
 descrip	type	superordinateConceptGeneric	<http://tbx2rdf.lider-project.eu/tbx#superordinateConceptGeneric>	OP
