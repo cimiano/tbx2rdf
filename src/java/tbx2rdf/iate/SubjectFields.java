@@ -20,9 +20,11 @@ public class SubjectFields {
     private Map mapa = new HashMap();
     
     public static void main(String[] args)  {
+        System.out.println("Subject Fields");
         SubjectFields sf= new SubjectFields();
         sf.init();
         String rdf = sf.getTriples();
+        System.out.println(rdf);
     } 
     
     public String getTriples()
@@ -43,7 +45,9 @@ public class SubjectFields {
     public void init()
     {
         try{
-            InputStream in = this.getClass().getResourceAsStream("subjectFields.txt");
+            InputStream in = this.getClass().getResourceAsStream("a.txt");
+            if (in==null)
+                System.out.println("jhioder");
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String str="";
             while ((str = br.readLine()) != null) {
@@ -56,6 +60,7 @@ public class SubjectFields {
             }
         }catch(Exception e)
         {
+            e.printStackTrace();
         }
     }
     
