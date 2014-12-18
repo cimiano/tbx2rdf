@@ -7,11 +7,13 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import tbx2rdf.Main;
 import tbx2rdf.Mappings;
 import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.abs.impIDLang;
@@ -50,6 +52,9 @@ public class LexicalEntry extends Describable {
 
     @Override
     public void toRDF(Model model, Resource parent) {
+        String newuri=/*Main.DATA_NAMESPACE+*/"LexicalEntry-"+URLEncoder.encode(Lemma);
+        this.setID(newuri);
+
         final Resource term = getRes(model);
         super.toRDF(model, term);
     
@@ -70,6 +75,7 @@ public class LexicalEntry extends Describable {
         term.addProperty(ONTOLEX.canonicalForm, canonicalForm);
 
         canonicalForm.addProperty(ONTOLEX.writtenRep, Lemma, lang);
+        
                 
         for(TermCompList decomposition : Decomposition) {
             decomposition.toRDF(model, term);
