@@ -1,0 +1,221 @@
+Afar	aar	aa
+Abkhazian	abk	ab
+Avestan	ave	ae
+Afrikaans	afr	af
+Akan	aka	ak
+Amharic	amh	am
+Aragonese	arg	an
+Arabic	ara	ar
+Assamese	asm	as
+Avaric	ava	av
+Aymara	aym	ay
+Azerbaijani	aze	az
+Bashkir	bak	ba
+Belarusian	bel	be
+Bulgarian	bul	bg
+Bihari languages	bih	bh
+Bislama	bis	bi
+Bambara	bam	bm
+Bengali	ben	bn
+Tibetan	tib/bod	bo
+Breton	bre	br
+Bosnian	bos	bs
+Catalan	cat	ca
+Valencian	cat	ca
+Chechen	che	ce
+Chamorro	cha	ch
+Corsican	cos	co
+Cree	cre	cr
+Czech	cze	cs
+Czech	ces	cs
+Church Slavic	chu	cu
+Church Slavonic	chu	cu
+Old Bulgarian	chu	cu
+Old Church Slavonic	chu	cu
+Old Slavonic	chu	cu
+Chuvash	chv	cv
+Danish	dan	da
+German	ger/deu	de
+Dhivehi	div	dv
+Divehi	div	dv
+Maldivian	div	dv
+Dzongkha	dzo	dz
+Ewe	ewe	ee
+Greek, Modern (1453-)	ell	el
+Greek, Modern (1453-)	gre	el
+English	eng	en
+Esperanto	epo	eo
+Castilian	spa	es
+Spanish	spa	es
+Estonian	est	et
+Basque	baq/eus	eu
+Persian	per/fas	fa
+Fulah	ful	ff
+Finnish	fin	fi
+Fijian	fij	fj
+Faroese	fao	fo
+French	fre	fr
+French	fra	fr
+Western Frisian	fry	fy
+Irish	gle	ga
+Gaelic	gla	gd
+Scottish Gaelic	gla	gd
+Galician	glg	gl
+Guarani	grn	gn
+Gujarati	guj	gu
+Manx	glv	gv
+Hausa	hau	ha
+Hebrew	heb	he
+Hindi	hin	hi
+Hiri Motu	hmo	ho
+Croatian	hrv	hr
+Haitian	hat	ht
+Haitian Creole	hat	ht
+Hungarian	hun	hu
+Armenian	arm/hye	hy
+Herero	her	hz
+Interlingua (International Auxiliary Language Association)	ina	ia
+Indonesian	ind	id
+Interlingue	ile	ie
+Occidental	ile	ie
+Igbo	ibo	ig
+Nuosu	iii	ii
+Sichuan Yi	iii	ii
+Inupiaq	ipk	ik
+Ido	ido	io
+Icelandic	ice	is
+Italian	ita	it
+Inuktitut	iku	iu
+Japanese	jpn	ja
+Javanese	jav	jv
+Georgian	geo	ka
+Kongo	kon	kg
+Gikuyu	kik	ki
+Kikuyu	kik	ki
+Kuanyama	kua	kj
+Kwanyama	kua	kj
+Kazakh	kaz	kk
+Greenlandic	kal	kl
+Kalaallisut	kal	kl
+Central Khmer	khm	km
+Kannada	kan	kn
+Korean	kor	ko
+Kanuri	kau	kr
+Kashmiri	kas	ks
+Kurdish	kur	ku
+Komi	kom	kv
+Cornish	cor	kw
+Kirghiz	kir	ky
+Kyrgyz	kir	ky
+Latin	lat	la
+Letzeburgesch	ltz	lb
+Luxembourgish	ltz	lb
+Ganda	lug	lg
+Limburgan	lim	li
+Limburger	lim	li
+Limburgish	lim	li
+Lingala	lin	ln
+Lao	lao	lo
+Lithuanian	lit	lt
+Luba-Katanga	lub	lu
+Latvian	lav	lv
+Malagasy	mlg	mg
+Marshallese	mah	mh
+Maori	mao	mi
+Macedonian	mac	mk
+Malayalam	mal	ml
+Mongolian	mon	mn
+Marathi	mar	mr
+Malay	may	ms
+Maltese	mlt	mt
+Burmese	bur	my
+Nauru	nau	na
+Bokmål, Norwegian	nob	nb
+Norwegian Bokmål	nob	nb
+Ndebele, North	nde	nd
+North Ndebele	nde	nd
+Nepali	nep	ne
+Ndonga	ndo	ng
+Dutch	dut	nl
+Flemish	dut	nl
+Norwegian Nynorsk	nno	nn
+Nynorsk, Norwegian	nno	nn
+Norwegian	nor	no
+Ndebele, South	nbl	nr
+South Ndebele	nbl	nr
+Navaho	nav	nv
+Navajo	nav	nv
+Chewa	nya	ny
+Chichewa	nya	ny
+Nyanja	nya	ny
+Occitan (post 1500)	oci	oc
+Ojibwa	oji	oj
+Oromo	orm	om
+Oriya	ori	or
+Ossetian	oss	os
+Ossetic	oss	os
+Panjabi	pan	pa
+Punjabi	pan	pa
+Pali	pli	pi
+Polish	pol	pl
+Pashto	pus	ps
+Pushto	pus	ps
+Portuguese	por	pt
+Quechua	que	qu
+Romansh	roh	rm
+Rundi	run	rn
+Moldavian	rum	ro
+Moldovan	rum	ro
+Romanian	rum	ro
+Russian	rus	ru
+Kinyarwanda	kin	rw
+Sanskrit	san	sa
+Sardinian	srd	sc
+Sindhi	snd	sd
+Northern Sami	sme	se
+Sango	sag	sg
+Sinhala	sin	si
+Sinhalese	sin	si
+Slovak	slk	sk
+Slovenian	slv	sl
+Samoan	smo	sm
+Shona	sna	sn
+Somali	som	so
+Albanian	sqi	sq
+Serbian	srp	sr
+Swati	ssw	ss
+Sotho, Southern	sot	st
+Sundanese	sun	su
+Swedish	swe	sv
+Swahili	swa	sw
+Tamil	tam	ta
+Telugu	tel	te
+Tajik	tgk	tg
+Thai	tha	th
+Tigrinya	tir	ti
+Turkmen	tuk	tk
+Tagalog	tgl	tl
+Tswana	tsn	tn
+Tonga (Tonga Islands)	ton	to
+Turkish	tur	tr
+Tsonga	tso	ts
+Tatar	tat	tt
+Twi	twi	tw
+Tahitian	tah	ty
+Uighur	uig	ug
+Uyghur	uig	ug
+Ukrainian	ukr	uk
+Urdu	urd	ur
+Uzbek	uzb	uz
+Venda	ven	ve
+Vietnamese	vie	vi
+Volapük	vol	vo
+Walloon	wln	wa
+Wolof	wol	wo
+Xhosa	xho	xh
+Yiddish	yid	yi
+Yoruba	yor	yo
+Chuang	zha	za
+Zhuang	zha	za
+Chinese	chi	zh
+Zulu	zul	zu
