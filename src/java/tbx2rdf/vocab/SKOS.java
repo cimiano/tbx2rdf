@@ -11,6 +11,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
  */
 public class SKOS {
     private static Model defaultModel = ModelFactory.createDefaultModel(); 
-     public static Resource Concept = defaultModel.createResource("<http://www.w3.org/2004/02/skos/core#Concept");
+     public static Resource Concept = defaultModel.createResource("http://www.w3.org/2004/02/skos/core#Concept");
      
 }

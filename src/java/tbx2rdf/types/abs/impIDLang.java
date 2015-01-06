@@ -3,7 +3,7 @@ package tbx2rdf.types.abs;
 import tbx2rdf.Mappings;
 
 /**
- *
+ * Named element with a language attribute
  * @author John McCrae
  */
 public abstract class impIDLang extends impID {

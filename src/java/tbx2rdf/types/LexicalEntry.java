@@ -7,12 +7,15 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import tbx2rdf.Main;
 import tbx2rdf.Mappings;
+import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.abs.impIDLang;
 import tbx2rdf.vocab.SKOS;
 
@@ -49,13 +52,18 @@ public class LexicalEntry extends Describable {
 
     @Override
     public void toRDF(Model model, Resource parent) {
+        String newuri=/*Main.DATA_NAMESPACE+*/"LexicalEntry-"+URLEncoder.encode(Lemma);
+        this.setID(newuri);
+
         final Resource term = getRes(model);
         super.toRDF(model, term);
     
         term.addProperty(RDF.type, ONTOLEX.LexicalEntry);
 
-        term.addProperty(ONTOLEX.language, lang);
-
+//        term.addProperty(ONTOLEX.language, lang);
+        Resource rlan=LexvoManager.mgr.getLexvoFromISO2(lang);
+        term.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+        
         final Resource sense = getSubRes(model, "Sense");
 
         sense.addProperty(ONTOLEX.reference, parent);
@@ -67,6 +75,7 @@ public class LexicalEntry extends Describable {
         term.addProperty(ONTOLEX.canonicalForm, canonicalForm);
 
         canonicalForm.addProperty(ONTOLEX.writtenRep, Lemma, lang);
+        
                 
         for(TermCompList decomposition : Decomposition) {
             decomposition.toRDF(model, term);

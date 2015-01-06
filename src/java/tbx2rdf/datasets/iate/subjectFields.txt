@@ -1,0 +1,690 @@
+0,NO SUBJECT DOMAIN
+4,POLITICS
+406,Political framework
+406001,Political ideology
+406002,Political institution
+406003,Political philosophy
+406004,Political power
+406005,Political system
+406006,State
+411,Political Parties
+411001,Party organisation
+411002,Political party
+411003,Political tendency
+416,Electoral procedure and voting
+416001,Election
+416002,Electoral law
+416003,Electoral system
+416004,Majority voting
+416005,Organisation of elections
+416006,Parliamentary seat
+416007,Vote
+416008,Voting method
+421,Parliament
+421001,Composition of parliament
+421002,Interparliamentary relations
+421003,Member of Parliament
+421004,Parliament
+421005,Powers of parliament
+426,Parliamentary proceedings
+426001,Legislative procedure
+426002,Parliamentary procedure
+431,Politics and public safety
+431001,Institutional activity
+431002,Politics
+431003,Public opinion
+431004,Public safety
+431005,Trends of opinion
+436,Executive power and public service
+436001,Administrative law
+436002,Administrative structures
+436003,Executive body
+436004,Public administration
+436005,Regional and local authorities
+8,INTERNATIONAL RELATIONS
+806,International affairs
+806001,International affairs
+806002,International agreement
+806003,International instrument
+806004,International organisation
+806005,National independence
+811,Cooperation policy
+811001,Aid policy
+811002,Cooperation policy
+811003,Humanitarian aid
+816,International balance
+816001,Foreign policy
+816002,International conflict
+816003,International issue
+816004,International security
+816005,Peace
+816006,War victim
+821,Defence
+821001,Armed forces
+821002,Arms policy
+821003,Defence policy
+821004,Military equipment
+10,EUROPEAN COMMUNITIES
+1006,Community institutions and European civil service
+1006001,Community body
+1006002,Community body (established by the Treaties)
+1006003,EU institution
+1006004,European civil service
+1006005,Institutional structure
+1006006,Operation of the Institutions
+1011,European Union law
+1011001,Community act
+1011002,Community law
+1011003,Community legal system
+1011004,EC Treaty
+1016,European construction
+1016001,Deepening of the European Union
+1016002,Enlargement of the Union
+1016003,EU relations
+1016004,European Union
+1021,Community finance
+1021001,Community budget
+1021002,Community expenditure
+1021003,Community financing
+1021004,Drawing up of the Community budget
+1021005,Financing of the Community budget
+12,LAW
+1206,Sources and branches of the law
+1206001,Legal science
+1206002,Source of law
+1211,Civil law
+1211001,Civil law
+1211002,Ownership
+1216,Criminal law
+1216001,Criminal law
+1216002,Criminal liability
+1216003,Law relating to prisons
+1216004,Offence
+1216005,Penalty
+1221,Justice
+1221001,Access to the courts
+1221002,Legal action
+1221003,Judicial proceedings
+1221004,Ruling
+1226,Organisation of the legal system
+1226001,Legal profession
+1226002,Legal system
+1231,International law
+1231001,International economic law
+1231002,International labour law
+1231003,International law
+1231004,Private international law
+1231005,Public international law
+1236,Rights and freedoms
+1236001,Anti-discriminatory measure
+1236002,Economic rights
+1236003,Human rights
+1236004,Political rights
+1236005,Rights of the individual
+1236006,Social rights
+1236007,Citizen's duties
+16,ECONOMICS
+1606,Economic policy
+1606001,Economic planning
+1606002,Economic policy
+1606003,Economic support
+1611,Economic growth
+1611001,Economic conditions
+1611002,Economic cycle
+1611003,Economic development
+1616,Regions and regional policy
+1616001,Economic region
+1616002,European Region
+1616003,Regional policy
+1621,Economic structure
+1621001,Economic sector
+1621002,Economic system
+1621003,Economy
+1626,National accounts
+1626001,Accounting system
+1626002,Income
+1626003,National accounts
+1631,Economic analysis
+1631001,Economic analysis
+1631002,Economic forecasting
+1631003,Statistics
+20,TRADE
+2006,Trade policy
+2006001,Commercial law
+2006002,Common commercial policy
+2006003,Export policy
+2006004,Import policy
+2006005,Market
+2006006,Public contract
+2011,Tariff policy
+2011001,Common tariff policy
+2011002,Community customs procedure
+2011003,Customs regulations
+2011004,Customs tariff
+2011005,Tariff policy
+2016,Trade
+2016001,Supply
+2016002,Supply and demand
+2016003,Trading operation
+2021,International trade
+2021001,International trade
+2021002,Trade relations
+2021003,Trade restriction
+2026,Consumption
+2026001,Consumer
+2026002,Consumption
+2026003,Goods and services
+2031,Marketing
+2031001,Commercial transaction
+2031002,Marketing
+2031003,Preparation for market
+2036,Distributive trades
+2036001,Distributive trades
+2036002,Storage
+24,FINANCE
+2406,Monetary relations
+2406001,Balance of payments
+2406002,European Monetary System
+2406003,International finance
+2406004,Monetary relations
+2411,Monetary economics
+2411001,Exchange policy
+2411002,Monetary policy
+2411003,Money market
+2416,Financial institutions and credit
+2416001,Banking
+2416002,Credit
+2416003,Credit policy
+2416004,Financial institution
+2421,Free movement of capital
+2421001,Financial market
+2421002,Free movement of capital
+2426,Financing and investment
+2426001,Financing
+2426002,Investment
+2431,Insurance
+2431001,Insurance
+2436,Public finance and budget policy
+2436001,Budget policy
+2436002,Public debt
+2436003,Public finance
+2441,Budget
+2441001,Budget financing
+2441002,Budgetary expenditure
+2441003,Budgetary procedure
+2441004,Implementation of the budget
+2446,Taxation
+2446001,Fiscal policy
+2446002,Tax
+2446003,Tax on capital
+2446004,Tax on consumption
+2446005,Tax on income
+2446006,Tax system
+2451,Prices
+2451001,Farm prices
+2451002,Market prices
+2451003,Price fluctuation
+2451004,Prices
+2451005,Prices policy
+28,SOCIAL QUESTIONS
+2806,Family
+2806001,Artificial reproductive techniques
+2806002,Family
+2806003,Family law
+2806004,Family planning
+2806005,Marital status
+2811,Migration
+2811001,Internal migration
+2811002,Migration
+2816,Demography and population
+2816001,Composition of the population
+2816002,Demography
+2816003,Geographical distribution of the population
+2816004,Population dynamics
+2821,Social framework
+2821001,Social analysis
+2821002,Social situation
+2821003,Social structure
+2821004,Sociocultural group
+2826,Social affairs
+2826001,Leisure
+2826002,Social life
+2826003,Social policy
+2826004,Social problem
+2831,Culture and religion
+2831001,Arts
+2831002,Cultural policy
+2831003,Culture
+2831004,Religion
+2836,Social protection
+2836001,Leave on social grounds
+2836002,Social security
+2836003,Welfare
+2841,Health
+2841001,Health care profession
+2841002,Health policy
+2841003,Illness
+2841004,Medical science
+2841005,Nutrition
+2841006,Pharmaceutical industry
+2846,Construction and town planning
+2846001,Built-up area
+2846002,Construction policy
+2846003,Habitat
+2846004,Housing
+2846005,Housing policy
+2846006,Property leasing
+2846007,Town planning
+32,EDUCATION AND COMMUNICATIONS
+3206,Education
+3206001,Education policy
+3206002,Teaching method
+3211,Teaching
+3211001,Educational institution
+3211002,General education
+3211003,Level of education
+3211004,Teaching
+3211005,Vocational education
+3216,Organisation of teaching
+3216001,Organisation of teaching
+3216002,School life
+3216003,Schoolwork
+3216004,Teaching materials
+3221,Documentation
+3221001,Document
+3221002,Documentation
+3221003,Information service
+3226,Communications
+3226001,Audiovisual equipment
+3226002,Communications industry
+3226003,Communications policy
+3226004,Communications systems
+3226005,Means of communication
+3231,Information and information processing
+3231001,Information
+3231002,Information policy
+3231003,Information processing
+3236,Information technology and data processing
+3236001,Computer system
+3236002,Computer systems
+3236003,Data-processing law
+3236004,Dataprocessing
+3236005,Information technology industry
+36,SCIENCE
+3606,Natural and applied sciences
+3606001,Applied sciences
+3606002,Earth sciences
+3606003,Life sciences
+3606004,Physical sciences
+3606005,Space science
+3611,Humanities
+3611001,Behavioural sciences
+3611002,Social sciences
+40,BUSINESS AND COMPETITION
+4006,Business organisation
+4006001,Administrative personnel
+4006002,Business activity
+4006003,Business policy
+4006004,Company law
+4006005,Company structure
+4006006,Economic concentration
+4011,Business classification
+4011001,Branch of activity
+4011002,Size of business
+4011003,Type of business
+4016,Legal form of organisations
+4016001,Organisation
+4021,Management
+4021001,Financial management
+4021002,Management
+4021003,Management techniques
+4026,Accounting
+4026001,Accounting
+4026002,Management accounting
+4031,Competition
+4031001,Competition law
+4031002,Competition policy
+4031003,Restriction on competition
+4031004,Restrictive trade practice
+44,EMPLOYMENT AND WORKING CONDITIONS
+4406,Employment
+4406001,Employment policy
+4406002,Employment structure
+4406003,Termination of employment
+4406004,Unemployment
+4406005,Vocational training
+4411,Labour market
+4411001,Labour force
+4411002,Labour market
+4411003,Occupational status
+4411004,Socioprofessional category
+4416,Organisation of work and working conditions
+4416001,Organisation of work
+4416002,Work
+4416003,Working conditions
+4421,Personnel management and staff remuneration
+4421001,Pay policy
+4421002,Personnel administration
+4421003,Remuneration of work
+4426,Labour law and labour relations
+4426001,Labour law
+4426002,Labour relations
+4426003,Organisation of professions
+48,TRANSPORT
+4806,Transport policy
+4806001,Traffic regulations
+4806002,Transport policy
+4806003,Transport price
+4806004,Transport regulations
+4811,Organisation of transport
+4811001,Destination of transport
+4811002,Means of transport
+4811003,Mode of transport
+4811004,Organisation of transport
+4816,Land transport
+4816001,Land transport
+4821,Maritime and inland waterway transport
+4821001,Inland waterway transport
+4821002,Maritime transport
+4821003,Ports policy
+4826,Air and space transport
+4826001,Air transport
+4826002,Space transport
+52,ENVIRONMENT
+5206,Environmental policy
+5206001,Environmental policy
+5206002,Environmental protection
+5206003,Pollution control measures
+5206004,Waste management
+5206005,Water management
+5211,Natural environment
+5211001,Climate
+5211002,Geophysical environment
+5211003,Natural resources
+5211004,Physical environment
+5211005,Wildlife
+5216,Deterioration of the environment
+5216001,Degradation of the environment
+5216002,Nuisance
+5216003,Pollution
+5216004,Waste
+56,"AGRICULTURE, FORESTRY AND FISHERIES"
+5606,Agricultural policy
+5606001,Common agricultural policy
+5611,Agricultural structures and production
+5611001,Agricultural production policy
+5611002,Policy on agricultural structures
+5611003,Regulation of agricultural production
+5616,Farming systems
+5616001,Agricultural holding
+5616002,Agricultural performance
+5616003,Agricultural real estate
+5616004,Farming system
+5616005,Type of tenure
+5616006,Working population engaged in agriculture
+5621,Cultivation of agricultural land
+5621001,Cultivation system
+5621002,Cultivation techniques
+5621003,Land use
+5626,Means of agricultural production
+5626001,Livestock
+5626002,Means of agricultural production
+5631,Agricultural activity
+5631001,Agricultural product
+5631002,Animal health
+5631003,Animal nutrition
+5631004,Animal production
+5631005,Crop production
+5631006,Livestock farming
+5636,Forestry
+5636001,Forest
+5636002,Forestry economics
+5636003,Forestry policy
+5641,Fisheries
+5641001,Aquaculture
+5641002,Fisheries policy
+5641003,Fisheries structure
+5641004,Fishery resources
+5641005,Fishing grounds
+5641006,Fishing industry
+60,AGRI-FOODSTUFFS
+6006,Plant product
+6006001,Cereals
+6006002,Fodder plant
+6006003,Fruit
+6006004,Industrial plant
+6006005,Oleaginous plant
+6006006,Root crop
+6006007,Textile plant
+6006008,Tropical plant
+6006009,Vegetable
+6011,Animal product
+6011001,Animal product
+6016,Processed agricultural produce
+6016001,Essential oil
+6016002,Fats
+6016003,Milk product
+6016004,Protein products
+6021,Beverages and sugar
+6021001,Beverage
+6021002,Sugar
+6026,Foodstuff
+6026001,Foodstuff
+6026002,Processed food product
+6026003,Processed foodstuff
+6031,Agri-foodstuffs
+6031001,Agri-foodstuffs
+6031002,Food industry
+6036,Food technology
+6036001,Food additive
+6036002,Food technology
+64,"PRODUCTION, TECHNOLOGY AND RESEARCH"
+6406,Production
+6406001,Production policy
+6411,Technology and technical regulations
+6411001,Advanced materials
+6411002,Industrial manufacturing
+6411003,Materials technology
+6411004,Technical regulations
+6411005,Technology
+6416,Research and intellectual property
+6416001,Intellectual property
+6416002,Research
+6416003,Research policy
+6416004,Space policy
+66,ENERGY
+6606,Energy policy
+6606001,Energy industry
+6606002,Energy policy
+6611,Coal and mining industries
+6611001,Coal industry
+6611002,Mining industry
+6611003,Mining product
+6616,Oil industry
+6616001,Hydrocarbon
+6616002,Oil industry
+6616003,Petrochemicals
+6621,Electrical and nuclear industries
+6621001,Electrical industry
+6621002,Nuclear energy
+6621003,Nuclear industry
+6621004,Nuclear power station
+6626,Soft energy
+6626001,Soft energy
+68,INDUSTRY
+6806,Industrial structures and policy
+6806001,Industrial policy
+6806002,Industrial production
+6806003,Industrial structures
+6806004,Technical profession
+6811,Chemistry
+6811001,Chemical compound
+6811002,Chemical element
+6811003,Chemical industry
+6811004,Special chemicals
+6816,"Iron, steel and other metal industries"
+6816001,Iron and steel industry
+6816002,Metallurgical industry
+6816003,Metals
+6821,Mechanical engineering
+6821001,Machinery
+6821002,Mechanical engineering
+6821003,Mechanical equipment
+6821004,Precision engineering
+6821005,Pressure equipment
+6821006,Thermal equipment
+6826,Electronics and electrical engineering
+6826001,Electrical engineering
+6826002,Electronics industry
+6831,Building and public works
+6831001,Building industry
+6831002,Building services
+6831003,Public works
+6836,Wood industry
+6836001,Wood industry
+6841,Leather and textile industries
+6841001,Leather industry
+6841002,Textile industry
+6846,Miscellaneous industries
+6846001,Ceramics
+6846002,Miscellaneous industries
+72,GEOGRAPHY
+7206,Europe
+7206001,Eastern Europe
+7206002,Europe
+7206003,Former USSR
+7206004,Northern Europe
+7206005,Southern Europe
+7206006,Western Europe
+7211,Regions of EU Member States
+7211001,Regions and communities of Belgium
+7211002,Regions of Austria
+7211003,Regions of Denmark
+7211004,Regions of Finland
+7211005,Regions of France
+7211006,Regions of Germany
+7211007,Regions of Greece
+7211008,Regions of Ireland
+7211009,Regions of Italy
+7211010,Regions of Portugal
+7211011,Regions of Spain
+7211012,Regions of Sweden
+7211013,Regions of the Netherlands
+7211014,Regions of the United Kingdom
+7211015,Regions of Estonia
+7211016,Regions of Hungary
+7211017,Regions of Latvia
+7211018,Regions of Lithuania
+7211019,Regions of Poland
+7211020,Regions of Slovakia
+7211021,Regions of Slovenia
+7211022,Regions of the Czech Republic
+7216,America
+7216001,America
+7216002,Caribbean Islands
+7216003,Latin America
+7216004,North America
+7221,Africa
+7221001,Africa
+7221002,Central Africa
+7221003,East Africa
+7221004,North Africa
+7221005,Southern Africa
+7221006,West Africa
+7226,Asia and Oceania
+7226001,Asia
+7226002,Central Asia
+7226003,Far East
+7226004,Middle East
+7226005,Oceania
+7226006,South Asia
+7226007,South-East Asia
+7231,Economic geography
+7231001,AAMS countries
+7231002,ACP countries
+7231003,Andean Group countries
+7231004,APEC countries
+7231005,Arab Common Market countries
+7231006,Asean countries
+7231007,Benelux countries
+7231008,CACM countries
+7231009,CAEEU countries
+7231010,Caricom countries
+7231011,CACM countries
+7231012,CEAO countries
+7231013,CMEA countries
+7231014,EFTA countries
+7231015,EU country
+7231016,LAES countries
+7231017,Lafta countries
+7231018,Mercosur countries
+7231019,NAFTA countries
+7231020,OCAS countries
+7231021,OECD countries
+7231022,OPEC countries
+7231023,Third countries in the Mediterranean
+7231024,Visegrad countries
+7231025,WAEMU countries
+7236,Political geography
+7236001,Anzus countries
+7236002,Arab League countries
+7236003,CIS countries
+7236004,Council of Europe countries
+7236005,Former socialist countries
+7236006,GCC countries
+7236007,NATO countries
+7236008,Nordic Council countries
+7236009,OAS countries
+7236010,United Arab Emirates countries
+7236011,Warsaw Pact countries
+7236012,WEU countries
+7241,Overseas countries and territories
+7241001,French Overseas Departments
+7241002,French Overseas Territories
+7241003,Netherlands OCT
+7241004,United Kingdom OCT
+76,INTERNATIONAL ORGANISATIONS
+7606,United Nations
+7606001,UN specialist institution
+7606002,United Nations system
+7606003,UNO
+7611,European organisations
+7611001,European organisation
+7616,Extra-European organisations
+7616001,African organisation
+7616002,Afro-Asian organisations
+7616003,American organisation
+7616004,Arab organisation
+7616005,Asian organisation
+7616006,Latin American organisation
+7621,Intergovernmental organisations
+7621001,Intergovernmental organisation
+7626,Non-governmental organisations
+7626001,Non-governmental organisation
+,
+# IdDomain/EN,
+1006007,EU office or agency
+1016005,European Communities
+1021006,EU financing
+3206003,Education
+5206006,Climate change policy
+5606002,Agricultural policy
+6406002,Production
+6411006,Biotechnology
+10,EUROPEAN UNION
+1006,EU institutions and European civil service
+1006002,EU body
+1011001,EU act
+1011002,EU law
+1011003,EU legal system
+1011004,European treaties
+1021,EU finance
+1021002,EU expenditure
+1021003,EU budget
+1021004,Drawing up of the EU budget
+1021005,Financing of the EU budget
+2011002,EU customs procedure
+7241001,French overseas department and region
+7241002,French overseas collectivity
+7621,World organisations
+7621001,World organisation

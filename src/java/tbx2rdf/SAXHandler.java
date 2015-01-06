@@ -23,13 +23,15 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.XMLReaderFactory;
+import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.MartifHeader;
 import tbx2rdf.types.MartifHeader.TitleStmt;
 import tbx2rdf.types.Term;
 import tbx2rdf.vocab.ONTOLEX;
 
 /**
- * This class makes the XML parsing of the TBX using the SAX model
+ * This class makes the XML parsing of the TBX using the SAX lexiconsModel.
+ * It only captures the lexicons and the Martif Header
  */
 public class SAXHandler extends DefaultHandler {
 
@@ -38,9 +40,15 @@ public class SAXHandler extends DefaultHandler {
     ///
     private MartifHeader header;
     ///Internal use
-    private String content = null;
     XmlDocumentBuilder consumer;
     XMLReader producer;
+
+    //Languages present in the file
+    Set<String> languages = new HashSet();
+    
+    //
+    private String martiftype="";
+    
 
     /**
      * Initializes the handler
@@ -58,17 +66,39 @@ public class SAXHandler extends DefaultHandler {
         return header;
     }
     
-    public Set<String> getLexicons()
+    public String getMartifType()
     {
-        final HashMap<String, Resource> lexicons = new HashMap<>();
-        Model model = ModelFactory.createDefaultModel();
+        return martiftype;
+    }
+    
+    
+    Model lexiconsModel = ModelFactory.createDefaultModel();
+    /**
+     * Gets the Jena model with the Lexicons.
+     */
+    public Model getLexiconsModel()
+    {
+        return lexiconsModel;
+    }
+    
+    /**
+     * Obtains a map of lexicons present in the 
+     */
+    public HashMap<String, Resource> getLexicons()
+    {
+        lexiconsModel = ModelFactory.createDefaultModel();
+        final HashMap<String, Resource> lexicons = new HashMap<>();    
         for(String language : languages)
         {
-            final Resource lexicon = model.createResource(model.expandPrefix(":Lexicon_" + language));
-            lexicon.addProperty(ONTOLEX.language, language).addProperty(RDF.type, ONTOLEX.Lexicon);
+            if (lexicons.containsKey(language))
+                continue;
+            final Resource lexicon = lexiconsModel.createResource(Main.DATA_NAMESPACE + language);
+            Resource rlan=LexvoManager.mgr.getLexvoFromISO2(language);
+            lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+            lexicon.addProperty(RDF.type, ONTOLEX.Lexicon);
             lexicons.put(language, lexicon);        
         }
-        return languages;
+        return lexicons;
     }
 
     /**
@@ -80,18 +110,24 @@ public class SAXHandler extends DefaultHandler {
 
     
     
-    
-    Set<String> languages = new HashSet();
+    //Set of all the languages present in the file
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attrs)
             throws SAXException {
         
+        if (qName.equalsIgnoreCase("martif")) {
+            int index=attrs.getIndex("type");
+            if (index!=-1)
+                martiftype=attrs.getValue(index);
+        }
+
         if (qName.equalsIgnoreCase("langSet")) {
             int index=attrs.getIndex("xml:lang");
             if (index!=-1)
-            {
                 languages.add(attrs.getValue(index));
-            }
+        }
+        if (qName.equalsIgnoreCase("martifHeader")) {
+            header = new MartifHeader();
         }
         
         
@@ -131,13 +167,6 @@ public class SAXHandler extends DefaultHandler {
 
         }
         
-        if (qName.equalsIgnoreCase("martifHeader")) {
-            header = new MartifHeader();
-
-
-
-
-        }
 */
 
     }

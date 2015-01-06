@@ -25,8 +25,7 @@ public class VirtuosoUploader {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        // deleteAll();
+     //    deleteAll();
         uploadLargeFile("iate_3.nt");
         
     }
@@ -46,17 +45,19 @@ public class VirtuosoUploader {
      * Triples are uploaded in groups of 20. A large text is rejected.
      * 
      * SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
-     * 
+     * http://lider2.dia.fi.upm.es:8891/sparql?default-graph-uri=&query=SELECT+*+WHERE+%7B+GRAPH+%3Chttp%3A%2F%2Ftbx2rdf.lider-project.eu%2F%3E+%7B+%3Fs+%3Fp+%3Fo+%7D+%7D+limit+100&format=text%2Fhtml&timeout=0&debug=on
      */
     public static void uploadLargeFile(String filename) {
         File file = new File(filename);
+        String line="";
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
+
             String pack = "";
             int conta = 0;
             int contatotal = 0;
             while ((line = br.readLine()) != null) {
+                line=line.replace("<<", "<");
                 pack += line + "\n";
                 conta++;
                 contatotal++;
@@ -106,7 +107,7 @@ public class VirtuosoUploader {
      * Adds one or more triples
      * @author MiguelÁngel
      */
-    public static void addElements(String graph, String triples) {
+    private static void addElements(String graph, String triples) {
         if (user.length() > 0) {
             VirtGraph set = new VirtGraph(url, user, passwd);
             String str = "INSERT INTO GRAPH <" + graph + "> { " + triples + " }";

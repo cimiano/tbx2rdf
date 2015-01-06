@@ -2,6 +2,7 @@ package tbx2rdf.types;
 
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.TBX;
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;

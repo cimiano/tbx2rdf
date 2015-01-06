@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<martif type="TBX-Default" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>This is a TBX file downloaded from the IATE website. Address any enquiries to iate@cdt.europa.eu.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+      <termEntry id="IATE-14">
+        <descripGrp>
+          <descrip type="subjectField">1011</descrip>
+        </descripGrp>
+        <langSet xml:lang="ro">
+          <tig>
+            <term>Agenție de aprovizionare</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="IATE-84">
+        <descripGrp>
+          <descrip type="subjectField">1011</descrip>
+        </descripGrp>
+        <langSet xml:lang="bg">
+          <tig>
+            <term>компетенции на държави членове</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="cs">
+          <tig>
+            <term>příslušnost členských států</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="da">
+          <tig>
+            <term>medlemsstatskompetence</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="de">
+          <tig>
+            <term>Zuständigkeit der Mitgliedstaaten</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="el">
+          <tig>
+            <term>αρμοδιότητα των κρατών μελών</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="en">
+          <tig>
+            <term>competence of the Member States</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="es">
+          <tig>
+            <term>competencias de los Estados miembros</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="et">
+          <tig>
+            <term>liikmesriikide pädevus</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="fi">
+          <tig>
+            <term>jäsenvaltioiden toimivalta</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="fr">
+          <tig>
+            <term>compétence des États membres</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="ga">
+          <tig>
+            <term>inniúlacht na mBallstát</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="hu">
+          <tig>
+            <term>tagállami hatáskör</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="it">
+          <tig>
+            <term>competenza degli Stati membri</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="lt">
+          <tig>
+            <term>valstybių narių kompetencija</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">2</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="lv">
+          <tig>
+            <term>dalībvalstu kompetence</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="nl">
+          <tig>
+            <term>bevoegdheid van de lidstaten</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="pl">
+          <tig>
+            <term>kompetencje państw członkowskich</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="pt">
+          <tig>
+            <term>competência dos Estados-Membros</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="ro">
+          <tig>
+            <term>competența statelor membre ale Uniunii Europene</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="sk">
+          <tig>
+            <term>právomoci členských štátov</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="sl">
+          <tig>
+            <term>pristojnost držav članic</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="sv">
+          <tig>
+            <term>medlemsstaternas behörighet</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+          </tig>
+        </langSet>
+      </termEntry>
+	</body>
+  </text>
+</martif>	  
+	  

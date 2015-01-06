@@ -61,7 +61,7 @@ descrip	type	relatedConceptNarrower	<http://tbx2rdf.lider-project.eu/tbx#related
 descrip	type	reliabilityCode	<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode>	DP
 descrip	type	sampleSentence	<http://tbx2rdf.lider-project.eu/tbx#sampleSentence>	DP
 descrip	type	sequentallyRelatedConcept	<http://tbx2rdf.lider-project.eu/tbx#sequentallyRelatedConcept>	OP
-descrip	type	subjectField	<http://tbx2rdf.lider-project.eu/tbx#subjectField>	DP <http://www.w3.org/2001/XMLSchema#string>
+descrip	type	subjectField	<subjectField>	EX
 descrip	type	subordinateConceptGeneric	<http://tbx2rdf.lider-project.eu/tbx#subordinateConceptGeneric>	OP
 descrip	type	subordinateConceptPartitive	<http://tbx2rdf.lider-project.eu/tbx#subordinateConceptPartitive>	OP
 descrip	type	superordinateConceptGeneric	<http://tbx2rdf.lider-project.eu/tbx#superordinateConceptGeneric>	OP
@@ -171,15 +171,15 @@ translingualBorrowing <http://tbx2rdf.lider-project.eu/tbx#translingualBorrowing
 loanTranslation <http://tbx2rdf.lider-project.eu/tbx#loanTranslation>
 neologism <http://tbx2rdf.lider-project.eu/tbx#neologism>
 termNote	type	termStructure	<http://tbx2rdf.lider-project.eu/tbx#termStructure>	DP
-termNote	type	termType	<http://tbx2rdf.lider-project.eu/tbx#termType>	OP	{abbreviation,acronym,clippedTerm,commonName, entryTerm,equation,formula,fullForm,initialism,internationalism,internationalScientificTerm,logicalExpression,partNumber,phraseologicalUnit,transcribedForm,transliteratedForm,shortForm,shortcut,sku,standardText,string,symbol,synonym,synonymousPhrase,variant}
+termNote	type	termType	<http://www.lexinfo.net/ontology/2.0/lexinfo#termType>	OP	{abbreviation,acronym,clippedTerm,commonName, entryTerm,equation,formula,fullForm,initialism,internationalism,internationalScientificTerm,logicalExpression,partNumber,phraseologicalUnit,transcribedForm,transliteratedForm,shortForm,shortcut,sku,standardText,string,symbol,synonym,synonymousPhrase,variant}
 abbreviation <http://tbx2rdf.lider-project.eu/tbx#abbreviation>
 acronym <http://tbx2rdf.lider-project.eu/tbx#acronym>
 clippedTerm <http://tbx2rdf.lider-project.eu/tbx#clippedTerm>
 commonName <http://tbx2rdf.lider-project.eu/tbx#commonName>
-entryTerm <http://tbx2rdf.lider-project.eu/tbx#entryTerm>
-equation <http://tbx2rdf.lider-project.eu/tbx#equation>
+entryTerm <http://www.lexinfo.net/ontology/2.0/lexinfo#entryTerm>
+equation <http://www.lexinfo.net/ontology/2.0/lexinfo#equation>
 formula <http://tbx2rdf.lider-project.eu/tbx#formula>
-fullForm <http://tbx2rdf.lider-project.eu/tbx#fullForm>
+fullForm <http://www.lexinfo.net/ontology/2.0/lexinfo#fullForm>
 initialism <http://tbx2rdf.lider-project.eu/tbx#initialism>
 internationalism <http://tbx2rdf.lider-project.eu/tbx#internationalism>
 internationalScientificTerm <http://tbx2rdf.lider-project.eu/tbx#internationalScientificTerm>
@@ -191,10 +191,10 @@ transliteratedForm <http://tbx2rdf.lider-project.eu/tbx#transliteratedForm>
 shortForm <http://tbx2rdf.lider-project.eu/tbx#shortForm>
 shortcut <http://tbx2rdf.lider-project.eu/tbx#shortcut>
 sku <http://tbx2rdf.lider-project.eu/tbx#sku>
-standardText <http://tbx2rdf.lider-project.eu/tbx#standardText>
-string <http://tbx2rdf.lider-project.eu/tbx#string>
-symbol <http://tbx2rdf.lider-project.eu/tbx#symbol>
-synonym <http://tbx2rdf.lider-project.eu/tbx#synonym>
+standardText <http://www.lexinfo.net/ontology/2.0/lexinfo#standardText>
+string <http://www.lexinfo.net/ontology/2.0/lexinfo#string>
+symbol <http://www.lexinfo.net/ontology/2.0/lexinfo#symbol>
+synonym <http://www.lexinfo.net/ontology/2.0/lexinfo#synonym>
 synonymousPhrase <http://tbx2rdf.lider-project.eu/tbx#synonymousPhrase>
 variant <http://tbx2rdf.lider-project.eu/tbx#variant>
 termNote	type	timeRestriction	<http://tbx2rdf.lider-project.eu/tbx#timeRestriction>	DP
