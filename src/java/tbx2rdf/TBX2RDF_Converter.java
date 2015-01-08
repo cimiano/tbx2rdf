@@ -275,7 +275,7 @@ public class TBX2RDF_Converter {
                             System.err.println("Error " + e.getMessage());
                         }
                         if (count % 1000 == 0) {
-                            System.err.println("Total: " + count + " " + errors);
+                            System.err.println("Total: " + count + " Errors: " + errors);
                         }
                     }
                     xml = "";
