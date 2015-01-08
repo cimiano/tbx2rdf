@@ -133,6 +133,7 @@ public class TBX2RDF_Converter {
 
     /**
      * Converts a XML TBX file (handling large files...)
+     * It does not hold in memory the whole dataset, but parses it as it comes.
      * 
      * @param file Path to the input file
      * @param mappings Mappings
