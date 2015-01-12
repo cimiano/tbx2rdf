@@ -1,23 +1,15 @@
 package tbx2rdf.types;
 
 import tbx2rdf.vocab.ONTOLEX;
-import tbx2rdf.vocab.TBX;
 import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import tbx2rdf.Main;
 import tbx2rdf.Mappings;
 import tbx2rdf.datasets.lexvo.LexvoManager;
-import tbx2rdf.types.abs.impIDLang;
-import tbx2rdf.vocab.SKOS;
 
 /**
  * This class represents a Lexical Entry
@@ -49,12 +41,21 @@ public class LexicalEntry extends Describable {
 
     }
 
+	@Override 
+	public String getID() {
+		if(id != null) {
+			return id;
+		} else {
+			try {
+				return String.format("%s-%s", URLEncoder.encode(Lemma, "UTF-8"), lang);
+			} catch(UnsupportedEncodingException x) {
+				throw new RuntimeException(x);
+			}
+		}
+	}
 
     @Override
     public void toRDF(Model model, Resource parent) {
-        String newuri=/*Main.DATA_NAMESPACE+*/"LexicalEntry-"+URLEncoder.encode(Lemma);
-        this.setID(newuri);
-
         final Resource term = getRes(model);
         super.toRDF(model, term);
     
