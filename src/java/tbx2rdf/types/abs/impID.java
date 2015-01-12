@@ -71,7 +71,7 @@ public abstract class impID {
      * @return
      */
     public Resource getSubRes(Model model, String name) {
-        return model.createResource(model.expandPrefix(":" + getID() + "-" + name));
+        return model.createResource(model.expandPrefix(":" + getID() + "#" + name));
 
     }
 
