@@ -40,6 +40,7 @@ import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 //TBX2RDF
+import java.io.PrintStream;
 import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
@@ -133,12 +134,13 @@ public class TBX2RDF_Converter {
 
     /**
      * Converts a XML TBX file (handling large files...)
+     * It does not hold in memory the whole dataset, but parses it as it comes.
      * 
      * @param file Path to the input file
      * @param mappings Mappings
      * @return The TBX terminology
      */
-    public TBX_Terminology convertAndSerializeLargeFile(String file, Mappings mappings) {
+    public TBX_Terminology convertAndSerializeLargeFile(String file, PrintStream fos, Mappings mappings) {
         String resourceURI = new String(Main.DATA_NAMESPACE);
        // TBX2RDF_Converter converter = new TBX2RDF_Converter();
         FileInputStream inputStream = null;
@@ -208,11 +210,11 @@ public class TBX2RDF_Converter {
         rdataset.addProperty(DC.source, IATE.iate);
         rdataset.addProperty(DC.attribution, "Download IATE, European Union, 2014");
         martifheader.toRDF(mdataset, rdataset);
-        RDFDataMgr.write(System.out, mdataset, Lang.NTRIPLES);
+        RDFDataMgr.write(fos, mdataset, Lang.NTRIPLES);
         
         
         Model msubjectFields = SubjectFields.generateSubjectFields();
-        RDFDataMgr.write(System.out, msubjectFields, Lang.NTRIPLES);
+        RDFDataMgr.write(fos, msubjectFields, Lang.NTRIPLES);
         
         
 
@@ -267,15 +269,13 @@ public class TBX2RDF_Converter {
                                 lexicon.addProperty(ONTOLEX.entry, le.getRes(model));
                                 le.toRDF(model, rterm);
                             }
-                            //                          System.out.println(xml);
-                            RDFDataMgr.write(System.out, model, Lang.NTRIPLES);
+                            RDFDataMgr.write(fos, model, Lang.NTRIPLES);
                         } catch (Exception e) {
                             errors++;
-//                            e.printStackTrace();
-//                            System.err.println("Error");
+                            System.err.println("Error " + e.getMessage());
                         }
                         if (count % 1000 == 0) {
-                            System.err.println("Total: " + count + " " + errors);
+                            System.err.println("Total: " + count + " Errors: " + errors);
                         }
                     }
                     xml = "";
@@ -283,7 +283,7 @@ public class TBX2RDF_Converter {
             } //end of while
 
             //Now we serialize the lexicons
-            RDFDataMgr.write(System.out, handler.getLexiconsModel(), Lang.NTRIPLES);
+            RDFDataMgr.write(fos, handler.getLexiconsModel(), Lang.NTRIPLES);
 
 
 

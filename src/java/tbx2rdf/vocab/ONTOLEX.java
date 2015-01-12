@@ -6,8 +6,8 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
- * Class with some common static terms 
- * @author vroddon
+ * Common Jena Resources for Dublincore 
+ * @author Victor - Ontology Engineering Group - UPM
  */
 public class ONTOLEX {
 	private static Model defaultModel = ModelFactory.createDefaultModel(); 
@@ -21,7 +21,6 @@ public class ONTOLEX {
 	public static Property otherForm = defaultModel.createProperty("http://www.w3.org/ns/lemon/ontolex#otherForm");
 	public static Property identifies = defaultModel.createProperty("http://www.w3.org/ns/lemon/decomp#identifies");
 	public static Property reference = defaultModel.createProperty("http://www.w3.org/ns/lemon/ontolex#reference");
-	
 	public static Resource Lexicon = defaultModel.createProperty("http://www.w3.org/ns/lemon/ontolex#Lexicon");
 	public static Resource LexicalEntry = defaultModel.createProperty("http://www.w3.org/ns/lemon/ontolex#LexicalEntry");
 }

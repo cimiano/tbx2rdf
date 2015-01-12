@@ -1,4 +1,4 @@
-package tbx2rdf;
+package tbx2rdf.utils;
 
 import com.hp.hpl.jena.query.*;
 import com.hp.hpl.jena.rdf.model.RDFNode;
@@ -11,8 +11,21 @@ import virtuoso.jena.driver.*;
 /**
  * Independent routines to upload triples to the Virtuoso RDF store. 
  * They are not meant to be invoked from other parts of the TBX2RDF code, but to be invoked directly.
+
+ * ALTERNATIVE INSERTION QUERY FROM THE COMMAND LINE: 
  * 
- * @author Victor
+ * 
+curl -i -d "INSERT IN GRAPH <http://tbx2rdf.lider-project.eu/> 
+{ 
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://tbx2rdf.lider-project.eu/tbx#termType> <http://tbx2rdf.lider-project.eu/tbx#fullForm> .
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#canonicalForm> <http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf-CanonicalForm> .
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#sense> <http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf-Sense> .
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#language> "ro" .
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/ontolex#LexicalEntry> .
+<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://tbx2rdf.lider-project.eu/tbx#reliabilityCode> "3"^^<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode> .
+  } " -u "vrodriguez:rodrVIC2!" -H "Content-Type: application/sparql-query" http://lider2.dia.fi.upm.es:8891/conductor/  http://localhost:8890/DAV/home/demo/test/myrq
+ *  
+ * @author Victor, Ontology Engineering Group
  */
 public class VirtuosoUploader {
 
@@ -42,7 +55,7 @@ public class VirtuosoUploader {
 
     /**
      * After this query, a large file will have been updated. 
-     * Triples are uploaded in groups of 20. A large text is rejected.
+     * Triples are uploaded in groups of 20, as a large text is rejected by Virtuoso
      * 
      * SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
      * http://lider2.dia.fi.upm.es:8891/sparql?default-graph-uri=&query=SELECT+*+WHERE+%7B+GRAPH+%3Chttp%3A%2F%2Ftbx2rdf.lider-project.eu%2F%3E+%7B+%3Fs+%3Fp+%3Fo+%7D+%7D+limit+100&format=text%2Fhtml&timeout=0&debug=on
@@ -82,30 +95,10 @@ public class VirtuosoUploader {
         }
     }
 
-    /**
-     * Makes a sample query
-     * @author Víctor
-     */
-    public static void testQuery() {
-        VirtGraph set = new VirtGraph(url, user, passwd);
-        Query sparql = QueryFactory.create("SELECT ?s ?p ?o WHERE { ?s ?p ?o}");
-//        Query sparql = QueryFactory.create("SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100");
-//        SELECT * WHERE { GRAPH <http://tbx2rdf.lider-project.eu/> { ?s ?p ?o } } limit 100
-        //       Query sparql = QueryFactory.create("SELECT * WHERE { GRAPH ?graph { ?s ?p ?o } } limit 100");
-        VirtuosoQueryExecution vqe = VirtuosoQueryExecutionFactory.create(sparql, set);
-        ResultSet results = vqe.execSelect();
-        while (results.hasNext()) {
-            QuerySolution result = results.nextSolution();
-            RDFNode s = result.get("s");
-            RDFNode p = result.get("p");
-            RDFNode o = result.get("o");
-            System.out.println(" { " + s + " " + p + " " + o + " . }");
-        }
-    }
 
     /**
-     * Adds one or more triples
-     * @author MiguelÁngel
+     * Adds one or more triples to the Virtuoso 
+     * @author Miguel Ángel Garcia OEG-UPM
      */
     private static void addElements(String graph, String triples) {
         if (user.length() > 0) {
@@ -121,16 +114,5 @@ public class VirtuosoUploader {
     }
 }
 /*
- * ALTERNATIVE INSERTION QUERY FROM THE COMMAND LINE: 
- * 
- * curl -i -d "INSERT IN GRAPH <http://tbx2rdf.lider-project.eu/> 
-{ 
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://tbx2rdf.lider-project.eu/tbx#termType> <http://tbx2rdf.lider-project.eu/tbx#fullForm> .
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#canonicalForm> <http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf-CanonicalForm> .
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#sense> <http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf-Sense> .
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/ns/ontolex#language> "ro" .
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/ns/ontolex#LexicalEntry> .
-<http://ejemplo.com#LexicalEntry-6747e9ce-d56e-4251-9970-2c0f92f3d1bf> <http://tbx2rdf.lider-project.eu/tbx#reliabilityCode> "3"^^<http://tbx2rdf.lider-project.eu/tbx#reliabilityCode> .
-  } " -u "vrodriguez:rodrVIC2!" -H "Content-Type: application/sparql-query" http://lider2.dia.fi.upm.es:8891/conductor/  http://localhost:8890/DAV/home/demo/test/myrq
- * 
+
  */

@@ -6,12 +6,11 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+//JENA
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
-import tbx2rdf.types.abs.impID;
 
 /**
  * This class provides with methods to obtain the Lexvo resource corresponding to a language iso code.
@@ -48,6 +47,8 @@ public class LexvoManager {
     
     /**
      * Obtains a LEXVO resource from a ISO2 language code ("es", "de", etc.)
+     * @param iso2 Language code ("es", "de")
+     * @return A Jena Resource with the LEXVO resource
      */
     public Resource getLexvoFromISO2(String iso2) {
         Model model = ModelFactory.createDefaultModel();

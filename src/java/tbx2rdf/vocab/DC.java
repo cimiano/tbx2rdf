@@ -6,8 +6,8 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 
 /**
- * Dublincore 
- * @author Victor
+ * Common Jena Resources for Dublincore 
+ * @author Victor - Ontology Engineering Group - UPM
  */
 public class DC {
      private static Model defaultModel = ModelFactory.createDefaultModel(); 

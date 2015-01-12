@@ -3,19 +3,22 @@ package tbx2rdf;
 import tbx2rdf.types.TBX_Terminology;
 import com.hp.hpl.jena.rdf.model.Model;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.w3c.dom.Document;
@@ -26,6 +29,7 @@ import org.xml.sax.SAXException;
  * Entry point of the functionality, it parses the parameters and invokes the conversion methods 
  * making them available from the command line.
  * Example of params for the command line: samples/iate.xml --output samples/iate.nt --big=true
+ *  --output samples/iatefullmini.nt
  * @author John McCrae - Universität Bielefeld
  * @author Victor Rodriguez - Universidad Politécnica de Madrid 
  */
@@ -50,6 +54,7 @@ public class Main {
             return;
         }
         boolean big = false;
+        boolean bOutputInConsole = true;
         String input_file = args[0];                                           //First argument, input file
         String output_file = input_file.replaceAll("\\.xml", "\\.rdf");
         String mapping_file = "mappings.default";
@@ -64,6 +69,7 @@ public class Main {
                 value = matcher.group(2);
                 if (key.equals("output")) {
                     output_file = value;
+                    bOutputInConsole=false;
                     logger.info("OUTPUT_FILE set to" + output_file + "\n");
                 }
                 if (key.equals("mappings")) {
@@ -92,14 +98,21 @@ public class Main {
         logger.info("Opening file " + input_file + "\n");
         BufferedReader reader = new BufferedReader(new FileReader(input_file));
 
-        // Document doc = Main.readXMLDocument(input_file);
-        //  Document doc = db.parse(textstream);        //This is an alternative form, which @victor disregards as we won't always have a file (service etc.).
-
-        /// UNCOMMENT THE FOLLOWING LINE TO USE SAX PARSING
-        //      TBX_Terminology terminology2 = converter.convertLargeFile(input_file, mappings);
         if (big) {
             logger.info("Doing the conversion of a big file\n");
-            TBX_Terminology terminology3 = converter.convertAndSerializeLargeFile(input_file, mappings);
+            PrintStream fos;
+            if (output_file.isEmpty() || bOutputInConsole)
+                fos = System.out;
+            else
+            {
+                fos = new PrintStream(output_file, "UTF-8");
+            }
+            if (fos==null)
+            {
+                logger.error("output file could not be open");
+                return;
+            }
+            TBX_Terminology terminology3 = converter.convertAndSerializeLargeFile(input_file, fos, mappings);
             //Note: The output is serialized as the conversion is being done
             
         } else { //standard conversion
