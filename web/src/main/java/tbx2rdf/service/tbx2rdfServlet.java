@@ -163,7 +163,7 @@ public class tbx2rdfServlet extends HttpServlet {
 	private static String getHeader() {
 		return "<html><head>"
 		+ "<link rel=stylesheet href=\"docs.css\"><link rel=\"stylesheet\" href=\"codemirror.css\"><script src=\"codemirror.js\"></script><script src=\"turtle.js\"></script>"
-		+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"http://www.licensius.com/css/vroddon.css\" />"
+		+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"http://www.licensius.com/css/vroddon.css\" /><title>TBX2RDF Converter</title>"
 		+ " </head><body>";
 	}
 
