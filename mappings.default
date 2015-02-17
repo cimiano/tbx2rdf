@@ -91,7 +91,7 @@ termNote	directionality	bidirectional	<http://tbx2rdf.lider-project.eu/tbx#bidir
 termNote	directionality	incommensurate	<http://tbx2rdf.lider-project.eu/tbx#incommensurateTranslation>	OP
 termNote	directionality	monodirectional	<http://tbx2rdf.lider-project.eu/tbx#monodirectionalTranslation>	OP
 termNote	directionality	undetermined	<http://tbx2rdf.lider-project.eu/tbx#undeterminedTranslation>	OP
-termNote	type	abbreviatedFormFor	<http://tbx2rdf.lider-project.eu/tbx#abbreviatedFormFor>	OP
+termNote	type	abbreviatedFormFor	<http://tbx2rdf.lider-project.eu/tbx#abbreviatedFormFor>	DP
 termNote	type	administrativeStatus	<http://tbx2rdf.lider-project.eu/tbx#administrativeStatus>	OP	{admittedTerm-admn-sts,deprecatedTerm-admn-sts,legalTerm-admn-sts,preferredTerm-admn-sts,regulatedTerm-admn-sts,standardizedTerm-admn-sts,supersededTerm-admn-sts}
 admittedTerm-admn-sts  <http://tbx2rdf.lider-project.eu/tbx#admittedTerm-admn-sts>
 deprecatedTerm-admn-sts <http://tbx2rdf.lider-project.eu/tbx#deprecatedTerm-admn-sts>

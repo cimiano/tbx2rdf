@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
+import java.io.StringReader;
 import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,6 +23,8 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 
 /**
@@ -131,7 +134,7 @@ public class Main {
      * @param input_file Name of an input file, a XML file.
      * @return XML Document
      */
-    public static Document readXMLDocument(String input_file) {
+    /*public static Document readXMLDocument(String input_file) {
         try {
 
             TBX2RDF_Converter converter = new TBX2RDF_Converter();
@@ -144,11 +147,23 @@ public class Main {
             reader.close();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                        System.err.println(String.format("publicId=%s, systemId=%s", publicId, systemId));
+                    if (systemId.endsWith(".dtd")) {
+                        return new InputSource(new StringReader(""));
+                    } else {
+                        return null;
+                    }
+                }
+            });
             Document doc = db.parse(new File(input_file));
             return doc;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }
