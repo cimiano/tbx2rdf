@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE martif SYSTEM "TBXcoreStructV02.dtd">
+<!-- VERSION HISTORY
+	version 1.1 (2008.12.23) - corrected XCS name to end in .xcs
+-->
+<!-- The following lines are required when validating this file against the TBX RNG schema.
+    If you want to use this schema for validation, instead of the DTD, you must uncomment the following
+    two lines, and comment-out the DOCTYPE statement on line 2.-->
+<!--<?oxygen SCHSchema="TBX_RNGV02.rng"?>-->
+<!--<?oxygen RNGSchema="TBX_RNGV02.rng" type="xml"?>-->
+<martif type="TBX" xml:lang="en">
+    <martifHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Oracle Terms</title>
+            </titleStmt>
+            <sourceDesc>
+                <p>from an Oracle termbase</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <p type="XCSURI">TBXXCSV02.xcs</p>
+        </encodingDesc>
+    </martifHeader>
+    <text>
+        <body>
+            <termEntry id="c1">
+                <xref type="corpusTrace" target="xx"
+                    >hr/per/SeedData/perzzdscflx00290.ldt:2,VALUE_SET.PAY_CA_PRE_ORG_ID_RL2.DESCRIPTION</xref>
+                <descrip type="subjectField">HR</descrip>
+                <admin type="productSubset">PER</admin>
+                <langSet xml:lang="en">
+                    <descripGrp>
+                        <descrip type="definition">GREs and PREs represent an employer the
+                            governments recognise as being responsible for paying employees and for
+                            filing a variety of reports. There must be a GRE for each Business
+                            Number that the Canada Customs and Revenue Agency (CCRA) assigns to an
+                            employer.</descrip>
+                    </descripGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>Provincial Reporting Establishment </term>
+                        </termGrp>
+                    </ntig>
+                    <ntig>
+                        <termGrp>
+                            <term>PRE</term>
+                            <termNote type="abbreviatedFormFor">Provincial Reporting Establishment
+                            </termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="pt">
+                    <note>Termo específico aos EUA.</note>
+                    <ntig>
+                        <termGrp>
+                            <term>Entidade de Supervisão de Província </term>
+                            <termNote type="administrativeStatus"
+                            >standardizedTerm-admn-sts</termNote>
+                        </termGrp>
+                    </ntig>
+                    <ntig>
+                        <termGrp>
+                            <term>PRE</term>
+                            <termNote type="abbreviatedFormFor">Entidade de Supervisão de Província
+                            </termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+            <termEntry id="c2">
+                <xref type="corpusTrace" target="xx"
+                    >fi/pon/SeedData/ponmsg.ldt:7655,FND_NEW_MESSAGES.PON_PON_ITEM_PRICE_TARGET_VALUE.MESSAGE_TEXT</xref>
+                <descrip type="subjectField">FI</descrip>
+                <admin type="productSubset">PON</admin>
+                <langSet xml:lang="en">
+                    <descripGrp>
+                        <descrip type="definition">Click the link to browse and select active that
+                            have been created. You can still enter the target value and select a
+                            pricing basis for each price element in the list and then apply the
+                            list. </descrip>
+                    </descripGrp>
+                    <ntig>
+                        <termGrp>
+                            <term>Target Value</term>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+                <langSet xml:lang="pt">
+                    <note>Different from 'Valor Alvo' that exists in the glossary for POM</note>
+                    <ntig>
+                        <termGrp>
+                            <term>Valor a Atingir</term>
+                            <termNote type="administrativeStatus"
+                            >standardizedTerm-admn-sts</termNote>
+                        </termGrp>
+                    </ntig>
+                </langSet>
+            </termEntry>
+        </body>
+    </text>
+</martif>

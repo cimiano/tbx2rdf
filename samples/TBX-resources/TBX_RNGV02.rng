@@ -1,0 +1,2627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rng:grammar xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+   datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes" ns="">
+   <!--
+Schema generated from ODD source 2008-11-18T15:42:05.889-05:00. 
+-->
+   <!-- This is the integrated Relax NG schema file for the TBX default Terminology Markup Language.-->
+   <!-- [2011-06-30: This line no longer applies] This file is also available from the following Web site:http://www.lisa.org/fileadmin/standards/tbx/TBX_RNGV02.rng-->
+   <!-- [2011-06-30: This line replaces the previous line] This file is also available from the following Web site: http://www.ttt.org/oscarStandards/tbx/TBX_RNGV02.rng-->
+   <!-- [2011-06-30: This line no longer applies] This file is controlled by LISA. If you make any changes to this file, you must change the file name.-->
+   <!-- [2011-06-30: This line replaces the previous line] If you make any changes to this file, you must change the file name.-->
+   <!-- [2011-06-30: This line no longer applies] Address enquiries to kara@ca.ibm.com -->
+   <!-- [2011-06-30: This line replaces the previous line] Address enquiries to kara@languageautomation.com -->
+   <!-- Note: in order to enable validation of language codes used in the xml:lang attribute of the <langSet> elements, you must declare the languages that
+      are used in your TBX document instance as shown on line 1351. -->
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="entity.basicText">
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:text/>
+            <rng:ref name="hi"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="entity.noteText">
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:text/>
+            <rng:ref name="hi"/>
+            <rng:ref name="foreign"/>
+            <rng:ref name="bpt"/>
+            <rng:ref name="ept"/>
+            <rng:ref name="ph"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="entity.auxInfo">
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="descrip"/>
+            <rng:ref name="descripGrp"/>
+            <rng:ref name="admin"/>
+            <rng:ref name="adminGrp"/>
+            <rng:ref name="transacGrp"/>
+            <rng:ref name="note"/>
+            <rng:ref name="ref"/>
+            <rng:ref name="xref"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="entity.noteLinkInfo">
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="admin"/>
+            <rng:ref name="adminGrp"/>
+            <rng:ref name="transacGrp"/>
+            <rng:ref name="note"/>
+            <rng:ref name="ref"/>
+            <rng:ref name="xref"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="idlang.attributes">
+      <ref name="id.attributes"/>
+      <ref name="lang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="idtype.attributes">
+      <ref name="id.attributes"/>
+      <ref name="idtype.attribute.type"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="idtype.attribute.type">
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+               the type of the meta data-category.</a:documentation>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="id.attributes">
+      <ref name="id.attribute.id"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="id.attribute.id">
+      <rng:optional>
+         <rng:attribute name="id">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <data type="ID"/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="target-IDREF.attributes">
+      <ref name="target-IDREF.attribute.target"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="target-IDREF.attribute.target">
+      <rng:optional>
+         <rng:attribute name="target">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <data type="IDREF"/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="lang.attributes">
+      <ref name="lang.attribute.xmllang"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="lang.attribute.xmllang">
+      <rng:optional>
+         <rng:attribute name="xml:lang">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+               the language of the element content. The allowed values are found in IETF RFC 4646 or
+               its successor. This attribute is optional for elements that use this attribute class.
+               For a description, see the information at the martif element.</a:documentation>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="IDLangTgtDtyp.attributes">
+      <ref name="lang.attributes"/>
+      <ref name="id.attributes"/>
+      <ref name="target-IDREF.attributes"/>
+      <ref name="IDLangTgtDtyp.attribute.datatype"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="IDLangTgtDtyp.attribute.datatype">
+      <rng:optional>
+         <rng:attribute name="datatype">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The data
+               type of plainText, or what is known as PCDATA.</a:documentation>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="hi">
+      <element name="hi">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="hi.content"/>
+         <ref name="hi.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="hi.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="hi.localattributes">
+      <ref name="target-IDREF.attributes"/>
+      <ref name="lang.attributes"/>
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <rng:choice>
+               <rng:value>entailedTerm</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (entailedTerm) A term, found in the content of a text element such as , that is
+                  defined in another terminological entry in the same terminological collection.</a:documentation>
+               <rng:value>hotkey</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (hotkey) A key or a combination of keys on a computer keyboard that, when pressed
+                  at one time, performs a task (such as starting an application) as an alternative
+                  to using a mouse or other input device. Hotkeys are supported by many operating
+                  systems and applications (the hotkey is indicated by an ampersand in the term and
+                  by an underscore in the visual display). This type of hi element allows a hotkey
+                  to be identified as such in a text field such as a context sentence. To identify a
+                  hotkey for the head term of an entry, use the lionHotkey value of the type
+                  attribute on a termNote.</a:documentation>
+               <rng:value>italics</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (italics) Indicates that the content enclosed in the hi element must be rendered
+                  in italics. </a:documentation>
+               <rng:value>bold</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (bold) Indicates that the content enclosed in the hi element must be rendered in
+                  boldface. </a:documentation>
+               <rng:value>superscript</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (superscript) Indicates that the content enclosed in the hi element must be
+                  rendered in superscript. </a:documentation>
+               <rng:value>subscript</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (subscript) Indicates that the content enclosed in the hi element must be rendered
+                  in subscript.</a:documentation>
+               <rng:value>math</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (math) Indicates that the content enclosed in the hi element is mathematical in
+                  nature.</a:documentation>
+            </rng:choice>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="foreign">
+      <element name="foreign">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="foreign.content"/>
+         <ref name="foreign.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="foreign.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="foreign.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="bpt">
+      <element name="bpt">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="bpt.content"/>
+         <ref name="bpt.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="bpt.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="bpt.localattributes">
+      <rng:optional>
+         <rng:attribute name="i">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ept">
+      <element name="ept">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="ept.content"/>
+         <ref name="ept.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ept.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ept.localattributes">
+      <rng:optional>
+         <rng:attribute name="i">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ph">
+      <element name="ph">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="ph.content"/>
+         <ref name="ph.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ph.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ph.localattributes">
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <text/>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="admin">
+      <element name="admin">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="admin.content"/>
+         <ref name="admin.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="admin.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_applicationSubset">
+         <sch:rule context="admin[@type='applicationSubset']">
+            <sch:assert test=".=not(*)">The application subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_businessUnitSubset">
+         <sch:rule context="admin[@type='businessUnitSubset']">
+            <sch:assert test=".=not(*)">The business unit subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_conceptOrigin">
+         <sch:rule context="admin[@type='conceptOrigin']">
+            <sch:assert test=".=not(*)">The concept origin must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_customerSubset">
+         <sch:rule context="admin[@type='customerSubset']">
+            <sch:assert test=".=not(*)">The customer subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_databaseType">
+         <sch:rule context="admin[@type='databaseType']">
+            <sch:assert test=".=not(*)">The type of data base must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_domainExpert">
+         <sch:rule context="admin[@type='domainExpert']">
+            <sch:assert test=".=not(*)">The domain expert must be expressed in plain
+            text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_elementWorkingStatus">
+         <sch:rule context="admin[@type='elementWorkingStatus']">
+            <sch:assert
+               test=".='starterElement' or .='workingElement' or .='consolidatedElement' or .='archiveElement' or .='importedElement' or .='exportedElement'"
+               > The element working status must be starterElement, workingElement,
+               consolidatedElement, archiveElement, importedElement, or
+            exportedElement.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_entrySource">
+         <sch:rule context="admin[@type='entrySource']">
+            <sch:assert test=".=not(*)">The source of the entry must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_environmentSubset">
+         <sch:rule context="admin[@type='environmentSubset']">
+            <sch:assert test=".=not(*)">The environment subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_indexHeading">
+         <sch:rule context="admin[@type='indexHeading']">
+            <sch:assert test=".=not(*)">The index heading must be expressed in plain
+            text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_keyword">
+         <sch:rule context="admin[@type='keyword']">
+            <sch:assert test=".=not(*)">The keyword must be expressed in plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_originatingPerson">
+         <sch:rule context="admin[@type='originatingPerson']">
+            <sch:assert test=".=not(*)">The name of the originating person must be expressed in
+               plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_originatingDatabase">
+         <sch:rule context="admin[@type='originatingDatabase']">
+            <sch:assert test=".=not(*)">The name of the originating database must be expressed in
+               plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_originatingInstitution">
+         <sch:rule context="admin[@type='originatingInstitution']">
+            <sch:assert test=".=not(*)">The name of the originating institution must be expressed in
+               plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_productSubset">
+         <sch:rule context="admin[@type='productSubset']">
+            <sch:assert test=".=not(*)">The product subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_projectSubset">
+         <sch:rule context="admin[@type='projectSubset']">
+            <sch:assert test=".=not(*)">The project subset must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_securitySubset">
+         <sch:rule context="admin[@type='securitySubset']">
+            <sch:assert test=".='public' or .='confidential'">The security subset must be public or
+               confidential.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_searchTerm">
+         <sch:rule context="admin[@type='searchTerm']">
+            <sch:assert test=".=not(*)">The search term must be expressed in plain
+            text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_sourceIdentifier">
+         <sch:rule context="admin[@type='sourceIdentifier']">
+            <sch:assert test=".=not(*)">The source identifier must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_sortKey">
+         <sch:rule context="admin[@type='sortKey']">
+            <sch:assert test=".=not(*)">The sort key must be expressed in plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="admin_subsetOwner">
+         <sch:rule context="admin[@type='subsetOwner']">
+            <sch:assert test=".=not(*)">The name of the subset owner must be expressed in
+            plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="admin.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the data-category type of the admin element, such as originatingDatabase or entrySource.</a:documentation>
+         <rng:choice>
+            <rng:value>annotatedNote</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (annotatedNote) A note that can be coupled with an adminNote element to indicate the
+               source of the note or other administrative information about the note. If no source
+               or additional information about the note is required, use the note element.</a:documentation>
+            <rng:value>applicationSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (applicationSubset) An identifier that indicates that the parent element to which it
+               applies is associated with a specific application. The content shall be in plainText.</a:documentation>
+            <rng:value>businessUnitSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (businessUnitSubset) An identifier that indicates that the parent element to which it
+               applies is associated with a specific department, division, or other unit of an
+               enterprise. The content shall be in plainText.</a:documentation>
+            <rng:value>conceptOrigin</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (conceptOrigin) The institution, region, community, culture, country, or other venue
+               from which a concept covered by a terminological entry originates. Because this
+               data-category provides information about the origin of the concept, it should occur
+               at the termEntry level. The content shall be in plainText.</a:documentation>
+            <rng:value>customerSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (customerSubset) An identifier that indicates that the parent element to which it
+               applies is associated with a specific customer. The content shall be in plainText.</a:documentation>
+            <rng:value>databaseType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (databaseType) An identifier that indicates the type of database from which the
+               parent element originated. This element should normally occur at the termEntry level
+               because typically entire entries originate from or are imported from another
+               database. The content shall be in plainText.</a:documentation>
+            <rng:value>domainExpert</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (domainExpert) Subject field specialist who provides information for a terminological
+               entry, such as a definition or target language equivalent. An admin element that has
+               a type attribute value of domainExpert can also have a target attribute pointing to
+               the identifier of a reference entry in the back matter of the TBX document instance
+               that provides information about the domain expert. The content shall be in plainText.</a:documentation>
+            <rng:value>elementWorkingStatus</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (elementWorkingStatus) A value indicating the level of completeness and accuracy of
+               an element (field, record, entry) within a terminological collection. The element
+               admin when its type attribute has the value elementWorkingStatus shall contain one of
+               the following values: * starterElement * workingElement * consolidatedElement *
+               archiveElement * importedElement * exportedElement</a:documentation>
+            <rng:value>entrySource</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (entrySource) A database or file from which the entry was imported. The content shall
+               be in plainText. </a:documentation>
+            <rng:value>environmentSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (environmentSubset) An identifier that indicates a specific computer environment that
+               the parent element is associated with. The content shall be in plainText.</a:documentation>
+            <rng:value>indexHeading</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (indexHeading) A term chosen to be used in an index to represent an item or a concept
+               in a document. The content shall be in plainText.</a:documentation>
+            <rng:value>keyword</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (keyword) A word or group of words, possibly in lexicographically standardized
+               (lemmatized) form, taken out of the text of a document, which characterizes the text
+               and enables its retrieval. For example, the terms data-category and terminological
+               entry are keywords for this international standard. In a terminological database that
+               contains the terminology of ISO 30042, they could be identified as keywords by using
+               this element. The content shall be in plainText.</a:documentation>
+            <rng:value>originatingDatabase</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (originatingDatabase) The database from which the parent element originated. The
+               content shall be in plainText.</a:documentation>
+            <rng:value>originatingInstitution</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (originatingInstitution) An institution (i.e., company, government agency, etc.) that
+               provided the information in the parent element. The content shall be in plainText.</a:documentation>
+            <rng:value>originatingPerson</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (originatingPerson) An individual who provided the information in the parent element.
+               The content shall be in plainText.</a:documentation>
+            <rng:value>productSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (productSubset) An identifier assigned to a term, record, or entry to indicate that
+               it is related to or used in a product. The content shall be in plainText, and
+               preferably one of a predefined set of picklist values.</a:documentation>
+            <rng:value>projectSubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (projectSubset) An identifier assigned to a term, record, or entry to indicate that
+               it is related to or used in a project. The content shall be in plainText, and
+               preferably one of a predefined set of picklist values.</a:documentation>
+            <rng:value>searchTerm</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (searchTerm) A term entered in a term entry for purposes of retrieval. The content
+               shall be in plainText </a:documentation>
+            <rng:value>securitySubset</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (securitySubset) A classification of a term, record, or entry indicating that its
+               distribution is restricted for security reasons. Sometimes, terms are not released to
+               the public until the material that uses the term (product, service, etc.) is released
+               to the public. Until that time, this element serves to protect the data from
+               distribution. The element admin when its type attribute has the value securitySubset
+               shall contain one of the following values: * public * confidential</a:documentation>
+            <rng:value>sortKey</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (sortKey) A character string used for sorting and merging operations. A sort key can
+               enable alphabetic or systematic access. The content shall be in plainText.</a:documentation>
+            <rng:value>source</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (source)
+               A complete citation of the source of the information in the parent element. </a:documentation>
+            <rng:value>sourceIdentifier</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (sourceIdentifier) A pointer to a bibliographic entry that contains information about
+               the source of the parent element. An admin element that has a type attribute value of
+               sourceIdentifier also has a target attribute containing the identifier of the
+               bibliographic entry. The content of the element is a display value for the source.</a:documentation>
+            <rng:value>subsetOwner</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (subsetOwner) The owner of the subset of terminological entries to which this entry
+               belongs. The content shall be in plainText.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminGrp">
+      <element name="adminGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="adminGrp.content"/>
+         <ref name="adminGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="admin"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="adminNote"/>
+            <rng:ref name="note"/>
+            <rng:ref name="ref"/>
+            <rng:ref name="xref"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminNote">
+      <element name="adminNote">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="adminNote.content"/>
+         <ref name="adminNote.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminNote.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="adminNote_sourceType">
+         <sch:rule context="adminNote[@type='sourceType']">
+            <sch:assert test=". = 'parallelText' or .='backgroundText'">The type of source can only
+               be either parallelText or backgroundText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="adminNote.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:choice>
+            <rng:value>sourceType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (sourceType) A property describing the source text, i.e. whether it is actual
+               parallel text (text that is equivalent to text in another language) or background
+               material. The content of the adminNote element when it has the type attribute value
+               of sourceType shall be one of the following: * parallelText * backgroundText</a:documentation>
+            <rng:value>noteSource</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (noteSource) The source of a note that is expressed in a admin element having the
+               type attribute value annotatedNote.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="date">
+      <element name="date">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="date.content"/>
+         <ref name="date.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="date.content">
+      <rng:data type="date" xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="date.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descrip">
+      <element name="descrip">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="descrip.content"/>
+         <ref name="descrip.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descrip.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_antonymConcept">
+         <sch:rule context="descrip[@type='antonymConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')]))and(parent::termEntry or parent::descripGrp/parent::termEntry)"
+               >Antonym concepts should occur at the entry (concept) level. The antonym-concept in
+               this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_associatedConcept">
+         <sch:rule context="descrip[@type='associatedConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')]))and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               >Associated concepts should occur at the termEntry or the langSet level. The term in
+               this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_audio">
+         <sch:rule context="descrip[@type='audio']">
+            <sch:assert
+               test="(.=not(*))and (parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >The content of this element must be plain text. It can occur at the concept
+               (termEntry) level, the langSet level or the term (tig or ntig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_broaderConceptGeneric">
+         <sch:rule context="descrip[@type='broaderConceptGeneric']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               >Generic broader concepts should occur at the termEntry level or the langSet level.
+               The term in this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_broaderConceptPartitive">
+         <sch:rule context="descrip[@type='broaderConceptPartitive']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               >Partitive broader concepts should occur at the termEntry level or the langSet level.
+               The term in this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_characteristic">
+         <sch:rule context="descrip[@type='characteristic']">
+            <sch:assert
+               test="(.=not(*))and (parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >A characteristic should only occur at the term (tig or ntig) level. The content of
+               this element must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_classificationCode">
+         <sch:rule context="descrip[@type='classificationCode']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               > The content of this element must be plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_conceptPosition">
+         <sch:rule context="descrip[@type='conceptPosition']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               > Information about a concept position should occur at the termEntry level or the
+               langSet level, and it must be expressed in plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_coordinateConceptGeneric">
+         <sch:rule context="descrip[@type='coordinateConceptGeneric']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               >Generic coordinate concepts should occur at the termEntry level or the langSet
+               level. The term in this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_coordinateConceptPartitive">
+         <sch:rule context="descrip[@type='coordinateConceptPartitive']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::termEntry or parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet)"
+               >Partitive coordinate concepts should occur at the termEntry level or the langSet
+               level. The term in this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_context">
+         <sch:rule context="descrip[@type='context']">
+            <sch:assert
+               test="parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig"
+               >A context sentence can only occur at the term (tig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_definition">
+         <sch:rule context="descrip[@type='definition']">
+            <sch:assert
+               test="parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig"
+               > A definition must occur at the termEntry level, the langSet level, or the term
+               (tig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_example">
+         <sch:rule context="descrip[@type='example']">
+            <sch:assert
+               test="parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig"
+               > An example must occur at the termEntry level, the langSet level, or the term (tig)
+               level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_explanation">
+         <sch:rule context="descrip[@type='explanation']">
+            <sch:assert
+               test="parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig"
+               > An explanation must occur at the termEntry level, the langSet level, or the term
+               (tig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_figure">
+         <sch:rule context="descrip[@type='figure']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               > The content of this element must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_otherBinaryData">
+         <sch:rule context="descrip[@type='otherBinaryData']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::langSet or parent::tig or parent::ntig or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >The content of this element must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_quantity">
+         <sch:rule context="descrip[@type='quantity']">
+            <sch:assert
+               test="(.=not(*)) and (parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >A quantity should occur at the term (tig or ntig) level. The content of this element
+               must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_range">
+         <sch:rule context="descrip[@type='range']">
+            <sch:assert
+               test="(.=not(*)) and (parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >A range should occur at the term (tig or ntig) level. The content of this element
+               must be plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_relatedConcept">
+         <sch:rule context="descrip[@type='relatedConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Related concepts should occur at the termEntry level or the langSet level. The
+               content of this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_relatedConceptBroader">
+         <sch:rule context="descrip[@type='relatedConceptBroader']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')]) )and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Broader related concepts should occur at the termEntry level or the langSet level.
+               The content of this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_relatedConceptNarrower">
+         <sch:rule context="descrip[@type='relatedConceptNarrower']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Narrower related concepts should occur at the termEntry level or the langSet level.
+               The content of this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_reliabilityCode">
+         <sch:rule context="descrip[@type='reliabilityCode']">
+            <sch:assert
+               test="((.='1' or .='2' or .='3' or .='4' or .='5' or .='6' or .='7' or .='8' or .='9' or .='10') and (parent::langSet or parent::termEntry or parent::tig or parent::ntig or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig))"
+               >A reliability code can be a value from 1 (least reliable) to 10 (most
+            reliable).</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_sampleSentence">
+         <sch:rule context="descrip[@type='sampleSentence']">
+            <sch:assert
+               test="parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig"
+               > A sample sentence can only occur at the term (tig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_sequentiallyRelatedConcept">
+         <sch:rule context="descrip[@type='sequentiallyRelatedConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Sequentially related concepts should occur at the termEntry level or the langSet
+               level. The content of this element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_spatiallyRelatedConcept">
+         <sch:rule context="descrip[@type='spatiallyRelatedConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Spatially related concepts should occur at the termEntry level or the langSet level.
+               The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_subjectField">
+         <sch:rule context="descrip[@type='subjectField']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::descripGrp/parent::termEntry)"> A
+               subject field must be a plainText value. Subject fields usually occur at the
+               termEntry level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_subordinateConceptGeneric">
+         <sch:rule context="descrip[@type='subordinateConceptGeneric']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               > Generic subordinate concepts should occur at the termEntry level or the langSet
+               level. The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_subordinateConceptPartitive">
+         <sch:rule context="descrip[@type='subordinateConceptPartitive']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               > Partitive subordinate concepts should occur at the termEntry level or the langSet
+               level. The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_superordinateConceptGeneric">
+         <sch:rule context="descrip[@type='superordinateConceptGeneric']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Generic superordinate concepts should occur at the termEntry level or the langSet
+               level. The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_superordinateConceptPartitive">
+         <sch:rule context="descrip[@type='superordinateConceptPartitive']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Partitive superordinate concepts should occur at the termEntry level or the langSet
+               level. The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_table">
+         <sch:rule context="descrip[@type='table']">
+            <sch:assert
+               test="(.=not(*)) and (parent::langSet or parent::termEntry or parent::tig or parent::ntig or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               > The content of this element must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_temporallyRelatedConcept">
+         <sch:rule context="descrip[@type='temporallyRelatedConcept']">
+            <sch:assert
+               test="(.=not(*[not(local-name()='hi')])) and (parent::langSet or parent::termEntry or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry)"
+               >Temporally related concepts should occur at the termEntry level or the langSet
+               level. The content of the element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_thesaurusDescriptor">
+         <sch:rule context="descrip[@type='thesaurusDescriptor']">
+            <sch:assert
+               test="(.=not(*)) and (parent::termEntry or parent::descripGrp/parent::termEntry)"
+               >Thesaurus descriptors should occur at the termEntry level. The content of this
+               element must be plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_unit">
+         <sch:rule context="descrip[@type='unit']">
+            <sch:assert
+               test="(not (*) and (parent::tig or parent::ntig or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig))"
+               > Units should occur at the term (tig or ntig) level. Units must be expressed in
+               plainText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descrip_video">
+         <sch:rule context="descrip[@type='video']">
+            <sch:assert
+               test="(.=not(*)) and (parent::langSet or parent::termEntry or parent::tig or parent::ntig or parent::descripGrp/parent::langSet or parent::descripGrp/parent::termEntry or parent::descripGrp/parent::tig or parent::descripGrp/parent::ntig)"
+               >The content of this element must be in plain text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descrip.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the data-category type of the descrip element, such as definition or associated-concept.</a:documentation>
+         <rng:choice>
+            <rng:value>antonymConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (antonymConcept) A concept that is opposite in meaning to the concept represented by
+               the entry containing the descrip element. A descrip element that has a type attribute
+               value of antonymConcept can also have a target attribute pointing to the entry ID of
+               the termEntry that contains the antonym concept. The display term in the content of
+               the element shall be expressed in basicText.</a:documentation>
+            <rng:value>associatedConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (associatedConcept) A concept that exhibits a relation to the subject concept that
+               can be established on the basis of non-hierarchical thematic connections. A descrip
+               element that has a type attribute value of associatedConcept can also have a target
+               attribute pointing to the entry ID of the termEntry that contains the associated
+               concept. For example, teacher and school represent associated concepts.</a:documentation>
+            <rng:value>audio</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (audio)
+               A name or other identifier of an audio file: sound, spoken words, music, or other
+               audible representations used to illustrate or explain terms or concepts. A descrip
+               element that has a type attribute value of audio can also have a target attribute
+               pointing to the ID of a refObject in the back matter of the TBX document instance
+               that describes and points to the audio file. The element content shall be in
+               plainText. If a direct pointer to the audio file is preferred within the termEntry,
+               rather than pointing to the back matter, use an xref instead.</a:documentation>
+            <rng:value>broaderConceptGeneric</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (broaderConceptGeneric) A concept two or more levels of abstraction higher than
+               subject concept in a generic hierarchical concept system. A descrip element that has
+               a type attribute value of broaderConceptGeneric can also have a target attribute
+               pointing to the entry ID of the termEntry that contains the broader concept. Generic
+               relations between concepts are "is-a" relations. This means that the narrower concept
+               "is an" instance of its broader generic concept. For example, a dog is a canine
+               animal, and a canine animal is a mammal, therefore mammal is a broader generic
+               concept for dog.</a:documentation>
+            <rng:value>broaderConceptPartitive</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (boaderConceptPartitive) A concept two or more levels of abstraction higher than
+               subject concept in a part-whole or meronymic hierarchical concept system. A descrip
+               element that has a type attribute value of broaderConceptPartitive can also have a
+               target attribute pointing to the entry ID of the termEntry that contains the broader
+               concept. For example, a floor board is part of a house (broader partitive concept),
+               but it can be more narrowly defined as being part of the floor (superordinate
+               partitive concept), which in turn is part of the house. Partitive relations between
+               concepts are "has-a" relations. This means that the broader partitive concept "has"
+               its narrower concepts as parts of itself.</a:documentation>
+            <rng:value>characteristic</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (characteristic) An abstraction of a property of an object or of a set of objects.
+               For example, flammability is a characteristic of fuel. Essential characteristics can
+               be used to define concepts. The element content shall be in plainText.</a:documentation>
+            <rng:value>classificationCode</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (classificationCode) A set of symbols, with rules for their application, used to
+               represent classes and their interrelations. A descrip element that has a type
+               attribute value of classificationCode can also have a target attribute pointing to
+               the ID of a bibliographic refobject in the back matter describing the classification
+               code. The element content shall be in plain text. If a direct pointer to the
+               classification code is preferred within the termEntry, rather than pointing to the
+               back matter, use an xref instead.</a:documentation>
+            <rng:value>conceptPosition</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (conceptPosition) The position of a concept in a concept system. A descrip element
+               that has a type attribute value of conceptPosition can also have a target attribute
+               pointing to the ID of a position in the concept system. The element content shall be
+               in plainText.</a:documentation>
+            <rng:value>context</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (context) A text which illustrates a concept or a term, by containing the concept
+               designation itself. Contexts must be authentic, that is, they must be obtained from
+               an existing source, and not created by the terminologist. Contexts are documented
+               very frequently in terminology collections. Contexts can provide information for
+               determining term usage and collocations. In TBX, the context is a term-related
+               data-category. A context can be further categorized according to context type.</a:documentation>
+            <rng:value>coordinateConceptGeneric</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (coordinateConceptGeneric) A concept having the same nearest superordinate concept as
+               the concept being described by this descrip element in a generic concept system. A
+               descrip element that has a type attribute value of coordinateConceptGeneric can also
+               have a target attribute pointing to the ID of the coordinate concept.</a:documentation>
+            <rng:value>coordinateConceptPartitive</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (coordinateConceptPartitive) A concept having the same nearest superordinate concept
+               as the concept being described by this descrip element in a partitive concept system.
+               A descrip element that has a type attribute value of coordinateConceptPartitive can
+               also have a target attribute pointing to the ID of the coordinate concept.</a:documentation>
+            <rng:value>definition</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (definition) A representation of a concept by a descriptive statement which serves to
+               differentiate that concept from related concepts.</a:documentation>
+            <rng:value>example</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (example) A text which illustrates a concept or a term, by providing an example of
+               the object designated by the concept or term, and not necessarily containing the
+               concept designation itself. </a:documentation>
+            <rng:value>explanation</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (explanation) A statement that describes and clarifies a concept and makes it
+               understandable, but does not necessarily differentiate it from other concepts.Some
+               databases use example as a label for contextual references. The content of those
+               data-categories should be converted to the data-category for interchange purposes.</a:documentation>
+            <rng:value>figure</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (figure)
+               A name or other description of a diagram, picture, or other graphic material used to
+               illustrate a concept or group of concepts. A descrip element that has a type
+               attribute value of figure can also have a target attribute pointing to the ID of a
+               refObject in the back matter of the TBX document instance that describes and points
+               to the file that contains the figure. The element content shall be in plainText. If a
+               direct pointer to the file that contains the figure is preferred within the
+               termEntry, rather than pointing to the back matter, use an xref instead.</a:documentation>
+            <rng:value>otherBinaryData</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (otherBinaryData) Any binary data not covered by the categories , , , and . A descrip
+               element that has a type attribute value of otherBinaryData can also have a target
+               attribute pointing to the ID of a refObject in the back matter of the TBX document
+               instance that describes and points to the binary file. The element content shall be
+               in plainText. If a direct pointer to the binary file is preferred within the
+               termEntry, rather than pointing to the back matter, use an xref instead.</a:documentation>
+            <rng:value>quantity</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (quantity) A measurable quantity associated with a concept. The element content shall
+               be in plainText.</a:documentation>
+            <rng:value>range</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (range)
+               The pair of limits within which a quantity is measured, as expressed by stating the
+               lower and upper permissible values. The element content shall be in plainText.</a:documentation>
+            <rng:value>relatedConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (relatedConcept) A concept that has an associative relation to another concept, such
+               as teacher and school. A descrip element that has a type attribute value of
+               relatedConcept can also have a target attribute pointing to the entry identifier of
+               the related concept.</a:documentation>
+            <rng:value>relatedConceptBroader</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (relatedConceptBroader) A concept that is broader at some level with respect to a
+               related or associated concept, but without comprising any reference to a generic or
+               partitive system. A descrip element that has a type attribute value of
+               relatedConceptBroader can also have a target attribute pointing to the entry
+               identifier of the related concept.</a:documentation>
+            <rng:value>relatedConceptNarrower</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (relatedConceptNarrower) A concept that is narrower at some level with respect to a
+               related or associated concept, but without comprising any reference to a generic or
+               partitive system. A descrip element that has a type attribute value of
+               relatedConceptNarrower can also have a target attribute pointing to the entry
+               identifier of the related concept.</a:documentation>
+            <rng:value>reliabilityCode</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (reliabilityCode) A code assigned to a data-category or record indicating accuracy
+               and/or completeness. The content of the descrip element when it has a type attribute
+               value of reliabilityCode shall be a value from 1 (least reliable) to 10 (most
+               reliable).</a:documentation>
+            <rng:value>sampleSentence</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (sampleSentence) A sentence composed (frequently by a terminologist or language
+               planner) to illustrate the use of a term in cases where an authentic context is
+               unavailable. Although contextual information should ideally be taken from actual
+               texts written in the language in question, such contextual references may not exist
+               for newly coined or suggested terms.</a:documentation>
+            <rng:value>sequentiallyRelatedConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (sequentiallyRelatedConcept) A concept that has a relation to the subject concept
+               based on spatial or temporal proximity. Temporal relations and spatial relations can
+               be sequential. A descrip element that has a type attribute value of
+               sequentiallyRelatedConcept can also have a target attribute pointing to the entry
+               identifier of the related concept.</a:documentation>
+            <rng:value>spatiallyRelatedConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (spatiallyRelatedConcept) A concept that has a relation of dependence with the
+               subject concept, referring to objects based on their relative physical positions. A
+               descrip element that has a type attribute value of spatiallyRelatedConcept can also
+               have a target attribute pointing to the entry identifier of the related concept.</a:documentation>
+            <rng:value>subjectField</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (subjectField) A field of special knowledge. Subject fields can be expressed in
+               multiple levels, for example: Subject field (level 1): disease, Subject field (level
+               2): cancer, Subject field (level 3): non-Hodgkin's lymphoma. Subject fields shall be
+               expressed in plainText, and preferably be selected from a defined set of picklist
+               values. Subject fields shall be specified at the concept (termEntry) level.</a:documentation>
+            <rng:value>subordinateConceptGeneric</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (subordinateConceptGeneric) A concept that has a generic relation with the subject
+               concept, and a broader intension. A descrip element that has a type attribute value
+               of subordinateConceptGeneric can also have a target attribute pointing to the entry
+               identifier of the subordinate concept.</a:documentation>
+            <rng:value>subordinateConceptPartitive</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (subordinateConceptPartitive) A concept that has a partitive relation with the
+               subject concept, and represents one of the parts of the subject concept. A descrip
+               element that has a type attribute value of subordinateConceptPartitive can also have
+               a target attribute pointing to the entry identifier of the subordinate concept.</a:documentation>
+            <rng:value>superordinateConceptGeneric</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (superordinateConceptGeneric) A concept that has a generic relation with the subject
+               concept, and a narrower intension. A descrip element that has a type attribute value
+               of superordinateConceptGeneric can also have a target attribute pointing to the entry
+               identifier of the superordinate concept.</a:documentation>
+            <rng:value>superordinateConceptPartitive</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (superordinateConceptPartitive) A concept that has a partitive relation with the
+               subject concept, and represents the sum of the parts; a comprehensive concept. A
+               descrip element that has a type attribute value of superordinateConceptPartitive can
+               also have a target attribute pointing to the entry identifier of the superordinate
+               concept.</a:documentation>
+            <rng:value>table</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (table)
+               The name of a table that is used to describe a concept. The table itself can be
+               contained (or referred to as an external file) in a refobject in the back matter of a
+               TBX document instance. The target attribute points to the refobject identifier. The
+               element content shall be in plainText. If a direct pointer to the file that contains
+               the table is preferred within the termEntry, rather than pointing to the back matter,
+               use an xref instead.</a:documentation>
+            <rng:value>temporallyRelatedConcept</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (temporallyRelatedConcept) A concept related to the subject concept through a
+               sequential relation involving events in time. A descrip element that has a type
+               attribute value of temporallyRelatedConcept can also have a target attribute pointing
+               to the entry identifier of the related concept.</a:documentation>
+            <rng:value>thesaurusDescriptor</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (thesaurusDescriptor) The term in a thesaurus that can be used to represent a concept
+               in a terminological entry. A descrip element that has a type attribute value of
+               thesaurusDescriptor can also have a target attribute pointing to the ID of the
+               refObject in the back matter of the TBX document instance that describes the
+               thesaurus. The element content shall be in plainText. If a direct pointer to the
+               thesaurus is preferred within the termEntry, rather than pointing to the back matter,
+               use an xref instead.</a:documentation>
+            <rng:value>unit</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (unit) A
+               precisely-specified quantity in terms of which the magnitudes of other quantities can
+               be stated, such as meter or volt. The element content shall be in plainText. </a:documentation>
+            <rng:value>video</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (video)
+               A name or other description of recorded visual images used to represent or illustrate
+               terminological information. A descrip element that has a type attribute value of
+               video can also have a target attribute pointing to the ID of a refObject in the back
+               matter of the TBX document instance that describes and points to the video file. The
+               element content shall be in plainText. If a direct pointer to the video file is
+               preferred within the termEntry, rather than pointing to the back matter, use an xref
+               instead.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripGrp">
+      <element name="descripGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="descripGrp.content"/>
+         <ref name="descripGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="descrip"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="descripNote"/>
+            <rng:ref name="admin"/>
+            <rng:ref name="adminGrp"/>
+            <rng:ref name="transacGrp"/>
+            <rng:ref name="note"/>
+            <rng:ref name="ref"/>
+            <rng:ref name="xref"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripNote">
+      <element name="descripNote">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="descripNote.content"/>
+         <ref name="descripNote.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripNote.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descripNote_contextType">
+         <sch:rule context="descripNote[@type='contextType']">
+            <sch:assert
+               test=". ='definingContext'  or .='explanatoryContext'  or .='associativeContext'  or .='linguisticContext'  or .='metalinguisticContext'  or .='translatedContext'"
+               > Contexts can only be of one of the following types: definingContext,
+               explanatoryContext, associativeContext, linguisticContext, metalinguisticContext or
+               translatedContext.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="descripNote_definitionType">
+         <sch:rule context="descripNote[@type='definitionType']">
+            <sch:assert
+               test=".=         'intensionalDefinition' or .='extensionalDefinition' or .='partitiveDefinition' or .='translatedDefinition'"
+               > Definitions can only be of one of the following types: intensionalDefinition,
+               extensionalDefinition, partitiveDefinition, or translatedDefinition.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="descripNote.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the data-category type of the descripNote element, such as contextType.</a:documentation>
+         <rng:choice>
+            <rng:value>contextType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (contextType) The characterization of a context according to a set of theoretical or
+               pragmatic types.The content of the descripNote element when it has a type attribute
+               value of contextType shall be one of the following: * definingContext *
+               explanatoryContext * associativeContext * linguisticContext * metalinguisticContext *
+               translatedContext</a:documentation>
+            <rng:value>definitionType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (definitionType) The characterization of a definition according to a set of
+               theoretical or pragmatic types.The content of the descripNote element when it has a
+               type attribute value of definitionType shall be one of the following: *
+               intensionalDefinition * extensionalDefinition * partitiveDefinition *
+               translatedDefinition</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="langSet">
+      <element name="langSet">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="langSet.content"/>
+         <ref name="langSet.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="langSet.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.auxInfo"/>
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="tig"/>
+            <rng:ref name="ntig"/>
+         </rng:choice>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="langSet.localattributes">
+      <rng:attribute name="xml:lang">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the language of the language section. This attribute is required for the langSet
+            element. See also the description on the martif element.</a:documentation>
+         <!-- to declare the languages used in a TBX document instance, specify the language codes as shown below. This sample markup should
+            be inserted to REPLACE the <text/> element. Substitute the values "en" and "de" with your own language code values, and add more values as needed. You can use any language code 
+            format that is supported by IETF RFC 4646 or its successor.
+            Sample markup starts here to replace <text/>
+            <rng:choice>
+            <rng:value>en</rng:value>
+            <rng:value>de</rng:value>
+            </rng:choice>
+            Sample markup ends here to replace <text/>-->
+         <text/>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="note">
+      <element name="note">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="note.content"/>
+         <ref name="note.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="note.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="note.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ntig">
+      <element name="ntig">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="ntig.content"/>
+         <ref name="ntig.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ntig.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="termGrp"/>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.auxInfo"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ntig.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ref">
+      <element name="ref">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="ref.content"/>
+         <ref name="ref.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ref.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="ref.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:choice>
+            <rng:value>crossReference</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (crossReference) A pointer to another related location, such as another entry or
+               another term. The ref element with a type attribute value of cross-reference shall
+               also have a target attribute to point to the identifier of the entry or term.</a:documentation>
+            <rng:value>see</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (see) An
+               element that points to a location where additional information can be found. The ref
+               element with a type attribute value of see shall also have a target attribute to
+               point to the location of the information.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="term">
+      <element name="term">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="term.content"/>
+         <ref name="term.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="term.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.basicText"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="term.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termComp">
+      <element name="termComp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termComp.content"/>
+         <ref name="termComp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termComp.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termComp.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompGrp">
+      <element name="termCompGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termCompGrp.content"/>
+         <ref name="termCompGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="termComp"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="termNote"/>
+            <rng:ref name="termNoteGrp"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteLinkInfo"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompList">
+      <element name="termCompList">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termCompList.content"/>
+         <ref name="termCompList.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompList.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.auxInfo"/>
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="termComp"/>
+            <rng:ref name="termCompGrp"/>
+         </rng:choice>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termCompList.localattributes">
+      <ref name="id.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the type of the termCompList, such as hyphenation. The value indicates on what basis the
+            term components were identified, such as by hyphenation parts or by syllables.</a:documentation>
+         <rng:choice>
+            <rng:value>hyphenation</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (Hyphenation) The termComp elements contain the parts of a term as it would be
+               hyphenated, such as at the end of a line, according to a given set of rules.</a:documentation>
+            <rng:value>lemma</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (Lemma)
+               The termComp elements contain the base form of the term or of the individual words
+               that it comprises. A base form of a word or term, sometimes called a lemma, is the
+               form that is used as the formal dictionary entry for the term. For nouns, the base
+               form is frequently the nominative singular form (in languages that show variation by
+               case). For adjectives it is the positive form of the adjective, as opposed to the
+               comparative, and in some languages it is uninflected, whereas in others it is the
+               masculine singular. For verbs, it is generally the infinitive.</a:documentation>
+            <rng:value>morphologicalElement</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (Morphological element) The termComp elements contain the individual morphemes that
+               comprise the term. .</a:documentation>
+            <rng:value>syllabification</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (Syllabification) The termComp elements contain the individual syllables that
+               comprise the term.</a:documentation>
+            <rng:value>termElement</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"> (Term
+               element) The termComp elements contain any other logically significant portion of the
+               term. </a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termEntry">
+      <element name="termEntry">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termEntry.content"/>
+         <ref name="termEntry.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termEntry.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.auxInfo"/>
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="langSet"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termEntry.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termGrp">
+      <element name="termGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termGrp.content"/>
+         <ref name="termGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="term"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="termNote"/>
+            <rng:ref name="termNoteGrp"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="termCompList"/>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNote">
+      <element name="termNote">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termNote.content"/>
+         <ref name="termNote.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNote.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_abbreviatedFormFor">
+         <sch:rule context="termNote[@type='abbreviatedFormFor']">
+            <sch:assert test=".=not(*[not(local-name()='hi')])"> The value of the abbreviated form
+               in this element must be expressed in basicText. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_administrativeStatus">
+         <sch:rule context="termNote[@type='administrativeStatus']">
+            <sch:assert
+               test=".=         'standardizedTerm-admn-sts' or .='preferredTerm-admn-sts' or .='admittedTerm-admn-sts' or .='deprecatedTerm-admn-sts' or .='supersededTerm-admn-sts' or .='legalTerm-admn-sts' or .='regulatedTerm-admn-sts'"
+               >The administrative status must be standardizedTerm-admn-sts, preferredTerm-admn-sts,
+               admittedTerm-admn-sts, deprecatedTerm-admn-sts, supersededTerm-admn-sts,
+               legalTerm-admn-sts, or regulatedTerm-admn-sts. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_antonymTerm">
+         <sch:rule context="termNote[@type='antonymTerm']">
+            <sch:assert test="(.=not(*[not(local-name()='hi')]))">Antonym terms should occur at the
+               term (tig or ntig) level. The antonym term in this element must be expressed in
+               basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_directionality">
+         <sch:rule context="termNote[@type='directionality']">
+            <sch:assert
+               test=". =        'monodirectional' or .='bidirectional' or .='incommensurate'">The
+               directionality must be monodirectional, bidirectional, or incommensurate.
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_etymology">
+         <sch:rule context="termNote[@type='etymology']">
+            <sch:assert test=".=not(*)">Information about the etymology of a term must be expressed
+               in noteText. Etymology information should occur at the tig level or at the
+               termCompGrp level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_falseFriend">
+         <sch:rule context="termNote[@type='falseFriend']">
+            <sch:assert test="(.=not(*[not(local-name()='hi')]))"> The false friend must be
+               expressed in basicText. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_frequency">
+         <sch:rule context="termNote[@type='frequency']">
+            <sch:assert test=". =        'commonlyUsed' or .='infrequentlyUsed' or .='rarelyUsed'"
+               >The frequency must be commonlyUsed, infrequentlyUsed, or rarelyUsed. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_geographicalUsage">
+         <sch:rule context="termNote[@type='geographicalUsage']">
+            <sch:assert test=".=not(*)">The geographical usage must be expressed in plainText.
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_grammaticalGender">
+         <sch:rule context="termNote[@type='grammaticalGender']">
+            <sch:assert test="(.='masculine' or .='feminine' or .='neuter' or .='otherGender')"> The
+               gender must be masculine, feminine, neuter, or otherGender. Gender should be
+               specified at the term level (tig or ntig) or at the termCompGrp level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_grammaticalNumber">
+         <sch:rule context="termNote[@type='grammaticalNumber']">
+            <sch:assert
+               test=". =         'single' or .='plural' or .='dual' or .='mass' or .='otherNumber'"
+               >The grammatical number must be single, plural, dual, mass, or otherNumber. The
+               grammatical number should be specified at the term level (tig or ntig) or at the
+               termCompGrp level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_grammaticalValency">
+         <sch:rule context="termNote[@type='grammaticalValency']">
+            <sch:assert test=".=not(*)"> The grammatical valency must be expressed in plainText.
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_homograph">
+         <sch:rule context="termNote[@type='homograph']">
+            <sch:assert test=".=not(*[not(local-name()='hi')])"> The homograph must be expressed in
+               basicText. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_language-planningQualifier">
+         <sch:rule context="termNote[@type='language-planningQualifier']">
+            <sch:assert
+               test=". =        'recommendedTerm' or .='nonstandardizedTerm' or .='proposedTerm' or .='newTerm'"
+               >The language planning qualifier must be recommendedTerm, nonstandardizedTerm,
+               proposedTerm, or newTerm. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_lionHotkey">
+         <sch:rule context="termNote[@type='lionHotkey']">
+            <sch:assert test=".=not(*)">The hotkey must be expressed in plainText. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_normativeAuthorization">
+         <sch:rule context="termNote[@type='normativeAuthorization']">
+            <sch:assert
+               test=". =        'standardizedTerm' or .='preferredTerm' or .='admittedTerm' or .='deprecatedTerm' or .='supersededTerm' or .='legalTerm' or .='regulatedTerm'"
+               >The normative authorization must be standardizedTerm, preferredTerm, admittedTerm,
+               deprecatedTerm, supersededTerm, legalTerm, regulatedTerm . </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_partOfSpeech">
+         <!-- the following rule is for TBX-Basic
+						<sch:rule context="termNote[@type='partOfSpeech']">
+						<sch:assert
+						test=". = 'noun' or .='verb' or .='adjective' or .='adverb' or .='properNoun' or .='other'"
+						>The part of speech must be either noun, verb,
+						adjective, adverb, properNoun, or other. </sch:assert>
+						</sch:rule> -->
+         <sch:rule context="termNote[@type='partOfSpeech']">
+            <sch:assert test=".=not(*)">The part of speech must be a plainText value. It should be
+               specified only at the term (tig or ntig) level or at the termCompGrp
+            level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_processStatus">
+         <sch:rule context="termNote[@type='processStatus']">
+            <sch:assert
+               test=". =        'unprocessed' or .='provisionallyProcessed' or .='finalized'">The
+               process status must be unprocessed, provisionallyProcessed, or finalized.
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_pronunciation">
+         <sch:rule context="termNote[@type='pronunciation']">
+            <sch:assert test=".=not(*[not(local-name()='hi')])">The pronunciation must be expressed
+               in basicText. It should be specified at the term (tig or ntig) level or at the
+               termCompGrp level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_proprietaryRestriction">
+         <sch:rule context="termNote[@type='proprietaryRestriction']">
+            <sch:assert test=". =        'trademark' or .='serviceMark' or .='tradeName'">The
+               proprietary restriction must be trademark, serviceMark, or tradeName. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_register">
+         <sch:rule context="termNote[@type='register']">
+            <sch:assert
+               test=". =        'colloquialRegister' or .='neutralRegister' or .='technicalRegister' or .='in-houseRegister' or .='bench-levelRegister' or .='slangRegister' or .='vulgarRegister'"
+               >The register must be colloquialRegister, neutralRegister, technicalRegister,
+               in-houseRegister, bench-levelRegister, slangRegister, or vulgarRegister .
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_shortFormFor">
+         <sch:rule context="termNote[@type='shortFormFor']">
+            <sch:assert test=".=not(*[not(local-name()='hi')])"> The value of the short form in this
+               element must be expressed in basicText.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_temporalQualifier">
+         <sch:rule context="termNote[@type='temporalQualifier']">
+            <sch:assert test=". =        'archaicTerm' or .='outdatedTerm' or .='obsoleteTerm'">The
+               temporal qualifier must be archaicTerm, outdatedTerm, or obsoleteTerm. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_termLocation">
+         <sch:rule context="termNote[@type='termLocation']">
+            <sch:assert test=".=not(*)">The termLocation must be a plainText value. It should be
+               specified only at the term (tig or ntig) level.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_termProvenance">
+         <sch:rule context="termNote[@type='termProvenance']">
+            <sch:assert
+               test=". =         'transdisciplinaryBorrowing' or .='translingualBorrowing' or .='loanTranslation' or .='neologism'"
+               >The term provenance must be transdisciplinaryBorrowing, translingualBorrowing,
+               loanTranslation, or neologism.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_termType">
+         <sch:rule context="termNote[@type='termType']">
+            <sch:assert
+               test=". = 'abbreviation' or .='initialism' or .='acronym' or .='clippedTerm' or .='entryTerm' or .='synonym' or .='internationalScientificTerm' or .='fullForm' or .='transcribedForm' or .='symbol' or .='formula' or .='equation' or .='logicalExpression' or .='commonName' or .='variant' or .='shortForm' or .='transliteratedForm' or .='sku' or .='partNumber' or .='phraseologicalUnit' or .='synonymousPhrase' or .='standardText' or .='string' or .='internationalism' or .='shortcut'"
+               >The type of term can only be one of the following values: abbreviation, initialism,
+               acronym, clippedTerm, entryTerm, synonym, internationalScientificTerm, fullForm,
+               transcribedForm, symbol, formula, equation, logicalExpression, commonName, variant,
+               shortForm, transliteratedForm, sku, partNumber, phraseologicalUnit, synonymousPhrase,
+               standardText, string, internationalism, shortcut.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_termStructure">
+         <sch:rule context="termNote[@type='termStructure']">
+            <sch:assert test=".=not(*)"> The term structure must be expressed in plain
+            text.</sch:assert>
+         </sch:rule>
+      </sch:pattern>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="termNote_timeRestriction">
+         <sch:rule context="termNote[@type='timeRestriction']">
+            <sch:assert test=".=not(*)"> The time restriction must be expressed in plainText.
+            </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNote.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the data-category type of the termNote, such as partOfSpeech or termType.</a:documentation>
+         <rng:choice>
+            <rng:value>abbreviatedFormFor</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (abbreviatedFormFor) A link used to identify a relation between a term that is an
+               abbreviated form, and its full or expanded form. It may be coupled with a target
+               attribute to point to the entry of the full or expanded form. For example, the term
+               WWW could have the following tag to point to its full form: World Wide Web. The
+               actual content of the element would be the text World Wide Web, which allows the user
+               to see what term is the full form of the current term without having to go to the
+               location of the full form in the file (the location would normally be somewhere
+               within the current entry, since the abbreviated form and the full form represent the
+               same concept). The element content shall be expressed in basicText. The
+               identification of a relation between an abbreviated term and its full form indicates
+               which term in a terminological entry is the full form of the abbreviated term. In
+               many languages, English abbreviations are commonly used, but the English full form
+               may be avoided in favor of an equivalent full form in the language in question. In
+               this case, the English abbreviation and the target language full form will both
+               appear in the target language section of the entry.</a:documentation>
+            <rng:value>administrativeStatus</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (administrativeStatus) The status of a term within a certain working environment. The
+               data-category administrativeStatus should be linked, through a target attribute, to a
+               refObject in the back matter that identifies the administrative organization that
+               determined the status. The element termNote when its type attribute has the value
+               administrativeStatus shall contain one of the following values: *
+               admittedTerm-admn-sts * deprecatedTerm-admn-sts * legalTerm-admn-sts *
+               preferredTerm-admn-sts * regulatedTerm-admn-sts * standardizedTerm-admn-sts *
+               supersededTerm-admn-stsThe status of terms with respect to a standardization process
+               is covered by normativeAuthorization. </a:documentation>
+            <rng:value>animacy</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (animacy) The characteristic of a word indicating that in a given discourse
+               community, its referent is considered to be alive or to possess a quality of volition
+               or consciousness. The value of the termNote element when it has a type attribute
+               value of animacy shall be one of: animate, inanimate, otherAnimacy.</a:documentation>
+            <rng:value>antonymTerm</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (antonymTerm) A term that designates a concept that is opposite in meaning to the
+               concept being described in the current entry. A termNote element that has a type
+               attribute value of antonymTerm can also have a target attribute pointing to the term
+               ID of the term that represents the antonym concept. The display term in the content
+               of this element shall be expressed in basicText.</a:documentation>
+            <rng:value>directionality</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (directionality) A data-category that, through the value of its target attribute,
+               indicates the preferred translation of the term in the term element of the current
+               tig from among the available translations in the entry. The target attribute should
+               point to the identifier of the tig corresponding to the target term. In the case of
+               the values monodirectional and bidirectional, the target term is the preferred
+               translation. The content of the termNote element when it has a type attribute value
+               of directionality indicates the scope of directionality, and shall be one of the
+               following: * monodirectional: The translation is only preferred going from the source
+               language (current tig to the target language (target tig). * bidirectional: The
+               translation is preferred in both directions, i.e. the term in the target tig is a
+               preferred translation of the term in the current tig and vice-versa. *
+               incommensurate: The relation between the term in the current tig and the term in the
+               target tig as translations is imperfect and should be used with care. In this case,
+               the concepts are not equal. A should be used to provide information about the
+               difference between the concepts. * undetermined: The scope of directionality has not
+               been determined.</a:documentation>
+            <rng:value>etymology</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (etymology) Information on the origin of a word and the development of its meaning.
+               The element content shall be expressed in noteText. </a:documentation>
+            <rng:value>falseFriend</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (falseFriend) A term in another language that appears to be semantically or
+               morphologically similar to the subject term in the entry, but that does not represent
+               the same concept. For example, in French, the term réaliser means "to accomplish",
+               and therefore, it is a false friend of the English term realize (i.e. to become
+               conscious of). A termNote element with the type attribute value of falseFriend can
+               also have a target attribute whose value is a pointer to a term in another entry. The
+               element content shall be expressed in basicText.</a:documentation>
+            <rng:value>frequency</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (frequency) The relative commonness with which a term occurs. The content of the
+               termNote element when it has a type attribute value of frequency shall be one of:
+               commonlyUsed, infrequentlyUsed, rarelyUsed. The assessment of frequency of a term can
+               be based on subjective criteria, or it can reflect computer analysis of text corpora.</a:documentation>
+            <rng:value>geographicalUsage</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (geographicalUsage) A code identifying any specific geographical area where the term
+               is used, for instance, to differentiate between UK English and US English. Preferred
+               values are language codes combined with geographical codes, from IETF RFC 4646 or its
+               successor, as identified in IETF BCP 47. For example: en-US for American English. The
+               element content shall be expressed in plainText. </a:documentation>
+            <rng:value>grammaticalGender</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (grammaticalGender) The gender of the word. The value of the termNote element when it
+               has a type attribute value of grammaticalGender shall be one of: masculine, feminine,
+               neuter, or otherGender.</a:documentation>
+            <rng:value>grammaticalNumber</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (grammaticalNumber) A property of a term that indicates the number of objects
+               referred to by the term. The content of the termNote element when it has a type
+               attribute value of grammaticalNumber shall be one of: singular, plural, dual, mass,
+               or otherNumber. For example, the terms rice and bread are mass nouns because there
+               are no separate singular and plural forms. If the singular and the plural forms of a
+               term do not designate the same concept, they should be recorded in separate entries.</a:documentation>
+            <rng:value>grammaticalValency</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (grammaticalValency) The range of syntactic elements either required or permitted by
+               a lexical unit. The valency of eat includes a subject ("I" in "I am eating") and an
+               object ("cheese" in "I am eating cheese".) It can thus be said to be "bivalent". The
+               element content shall be expressed in plainText. </a:documentation>
+            <rng:value>homograph</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (homograph) A word that is spelled like the subject term in the entry, but that has a
+               different meaning, and origin. Homographs are terms that have the same written form,
+               but are derived from different etymological origins, for example, a port for boats
+               and a port for computer peripherals. A termNote element having a type attribute value
+               of homograph can also have a target attribute to point to the tig of the entry that
+               describes the homograph. The element content shall be expressed in basicText.</a:documentation>
+            <rng:value>language-planningQualifier</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (language-planningQualifier) A qualifier assigned to a provisional term within a
+               language planning or descriptive terminology environment. The content of the termNote
+               element when it has a type attribute value of language-planningQualifier shall be one
+               of: recommendedTerm, nonstandardizedTerm, proposedTerm, or newTerm.</a:documentation>
+            <rng:value>lionHotkey</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (lionHotkey) The letter in a word that acts as a hotkey in a computer application. A
+               hotkey is a key or a combination of keys on a computer keyboard that, when pressed at
+               one time, performs a task (such as starting an application) as an alternative to
+               using a mouse or other input device. Hotkeys are supported by many operating systems
+               and applications. The hotkey is indicated by an ampersand in the term in software
+               interface files, and by an underscore in the actual visual display. The element
+               content shall be expressed in plainText. </a:documentation>
+            <rng:value>normativeAuthorization</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (normativeAuthorization) A term status qualifier assigned by an authoritative body,
+               such as a standards body or a governmental entity with a regulatory function. The
+               content of the termNote element when it has a type attribute value of
+               normativeAuthorization shall be one of: * standardizedTerm * preferredTerm *
+               admittedTerm * deprecatedTerm * supersededTerm * legalTerm * regulatedTerm The name
+               of the authoritative body should be documented in the terminology repository, and
+               referenced in the TBX document instance by using a refObject. </a:documentation>
+            <rng:value>partOfSpeech</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (partOfSpeech) A category assigned to a word based on its grammatical and semantic
+               properties. For example: noun, verb, or adjective. The element content shall be
+               expressed in plainText, and preferably be limited to a set of picklist values. Only
+               one value shall be permitted for each term in a given entry. For example, the
+               following values are permitted in the TBX-Basic TML: * noun * verb * adjective *
+               adverb * properNoun * other</a:documentation>
+            <rng:value>processStatus</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (processStatus) The status of a term with respect to its advancement within the
+               terminology management process. The content of the termNote element when it has a
+               type attribute value of processStatus shall be one of: unprocessed,
+               provisionallyProcessed, or finalized.</a:documentation>
+            <rng:value>pronunciation</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (pronunciation) The representation of the manner by which a term is spoken. In TBX,
+               pronunciation shall be represented in the International Phonetic Alphabet. A given
+               term can have more than one pronunciation depending on the geographical area in which
+               the term is used. A given term can have more than one pronunciation depending on the
+               geographical area in which the term is used. In this case use a separate tig or ntig
+               element for each pronunciation, and indicate the gegraphical area of each by using a
+               termNote element with a type attribute value of geographicalUsage. The element
+               content shall be expressed in basicText.</a:documentation>
+            <rng:value>proprietaryRestriction</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (proprietaryRestriction) A restriction placed on a term for the purpose of protecting
+               the right of an organization to the exclusive use of the term. The content of the
+               termNote element when it has a type attribute value of proprietaryRestriction shall
+               be one of: trademark, serviceMark or tradeName. The content value "copyright" is not
+               included because copyright only applies to larger text units, such as books, not to
+               terms.</a:documentation>
+            <rng:value>register</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (register) Classification indicating the level of language assigned to a term. The
+               content of the termNote element when it has a type attribute value of register shall
+               be one of: * colloquialRegister * neutralRegister * technicalRegister *
+               in-houseRegister * bench-levelRegister * slangRegister * vulgarRegister</a:documentation>
+            <rng:value>shortFormFor</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (shortFormFor) A linking element used to identify a relation between the subject term
+               when it is a short form, and its full or expanded form. It may be coupled with a
+               target attribute to point to the full or expanded form. Normally both the short form
+               and the full form will be contained in the same entry, but each in its own tig,
+               because they represent the same concept. For example, the term United States could
+               have the following markup to point to the full form term United States of America:
+               United States of America. The content of the element would be the target term,
+               expressed in basicText, which allows the user to see the target term without going to
+               its location in the entry. The identification of a relation between a short form and
+               its full form indicates which term in a terminological entry is the full form of the
+               short form. </a:documentation>
+            <rng:value>temporalQualifier</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (temporalQualifier) A property of a term with respect to its use over time. The
+               content of the termNote element when it has a type attribute value of
+               temporalQualifier shall be one of: archaicTerm, outdatedTerm, obsoleteTerm.</a:documentation>
+            <rng:value>termLocation</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (termLocation) A location in a document, computer file, or other information medium,
+               where the term frequently occurs, such as a user interface object (in software), a
+               packaging element, a component in an industrial process, and so forth. The element
+               content shall be expressed in plainText, and preferably be restricted to a set of
+               picklist values. The following picklist values are recommended for software user
+               interface locations in a Windows environment. * checkBox * comboBox * comboBoxElement
+               * dialogBox * groupBox * informativeMessage * interactiveMessage * menuItem *
+               progressBar * pushButton * radioButton * slider * spinBox * tab * tableText * textBox
+               * toolTip * user-definedType</a:documentation>
+            <rng:value>termProvenance</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (termProvenance) Classification of a term according to the methodology employed in
+               creating the term. The content of the termNote element when it has a type attribute
+               value of termProvenance shall be one of: transdisciplinaryBorrowing,
+               translingualBorrowing, loanTranslation, or neologism.</a:documentation>
+            <rng:value>termStructure</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (termStructure) The structure of the components of a term, indicated using square
+               brackets. For example, e.g. : [bank statement] [total] versus [bank] [statement
+               total]. The element content shall be expressed in plainText. </a:documentation>
+            <rng:value>termType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (termType) A categorization of a term with respect to formal representations of terms
+               or where or how they are used, for example, acronym. The content of the termNote
+               element when it has a type attribute value of termType shall be one of the following:
+               * abbreviation * acronym * clippedTerm * commonName * entryTerm * equation * formula
+               * fullForm * initialism * internationalism * internationalScientificTerm *
+               logicalExpression * partNumber * phraseologicalUnit * transcribedForm *
+               transliteratedForm * shortForm * shortcut * sku * standardText * string * symbol *
+               synonym * synonymousPhrase * variantRefer to ISO 12620 for definitions of the above
+               term types. The value shortcut refers to a string that acts as a keyboard shortcut on
+               computers, for example, Ctrl + V is a term that represents a keyboard shortcut for
+               the concept of paste.</a:documentation>
+            <rng:value>timeRestriction</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (timeRestriction) The indication of a period of time during or since which a term was
+               or has been subject to specified usage. For example, several European countries have
+               redefined the requirements for certain university degrees in recent years. If, for
+               instance, the requirements for a baccalaureate degree changed from three to four
+               years in 1993, then any terminology entry defining the term used to designate this
+               degree would have to specify the time restriction affecting the definition, which
+               would be different before 1993 and after 1993. The element content shall be expressed
+               in plainText. </a:documentation>
+            <rng:value>transferComment</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (transferComment) Note included in a term entry providing information on the degree
+               of equivalence, directionality or other special features affecting equivalence
+               between a term in one language and another term in a second language. This element
+               can be used in conjunction with the element to indicate the preferred translation of
+               the term in question. The termNote element with a type attribute value of
+               transferComment can also have a target attribute to point to the term that is the
+               object of the transfer comment.</a:documentation>
+            <rng:value>usageNote</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (usageNote) A note containing information on the usage of the term.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNoteGrp">
+      <element name="termNoteGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="termNoteGrp.content"/>
+         <ref name="termNoteGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNoteGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="termNote"/>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteLinkInfo"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="termNoteGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="tig">
+      <element name="tig">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="tig.content"/>
+         <ref name="tig.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="tig.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="term"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="termNote"/>
+      </rng:zeroOrMore>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.auxInfo"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="tig.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transac">
+      <element name="transac">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="transac.content"/>
+         <ref name="transac.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transac.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+      <sch:pattern xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0"
+         name="transac_transactionType">
+         <sch:rule context="transac[@type='transactionType']">
+            <sch:assert
+               test=". =        'origination' or .='input' or .='modification' or .='check' or .='approval' or         .='withdrawl' or .='standardization' or .='exportation' or .='importation' or .='proposal' or .='userAccess'"
+               >The content of this element indicates the type of transaction and must be one of the
+               following values: origination, input, modification, check, approval, withdrawal,
+               standardization, exportation, importation, proposal, userAccess. </sch:assert>
+         </sch:rule>
+      </sch:pattern>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transac.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The
+            attribute value transactionType ensures that the content of the transac element will be
+            a transaction type.</a:documentation>
+         <rng:choice>
+            <rng:value>transactionType</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (transactionType) A record that indicates the stage of the entry within the overall
+               process of creation, approval, and use of a terminology entry.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacGrp">
+      <element name="transacGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="transacGrp.content"/>
+         <ref name="transacGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="transac"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="transacNote"/>
+            <rng:ref name="date"/>
+            <rng:ref name="note"/>
+            <rng:ref name="ref"/>
+            <rng:ref name="xref"/>
+         </rng:choice>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacNote">
+      <element name="transacNote">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="transacNote.content"/>
+         <ref name="transacNote.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacNote.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="transacNote.localattributes">
+      <ref name="IDLangTgtDtyp.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <rng:choice>
+            <rng:value>usageCount</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (usageCount) The number of times an entry has been accessed.</a:documentation>
+            <rng:value>responsibility</rng:value>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+               (responsibility) The name of a person or entity associated with a terminology
+               management transaction. The transacNote element with a type attribute value of
+               responsibility can also have a target attribute to point to the identifier of a
+               bibliographic entry in a refObject that contains information about the person or
+               entity.</a:documentation>
+         </rng:choice>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="xref">
+      <element name="xref">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="xref.content"/>
+         <ref name="xref.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="xref.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="xref.localattributes">
+      <ref name="id.attributes"/>
+      <rng:attribute name="target">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The URI of
+            the external object.</a:documentation>
+         <text/>
+      </rng:attribute>
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <rng:choice>
+               <rng:value>corpusTrace</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (corpusTrace) A notation indicating the location of an external contextual
+                  resource.</a:documentation>
+               <rng:value>externalCrossReference</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (externalCrossReference) A term or other terminological resource that is external
+                  to the terminological database or TBX document instance.</a:documentation>
+               <rng:value>xGraphic</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (xGraphic) External graphic file.</a:documentation>
+               <rng:value>xAudio</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (xAudio) External audio file.</a:documentation>
+               <rng:value>xVideo</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (xVideo) External video file</a:documentation>
+               <rng:value>xSource</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (xSource) An external source of information such as the source of a definition or
+                  context sentence.</a:documentation>
+               <rng:value>xMathML</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+                  (xMathML) A mathematical concept expressed in MathML.</a:documentation>
+            </rng:choice>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martif">
+      <element name="martif">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="martif.content"/>
+         <ref name="martif.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martif.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="martifHeader"/>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="text"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martif.localattributes">
+      <rng:attribute name="xml:lang">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the default language of the entire martif element content. The allowed values of the
+            xml:lang attribute are found in IETF RFC 4646 or its successor, as indicated in IETF BCP
+            47. This attribute is required for the martif element.</a:documentation>
+         <text/>
+      </rng:attribute>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Indicates
+            the type of martif document. If the type attribute value TBX is used, then the TBX
+            document instance shall adhere to the default XCS file. If the TBX document instance
+            adheres to another XCS file, then the type attribute value can consist of TBX- plus
+            another word associated with the XCS file, such as 'TBX-Basic'.</a:documentation>
+         <text/>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martifHeader">
+      <element name="martifHeader">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="martifHeader.content"/>
+         <ref name="martifHeader.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martifHeader.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="fileDesc"/>
+      <rng:optional xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="encodingDesc"/>
+      </rng:optional>
+      <rng:optional xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="revisionDesc"/>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="martifHeader.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="p">
+      <element name="p">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="p.content"/>
+         <ref name="p.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="p.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="p.localattributes">
+      <ref name="idlang.attributes"/>
+      <rng:optional>
+         <rng:attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <rng:choice>
+               <rng:value>DCSName</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The
+                  name of the XCS file that constrains the content of the TBX document instance.</a:documentation>
+               <rng:value>XCSURI</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The
+                  URI of the XCS file that constrains the content of the TBX document instance.</a:documentation>
+               <rng:value>XCSContent</rng:value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The
+                  content of an XCS file, embedded directly in the TBX document instance. Note that
+                  this content cannot be validated by the TBX DTD and therefore should be removed
+                  from the TBX document instance, or commented out, prior to such validation.
+               </a:documentation>
+            </rng:choice>
+         </rng:attribute>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="fileDesc">
+      <element name="fileDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="fileDesc.content"/>
+         <ref name="fileDesc.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="fileDesc.content">
+      <rng:optional xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="titleStmt"/>
+      </rng:optional>
+      <rng:optional xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="publicationStmt"/>
+      </rng:optional>
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="sourceDesc"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="fileDesc.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="titleStmt">
+      <element name="titleStmt">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="titleStmt.content"/>
+         <ref name="titleStmt.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="titleStmt.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="title"/>
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="note"/>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="titleStmt.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="title">
+      <element name="title">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="title.content"/>
+         <ref name="title.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="title.content">
+      <rng:text xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="title.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="publicationStmt">
+      <element name="publicationStmt">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="publicationStmt.content"/>
+         <ref name="publicationStmt.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="publicationStmt.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="p"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="publicationStmt.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="sourceDesc">
+      <element name="sourceDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="sourceDesc.content"/>
+         <ref name="sourceDesc.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="sourceDesc.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="p"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="sourceDesc.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="encodingDesc">
+      <element name="encodingDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="encodingDesc.content"/>
+         <ref name="encodingDesc.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="encodingDesc.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="p"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="encodingDesc.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="revisionDesc">
+      <element name="revisionDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="revisionDesc.content"/>
+         <ref name="revisionDesc.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="revisionDesc.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="change"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="revisionDesc.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="change">
+      <element name="change">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="change.content"/>
+         <ref name="change.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="change.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="p"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="change.localattributes">
+      <ref name="idlang.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="text">
+      <element name="text">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="text.content"/>
+         <ref name="text.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="text.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="body"/>
+      <rng:optional xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="back"/>
+      </rng:optional>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="text.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="body">
+      <element name="body">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="body.content"/>
+         <ref name="body.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="body.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="termEntry"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="body.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="back">
+      <element name="back">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="back.content"/>
+         <ref name="back.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="back.content">
+      <rng:zeroOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="refObjectList"/>
+      </rng:zeroOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="back.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObjectList">
+      <element name="refObjectList">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="refObjectList.content"/>
+         <ref name="refObjectList.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObjectList.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:ref name="refObject"/>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObjectList.localattributes">
+      <ref name="id.attributes"/>
+      <rng:attribute name="type">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <text/>
+      </rng:attribute>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObject">
+      <element name="refObject">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="refObject.content"/>
+         <ref name="refObject.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObject.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="itemSet"/>
+            <rng:ref name="itemGrp"/>
+            <rng:ref name="item"/>
+         </rng:choice>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="refObject.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="item">
+      <element name="item">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="item.content"/>
+         <ref name="item.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="item.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteText"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="item.localattributes">
+      <ref name="idtype.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemGrp">
+      <element name="itemGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="itemGrp.content"/>
+         <ref name="itemGrp.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemGrp.content">
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="item"/>
+      <rng:ref xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://www.ascc.net/xml/schematron"
+         xmlns:tei="http://www.tei-c.org/ns/1.0" name="entity.noteLinkInfo"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemGrp.localattributes">
+      <ref name="id.attributes"/>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemSet">
+      <element name="itemSet">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+         <ref name="itemSet.content"/>
+         <ref name="itemSet.localattributes"/>
+      </element>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemSet.content">
+      <rng:oneOrMore xmlns="http://www.tei-c.org/ns/1.0"
+         xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:tei="http://www.tei-c.org/ns/1.0">
+         <rng:choice>
+            <rng:ref name="item"/>
+            <rng:ref name="itemGrp"/>
+         </rng:choice>
+      </rng:oneOrMore>
+   </define>
+   <define xmlns="http://relaxng.org/ns/structure/1.0" name="itemSet.localattributes">
+      <ref name="idtype.attributes"/>
+   </define>
+   <rng:start>
+      <rng:ref name="martif"/>
+   </rng:start>
+</rng:grammar>

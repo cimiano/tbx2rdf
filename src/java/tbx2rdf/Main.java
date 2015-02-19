@@ -3,28 +3,18 @@ package tbx2rdf;
 import tbx2rdf.types.TBX_Terminology;
 import com.hp.hpl.jena.rdf.model.Model;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
-import java.io.StringReader;
-import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 
 /**
