@@ -17,6 +17,9 @@ There are four kinds of mapping that we can do:
 * __Exceptional mapping__: This allows custom mapping function but requires
     recompiling the TBX2RDF converter.
 
+The default mapping file used by the service is
+[`mappings.default`](mappings.default).
+
 Value mapping
 -------------
 
@@ -87,5 +90,5 @@ Exceptional mappings are as follows:
     descrip	type	subjectField	<subjectField>	EX
 
 They are implemented by the method with the name given in angular brackets in 
-the file
-[`tbx2rdf.ExceptionMethods.java`](src/java/tbx2rdf/ExceptionMethods.java).
+the class
+[`tbx2rdf.ExceptionMethods`](src/java/tbx2rdf/ExceptionMethods.java).
