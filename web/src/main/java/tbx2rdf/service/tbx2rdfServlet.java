@@ -152,15 +152,7 @@ public class tbx2rdfServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Gets an standard header
-     */
-    private static String getHeader() {
-        return "<html><head>"
-                + "<link rel=stylesheet href=\"docs.css\"><link rel=\"stylesheet\" href=\"codemirror.css\"><script src=\"codemirror.js\"></script><script src=\"turtle.js\"></script>"
-                + "<link type=\"text/css\" rel=\"stylesheet\" href=\"http://www.licensius.com/css/vroddon.css\" />"
-                + " </head><body>";
-    }
+   
 
     /**
      * Get the submission form
@@ -176,7 +168,7 @@ public class tbx2rdfServlet extends HttpServlet {
                 + "  <textarea name='mappings' cols='80' rows='10'></textarea><br>\n"
                 + "  <input type='submit' value='Submit'><br>\n"
                 + "</form></body></html>";
-
+    }
 	/**
 	 * Gets an standard header
 	 */
