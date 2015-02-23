@@ -1,33 +1,27 @@
 package tbx2rdf;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
 import java.util.Set;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.apache.crimson.tree.XmlDocumentBuilder;
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
+
 import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.MartifHeader;
-import tbx2rdf.types.MartifHeader.TitleStmt;
 import tbx2rdf.types.Term;
 import tbx2rdf.vocab.ONTOLEX;
+
+import org.apache.crimson.tree.XmlDocumentBuilder;
+
 
 /**
  * This class makes the XML parsing of the TBX using the SAX lexiconsModel.
@@ -45,7 +39,7 @@ public class SAXHandler extends DefaultHandler {
 
     //Languages present in the file
     Set<String> languages = new HashSet();
-    
+
     //
     private String martiftype="";
     

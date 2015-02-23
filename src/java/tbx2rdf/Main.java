@@ -3,14 +3,11 @@ package tbx2rdf;
 import tbx2rdf.types.TBX_Terminology;
 import com.hp.hpl.jena.rdf.model.Model;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.PrintStream;
-import java.io.Writer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
@@ -25,7 +22,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * Main class for TBX2RDF Converter
+ * Main class for TBX2RDF Converter.
+ * WRONG DESIGN: IT IS CURRENTLY MIXING TBX2RDF AND IATE AFFAIRS
+ * 
  * Entry point of the functionality, it parses the parameters and invokes the conversion methods 
  * making them available from the command line.
  * Example of params for the command line: samples/iate.xml --output samples/iate.nt --big=true
@@ -147,6 +146,7 @@ public class Main {
             Document doc = db.parse(new File(input_file));
             return doc;
         } catch (Exception e) {
+            logger.warn(e.getMessage());
             e.printStackTrace();
             return null;
         }

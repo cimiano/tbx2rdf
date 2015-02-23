@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+//APACHE COMMONS
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -22,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 public class FileUploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = 8367618333138027430L;
+    
     private static final Logger log = Logger.getLogger(FileUploadServlet.class.getName());
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -35,12 +36,10 @@ public class FileUploadServlet extends HttpServlet {
             ServletFileUpload upload = new ServletFileUpload();
             res.setContentType("text/html");
             res.setCharacterEncoding("UTF-8");
-
             FileItemIterator iterator = upload.getItemIterator(req);
             while (iterator.hasNext()) {
                 FileItemStream item = iterator.next();
                 InputStream stream = item.openStream();
-
                 if (item.isFormField()) {
                     log.warning("Got a form field: " + item.getFieldName());
                 } else {
