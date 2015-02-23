@@ -30,14 +30,15 @@ public class Mappings {
 	public static Mappings readInMappings(Reader fstream) throws IOException {
 		final Mappings mappings = new Mappings();
 		final BufferedReader br = new BufferedReader(fstream);
-		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s*<(\\S*?)>$");
-		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*OP(\\s*\\{(.*?)\\})?$");
-		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*DP(\\s*<(.*?)>)?$");
-		final Pattern mapping4 = Pattern.compile("^(\\S*?)\\s*(\\S*?)\\s*(\\S*?)\\s*<(\\S*)>\\s*EX(\\s*\\{(.*?)\\})?$");
+		final Pattern mapping1 = Pattern.compile("^(\\S*?)\\s+<(\\S*?)>$");
+		final Pattern mapping2 = Pattern.compile("^(\\S*?)\\s+(\\S*?)\\s+(\\S*?)\\s+<(\\S*)>\\s+OP(\\s*\\{(.*?)\\})?$");
+		final Pattern mapping3 = Pattern.compile("^(\\S*?)\\s+(\\S*?)\\s+(\\S*?)\\s+<(\\S*)>\\s+DP(\\s*<(.*?)>)?$");
+		final Pattern mapping4 = Pattern.compile("^(\\S*?)\\s+(\\S*?)\\s+(\\S*?)\\s+<(\\S*)>\\s+EX(\\s*\\{(.*?)\\})?$");
 
 		String strLine;
 		Matcher matcher;
 		while ((strLine = br.readLine()) != null) {
+                        strLine = strLine.trim();
 
 			if ((matcher = mapping1.matcher(strLine)).find()) {
 				mappings.addMapping(matcher.group(1), new IndividualMapping(matcher.group(2)));

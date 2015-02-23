@@ -10,15 +10,12 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
@@ -55,7 +52,10 @@ public class Main {
         boolean big = false;
         boolean bOutputInConsole = true;
         String input_file = args[0];                                           //First argument, input file
-        String output_file = input_file.replaceAll("\\.xml", "\\.rdf");
+        String output_file = input_file.replaceAll("\\.(xml|tbx)", "\\.rdf");
+		if(!output_file.endsWith(".rdf")) {
+			output_file += ".rdf";
+		}
         String mapping_file = "mappings.default";
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
@@ -130,7 +130,7 @@ public class Main {
      * @param input_file Name of an input file, a XML file.
      * @return XML Document
      */
-    public static Document readXMLDocument(String input_file) {
+    /*public static Document readXMLDocument(String input_file) {
         try {
 
             TBX2RDF_Converter converter = new TBX2RDF_Converter();
@@ -143,6 +143,18 @@ public class Main {
             reader.close();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                        System.err.println(String.format("publicId=%s, systemId=%s", publicId, systemId));
+                    if (systemId.endsWith(".dtd")) {
+                        return new InputSource(new StringReader(""));
+                    } else {
+                        return null;
+                    }
+                }
+            });
             Document doc = db.parse(new File(input_file));
             return doc;
         } catch (Exception e) {
@@ -150,5 +162,5 @@ public class Main {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }

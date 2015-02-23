@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE martif SYSTEM "TBXcoreStructV02.dtd">
+<!-- VERSION HISTORY
+	version 1.1 (2008.12.23) - corrected XCS name to end in .xcs
+-->
+<!-- The following lines are required when validating this file against the TBX RNG schema.
+    If you want to use this schema for validation, instead of the DTD, you must uncomment the following
+    two lines, and comment-out the DOCTYPE statement on line 2.-->
+<!--<?oxygen SCHSchema="TBX_RNGV02.rng"?>-->
+<!--<?oxygen RNGSchema="TBX_RNGV02.rng" type="xml"?>-->
+
+<martif type="TBX" xml:lang="EN">
+	<martifHeader>
+		<fileDesc>
+			<sourceDesc>
+				<p>Muzerelle, "Vocabulaire Codicologique," 1985.</p>
+				<p> http://vocabulaire.irht.cnrs.fr/pages/vocab1.htm</p>
+			</sourceDesc>
+		</fileDesc>
+		<encodingDesc>
+			<p type="XCSURI">TBXXCSV02.xcs</p>
+		</encodingDesc>
+	</martifHeader>
+	<text>
+		<body>
+			<termEntry id="eid-VocCod-211.01">
+				<descrip type="subjectField">personnel</descrip>
+				<descrip type="definition">personne qui accomplit un travail copie ou
+					d'&#x00E9;criture</descrip>
+				<langSet xml:lang="fr">
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-fr1">copiste</term>
+							<termNote type="termType">entryTerm</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-fr2">scribe</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-fr3">&#x00E9;crivain</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+				</langSet>
+				<langSet xml:lang="it">
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-it1">scriba</term>
+							<termNote type="termType">entryTerm</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-it2">amanuense</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-it3">copista</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-it4">trascrittore</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+				</langSet>
+				<langSet xml:lang="es">
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-es1">copista</term>
+							<termNote type="termType">entryTerm</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-es2">escriba</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-es3">escribano</term>
+							<termNote type="termType">variant</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-es4">amanuense</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+				</langSet>
+				<langSet xml:lang="en">
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-en1">scribe</term>
+							<termNote type="termType">entryTerm</termNote>
+						</termGrp>
+					</ntig>
+					<ntig>
+						<termGrp>
+							<term id="tid-voccod-211.01-en2">copyist</term>
+							<termNote type="termType">synonym</termNote>
+						</termGrp>
+					</ntig>
+				</langSet>
+			</termEntry>
+		</body>
+	</text>
+</martif>

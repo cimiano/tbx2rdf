@@ -26,6 +26,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 
 //JENA
@@ -41,6 +42,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 //TBX2RDF
 import java.io.PrintStream;
+import java.util.Collections;
 import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
@@ -125,6 +127,17 @@ public class TBX2RDF_Converter {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                    if (systemId.endsWith(".dtd")) {
+                        return new InputSource(new StringReader(""));
+                    } else {
+                        return null;
+                    }
+                }
+            });
             InputSource is = new InputSource(new StringReader(xml));
             return builder.parse(is);
         } catch (Exception e) {
@@ -329,7 +342,18 @@ public class TBX2RDF_Converter {
     public TBX_Terminology convert(Reader input, Mappings mappings) throws IOException, ParserConfigurationException, TBXFormatException, SAXException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
-        //  InputStream stream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
+        db.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                    if (systemId.endsWith(".dtd")) {
+                        return new InputSource(new StringReader(""));
+                    } else {
+                        return null;
+                    }
+                }
+            });
+//  InputStream stream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
 
         Document doc = db.parse(new InputSource(input));
 
@@ -458,7 +482,8 @@ public class TBX2RDF_Converter {
     }
 
     private Collection<? extends Term> processBack(Element root, Mappings mappings) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		// TODO: This should do something right?
+		return Collections.EMPTY_LIST;
     }
 
     /**

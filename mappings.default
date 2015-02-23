@@ -91,7 +91,7 @@ termNote	directionality	bidirectional	<http://tbx2rdf.lider-project.eu/tbx#bidir
 termNote	directionality	incommensurate	<http://tbx2rdf.lider-project.eu/tbx#incommensurateTranslation>	OP
 termNote	directionality	monodirectional	<http://tbx2rdf.lider-project.eu/tbx#monodirectionalTranslation>	OP
 termNote	directionality	undetermined	<http://tbx2rdf.lider-project.eu/tbx#undeterminedTranslation>	OP
-termNote	type	abbreviatedFormFor	<http://tbx2rdf.lider-project.eu/tbx#abbreviatedFormFor>	OP
+termNote	type	abbreviatedFormFor	<http://tbx2rdf.lider-project.eu/tbx#abbreviatedFormFor>	DP
 termNote	type	administrativeStatus	<http://tbx2rdf.lider-project.eu/tbx#administrativeStatus>	OP	{admittedTerm-admn-sts,deprecatedTerm-admn-sts,legalTerm-admn-sts,preferredTerm-admn-sts,regulatedTerm-admn-sts,standardizedTerm-admn-sts,supersededTerm-admn-sts}
 admittedTerm-admn-sts  <http://tbx2rdf.lider-project.eu/tbx#admittedTerm-admn-sts>
 deprecatedTerm-admn-sts <http://tbx2rdf.lider-project.eu/tbx#deprecatedTerm-admn-sts>
@@ -202,7 +202,7 @@ termNote	type	transferComment	<http://tbx2rdf.lider-project.eu/tbx#transferComme
 termNote	type	usageNote	<http://tbx2rdf.lider-project.eu/tbx#usageNote>	DP
 transac	type	transactionType	<http://tbx2rdf.lider-project.eu/tbx#transactionType>	DP
 transacNote	type	responsibility	<http://www.w3.org/ns/prov#wasAssociatedWith>	DP
-transacNote	type	usageCount	<http://tbx2rdf.lider-project.eu/tbx#usaageCount>		DP
+transacNote	type	usageCount	<http://tbx2rdf.lider-project.eu/tbx#usaageCount>		DP  <http://www.w3.org/2001/XMLSchema#integer>
 xref	type	corpusTrace	<http://tbx2rdf.lider-project.eu/tbx#corpusTrace>		OP
 xref	type	externalCrossReference	<http://tbx2rdf.lider-project.eu/tbx#externalCrossReference>	OP
 xref	type	xAudio	<http://tbx2rdf.lider-project.eu/tbx#xAudio>	OP

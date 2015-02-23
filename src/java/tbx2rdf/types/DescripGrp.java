@@ -21,7 +21,8 @@ public class DescripGrp extends NoteLinkInfo {
         super("eng", null);
 
         //@todo This has been done adhoc. There should be a general mechanism to solve this.
-        if (descrip.type.getURL().equals("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode"))
+        if (descrip != null && descrip.type != null &&
+				descrip.type.getURL().equals("http://tbx2rdf.lider-project.eu/tbx#reliabilityCode"))
         {
             descrip.datatype = "http://www.w3.org/2001/XMLSchema#integer";
         }
