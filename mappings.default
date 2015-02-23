@@ -202,7 +202,7 @@ termNote	type	transferComment	<http://tbx2rdf.lider-project.eu/tbx#transferComme
 termNote	type	usageNote	<http://tbx2rdf.lider-project.eu/tbx#usageNote>	DP
 transac	type	transactionType	<http://tbx2rdf.lider-project.eu/tbx#transactionType>	DP
 transacNote	type	responsibility	<http://www.w3.org/ns/prov#wasAssociatedWith>	DP
-transacNote	type	usageCount	<http://tbx2rdf.lider-project.eu/tbx#usaageCount>		DP
+transacNote	type	usageCount	<http://tbx2rdf.lider-project.eu/tbx#usaageCount>		DP  <http://www.w3.org/2001/XMLSchema#integer>
 xref	type	corpusTrace	<http://tbx2rdf.lider-project.eu/tbx#corpusTrace>		OP
 xref	type	externalCrossReference	<http://tbx2rdf.lider-project.eu/tbx#externalCrossReference>	OP
 xref	type	xAudio	<http://tbx2rdf.lider-project.eu/tbx#xAudio>	OP

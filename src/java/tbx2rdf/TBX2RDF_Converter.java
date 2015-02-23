@@ -42,6 +42,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 
 //TBX2RDF
 import java.io.PrintStream;
+import java.util.Collections;
 import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
@@ -481,7 +482,8 @@ public class TBX2RDF_Converter {
     }
 
     private Collection<? extends Term> processBack(Element root, Mappings mappings) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		// TODO: This should do something right?
+		return Collections.EMPTY_LIST;
     }
 
     /**

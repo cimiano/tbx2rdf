@@ -49,7 +49,10 @@ public class Main {
         boolean big = false;
         boolean bOutputInConsole = true;
         String input_file = args[0];                                           //First argument, input file
-        String output_file = input_file.replaceAll("\\.xml", "\\.rdf");
+        String output_file = input_file.replaceAll("\\.(xml|tbx)", "\\.rdf");
+		if(!output_file.endsWith(".rdf")) {
+			output_file += ".rdf";
+		}
         String mapping_file = "mappings.default";
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
