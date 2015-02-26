@@ -25,38 +25,83 @@ import org.xml.sax.SAXException;
  * Entry point of the functionality, it parses the parameters and invokes the conversion methods 
  * making them available from the command line.
  * Example of params for the command line: samples/iate.xml --output samples/iate.nt --big=true
+ * Another example: samples/CounterSample.xml --output=samples/CounterSample.nt
  *  --output samples/iatefullmini.nt
+ * 
+ * It is advice to set a parameter in the Java Virtual Machine: -Dfile.encoding=UTF-8 in order to have good character encoding.
+ * 
  * @author John McCrae - Universität Bielefeld
  * @author Victor Rodriguez - Universidad Politécnica de Madrid 
  */
 public class Main {
 
+    private final static Logger logger = Logger.getLogger(Main.class);
+    //Determines whether it will be a stream-parsing (if big=true) or a block conversion (big=false)
+    static boolean big = false;
+    // Establishes the file with the mappings
+    static String mapping_file = "mappings.default";
+    // Input file name to be read from;
+    static String input_file = "";
+    // Output file name to be written to
+    static String output_file = "";
+    // If the output is to be shown in console
+    static boolean bOutputInConsole = true;
+    // The mappings to be used
+    public static Mappings mappings;
+    // The base namespace of the dataset
     public static String DATA_NAMESPACE = "http://tbx2rdf.lider-project.eu/data/iate/";
-    private final static Logger logger = Logger.getLogger(Main.class);        
     
+
     /**
      * Main method. 
-     * 
      */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        final Mappings mappings;
-        
         PropertyConfigurator.configure("log4j.properties");
 
-        if (args.length == 0) {
-            System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)? (--big=true)? (--datanamespace=<DATA_NAMESPACE>)?");
-            System.out.println("If no OUTPUT_FILE is provided, then <INPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
-            System.out.println("If no MAPPING_FILE is provided, then mappings.default will be used.");
+        boolean ok = parseParams(args);
+        if (!ok) {
             return;
         }
-        boolean big = false;
-        boolean bOutputInConsole = true;
-        String input_file = args[0];                                           //First argument, input file
-        String output_file = input_file.replaceAll("\\.(xml|tbx)", "\\.rdf");
-		if(!output_file.endsWith(".rdf")) {
-			output_file += ".rdf";
-		}
-        String mapping_file = "mappings.default";
+        
+        //READ MAPPINGS
+        logger.info("Using mapping file: " + mapping_file + "\n");
+        mappings = Mappings.readInMappings(mapping_file);
+
+        if (big) {
+            convertBigFile();
+        } else {
+            convertSmallFile();
+        }
+
+    }
+
+    /**
+     * Parses the command line parameters
+     */
+    public static boolean parseParams(String[] args) {
+        String ejecutando = "";
+        for (String ejecutandox : args) {
+            ejecutando += " " + ejecutandox;
+        }
+        logger.info(ejecutando);
+        if (args.length == 0) {
+            System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)? (--big=true)? (--datanamespace=<DATA_NAMESPACE>)?");
+            System.out.println("If no OUTPUT_FILE is provided, then <OUTPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
+            System.out.println("If no MAPPING_FILE is provided, then mappings.default will be used.");
+            return false;
+        }
+        input_file = args[0];                                           //First argument, input file
+        File file = new File(input_file);
+        if (!file.exists())
+        {
+            logger.error("The file " + input_file + " does not exist");
+            return false;
+        }
+        
+        output_file = input_file.replaceAll("\\.(xml|tbx)", "\\.rdf");
+        if (!output_file.endsWith(".rdf")) {
+            output_file += ".rdf";
+        }
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
             arg = args[i];
@@ -68,7 +113,7 @@ public class Main {
                 value = matcher.group(2);
                 if (key.equals("output")) {
                     output_file = value;
-                    bOutputInConsole=false;
+                    bOutputInConsole = false;
                     logger.info("OUTPUT_FILE set to" + output_file + "\n");
                 }
                 if (key.equals("mappings")) {
@@ -80,87 +125,66 @@ public class Main {
                     logger.info("DATA_NAMESPACE set to" + DATA_NAMESPACE + "\n");
                 }
                 if (key.equals("big")) {
-                    if (value.equals("true"))
+                    if (value.equals("true")) {
                         big = true;
+                    }
                     logger.info("Processing large file");
                 }
             }
         }
+        return true;
+    }
 
-        TBX2RDF_Converter converter = new TBX2RDF_Converter();
-
-        //READ MAPPINGS
-        logger.info("Using mapping file: " + mapping_file + "\n");
-        mappings = Mappings.readInMappings(mapping_file);
-
-        //READ XML
-        logger.info("Opening file " + input_file + "\n");
-        BufferedReader reader = new BufferedReader(new FileReader(input_file));
-
-        if (big) {
+    /**
+     * This is the conversion to be invoked for large files, that will be processed in a stream
+     * The output is serialized as the conversion is being done     
+     */
+    public static boolean convertBigFile() {
+        try {
+            bOutputInConsole = false;
             logger.info("Doing the conversion of a big file\n");
+            TBX2RDF_Converter converter = new TBX2RDF_Converter();
             PrintStream fos;
-            if (output_file.isEmpty() || bOutputInConsole)
+            if (output_file.isEmpty() || bOutputInConsole) {
                 fos = System.out;
-            else
-            {
+            } else {
                 fos = new PrintStream(output_file, "UTF-8");
             }
-            if (fos==null)
-            {
+            if (fos == null) {
                 logger.error("output file could not be open");
-                return;
+                return false;
             }
-            TBX_Terminology terminology3 = converter.convertAndSerializeLargeFile(input_file, fos, mappings);
-            //Note: The output is serialized as the conversion is being done
-            
-        } else { //standard conversion
-            logger.info("Doing the conversion\n");
+            converter.convertAndSerializeLargeFile(input_file, fos, mappings);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Standard conversion
+     * This is the conversion invoked from the web service. 
+     * Input file is read as a whole and kept in memory.
+     */
+    public static boolean convertSmallFile() {
+        try {
+            logger.info("Doing the standard conversion (not a big file)\n");
+            //READ TBX XML
+            logger.info("Opening file " + input_file + "\n");
+            BufferedReader reader = new BufferedReader(new FileReader(input_file));
+            TBX2RDF_Converter converter = new TBX2RDF_Converter();
             TBX_Terminology terminology = converter.convert(reader, mappings);
             //WRITE. This one has been obtained from 
             logger.info("Writting output to " + output_file + "\n");
             final Model model = terminology.getModel("file:" + output_file);
             RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);
+            reader.close();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return false;
         }
+        return true;
 
     }
-
-    /**
-     * Reads a XML document from a file, returning the XML Document
-     * @param input_file Name of an input file, a XML file.
-     * @return XML Document
-     */
-    /*public static Document readXMLDocument(String input_file) {
-        try {
-
-            TBX2RDF_Converter converter = new TBX2RDF_Converter();
-
-            BufferedReader reader = new BufferedReader(new FileReader(input_file));
-            String line, textstream = "";
-            while ((line = reader.readLine()) != null) {
-                textstream += line + "\n";
-            }
-            reader.close();
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setEntityResolver(new EntityResolver() {
-                @Override
-                public InputSource resolveEntity(String publicId, String systemId)
-                        throws SAXException, IOException {
-                        System.err.println(String.format("publicId=%s, systemId=%s", publicId, systemId));
-                    if (systemId.endsWith(".dtd")) {
-                        return new InputSource(new StringReader(""));
-                    } else {
-                        return null;
-                    }
-                }
-            });
-            Document doc = db.parse(new File(input_file));
-            return doc;
-        } catch (Exception e) {
-            logger.warn(e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }*/
 }

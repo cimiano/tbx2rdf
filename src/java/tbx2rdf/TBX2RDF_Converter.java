@@ -43,6 +43,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 //TBX2RDF
 import java.io.PrintStream;
 import java.util.Collections;
+import org.apache.log4j.Logger;
 import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
@@ -72,6 +73,7 @@ import tbx2rdf.types.TransacNote;
 import tbx2rdf.types.Transaction;
 import tbx2rdf.types.abs.impID;
 import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
+import tbx2rdf.utils.XMLUtils;
 import tbx2rdf.vocab.DC;
 import tbx2rdf.vocab.IATE;
 
@@ -97,6 +99,9 @@ import tbx2rdf.vocab.IATE;
  */
 public class TBX2RDF_Converter {
 
+    private final static Logger logger = Logger.getLogger(TBX2RDF_Converter.class);
+    
+    
     /**
      * Do not construct
      */
@@ -120,221 +125,6 @@ public class TBX2RDF_Converter {
     }
 
     /**
-     * Gently loads a DOM XML document from a XML fragment.
-     * If it fails, it returns null;
-     */
-    public static Document loadXMLFromString(String xml) throws Exception {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            builder.setEntityResolver(new EntityResolver() {
-                @Override
-                public InputSource resolveEntity(String publicId, String systemId)
-                        throws SAXException, IOException {
-                    if (systemId.endsWith(".dtd")) {
-                        return new InputSource(new StringReader(""));
-                    } else {
-                        return null;
-                    }
-                }
-            });
-            InputSource is = new InputSource(new StringReader(xml));
-            return builder.parse(is);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    /**
-     * Converts a XML TBX file (handling large files...)
-     * It does not hold in memory the whole dataset, but parses it as it comes.
-     * 
-     * @param file Path to the input file
-     * @param mappings Mappings
-     * @return The TBX terminology
-     */
-    public TBX_Terminology convertAndSerializeLargeFile(String file, PrintStream fos, Mappings mappings) {
-        String resourceURI = new String(Main.DATA_NAMESPACE);
-       // TBX2RDF_Converter converter = new TBX2RDF_Converter();
-        FileInputStream inputStream = null;
-        Scanner sc = null;
-        boolean dentro = false;
-        int count = 0;
-        int errors = 0;
-
-        //We first count the lexicons we have
-        SAXHandler handler = null;
-        HashMap<String, Resource> lexicons = new HashMap();
-        try {
-            InputStream xmlInput = new FileInputStream(file);
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser saxParser = factory.newSAXParser();
-            handler = new SAXHandler(mappings);
-            saxParser.parse(xmlInput, handler);
-            lexicons = handler.getLexicons();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        count = 0;
-
-        MartifHeader martifheader = null;
-        //WE PROCESS HERE THE MARTIF HEADER
-        try {
-            inputStream = new FileInputStream(file);
-            sc = new Scanner(inputStream, "UTF-8");
-            String xml = "";
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                //We identify the terms by scanning the strings. Not a very nice practice, though.
-                int index = line.indexOf("<martifHeader");
-                if (index != -1) {
-                    dentro = true;
-                    xml = line.substring(index) + "\n";
-                }
-                if (dentro == true && index == -1) {
-                    xml = xml + line + "\n";
-                }
-                index = line.indexOf("</martifHeader>");
-                if (index != -1) {
-                    xml = xml + line.substring(0, index) + "\n";
-                    count++;
-                    //We do a partial parsing of this XML fragment
-                    Document doc = loadXMLFromString(xml);
-                    Element root = doc.getDocumentElement();
-                    martifheader = this.processMartifHeader(root, mappings);
-                    break;
-                }
-
-            }
-        } catch (Exception e) {
-        }
-
-        if (martifheader==null)
-            return null;
-        
-        //First we serialize the header
-        Model mdataset = ModelFactory.createDefaultModel();
-        //The whole dataset!
-        final Resource rdataset = mdataset.createResource(resourceURI);
-        rdataset.addProperty(DCTerms.type, handler.getMartifType());
-        //This should be generalized
-        rdataset.addProperty(RDF.type, mdataset.createResource("http://www.w3.org/ns/dcat#Dataset"));
-        rdataset.addProperty(DC.rights, IATE.rights);
-        rdataset.addProperty(DC.source, IATE.iate);
-        rdataset.addProperty(DC.attribution, "Download IATE, European Union, 2014");
-        martifheader.toRDF(mdataset, rdataset);
-        RDFDataMgr.write(fos, mdataset, Lang.NTRIPLES);
-        
-        
-        Model msubjectFields = SubjectFields.generateSubjectFields();
-        RDFDataMgr.write(fos, msubjectFields, Lang.NTRIPLES);
-        
-        
-
-        //We declare that every lexicon belongs to 
-        Iterator it = lexicons.entrySet().iterator();
-        Property prootresource=mdataset.createProperty("http://www.w3.org/TR/void/rootResource");
-        while (it.hasNext()) {
-            Map.Entry e = (Map.Entry) it.next();
-            Resource rlexicon = (Resource) e.getValue();
-            rlexicon.addProperty(prootresource, rdataset);
-        }
-        
-        
-
-        try {
-            inputStream = new FileInputStream(file);
-            sc = new Scanner(inputStream, "UTF-8");
-            String xml = "";
-
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                //We identify the terms by scanning the strings. Not a very nice practice, though.
-                int index = line.indexOf("<termEntry");
-                if (index != -1) {
-                    dentro = true;
-                    xml = line.substring(index) + "\n";
-                }
-                if (dentro == true && index == -1) {
-                    xml = xml + line + "\n";
-                }
-                index = line.indexOf("</termEntry>");
-                if (index != -1) {
-                    xml = xml + line.substring(0, index) + "\n";
-                    count++;
-                    //We do a partial parsing of this XML fragment
-                    Document doc = loadXMLFromString(xml);
-                    if (doc == null) {
-                        continue;
-                    }
-                    Element root = doc.getDocumentElement();
-                    if (root != null) {
-                        try {
-                            Term term = processTermEntry(root, mappings);
-                            Model model = ModelFactory.createDefaultModel();
-                            TBX.addPrefixesToModel(model);
-                            model.setNsPrefix("", Main.DATA_NAMESPACE);
-                            final Resource rterm = term.getRes(model);
-                            rterm.addProperty(RDF.type, SKOS.Concept);
-                            term.toRDF(model, rterm);
-                            for (LexicalEntry le : term.Lex_entries) {
-                                final Resource lexicon = lexicons.get(term.lang);
-                                lexicon.addProperty(ONTOLEX.entry, le.getRes(model));
-                                le.toRDF(model, rterm);
-                            }
-                            RDFDataMgr.write(fos, model, Lang.NTRIPLES);
-                        } catch (Exception e) {
-                            errors++;
-                            System.err.println("Error " + e.getMessage());
-                        }
-                        if (count % 1000 == 0) {
-                            System.err.println("Total: " + count + " Errors: " + errors);
-                        }
-                    }
-                    xml = "";
-                }
-            } //end of while
-
-            //Now we serialize the lexicons
-            RDFDataMgr.write(fos, handler.getLexiconsModel(), Lang.NTRIPLES);
-
-
-
-            // note that Scanner suppresses exceptions
-            if (sc.ioException() != null) {
-                throw sc.ioException();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (sc != null) {
-                sc.close();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Converts a XML TBX file by using SAX parsing (handling large files...)
-     * @param file Path to the input file
-     * @param mappings Mappings
-     * @return The TBX terminology
-     */
-    /*  public TBX_Terminology convertLargeFile(String file, Mappings mappings) {
-    SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
-    try {
-    SAXParser saxParser = saxParserFactory.newSAXParser();
-    SAXHandler handler = new SAXHandler(mappings);
-    
-    saxParser.parse(new File(file), handler);
-    } catch (ParserConfigurationException | SAXException | IOException e) {
-    e.printStackTrace();
-    }
-    return null;
-    //      return processMartif(root,mappings);
-    }
-     */
-    /**
      * Makes the conversion given a certain input and a set of mappings. This is done with a 
      * @param input Input 
      * @param mappings Mappings
@@ -344,8 +134,7 @@ public class TBX2RDF_Converter {
         DocumentBuilder db = dbf.newDocumentBuilder();
         db.setEntityResolver(new EntityResolver() {
                 @Override
-                public InputSource resolveEntity(String publicId, String systemId)
-                        throws SAXException, IOException {
+                public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
                     if (systemId.endsWith(".dtd")) {
                         return new InputSource(new StringReader(""));
                     } else {
@@ -353,14 +142,14 @@ public class TBX2RDF_Converter {
                     }
                 }
             });
-//  InputStream stream = new ByteArrayInputStream(str.getBytes(StandardCharsets.UTF_8));
 
+        // parse the input document
         Document doc = db.parse(new InputSource(input));
 
         // extract here martif metadata
         Element root = doc.getDocumentElement();
 
-        return processMartif(root, mappings);
+        return createTerminology(root, mappings);
 
     }
 
@@ -368,10 +157,13 @@ public class TBX2RDF_Converter {
      * Processes the whole TBX file from the root XML element (once built the DOM model)
      * @param root The root element
      */
-    TBX_Terminology processMartif(Element root, Mappings mappings) throws IOException, SAXException {
-        final TBX_Terminology terminology = new TBX_Terminology(root.getAttribute("type"), processMartifHeader(child(root, "martifHeader"), mappings));
+    TBX_Terminology createTerminology(Element root, Mappings mappings) throws IOException, SAXException {
+        
+        MartifHeader header = processMartifHeader(XMLUtils.child(root, "martifHeader"), mappings); 
+        final TBX_Terminology terminology = new TBX_Terminology(root.getAttribute("type"), header);
         mappings.defaultLanguage = "en";
-        for (Element e : children(root)) {
+        
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("text")) {
                 for (Term t : processText(e, mappings)) {
                     terminology.addTerm(t);
@@ -380,7 +172,6 @@ public class TBX2RDF_Converter {
                 unexpected(root);
             }
         }
-
         return terminology;
     }
 
@@ -392,10 +183,9 @@ public class TBX2RDF_Converter {
      * @param mappings Mappings
      */
     MartifHeader processMartifHeader(Element root, Mappings mappings) throws IOException, SAXException {
-        final MartifHeader header = new MartifHeader(processFileDescrip(child(root, "fileDesc"), mappings));
+        final MartifHeader header = new MartifHeader(processFileDescrip(XMLUtils.child(root, "fileDesc"), mappings));
         processID(header, root);
-
-        for (Element e : children(root)) {
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("encodingDesc")) {
                 header.encodingDesc = e.getChildNodes();
             } else if (e.getTagName().equalsIgnoreCase("revisionDesc")) {
@@ -404,17 +194,17 @@ public class TBX2RDF_Converter {
                 unexpected(e);
             }
         }
-
         return header;
     }
 
     /**
      * Obtains a FileDesc object by parsing a XML element.
+     * <filedesc>: A nesting element containing child elements that describe the TBX document instance.
      */
     public FileDesc processFileDescrip(Element root, Mappings mappings) throws IOException, SAXException {
         final FileDesc fileDesc = new FileDesc();
 
-        for (Element e : children(root)) {
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("titleStmt")) {
                 fileDesc.titleStmt = processTitleStmt(e, mappings);
             } else if (e.getTagName().equalsIgnoreCase("publicationStmt")) {
@@ -430,22 +220,25 @@ public class TBX2RDF_Converter {
 
     }
 
+    /**
+     * Processes some metadata elements from the root element
+     */
     private TitleStmt processTitleStmt(Element root, Mappings mappings) {
-        final TitleStmt titleStmt = new TitleStmt(child(root, "title").getTextContent());
+        final TitleStmt titleStmt = new TitleStmt(XMLUtils.child(root, "title").getTextContent());
         if (root.hasAttribute("xml:lang")) {
             titleStmt.lang = root.getAttribute("xml:lang");
         }
         if (root.hasAttribute("id")) {
             titleStmt.id = root.getAttribute("id");
         }
-        final Element title = child(root, "title");
+        final Element title = XMLUtils.child(root, "title");
         if (title.hasAttribute("xml:lang")) {
             titleStmt.title_lang = title.getAttribute("xml:lang");
         }
         if (root.hasAttribute("id")) {
             titleStmt.title_id = title.getAttribute("id");
         }
-        for (Element e : children(root)) {
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("note")) {
                 titleStmt.notes.add(e);
             }
@@ -454,9 +247,13 @@ public class TBX2RDF_Converter {
         return titleStmt;
     }
 
+    /**
+     * Processes the body element and the back element.
+     * We arrive here with a <text> element.
+     */
     Collection<Term> processText(Element root, Mappings mappings) throws IOException, SAXException {
         final Collection<Term> terms = new HashSet<Term>();
-        for (Element e : children(root)) {
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("body")) {
                 terms.addAll(processBody(e, mappings));
             } else if (e.getTagName().equalsIgnoreCase("back")) {
@@ -469,9 +266,13 @@ public class TBX2RDF_Converter {
         return terms;
     }
 
+    /**
+     * Processes the collection of terms
+     * We arreive here with a <body> element
+     */
     private Collection<? extends Term> processBody(Element root, Mappings mappings) {
         final Collection<Term> terms = new HashSet<Term>();
-        for (Element e : children(root)) {
+        for (Element e : XMLUtils.children(root)) {
             if (e.getTagName().equalsIgnoreCase("termEntry")) {
                 terms.add(processTermEntry(e, mappings));
             } else {
@@ -483,7 +284,7 @@ public class TBX2RDF_Converter {
 
     private Collection<? extends Term> processBack(Element root, Mappings mappings) {
 		// TODO: This should do something right?
-		return Collections.EMPTY_LIST;
+        return Collections.EMPTY_LIST;
     }
 
     /**
@@ -506,7 +307,7 @@ public class TBX2RDF_Converter {
         String sid=node.getAttribute("id");
         term.setID(sid);
 
-        for (Element sub : children(node)) {
+        for (Element sub : XMLUtils.children(node)) {
             final String name = sub.getTagName();
 
             if (name.equalsIgnoreCase("langSet")) {
@@ -558,7 +359,7 @@ public class TBX2RDF_Converter {
         processID((impID) descr, node);
 
         int i = 0;
-        for (Element tig_child : children(node)) {
+        for (Element tig_child : XMLUtils.children(node)) {
 
             String name = tig_child.getNodeName();
 
@@ -597,7 +398,7 @@ public class TBX2RDF_Converter {
         // xml:lang CDATA #REQUIRED >
 
         LexicalEntry entry;
-        String language = getValueOfAttribute(langSet, "xml:lang");
+        String language = XMLUtils.getValueOfAttribute(langSet, "xml:lang");
 
         if (language == null) {
             throw new TBXFormatException("Language not specified for langSet!");
@@ -607,7 +408,7 @@ public class TBX2RDF_Converter {
 
         processID(term, langSet);
 
-        for (Element sub : children(langSet)) {
+        for (Element sub : XMLUtils.children(langSet)) {
 
             final String name = sub.getNodeName();
 
@@ -641,7 +442,7 @@ public class TBX2RDF_Converter {
         int i = 0;
 
         processID(entry, tig);
-        Iterable<Element> children = children(tig);
+        Iterable<Element> children = XMLUtils.children(tig);
         for (Element tig_child : children) {
 
             String name = tig_child.getNodeName();
@@ -694,7 +495,7 @@ public class TBX2RDF_Converter {
         // id ID #IMPLIED	
         // >
         int i = 0;
-        for (Element ntig_child : children(ntig)) {
+        for (Element ntig_child : XMLUtils.children(ntig)) {
 
             String name = ntig_child.getNodeName();
 
@@ -717,7 +518,7 @@ public class TBX2RDF_Converter {
         // <!ATTLIST xref
         // %impIDType;
         // target CDATA #REQUIRED >
-        XReference xref = new XReference(getValueOfAttribute(node, "target"), node.getTextContent());
+        XReference xref = new XReference(XMLUtils.getValueOfAttribute(node, "target"), node.getTextContent());
 
         processID(xref, node);
         xref.type = processType(node, mappings, false);
@@ -732,11 +533,11 @@ public class TBX2RDF_Converter {
         // <!ATTLIST descripGrp
         //  id ID #IMPLIED >
 
-        DescripGrp descrip = new DescripGrp(processDescrip(firstChild("descrip", node), mappings));
+        DescripGrp descrip = new DescripGrp(processDescrip(XMLUtils.firstChild("descrip", node), mappings));
         processID(descrip, node);
         // get first child that needs to be a descrip
-        // process other children that can be: descripNote, admin, adminGroup, transacGrp, note, ref and xref
-        for (Element sub : children(node)) {
+        // process other XMLUtils.children that can be: descripNote, admin, adminGroup, transacGrp, note, ref and xref
+        for (Element sub : XMLUtils.children(node)) {
             final String name = sub.getTagName();
             if (name.equalsIgnoreCase("descrip")) {
                 // ignore
@@ -796,14 +597,14 @@ public class TBX2RDF_Converter {
         // id ID #IMPLIED >
         Element elemTransac = null;
         try {
-            elemTransac = firstChild("transac", elem);
+            elemTransac = XMLUtils.firstChild("transac", elem);
         } catch (Exception e) {
             return;
         }
         final TransacGrp transacGrp = new TransacGrp(processTransac(elemTransac, mappings));
 
         int i = 0;
-        for (Element child : children(elem)) {
+        for (Element child : XMLUtils.children(elem)) {
 
             String name = child.getNodeName();
 
@@ -836,7 +637,7 @@ public class TBX2RDF_Converter {
         // <!ATTLIST termGrp
         //  id ID #IMPLIED
         //>
-        for (Element elem : children(node)) {
+        for (Element elem : XMLUtils.children(node)) {
             final String name = elem.getTagName();
             if (name.equalsIgnoreCase("term")) {
                 processTerm(entry, elem, mappings);
@@ -913,8 +714,8 @@ public class TBX2RDF_Converter {
         //<!ATTLIST termNoteGrp
         //id ID #IMPLIED
         //> 
-        final TermNoteGrp termNoteGrp = new TermNoteGrp(processTermNote(firstChild("termNote", elem), mappings), elem.getAttribute("xml:lang"), mappings);
-        for (Element e : children(elem)) {
+        final TermNoteGrp termNoteGrp = new TermNoteGrp(processTermNote(XMLUtils.firstChild("termNote", elem), mappings), elem.getAttribute("xml:lang"), mappings);
+        for (Element e : XMLUtils.children(elem)) {
             final String name = e.getTagName();
             if (name.equalsIgnoreCase("termNote")) {
                 // Do nothing
@@ -943,7 +744,7 @@ public class TBX2RDF_Converter {
         //>
         final TermCompList termCompList = new TermCompList(mappings.getMapping("termCompList", "type", elem.getAttribute("type")));
         processID(termCompList, elem);
-        for (Element e : children(elem)) {
+        for (Element e : XMLUtils.children(elem)) {
             final String name = e.getTagName();
             if (name.equalsIgnoreCase("termComp")) {
                 final TermComp termComp = processTermComp(e, mappings);
@@ -983,8 +784,8 @@ public class TBX2RDF_Converter {
         //<!ATTLIST termCompGrp
         //id ID #IMPLIED
         //>
-        final TermCompGrp termCompGrp = new TermCompGrp(processTermComp(firstChild("termComp", elem), mappings), null, mappings);
-        for (Element e : children(elem)) {
+        final TermCompGrp termCompGrp = new TermCompGrp(processTermComp(XMLUtils.firstChild("termComp", elem), mappings), null, mappings);
+        for (Element e : XMLUtils.children(elem)) {
             final String name = e.getTagName();
             if (name.equalsIgnoreCase("termNote")) {
                 termCompGrp.termNoteGrps.add(new TermNoteGrp(processTermNote(e, mappings), null, mappings));
@@ -1007,48 +808,13 @@ public class TBX2RDF_Converter {
         termCompList.termComp.add(termCompGrp);
     }
 
+
+
+
+
     /**
-     * Gets the value of an XML attribute
-     *
-     * @param node XML attribute
-     * @param name Name of the attribute
-     * @return Value of the attribute
+     * 
      */
-    private String getValueOfAttribute(Node node, String name) {
-
-        NamedNodeMap map = node.getAttributes();
-
-        Node namedItem = map.getNamedItem(name);
-
-        if (namedItem != null) {
-            return namedItem.getNodeValue();
-        } else {
-            throw new TBXFormatException("Node " + node.getNodeName() + " does not have expected attribute " + name);
-        }
-
-    }
-
-    private Iterable<Element> children(Node n) {
-        final List<Element> e = new ArrayList<Element>();
-        final NodeList ns = n.getChildNodes();
-        for (int i = 0; i < ns.getLength(); i++) {
-            if (ns.item(i) instanceof Element) {
-                e.add((Element) ns.item(i));
-            }
-        }
-        return e;
-    }
-
-    private Element child(Node n, String tagName) {
-        final NodeList ns = n.getChildNodes();
-        for (int i = 0; i < ns.getLength(); i++) {
-            if (ns.item(i) instanceof Element && ((Element) ns.item(i)).getTagName().equalsIgnoreCase(tagName)) {
-                return (Element) ns.item(i);
-            }
-        }
-        throw new TBXFormatException("Expected " + tagName);
-    }
-
     private void unexpected(Node n) {
         if (n instanceof Element) {
             throw new TBXFormatException("Unexpected " + ((Element) n).getTagName());
@@ -1115,20 +881,15 @@ public class TBX2RDF_Converter {
 
     }
 
-    public Element firstChild(String name, Element node) {
-        final NodeList nl = node.getElementsByTagName(name);
-        if (nl.getLength() > 0) {
-            return (Element) nl.item(0);
-        } else {
-            throw new TBXFormatException("Expected child named " + name);
-        }
-    }
 
+    /**
+     * 
+     */
     private Mapping processType(Element sub, Mappings mappings, boolean required) {
         if (sub.hasAttribute("type")) {
             final Mapping m = mappings.getMapping(sub.getTagName(), "type", sub.getAttribute("type"));
             if (m == null && required) {
-                System.err.println("Unrecognised mapping for <" + sub.getTagName() + " type=\"" + sub.getAttribute("type") + "\">");
+                logger.warn("Unrecognised mapping for <" + sub.getTagName() + " type=\"" + sub.getAttribute("type") + "\">");
             }
             return m;
         } else if (required) {
@@ -1138,4 +899,214 @@ public class TBX2RDF_Converter {
             return null;
         }
     }
+    
+    
+    /**
+     * Converts a XML TBX file (handling large files...)
+     * It does not hold in memory the whole dataset, but parses it as it comes.
+     * 
+     * A TBX file root element is called "martif". It has two childre: marthifHeader and text
+     * 
+     * 
+     * @param file Path to the input file
+     * @param mappings Mappings
+     * @return The TBX terminology
+     */
+    public TBX_Terminology convertAndSerializeLargeFile(String file, PrintStream fos, Mappings mappings) {
+        String resourceURI = new String(Main.DATA_NAMESPACE);
+        FileInputStream inputStream = null;
+        Scanner sc = null;
+        int count = 0;
+        int errors = 0;
+
+        //We first count the lexicons we have
+        SAXHandler handler = null;
+        HashMap<String, Resource> lexicons = new HashMap();
+        try {
+            InputStream xmlInput = new FileInputStream(file);
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            SAXParser saxParser = factory.newSAXParser();
+            handler = new SAXHandler(mappings);
+            saxParser.parse(xmlInput, handler);
+            lexicons = handler.getLexicons();
+            xmlInput.close();
+        } catch (Exception e) {
+            logger.warn(e.getMessage());
+        }
+
+        //WE PROCESS HERE THE MARTIF HEADER
+        MartifHeader martifheader = extractAndReadMartifHeader(file, mappings);
+        
+
+        if (martifheader==null)
+            return null;
+        
+        //First we serialize the header
+        Model mdataset = ModelFactory.createDefaultModel();
+        //The whole dataset!
+        final Resource rdataset = mdataset.createResource(resourceURI);
+        rdataset.addProperty(DCTerms.type, handler.getMartifType());
+        //This should be generalized
+        rdataset.addProperty(RDF.type, mdataset.createResource("http://www.w3.org/ns/dcat#Dataset"));
+        rdataset.addProperty(DC.rights, IATE.rights);
+        rdataset.addProperty(DC.source, IATE.iate);
+        rdataset.addProperty(DC.attribution, "Download IATE, European Union, 2014");
+        martifheader.toRDF(mdataset, rdataset);
+        RDFDataMgr.write(fos, mdataset, Lang.NTRIPLES);
+
+        
+        Model msubjectFields = SubjectFields.generateSubjectFields();
+        RDFDataMgr.write(fos, msubjectFields, Lang.NTRIPLES);
+        
+        
+
+        //We declare that every lexicon belongs to 
+        Iterator it = lexicons.entrySet().iterator();
+        Property prootresource=mdataset.createProperty("http://www.w3.org/TR/void/rootResource");
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry) it.next();
+            Resource rlexicon = (Resource) e.getValue();
+            rlexicon.addProperty(prootresource, rdataset);
+        }
+        
+        
+        boolean dentro = false;
+        try {
+            inputStream = new FileInputStream(file);
+            sc = new Scanner(inputStream, "UTF-8");
+            String xml = "";
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                //We identify the terms by scanning the strings. Not a very nice practice, though.
+                int index = line.indexOf("<termEntry");
+                if (index != -1) {
+                    dentro = true;
+                    xml = line.substring(index) + "\n";
+                }
+                if (dentro == true && index == -1) {
+                    xml = xml + line + "\n";
+                }
+                index = line.indexOf("</termEntry>");
+                if (index != -1) {
+                    xml = xml + line.substring(0, index) + "\n";
+                    count++;
+                    //We do a partial parsing of this XML fragment
+                    Document doc = loadXMLFromString(xml);
+                    if (doc == null) {
+                        continue;
+                    }
+                    Element root = doc.getDocumentElement();
+                    if (root != null) {
+                        try {
+                            Term term = processTermEntry(root, mappings);
+                            Model model = ModelFactory.createDefaultModel();
+                            TBX.addPrefixesToModel(model);
+                            model.setNsPrefix("", Main.DATA_NAMESPACE);
+                            final Resource rterm = term.getRes(model);
+                            rterm.addProperty(RDF.type, SKOS.Concept);
+                            term.toRDF(model, rterm);
+                            for (LexicalEntry le : term.Lex_entries) {
+                                final Resource lexicon = lexicons.get(term.lang);
+                                lexicon.addProperty(ONTOLEX.entry, le.getRes(model));
+                                le.toRDF(model, rterm);
+                            }
+                            RDFDataMgr.write(fos, model, Lang.NTRIPLES);
+                        } catch (Exception e) {
+                            errors++;
+                            System.err.println("Error " + e.getMessage());
+                        }
+                        if (count % 1000 == 0) {
+                            System.err.println("Total: " + count + " Errors: " + errors);
+                        }
+                    }
+                    xml = "";
+                }
+            } //end of while
+
+            //Now we serialize the lexicons
+            RDFDataMgr.write(fos, handler.getLexiconsModel(), Lang.NTRIPLES);
+
+
+
+            // note that Scanner suppresses exceptions
+            if (sc.ioException() != null) {
+                throw sc.ioException();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (sc != null) {
+                sc.close();
+            }
+        }
+        return null;
+    }        
+    /**
+     * Gently loads a DOM XML document from a XML fragment.
+     * If it fails, it returns null;
+     */
+    private static Document loadXMLFromString(String xml) throws Exception {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            builder.setEntityResolver(new EntityResolver() {
+                @Override
+                public InputSource resolveEntity(String publicId, String systemId)
+                        throws SAXException, IOException {
+                    if (systemId.endsWith(".dtd")) {
+                        return new InputSource(new StringReader(""));
+                    } else {
+                        return null;
+                    }
+                }
+            });
+            InputSource is = new InputSource(new StringReader(xml));
+            return builder.parse(is);
+        } catch (Exception e) {
+            return null;
+        }
+    }        
+    
+
+    /**
+     * Parses the text manually, extracting as text the fragment where the MartifHeader is and then parses it as XML.
+     */
+    public MartifHeader extractAndReadMartifHeader(String file, Mappings mappings)
+    {
+        MartifHeader martifheader = null;
+        boolean dentro = false;
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            Scanner sc = new Scanner(inputStream, "UTF-8");
+            String xml = "";
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                //We identify the terms by scanning the strings. Not a very nice practice, though.
+                int index = line.indexOf("<martifHeader");
+                if (index != -1) {
+                    dentro = true;
+                    xml = line.substring(index) + "\n";
+                }
+                if (dentro == true && index == -1) {
+                    xml = xml + line + "\n";
+                }
+                index = line.indexOf("</martifHeader>");
+                if (index != -1) {
+                    xml = xml + line.substring(0, index) + "\n";
+                    //We do a partial parsing of this XML fragment
+                    Document doc = loadXMLFromString(xml);
+                    Element root = doc.getDocumentElement();
+                    martifheader = this.processMartifHeader(root, mappings);
+                    break;
+                }
+
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            logger.warn("Could not parse well the general metadata (MartifHeader)" + e.getMessage());
+        }
+        return martifheader;
+}    
+    
 }
