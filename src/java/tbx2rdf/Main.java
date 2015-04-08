@@ -46,6 +46,8 @@ public class Main {
     static String output_file = "";
     // If the output is to be shown in console
     static boolean bOutputInConsole = true;
+    //Determines if the parsing is going to be lenient or strict
+    static boolean lenient = false;
     // The mappings to be used
     public static Mappings mappings;
     // The base namespace of the dataset
@@ -105,7 +107,7 @@ public class Main {
         String arg, key, value;
         for (int i = 1; i < args.length; i++) {
             arg = args[i];
-            Pattern p = Pattern.compile("^--(output|mappings|big)=(.*?)$");
+            Pattern p = Pattern.compile("^--(output|mappings|datanamespace|big|lenient)=(.*?)$");
             Matcher matcher;
             matcher = p.matcher(arg);
             if (matcher.matches()) {
@@ -129,6 +131,12 @@ public class Main {
                         big = true;
                     }
                     logger.info("Processing large file");
+                }
+                if (key.equals("lenient")) {
+                    if (value.equals("true")) {
+                        lenient = true;
+                    }
+                    logger.info("Processing in lenient mode");
                 }
             }
         }
