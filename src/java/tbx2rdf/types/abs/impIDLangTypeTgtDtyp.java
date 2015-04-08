@@ -97,16 +97,17 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-//                    Method  method = c.getDeclaredMethod ("method name", parameterTypes)
+//                  Method  method = c.getDeclaredMethod ("method name", parameterTypes)
                 }
                 else {
                     logger.warn("Unexpected mapping type when processing " + parent.getURI()  );
-                    
                     throw new RuntimeException("Unexpected mapping type. You may want to visit https://github.com/cimiano/tbx2rdf/blob/master/MAPPINGS.md");
 		}
-
 	}
         
+        /**
+         * 
+         */
     public static String getFirstLabel(Model model, String uri) {
         Resource res = model.getResource(uri);
         if (res == null) {
