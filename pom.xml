@@ -133,7 +133,7 @@
                <goal>copy-resources</goal>
             </goals>
             <configuration>
-               <outputDirectory>${basedir}/target/tbxcheck</outputDirectory>
+               <outputDirectory>${basedir}/target</outputDirectory>
                <resources>          
                     <resource>
                         <directory>doc/reference/TBX-resources</directory>
