@@ -25,10 +25,10 @@ public class TermCompList extends Describable {
         final Resource comp = getRes(model);
         comp.addProperty(ONTOLEX.identifies, parent);
         if (type != null)
-        parent.addProperty(model.createProperty(type.getURL()), comp);
-        for(TermCompGrp termCompGrp : termComp) {
-            termCompGrp.toRDF(model, comp);
-        }
+            parent.addProperty(model.createProperty(type.getURL()), comp);
+            for(TermCompGrp termCompGrp : termComp) {
+                termCompGrp.toRDF(model, comp);
+            }
         super.toRDF(model, comp);
     }
    

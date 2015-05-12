@@ -24,7 +24,7 @@ public class TermCompGrp extends NoteLinkInfo {
     public void toRDF(Model model, Resource parent) {
         final Resource component = (id == null ? termComp.getRes(model) : getRes(model));
         parent.addProperty(ONTOLEX.constituent, component);
-        termComp.toRDF(model, component);
+        termComp.toRDF(model, component); //component
         for(TermNoteGrp termNoteGrp : termNoteGrps) {
             termNoteGrp.toRDF(model, component);
         }

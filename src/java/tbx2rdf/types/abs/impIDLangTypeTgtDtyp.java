@@ -63,8 +63,8 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
 				if (im == null) {
 					throw new TBXFormatException("Mapping not in declared property range or value URI not declared: " + valueString + " " + opm.getURL());
 				}
-				parent.addProperty(model.createProperty(opm.getURL()),
-					model.createResource(im.getURL()));
+                                    parent.addProperty(model.createProperty(opm.getURL()),
+                                    model.createResource(im.getURL()));
 			} else {
 				try {
 					final URI uri = new URI(valueString);

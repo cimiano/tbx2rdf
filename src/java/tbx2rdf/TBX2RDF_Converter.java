@@ -319,7 +319,8 @@ public class TBX2RDF_Converter {
         }
 
         if (langsetcount == 0) {
-            throw new TBXFormatException("No langSet element in termEntry");
+            logger.warn("No langSet element in termEntry");
+//            throw new TBXFormatException("No langSet element in termEntry");
         }
 
         return term;

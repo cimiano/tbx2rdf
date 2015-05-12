@@ -4,6 +4,8 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
+import java.util.HashMap;
+import java.util.Map;
 import org.w3c.dom.NodeList;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
@@ -18,18 +20,32 @@ public class TransacNote extends impIDLangTypeTgtDtyp {
     public TransacNote(NodeList value, Mapping type, String lang, Mappings mappings) {
         super(type, lang, mappings, value);
     }
+    
+        //Static map to match at last the first 10000 agents to see if they are repeated. After this number, 
+        //performance may be very slow and it does not worth. Also do mind that this is a static member. Handle with care!
+        public static Map<String, Resource> mapAgents = new HashMap();
 
 	@Override
 	public void toRDF(Model model, Resource parent) {
 		if(type.getURL().equalsIgnoreCase(PROVO.wasAssociatedWith.getURI())) {
-			final Resource res = getRes(model);
-			parent.addProperty(PROVO.wasAssociatedWith, res);
-			res.addProperty(RDF.type, PROVO.Agent);
-			res.addProperty(RDFS.label, nodelistToString(value));
+                        String svalue = nodelistToString(value);
+                        Resource res = mapAgents.get(svalue);
+                        if (res==null)
+                        {
+                            res = getRes(model);
+                            res.addProperty(RDF.type, PROVO.Agent);
+                            res.addProperty(RDFS.label, svalue);
+                            mapAgents.put(svalue,res);
+                            if (mapAgents.size()>10000)
+                                mapAgents.clear();
+                        }
+ 			parent.addProperty(PROVO.wasAssociatedWith, res);
 		} else {
 			super.toRDF(model, parent); 
 		}
 	}
+        
+     
 
 	
 }
