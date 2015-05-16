@@ -56,6 +56,7 @@ public class TBX_Terminology {
         Model model = ModelFactory.createDefaultModel();
         TBX.addPrefixesToModel(model);
         model.setNsPrefix("", resourceURI);
+        
 
         final HashMap<String, Resource> lexicons = new HashMap<>();
         for (Term term : terms) {

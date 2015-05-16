@@ -6,6 +6,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import org.w3c.dom.NodeList;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
@@ -32,9 +33,10 @@ public class TransacNote extends impIDLangTypeTgtDtyp {
                         Resource res = mapAgents.get(svalue);
                         if (res==null)
                         {
-                            res = getRes(model);
+                            res = model.createResource(model.expandPrefix(":" +"Agent-" + UUID.randomUUID().toString()));
                             res.addProperty(RDF.type, PROVO.Agent);
                             res.addProperty(RDFS.label, svalue);
+//                            model.add(res, RDF.type, PROVO.Agent);
                             mapAgents.put(svalue,res);
                             if (mapAgents.size()>10000)
                                 mapAgents.clear();
