@@ -111,7 +111,6 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-//                  Method  method = c.getDeclaredMethod ("method name", parameterTypes)
                 }
                 else {
                     logger.warn("Unexpected mapping type when processing " + parent.getURI()  );

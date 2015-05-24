@@ -89,7 +89,6 @@ public class TBX {
         model.setNsPrefix("ldr", "http://purl.oclc.org/NET/ldr/ns#");
         model.setNsPrefix("void", "http://rdfs.org/ns/void#");
         model.setNsPrefix("dcat", "http://www.w3.org/ns/dcat#");
-        model.setNsPrefix("gr", "http://purl.org/goodrelations/");
         model.setNsPrefix("prov", "http://www.w3.org/ns/prov#");
         model.setNsPrefix("decomp", "http://www.w3.org/ns/lemon/decomp#");
         

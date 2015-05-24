@@ -35,9 +35,9 @@ public class TBX2RDF_Tutorial {
     public static void Example1() throws Exception
     {
         final Mappings mappings = Mappings.readInMappings("mappings.default");
-        final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/test1.tbx"), mappings);
+        final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/test4.tbx"), mappings);
         Model model = terminology.getModel("file:samples/simple_with_decomposition.rdf");
         RDFDataMgr.write(System.err,model, Lang.TURTLE);
-        RDFDataMgr.write(new FileOutputStream("samples/test1.rdf"), model, org.apache.jena.riot.Lang.TURTLE);
+        RDFDataMgr.write(new FileOutputStream("samples/test4.rdf"), model, org.apache.jena.riot.Lang.TURTLE);
     }
 }
