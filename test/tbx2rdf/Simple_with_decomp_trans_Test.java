@@ -109,19 +109,11 @@ public class Simple_with_decomp_trans_Test {
     */
     @Test
     public void testActivityHasAgent() throws Exception {
-        RDFDataMgr.write(System.err,model, Lang.TURTLE);
+//        RDFDataMgr.write(System.err,model, Lang.TURTLE);
         final List<Statement> stats = model.listStatements(null, RDF.type, PROVO.Activity).toList();
         for(Statement stat : stats) {
             final List<Statement> stats2 = model.listStatements(stat.getSubject(), PROVO.wasAssociatedWith, (RDFNode)null).toList();
             assert(stats2.size() == 1);
-            
-            
-            final List<Statement> statsxxx = model.listStatements(null, null, (RDFNode)null).toList();
-//            final List<Statement> statsxxx = model.listStatements(stats2.get(0).getObject().asResource(), null, (RDFNode)null).toList();
-            for(Statement s:statsxxx)
-            {
-                    System.out.println(s.toString());
-            }
             final List<Statement> stats3 = model.listStatements(stats2.get(0).getObject().asResource(), RDF.type, PROVO.Agent).toList();
             assert(stats3.size() == 1);
         }
