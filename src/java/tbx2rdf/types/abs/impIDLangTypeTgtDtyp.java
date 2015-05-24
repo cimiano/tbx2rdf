@@ -24,6 +24,8 @@ import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
 import tbx2rdf.ObjectPropertyMapping;
 import tbx2rdf.TBXFormatException;
+import tbx2rdf.datasets.iate.SubjectField;
+import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.TBX;
 
 /**
@@ -94,6 +96,18 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
                         String res=(String) m.invoke(o, nodelistToString(value));
                         Resource r=model.createResource(res);
                         parent.addProperty(TBX.subjectField,r);
+                        
+                        //Special procedure for IATE subject fields. THIS SHOULD NOT BE HERE because it is breaking the converter neutrality
+                        if(r.toString().contains("http://tbx2rdf.lider-project.eu/data/iate/subjectField/"))
+                        {
+                            String urisf = r.getURI().toString();
+                            urisf = urisf.substring(urisf.lastIndexOf("/")+1, urisf.length());
+                            SubjectField sf = SubjectFields.mapauris.get(urisf);
+                            if (sf!=null)
+                                model.add(r,RDFS.label, sf.getTopicString());
+                        }
+                        //End of the special procedure for IATE subject fields
+                        
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }

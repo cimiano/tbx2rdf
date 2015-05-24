@@ -13,6 +13,7 @@ import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.vocabulary.RDF;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.List;
 
@@ -34,8 +35,9 @@ public class TBX2RDF_Tutorial {
     public static void Example1() throws Exception
     {
         final Mappings mappings = Mappings.readInMappings("mappings.default");
-        final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/simple_with_decomp_trans.xml"), mappings);
+        final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/test1.tbx"), mappings);
         Model model = terminology.getModel("file:samples/simple_with_decomposition.rdf");
         RDFDataMgr.write(System.err,model, Lang.TURTLE);
+        RDFDataMgr.write(new FileOutputStream("samples/test1.rdf"), model, org.apache.jena.riot.Lang.TURTLE);
     }
 }
