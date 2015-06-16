@@ -20,6 +20,7 @@ import org.w3c.dom.NodeList;
 import tbx2rdf.DatatypePropertyMapping;
 import tbx2rdf.ExceptionMapping;
 import tbx2rdf.IndividualMapping;
+import tbx2rdf.Main;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
 import tbx2rdf.ObjectPropertyMapping;
@@ -114,7 +115,8 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
                 }
                 else {
                     logger.warn("Unexpected mapping type when processing " + parent.getURI()  );
-                    throw new RuntimeException("Unexpected mapping type. You may want to visit https://github.com/cimiano/tbx2rdf/blob/master/MAPPINGS.md");
+                    if (Main.lenient==false)
+                        throw new RuntimeException("Unexpected mapping type. You may want to visit https://github.com/cimiano/tbx2rdf/blob/master/MAPPINGS.md");
 		}
 	}
         

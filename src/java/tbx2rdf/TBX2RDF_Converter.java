@@ -502,7 +502,8 @@ public class TBX2RDF_Converter {
             String name = ntig_child.getNodeName();
 
             if (i == 0 && !name.equals("termGrp")) {
-                throw new TBXFormatException("First element of NTIG is not termGrp !\n");
+                if (Main.lenient==false)
+                    throw new TBXFormatException("First element of NTIG is not termGrp !\n");
             }
 
             if (name.equals("termGrp")) {

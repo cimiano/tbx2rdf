@@ -47,7 +47,7 @@ public class Main {
     // If the output is to be shown in console
     static boolean bOutputInConsole = true;
     //Determines if the parsing is going to be lenient or strict
-    static boolean lenient = false;
+    public static boolean lenient = false;
     // The mappings to be used
     public static Mappings mappings;
     // The base namespace of the dataset
