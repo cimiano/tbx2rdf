@@ -185,7 +185,8 @@ public class Main {
             TBX_Terminology terminology = converter.convert(reader, mappings);
             //WRITE. This one has been obtained from 
             logger.info("Writting output to " + output_file + "\n");
-            final Model model = terminology.getModel("file:" + output_file);
+//            final Model model = terminology.getModel("file:" + output_file);
+            final Model model = terminology.getModel(Main.DATA_NAMESPACE);           
             RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);
             reader.close();
         } catch (Exception e) {
