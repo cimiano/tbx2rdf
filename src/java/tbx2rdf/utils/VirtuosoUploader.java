@@ -65,7 +65,6 @@ public class VirtuosoUploader {
         String line="";
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-
             String pack = "";
             int conta = 0;
             int contatotal = 0;
