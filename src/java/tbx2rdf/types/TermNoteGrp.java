@@ -25,7 +25,9 @@ public class TermNoteGrp extends NoteLinkInfo {
 
     @Override
     public void toRDF(Model model, Resource resource) {
-        termNote.toRDF(model, resource);
+        try{// THIS TRY CATCH IS ONLY EXPERIMENTAL TOWARDS A MORE LENIENT PROCESSING MODEL. WHAT TO DO?
+            termNote.toRDF(model, resource);
+        }catch(Exception e){}// THIS TRY CATCH IS ONLY EXPERIMENTAL TOWARDS A MORE LENIENT PROCESSING MODEL. WHAT TO DO?
         
         if(!isEmpty()) {
             final Resource descripRes = getRes(model);

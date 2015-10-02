@@ -2,29 +2,42 @@ package tbx2rdf.types.abs;
 
 import com.hp.hpl.jena.graph.NodeFactory;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Selector;
+import com.hp.hpl.jena.rdf.model.SimpleSelector;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.DCTerms;
 import com.hp.hpl.jena.vocabulary.RDFS;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
+import org.apache.log4j.Logger;
 import org.w3c.dom.NodeList;
 import tbx2rdf.DatatypePropertyMapping;
 import tbx2rdf.ExceptionMapping;
 import tbx2rdf.IndividualMapping;
+import tbx2rdf.Main;
 import tbx2rdf.Mapping;
 import tbx2rdf.Mappings;
 import tbx2rdf.ObjectPropertyMapping;
 import tbx2rdf.TBXFormatException;
+import tbx2rdf.datasets.iate.SubjectField;
+import tbx2rdf.datasets.iate.SubjectFields;
 import tbx2rdf.vocab.TBX;
 
 /**
- *
+ * 
  * @author John McCrae
  */
 public abstract class impIDLangTypeTgtDtyp extends impIDLang {
 
+    private final static Logger logger = Logger.getLogger(impIDLangTypeTgtDtyp.class);
+    
+    
 	public final Mapping type;
 	public String target;
 	public String datatype;
@@ -53,8 +66,8 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
 				if (im == null) {
 					throw new TBXFormatException("Mapping not in declared property range or value URI not declared: " + valueString + " " + opm.getURL());
 				}
-				parent.addProperty(model.createProperty(opm.getURL()),
-					model.createResource(im.getURL()));
+                                    parent.addProperty(model.createProperty(opm.getURL()),
+                                    model.createResource(im.getURL()));
 			} else {
 				try {
 					final URI uri = new URI(valueString);
@@ -84,14 +97,46 @@ public abstract class impIDLangTypeTgtDtyp extends impIDLang {
                         String res=(String) m.invoke(o, nodelistToString(value));
                         Resource r=model.createResource(res);
                         parent.addProperty(TBX.subjectField,r);
+                        
+                        //Special procedure for IATE subject fields. THIS SHOULD NOT BE HERE because it is breaking the converter neutrality
+                        if(r.toString().contains("http://tbx2rdf.lider-project.eu/data/iate/subjectField/"))
+                        {
+                            String urisf = r.getURI().toString();
+                            urisf = urisf.substring(urisf.lastIndexOf("/")+1, urisf.length());
+                            SubjectField sf = SubjectFields.mapauris.get(urisf);
+                            if (sf!=null)
+                                model.add(r,RDFS.label, sf.getTopicString());
+                        }
+                        //End of the special procedure for IATE subject fields
+                        
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-//                    Method  method = c.getDeclaredMethod ("method name", parameterTypes)
                 }
                 else {
-			throw new RuntimeException("Unexpected mapping type");
+                    logger.warn("Unexpected mapping type when processing " + parent.getURI()  );
+                    if (Main.lenient==false)
+                        throw new RuntimeException("Unexpected mapping type. You may want to visit https://github.com/cimiano/tbx2rdf/blob/master/MAPPINGS.md");
 		}
-
 	}
+        
+        /**
+         * 
+         */
+    public static String getFirstLabel(Model model, String uri) {
+        Resource res = model.getResource(uri);
+        if (res == null) {
+            return "";
+        }
+        StmtIterator it = res.listProperties(model.createProperty("http://www.w3.org/2000/01/rdf-schema#label"));
+        while (it.hasNext()) {
+            Statement stmt2 = it.nextStatement();
+            RDFNode nodo = stmt2.getObject();
+            return nodo.toString();
+        }
+        return "";
+    }
+
+        
+        
 }

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<martif type="TBX" xml:lang="en">
+
+                <martifHeader>
+
+                               <fileDesc>
+
+                                               <titleStmt>
+
+                                                               <title>XXXterm</title>
+
+                                               </titleStmt>
+
+                                               <publicationStmt>
+
+                                                               <p>Distributor=XXX Language Services contact=YYY-TERM Company=XXX AG
+
+                                                                              URL=http://www.XXX.com/company/legal/impressum.epx Region=world
+
+                                                                              PubStatus=unknown DateValue=March 2010</p>
+
+                                               </publicationStmt>
+
+                                               <sourceDesc>
+
+                                                               <p>CreaTool=XXXterm CreaToolVersion= 740 OrigFormat=R3-internal
+
+                                                                              AdminLang=en CreaDate= 20150211073900 CreaId= L</p>
+
+                                               </sourceDesc>
+
+                               </fileDesc>
+
+                               <encodingDesc>
+
+                                               <p type="DCSName">XXXTBXXCSV02.xcs</p>
+
+                               </encodingDesc>
+
+                </martifHeader>
+
+                <text>
+
+                               <body>
+
+                                               <termEntry id="tid_db6_014D420D507ED411B1360060B03C6BFB">
+
+                                                               <descripGrp>
+
+                                                                              <descrip type="definition" />
+
+                                                                              <transacGrp>
+
+                                                                                              <transac type="transactionType">origination</transac>
+
+                                                                                              <transacNote type="responsibility" />
+
+                                                                                              <date />
+
+                                                                              </transacGrp>
+
+                                                                              <transacGrp>
+
+                                                                                              <transac type="transactionType">modification</transac>
+
+                                                                                              <transacNote type="responsibility" />
+
+                                                                                              <date />
+
+                                                                              </transacGrp>
+
+                                                               </descripGrp>
+
+                                                               <transacGrp>
+
+                                                                              <transac type="transactionType">origination</transac>
+
+                                                                              <transacNote type="responsibility">S5</transacNote>
+
+                                                                              <date>20080307024400</date>
+
+                                                               </transacGrp>
+
+                                                               <transacGrp>
+
+                                                                              <transac type="transactionType">modification</transac>
+
+                                                                              <transacNote type="responsibility">S5</transacNote>
+
+                                                                              <date>20080407020448</date>
+
+                                                               </transacGrp>
+
+                                                               <admin type="conceptOrigin">de</admin>
+
+                                                               <descrip type="characteristic">standardEntry</descrip>
+
+                                                               <admin type="XXXAddProductSubset">CA; </admin>
+
+                                                               <descrip type="XXXAddProductSubsetSubjectField">Cross-Application Components; </descrip>
+
+                                                               <descrip type="XXXNonTranslatable" />
+
+                                                               <descrip type="XXXLegalRestriction" />
+
+                                                               <descrip type="XXXProprietaryRestriction" />
+
+                                                               <descrip type="XXXtermCategory" />
+
+                                                               <descrip type="entryNote" />
+
+                                                               <admin type="productSubset">BC</admin>
+
+                                                               <descrip type="subjectField">Basis Components</descrip>
+
+                                                               <langSet xml:lang="DE">
+
+                                                                              <ntig>
+
+                                                                                              <termGrp>
+
+                                                                                                              <term id="oid_db6_034D420D507ED411B1360060B03C6BFB">einrichten</term>
+
+                                                                                                              <termNote type="partOfSpeech">Verb</termNote>
+
+                                                                                                              <termNote type="grammaticalGender" />
+
+                                                                                                              <termNote type="geographicalUsage" />
+
+                                                                                                              <termNote type="termType">entryTerm</termNote>
+
+                                                                                                              <termNote type="processStatus">finalized</termNote>
+
+                                                                                              </termGrp>
+
+                                                                                              <admin type="annotatedNote" />
+
+                                                                                              <descrip type="context" />
+
+                                                                                              <admin type="projectSubset">30A</admin>
+
+                                                                                              <admin type="XXXLastBasisRelease" />
+
+                                                                                              <admin type="XXXEnhancement" />
+
+                                                                                              <admin type="XXXFirstEnhancementRelease" />
+
+                                                                                              <admin type="XXXLastEnhancementRelease" />
+
+                                                                                              <xref target="link2source" type="externalCrossReference">KENO
+
+                                                                                                              IWB_EXTHLP57/38DE0C4EB711D182BF0000E829FBFE KENO
+
+                                                                                                              IWB_EXTHLP5738DE0C4EB711D182BF0000E829FBFE </xref>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">origination</transac>
+
+                                                                                                              <transacNote type="responsibility">CARLSSONJ</transacNote>
+
+                                                                                                              <date>20000830104445</date>
+
+                                                                                              </transacGrp>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">modification</transac>
+
+                                                                                                              <transacNote type="responsibility">BUCHNER</transacNote>
+
+                                                                                                              <date>20110215092235</date>
+
+                                                                                              </transacGrp>
+
+                                                                              </ntig>
+
+                                                              </langSet>
+
+                                                               <langSet xml:lang="FR">
+
+                                                                              <ntig>
+
+                                                                                              <termGrp>
+
+                                                                                                              <term id="oid_db6_0E40995937DB4C49A6B6AC335E2A4085">configurer</term>
+
+                                                                                                              <termNote type="partOfSpeech">Verb</termNote>
+
+                                                                                                              <termNote type="grammaticalGender" />
+
+                                                                                                              <termNote type="geographicalUsage" />
+
+                                                                                                              <termNote type="termType">entryTerm</termNote>
+
+                                                                                                              <termNote type="processStatus">finalized</termNote>
+
+                                                                                              </termGrp>
+
+                                                                                              <admin type="annotatedNote" />
+
+                                                                                              <descrip type="context" />
+
+                                                                                              <admin type="projectSubset">30A</admin>
+
+                                                                                              <admin type="XXXLastBasisRelease" />
+
+                                                                                              <admin type="XXXEnhancement" />
+
+                                                                                              <admin type="XXXFirstEnhancementRelease" />
+
+                                                                                              <admin type="XXXLastEnhancementRelease" />
+
+                                                                                              <xref target="link2source" type="externalCrossReference">KENO
+
+                                                                                                              IWB_EXTHLP57/38DE0C4EB711D182BF0000E829FBFE KENO
+
+                                                                                                              IWB_EXTHLP5738DE0C4EB711D182BF0000E829FBFE </xref>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">origination</transac>
+
+                                                                                                              <transacNote type="responsibility">N</transacNote>
+
+                                                                                                              <date>20020405161417</date>
+
+                                                                                              </transacGrp>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">modification</transac>
+
+                                                                                                              <transacNote type="responsibility">N</transacNote>
+
+                                                                                                              <date>20020405161417</date>
+
+                                                                                              </transacGrp>
+
+                                                                              </ntig>
+
+                                                               </langSet>
+
+                                                               <langSet xml:lang="EN">
+
+                                                                              <ntig>
+
+                                                                                              <termGrp>
+
+                                                                                                              <term id="oid_db6_3CC7BB7B7D6BB04582E8B0479AB143B0">set up</term>
+
+                                                                                                              <termNote type="partOfSpeech">Verb</termNote>
+
+                                                                                                              <termNote type="grammaticalGender" />
+
+                                                                                                              <termNote type="geographicalUsage" />
+
+                                                                                                              <termNote type="termType">entryTerm</termNote>
+
+                                                                                                              <termNote type="processStatus">finalized</termNote>
+
+                                                                                              </termGrp>
+
+                                                                                              <admin type="annotatedNote" />
+
+                                                                                              <descrip type="context" />
+
+                                                                                              <admin type="projectSubset">30A</admin>
+
+                                                                                              <admin type="XXXLastBasisRelease" />
+
+                                                                                              <admin type="XXXEnhancement" />
+
+                                                                                              <admin type="XXXFirstEnhancementRelease" />
+
+                                                                                              <admin type="XXXLastEnhancementRelease" />
+
+                                                                                              <xref target="link2source" type="externalCrossReference">KENO
+
+                                                                                                              IWB_EXTHLP57/38DE0C4EB711D182BF0000E829FBFE KENO
+
+                                                                                                              IWB_EXTHLP5738DE0C4EB711D182BF0000E829FBFE </xref>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">origination</transac>
+
+                                                                                                              <transacNote type="responsibility">CS</transacNote>
+
+                                                                                                              <date>20011212152515</date>
+
+                                                                                              </transacGrp>
+
+                                                                                              <transacGrp>
+
+                                                                                                              <transac type="transactionType">modification</transac>
+
+                                                                                                              <transacNote type="responsibility">CS</transacNote>
+
+                                                                                                              <date>20011212152515</date>
+
+                                                                                              </transacGrp>
+
+                                                                              </ntig>
+
+                                                               </langSet>
+
+                                               </termEntry>
+
+                               </body>
+
+                </text>
+
+</martif>

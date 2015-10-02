@@ -66,6 +66,13 @@
     <artifactId>virtjdbc3</artifactId>
     <version>1.0</version>
 </dependency>	
+<dependency>
+    <groupId>tbxcheck-1.2.9</groupId>
+    <artifactId>tbxcheck</artifactId>
+    <version>1.2.9</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/doc/reference/TBX-resources/tbxcheck-1.2.9.jar</systemPath>
+</dependency>
 
     </dependencies>
 
@@ -114,6 +121,31 @@
                     </archive>
                 </configuration>
             </plugin>			
+<plugin>
+    <artifactId>maven-resources-plugin</artifactId>
+    <version>2.6</version>
+    <executions>
+         <execution>
+            <id>copy-resources</id>
+            <!-- here the phase you need -->
+            <phase>validate</phase>
+            <goals>
+               <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+               <outputDirectory>${basedir}/target</outputDirectory>
+               <resources>          
+                    <resource>
+                        <directory>doc/reference/TBX-resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+               </resources>              
+            </configuration>            
+        </execution>
+     </executions>
+</plugin>			
+			
+			
         </plugins>
 
     </build>

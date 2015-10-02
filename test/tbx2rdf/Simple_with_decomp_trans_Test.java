@@ -8,12 +8,15 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 
 import java.io.FileReader;
 import java.util.List;
+import org.apache.jena.riot.RDFDataMgr;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.openjena.riot.Lang;
+import static tbx2rdf.Main.output_file;
 
 import tbx2rdf.types.TBX_Terminology;
 import tbx2rdf.vocab.ONTOLEX;
@@ -44,7 +47,8 @@ public class Simple_with_decomp_trans_Test {
     public void setUp() throws Exception {      
         final Mappings mappings = Mappings.readInMappings("mappings.default");
         final TBX_Terminology terminology = new TBX2RDF_Converter().convert(new FileReader("samples/simple_with_decomp_trans.xml"), mappings);
-        model = terminology.getModel("http://www.example.com/example#");  
+        model = terminology.getModel("file:samples/simple_with_decomp_trans.rdf/");
+//        RDFDataMgr.write(System.err,model, Lang.TURTLE);
     }
     
     @After
@@ -105,11 +109,12 @@ public class Simple_with_decomp_trans_Test {
     */
     @Test
     public void testActivityHasAgent() throws Exception {
+//        RDFDataMgr.write(System.err,model, Lang.TURTLE);
         final List<Statement> stats = model.listStatements(null, RDF.type, PROVO.Activity).toList();
         for(Statement stat : stats) {
             final List<Statement> stats2 = model.listStatements(stat.getSubject(), PROVO.wasAssociatedWith, (RDFNode)null).toList();
             assert(stats2.size() == 1);
-			final List<Statement> stats3 = model.listStatements(stats2.get(0).getObject().asResource(), RDF.type, PROVO.Agent).toList();
+            final List<Statement> stats3 = model.listStatements(stats2.get(0).getObject().asResource(), RDF.type, PROVO.Agent).toList();
             assert(stats3.size() == 1);
         }
     }

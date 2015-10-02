@@ -19,7 +19,7 @@ import tbx2rdf.vocab.SKOS;
 import tbx2rdf.vocab.TBX;
 
 /**
- *
+ * 
  * @author jmccrae
  */
 public class Simple1Test {

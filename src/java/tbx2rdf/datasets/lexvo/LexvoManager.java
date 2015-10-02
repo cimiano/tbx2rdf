@@ -26,6 +26,7 @@ public class LexvoManager {
 
     /**
      * The constructor reads the name together with the iso2 and iso3 representation
+     * This information is stored in a bundled text file
      */
     public LexvoManager() {
         try {
@@ -58,6 +59,8 @@ public class LexvoManager {
         return res;
     }    
     
+    
+    /************* PRIVATE METHODS *********************************************/
 
     private static <K, V> Map<V, K> invertMap(Map<K, V> toInvert) {
         Map<V, K> result = new HashMap<V, K>();

@@ -10,7 +10,7 @@ import virtuoso.jena.driver.*;
 
 /**
  * Independent routines to upload triples to the Virtuoso RDF store. 
- * They are not meant to be invoked from other parts of the TBX2RDF code, but to be invoked directly.
+ * They are not meant to be invoked from other parts of the TBX2RDF code, but to be invoked here directly.
 
  * ALTERNATIVE INSERTION QUERY FROM THE COMMAND LINE: 
  * 
@@ -65,7 +65,6 @@ public class VirtuosoUploader {
         String line="";
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-
             String pack = "";
             int conta = 0;
             int contatotal = 0;
@@ -113,6 +112,3 @@ public class VirtuosoUploader {
 
     }
 }
-/*
-
- */

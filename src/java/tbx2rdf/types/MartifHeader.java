@@ -1,6 +1,8 @@
 package tbx2rdf.types;
 
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.NodeIterator;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.DC_11;
 import com.hp.hpl.jena.vocabulary.RDF;
@@ -90,6 +92,8 @@ public class MartifHeader extends impID {
         final Resource res = parent;
         
         res.addProperty(RDF.type, TBX.MartifHeader);
+        
+        //TITLESTMT
         if(fileDesc.titleStmt != null) {
             if(fileDesc.titleStmt.title_lang != null) {
                 res.addProperty(DC_11.title, fileDesc.titleStmt.title, fileDesc.titleStmt.title_lang);
@@ -114,12 +118,18 @@ public class MartifHeader extends impID {
                 }
             }
         }
+        
+        //PUBLICATIONSTMT
         if(fileDesc.publicationStmt != null) {
             res.addProperty(TBX.publicationStmt, nodeToString(fileDesc.publicationStmt), XMLLiteral);
         }
+        
+        //SOURCEDESC
         for(Element sourceDesc : fileDesc.sourceDesc) {
+            String test = nodeToString(sourceDesc);
             res.addProperty(TBX.sourceDesc, nodeToString(sourceDesc), XMLLiteral);
             res.addProperty(DC_11.source, sourceDesc.getTextContent());
+           
         }
         if(encodingDesc != null) {
             res.addProperty(TBX.encodingDesc, nodelistToString(encodingDesc), XMLLiteral);

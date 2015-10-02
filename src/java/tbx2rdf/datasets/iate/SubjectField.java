@@ -30,5 +30,14 @@ public class SubjectField extends impID {
         res.addProperty(RDF.type, TBX.SubjectField);
         res.addProperty(RDFS.label, topic);        
     }
+
+    /**
+     * Obtains a human readable name for the topic
+     */
+    public String getTopicString()
+    {
+        return topic;
+    }
+    
     
 }

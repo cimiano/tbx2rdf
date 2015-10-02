@@ -1,0 +1,29 @@
+<martif type="TBX-Default" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>This is an excerpt of a TBX file downloaded from the IATE website. Address any enquiries to iate@cdt.europa.eu.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+<text>
+    <body>
+      <termEntry id="IATE-84">
+        <descripGrp>
+          <descrip type="subjectField">1011</descrip>
+       </descripGrp>
+	   <langSet xml:lang="de">
+          <tig>
+            <term>Zuständigkeit der Mitgliedstaaten</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">3</descrip>
+            <termNote type="grammaticalGender" />
+          </tig>
+	    </langSet>
+  </termEntry>
+</body>
+</text>	
+</martif>

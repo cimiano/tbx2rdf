@@ -11,7 +11,11 @@ import tbx2rdf.types.abs.impID;
 import tbx2rdf.vocab.TBX;
 
 /**
- *
+ * A meta data-category is a core-structure module data-category that takes a type attribute, such as <descrip>, <admin>, and <termNote>.
+ * In particular, <admin> Contains information of an administrative nature for the node in question, such as the source of information, or the
+ * project or client for which it applies. The type of administrative information is indicated by the value of the type
+ * attribute. It can appear alone, or, if additional information needs to be provided, such as a note or a reference, it can
+ * be nested in an <adminGrp> elemen
  * @author jmccrae
  */
 public class AdminGrp extends impID {
@@ -28,6 +32,9 @@ public class AdminGrp extends impID {
         return notes.isEmpty() && refs.isEmpty() && xrefs.isEmpty();
     }
     
+    /**
+     * We enter here when the <admin> element is being entered.
+     */
     @Override
     public void toRDF(Model model, Resource parent) {
 	admin.toRDF(model, parent);

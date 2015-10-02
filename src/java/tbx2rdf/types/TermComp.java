@@ -22,9 +22,9 @@ public class TermComp extends impIDLang {
 
     @Override
     public void toRDF(Model model, Resource parent) {
-		final Resource res = getRes(model);
-		parent.addProperty(ONTOLEX.identifies, res);
-		res.addProperty(RDF.type, ONTOLEX.LexicalEntry);
+        final Resource res = getRes(model);
+        parent.addProperty(ONTOLEX.identifies, res);
+        res.addProperty(RDF.type, ONTOLEX.LexicalEntry);
         res.addProperty(RDFS.label, value, lang);
     }
     
