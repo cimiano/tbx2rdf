@@ -35,7 +35,6 @@ import org.xml.sax.SAXException;
  */
 public class Main {
 
-    private final static Logger logger = Logger.getLogger(Main.class);
     //Determines whether it will be a stream-parsing (if big=true) or a block conversion (big=false)
     static boolean big = false;
     // Establishes the file with the mappings
@@ -62,11 +61,11 @@ public class Main {
 
         boolean ok = parseParams(args);
         if (!ok) {
-            return;
+            System.exit(-1);
         }
         
         //READ MAPPINGS
-        logger.info("Using mapping file: " + mapping_file + "\n");
+        System.err.println("Using mapping file: " + mapping_file + "\n");
         mappings = Mappings.readInMappings(mapping_file);
 
         if (big) {
@@ -85,18 +84,17 @@ public class Main {
         for (String ejecutandox : args) {
             ejecutando += " " + ejecutandox;
         }
-        logger.info(ejecutando);
         if (args.length == 0) {
-            System.out.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)? (--big=true)? (--datanamespace=<DATA_NAMESPACE>)?");
-            System.out.println("If no OUTPUT_FILE is provided, then <OUTPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
-            System.out.println("If no MAPPING_FILE is provided, then mappings.default will be used.");
+            System.err.println("Usage: TBX2RDF_Converter <INPUT_FILE> (--output=<OUTPUT_FILE>)? (--mappings=<MAPPING_FILE>)? (--big=true)? (--datanamespace=<DATA_NAMESPACE>)?");
+            System.err.println("If no OUTPUT_FILE is provided, then <OUTPUT FILE>s/.xml/.rdf/ will be assumed as output file.");
+            System.err.println("If no MAPPING_FILE is provided, then mappings.default will be used.");
             return false;
         }
         input_file = args[0];                                           //First argument, input file
         File file = new File(input_file);
         if (!file.exists())
         {
-            logger.error("The file " + input_file + " does not exist");
+            System.err.println("The file " + input_file + " does not exist");
             return false;
         }
         
@@ -116,27 +114,27 @@ public class Main {
                 if (key.equals("output")) {
                     output_file = value;
                     bOutputInConsole = false;
-                    logger.info("OUTPUT_FILE set to" + output_file + "\n");
+                    System.err.println("OUTPUT_FILE set to" + output_file + "\n");
                 }
                 if (key.equals("mappings")) {
                     mapping_file = value;
-                    logger.info("MAPPING_FILE set to" + mapping_file + "\n");
+                    System.err.println("MAPPING_FILE set to" + mapping_file + "\n");
                 }
                 if (key.equals("datanamespace")) {
                     DATA_NAMESPACE = value;
-                    logger.info("DATA_NAMESPACE set to" + DATA_NAMESPACE + "\n");
+                    System.err.println("DATA_NAMESPACE set to" + DATA_NAMESPACE + "\n");
                 }
                 if (key.equals("big")) {
                     if (value.equals("true")) {
                         big = true;
                     }
-                    logger.info("Processing large file");
+                    System.err.println("Processing large file");
                 }
                 if (key.equals("lenient")) {
                     if (value.equals("true")) {
                         lenient = true;
                     }
-                    logger.info("Processing in lenient mode");
+                    System.err.println("Processing in lenient mode");
                 }
             }
         }
@@ -150,7 +148,7 @@ public class Main {
     public static boolean convertBigFile() {
         try {
             bOutputInConsole = false;
-            logger.info("Doing the conversion of a big file\n");
+            System.err.println("Doing the conversion of a big file\n");
             TBX2RDF_Converter converter = new TBX2RDF_Converter();
             PrintStream fos;
             if (output_file.isEmpty() || bOutputInConsole) {
@@ -159,12 +157,12 @@ public class Main {
                 fos = new PrintStream(output_file, "UTF-8");
             }
             if (fos == null) {
-                logger.error("output file could not be open");
+                System.err.println("output file could not be open");
                 return false;
             }
             converter.convertAndSerializeLargeFile(input_file, fos, mappings);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
         return true;
@@ -177,20 +175,20 @@ public class Main {
      */
     public static boolean convertSmallFile() {
         try {
-            logger.info("Doing the standard conversion (not a big file)\n");
+            System.err.println("Doing the standard conversion (not a big file)\n");
             //READ TBX XML
-            logger.info("Opening file " + input_file + "\n");
+            System.err.println("Opening file " + input_file + "\n");
             BufferedReader reader = new BufferedReader(new FileReader(input_file));
             TBX2RDF_Converter converter = new TBX2RDF_Converter();
             TBX_Terminology terminology = converter.convert(reader, mappings);
             //WRITE. This one has been obtained from 
-            logger.info("Writting output to " + output_file + "\n");
+            System.err.println("Writting output to " + output_file + "\n");
 //            final Model model = terminology.getModel("file:" + output_file);
             final Model model = terminology.getModel(Main.DATA_NAMESPACE);           
             RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);
             reader.close();
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            System.err.println(e.getMessage());
             return false;
         }
         return true;
