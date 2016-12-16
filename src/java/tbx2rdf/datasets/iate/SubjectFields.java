@@ -5,12 +5,15 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
 
 /**
  * The package tbx2rdf.iate gathers some specificities of the IATE dataset
@@ -29,6 +32,12 @@ public class SubjectFields {
         System.out.println("Subject Fields");
         SubjectFields sf= new SubjectFields();
         List<SubjectField> lsf=sf.readInternalFile();
+        Model model = generateSubjectFields();
+        StringWriter sw = new StringWriter();
+        RDFDataMgr.write(sw, model, RDFFormat.NTRIPLES);
+        String str = sw.toString();
+        System.out.println(str);
+        
     } 
     
     /**
