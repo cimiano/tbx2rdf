@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import tbx2rdf.Main;
 import tbx2rdf.datasets.lexvo.LexvoManager;
+import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
 
@@ -68,11 +69,11 @@ public class TBX_Terminology {
                     final Resource lexicon = model.createResource(Main.DATA_NAMESPACE + le.lang);
                     Resource rlan = LexvoManager.mgr.getLexvoFromISO2(le.lang);
                     lexicon.addProperty(ONTOLEX.language, rlan);    
-                    lexicon.addProperty(RDF.type, ONTOLEX.Lexicon);
+                    lexicon.addProperty(RDF.type, LIME.Lexicon);
                     lexicons.put(le.lang, lexicon);
                 }
                 final Resource lexicon = lexicons.get(le.lang);
-                lexicon.addProperty(ONTOLEX.entry, le.getRes(model));
+                lexicon.addProperty(LIME.entry, le.getRes(model)); 
                 le.toRDF(model, concept);
             }
 

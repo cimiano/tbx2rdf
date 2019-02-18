@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import tbx2rdf.types.TBX_Terminology;
+import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
 import tbx2rdf.vocab.TBX;
@@ -144,7 +145,7 @@ public class Simple1Test {
 	 */
 	@Test
 	public void checkNumberofLexicons() throws Exception {
-		final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.Lexicon).toList();
+		final List<Statement> stats = model.listStatements(null, RDF.type, LIME.Lexicon).toList();
 
 		assert (stats.size() == 3);
 
@@ -155,7 +156,7 @@ public class Simple1Test {
 	@Test
 	public void checkLexiconLanguages() throws Exception {
 
-		final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.Lexicon).toList();
+		final List<Statement> stats = model.listStatements(null, RDF.type, LIME.Lexicon).toList();
 
 		Boolean found;
 

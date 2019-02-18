@@ -18,6 +18,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.MartifHeader;
 import tbx2rdf.types.Term;
+import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 
 import org.apache.crimson.tree.XmlDocumentBuilder;
@@ -89,7 +90,7 @@ public class SAXHandler extends DefaultHandler {
             final Resource lexicon = lexiconsModel.createResource(Main.DATA_NAMESPACE + language);
             Resource rlan=LexvoManager.mgr.getLexvoFromISO2(language);
             lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
-            lexicon.addProperty(RDF.type, ONTOLEX.Lexicon);
+            lexicon.addProperty(RDF.type, LIME.Lexicon);
             lexicons.put(language, lexicon);        
         }
         return lexicons;
@@ -117,8 +118,9 @@ public class SAXHandler extends DefaultHandler {
 
         if (qName.equalsIgnoreCase("langSet")) {
             int index=attrs.getIndex("xml:lang");
-            if (index!=-1)
+            if (index!=-1) {
                 languages.add(attrs.getValue(index));
+            }
         }
         if (qName.equalsIgnoreCase("martifHeader")) {
             header = new MartifHeader();
