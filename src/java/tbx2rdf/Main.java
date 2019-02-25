@@ -4,10 +4,13 @@ import tbx2rdf.types.TBX_Terminology;
 import com.hp.hpl.jena.rdf.model.Model;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
@@ -51,35 +54,93 @@ public class Main {
     public static Mappings mappings;
     // The base namespace of the dataset
     public static String DATA_NAMESPACE = "http://tbx2rdf.lider-project.eu/data/iate/";
+    //the system id used for relative URI
+    //public static String systemIdForRelativeURI;
     
 
     /**
      * Main method. 
      */
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
+    public static void main(String[] args) {
         PropertyConfigurator.configure("log4j.properties");
 
-        boolean ok = parseParams(args);
+        try {
+			readConfigurationFile(args[0]);
+			mappings = Mappings.readInMappings(mapping_file);
+
+	        if (big) {
+	            convertBigFile();
+	        } else {
+	            convertSmallFile();
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
+        /*boolean ok = parseParams(args);
         if (!ok) {
             System.exit(-1);
-        }
+        }*/
         
         //READ MAPPINGS
-        System.err.println("Using mapping file: " + mapping_file + "\n");
-        mappings = Mappings.readInMappings(mapping_file);
+        //System.err.println("Using mapping file: " + mapping_file + "\n");
+        /*mappings = Mappings.readInMappings(mapping_file);
 
         if (big) {
             convertBigFile();
         } else {
             convertSmallFile();
-        }
+        }*/
 
     }
 
-    /**
+    private static void readConfigurationFile(String propFile) throws Exception {
+    	File fileProp = new File(propFile);
+		Properties prop = new Properties();
+		prop.load(new FileInputStream(fileProp));
+		
+		String bigFile = prop.getProperty("bigfile", "false");
+		big = Boolean.parseBoolean(bigFile);
+		
+		String tbxfile = prop.getProperty("tbxfile");
+		input_file = tbxfile;
+		File file = new File(input_file);
+        if (!file.exists()) {
+            System.err.println("The file " + input_file + " does not exist");
+            throw new FileNotFoundException("The file " + input_file + " does not exist");
+        }
+		
+        String output = prop.getProperty("output", "").trim();
+		if(output.length()==0) {
+			output_file = input_file.replaceAll("\\.(xml|tbx)", "\\.rdf");
+	        if (!output_file.endsWith(".rdf")) {
+	            output_file += ".rdf";
+	        }
+		}
+        
+        String namespace = prop.getProperty("namespace", "");
+        if(namespace.length()==0) {
+        	throw new Exception("namespace value is missing in the property file");
+        }
+		DATA_NAMESPACE = namespace;
+		
+		String mappings = prop.getProperty("mappings", "mappings.default");
+		mapping_file = mappings;
+		
+		//recap al values that will be used
+		System.out.println("The following values will be used:");
+		System.out.println("\tbig = "+big);
+		System.out.println("\tinput_file = "+input_file);
+		System.out.println("\toutput_file = "+output_file);
+		System.out.println("\tnamespace = "+DATA_NAMESPACE);
+		System.out.println("\tmapping_file = "+mapping_file);
+		
+	}
+
+	/**
      * Parses the command line parameters
      */
-    public static boolean parseParams(String[] args) {
+    /*public static boolean parseParams(String[] args) {
         String ejecutando = "";
         for (String ejecutandox : args) {
             ejecutando += " " + ejecutandox;
@@ -139,7 +200,7 @@ public class Main {
             }
         }
         return true;
-    }
+    }*/
 
     /**
      * This is the conversion to be invoked for large files, that will be processed in a stream
@@ -175,14 +236,14 @@ public class Main {
      */
     public static boolean convertSmallFile() {
         try {
-            System.err.println("Doing the standard conversion (not a big file)\n");
+            System.out.println("Doing the standard conversion (not a big file)\n");
             //READ TBX XML
-            System.err.println("Opening file " + input_file + "\n");
+            System.out.println("Opening file " + input_file + "\n");
             BufferedReader reader = new BufferedReader(new FileReader(input_file));
             TBX2RDF_Converter converter = new TBX2RDF_Converter();
             TBX_Terminology terminology = converter.convert(reader, mappings);
             //WRITE. This one has been obtained from 
-            System.err.println("Writting output to " + output_file + "\n");
+            System.out.println("Writting output to " + output_file + "\n");
 //            final Model model = terminology.getModel("file:" + output_file);
             final Model model = terminology.getModel(Main.DATA_NAMESPACE);           
             RDFDataMgr.write(new FileOutputStream(output_file), model, Lang.TURTLE);

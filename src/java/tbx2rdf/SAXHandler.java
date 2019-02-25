@@ -21,8 +21,6 @@ import tbx2rdf.types.Term;
 import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 
-import org.apache.crimson.tree.XmlDocumentBuilder;
-
 
 /**
  * This class makes the XML parsing of the TBX using the SAX lexiconsModel.
@@ -35,7 +33,6 @@ public class SAXHandler extends DefaultHandler {
     ///
     private MartifHeader header;
     ///Internal use
-    XmlDocumentBuilder consumer;
     XMLReader producer;
 
     //Languages present in the file
