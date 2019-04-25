@@ -67,7 +67,7 @@ public class LexicalEntry extends Describable {
         
         final Resource sense = getSubRes(model, "Sense");
 
-        sense.addProperty(ONTOLEX.reference, parent);
+        sense.addProperty(ONTOLEX.isLexicalizedSenseOf, parent);
         
         term.addProperty(ONTOLEX.sense, sense);
 

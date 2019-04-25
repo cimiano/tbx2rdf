@@ -76,6 +76,7 @@ import tbx2rdf.types.abs.impIDLangTypeTgtDtyp;
 import tbx2rdf.utils.XMLUtils;
 import tbx2rdf.vocab.DC;
 import tbx2rdf.vocab.IATE;
+import tbx2rdf.vocab.LIME;
 
 
 /**
@@ -934,6 +935,7 @@ public class TBX2RDF_Converter {
             lexicons = handler.getLexicons();
             xmlInput.close();
         } catch (Exception e) {
+        	logger.warn("There was an error while reading/creting the lexicons, this could affect the rest of the code");
             logger.warn(e.getMessage());
         }
 
@@ -1007,11 +1009,11 @@ public class TBX2RDF_Converter {
                             TBX.addPrefixesToModel(model);
                             model.setNsPrefix("", Main.DATA_NAMESPACE);
                             final Resource rterm = term.getRes(model);
-                            rterm.addProperty(RDF.type, SKOS.Concept);
+                            rterm.addProperty(RDF.type, ONTOLEX.Concept);
                             term.toRDF(model, rterm);
                             for (LexicalEntry le : term.Lex_entries) {
-                                final Resource lexicon = lexicons.get(term.lang);
-                                lexicon.addProperty(ONTOLEX.entry, le.getRes(model));
+                                final Resource lexicon = lexicons.get(le.lang);
+                                lexicon.addProperty(LIME.entry, le.getRes(model));
                                 le.toRDF(model, rterm);
                             }
                             RDFDataMgr.write(fos, model, Lang.NTRIPLES);
