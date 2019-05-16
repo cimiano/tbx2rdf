@@ -1,5 +1,7 @@
 package tbx2rdf.types;
 
+import tbx2rdf.vocab.DC;
+import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
@@ -63,13 +65,18 @@ public class LexicalEntry extends Describable {
 
 //        term.addProperty(ONTOLEX.language, lang);
         Resource rlan=LexvoManager.mgr.getLexvoFromISO2(lang);
-        term.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+        //term.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+        term.addProperty(DC.language, rlan);    //before it was the mere constant "language"
+        term.addProperty(LIME.language, lang);    //before it was the mere constant "language"
+        
         
         final Resource sense = getSubRes(model, "Sense");
 
         sense.addProperty(ONTOLEX.isLexicalizedSenseOf, parent);
         
         term.addProperty(ONTOLEX.sense, sense);
+        
+        sense.addProperty(RDF.type, ONTOLEX.SenseEntry);
 
         final Resource canonicalForm = getSubRes(model, "CanonicalForm");
 

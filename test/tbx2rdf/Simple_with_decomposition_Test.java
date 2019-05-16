@@ -17,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openjena.riot.Lang;
 import tbx2rdf.types.TBX_Terminology;
+import tbx2rdf.vocab.DC;
 import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 import tbx2rdf.vocab.SKOS;
@@ -81,7 +82,7 @@ public class Simple_with_decomposition_Test {
 	public void testLanguage() throws Exception {
 		final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.LexicalEntry).toList();
 		for (Statement stat : stats) {
-			final List<Statement> stats2 = model.listStatements(stat.getSubject(), ONTOLEX.language, (RDFNode) null).toList();
+			final List<Statement> stats2 = model.listStatements(stat.getSubject(), DC.language, (RDFNode) null).toList();
 			final List<Statement> stats3 = model.listStatements(stat.getSubject(), RDFS.label, (RDFNode) null).toList();
 			assert (stats2.size() == 1 || !stats3.isEmpty());
 		}
@@ -92,7 +93,7 @@ public class Simple_with_decomposition_Test {
 	 */
 	@Test
 	public void testSKOSConcept() throws Exception {
-		final List<Statement> stats = model.listStatements(null, RDF.type, SKOS.Concept).toList();
+		final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.Concept).toList();
 		assert (stats.size() == 1);
 	}
 
@@ -101,7 +102,7 @@ public class Simple_with_decomposition_Test {
 	 */
 	@Test
 	public void testSubjectField() throws Exception {
-		final List<Statement> stats = model.listStatements(null, RDF.type, SKOS.Concept).toList();
+		final List<Statement> stats = model.listStatements(null, RDF.type, ONTOLEX.Concept).toList();
 
 		for (Statement stat : stats) {
 			final List<Statement> stats2 = model.listStatements(stat.getSubject(), TBX.subjectField, (RDFNode) null).toList();
