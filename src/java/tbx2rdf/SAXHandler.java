@@ -18,6 +18,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.MartifHeader;
 import tbx2rdf.types.Term;
+import tbx2rdf.vocab.DC;
 import tbx2rdf.vocab.LIME;
 import tbx2rdf.vocab.ONTOLEX;
 
@@ -86,7 +87,9 @@ public class SAXHandler extends DefaultHandler {
                 continue;
             final Resource lexicon = lexiconsModel.createResource(Main.DATA_NAMESPACE + language);
             Resource rlan=LexvoManager.mgr.getLexvoFromISO2(language);
-            lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language"
+            //lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language" //OLD
+            lexicon.addProperty(DC.language, rlan);    //before it was the mere constant "language"
+            lexicon.addProperty(LIME.language, language);    //before it was the mere constant "language"
             lexicon.addProperty(RDF.type, LIME.Lexicon);
             lexicons.put(language, lexicon);        
         }

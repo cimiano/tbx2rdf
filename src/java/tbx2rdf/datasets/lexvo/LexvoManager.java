@@ -54,7 +54,8 @@ public class LexvoManager {
     public Resource getLexvoFromISO2(String iso2) {
         Model model = ModelFactory.createDefaultModel();
         String iso3 = fromISO2toISO3(iso2);
-        String lexvo = "http://www.lexvo.org/page/iso639-3/" + iso3;
+        //String lexvo = "http://www.lexvo.org/page/iso639-3/" + iso3; // OLD
+        String lexvo = "http://www.lexvo.org/id/iso639-3/" + iso3;
         Resource res = model.createProperty(lexvo);
         return res;
     }    

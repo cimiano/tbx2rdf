@@ -15,5 +15,7 @@ public class DC {
      public static Property rights = defaultModel.createProperty("http://purl.org/dc/terms/rights");
      public static Property source = defaultModel.createProperty("http://purl.org/dc/terms/source");
      public static Property attribution= defaultModel.createProperty("http://creativecommons.org/ns#attributionName");
+     
+     public static Property language = defaultModel.createProperty("http://purl.org/dc/terms/language");
 
 }
