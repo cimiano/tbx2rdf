@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 //JENA
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
 
 /**
  * This class provides with methods to obtain the Lexvo resource corresponding to a language iso code.

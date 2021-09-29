@@ -1,8 +1,8 @@
 package tbx2rdf.types;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 import tbx2rdf.Mappings;
 import tbx2rdf.vocab.TBX;
 

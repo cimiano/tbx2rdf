@@ -10,10 +10,10 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDF;
 
 import tbx2rdf.datasets.lexvo.LexvoManager;
 import tbx2rdf.types.MartifHeader;
@@ -77,7 +77,7 @@ public class SAXHandler extends DefaultHandler {
     /**
      * Obtains a map of lexicons present in the 
      */
-    public HashMap<String, Resource> getLexicons()
+    public HashMap<String, Resource> getLexicons(String namespace)
     {
         lexiconsModel = ModelFactory.createDefaultModel();
         final HashMap<String, Resource> lexicons = new HashMap<>();    
@@ -85,7 +85,7 @@ public class SAXHandler extends DefaultHandler {
         {
             if (lexicons.containsKey(language))
                 continue;
-            final Resource lexicon = lexiconsModel.createResource(Main.DATA_NAMESPACE + language);
+            final Resource lexicon = lexiconsModel.createResource(namespace + language);
             Resource rlan=LexvoManager.mgr.getLexvoFromISO2(language);
             //lexicon.addProperty(ONTOLEX.language, rlan);    //before it was the mere constant "language" //OLD
             lexicon.addProperty(DC.language, rlan);    //before it was the mere constant "language"

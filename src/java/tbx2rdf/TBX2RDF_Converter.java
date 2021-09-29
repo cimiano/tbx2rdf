@@ -30,15 +30,15 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.SAXException;
 
 //JENA
-import org.openjena.riot.Lang;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.DCTerms;
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Property;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.DCTerms;
+import org.apache.jena.vocabulary.RDF;
 
 //TBX2RDF
 import java.io.PrintStream;
@@ -293,7 +293,7 @@ public class TBX2RDF_Converter {
      * Processes, from a node, a termEntry
      * @return A Term
      */
-    Term processTermEntry(Element node, Mappings mappings) {
+    public Term processTermEntry(Element node, Mappings mappings) {
         // create new Term 
         // add subjectField
         // add ID
@@ -916,8 +916,8 @@ public class TBX2RDF_Converter {
      * @param mappings Mappings
      * @return The TBX terminology
      */
-    public TBX_Terminology convertAndSerializeLargeFile(String file, PrintStream fos, Mappings mappings) {
-        String resourceURI = new String(Main.DATA_NAMESPACE);
+    public TBX_Terminology convertAndSerializeLargeFile(String file, PrintStream fos, Mappings mappings, String namespace) {
+        String resourceURI = new String(namespace);
         FileInputStream inputStream = null;
         Scanner sc = null;
         int count = 0;
@@ -932,7 +932,7 @@ public class TBX2RDF_Converter {
             SAXParser saxParser = factory.newSAXParser();
             handler = new SAXHandler(mappings);
             saxParser.parse(xmlInput, handler);
-            lexicons = handler.getLexicons();
+            lexicons = handler.getLexicons(namespace);
             xmlInput.close();
         } catch (Exception e) {
         	logger.warn("There was an error while reading/creting the lexicons, this could affect the rest of the code");
@@ -1051,7 +1051,7 @@ public class TBX2RDF_Converter {
      * Gently loads a DOM XML document from a XML fragment.
      * If it fails, it returns null;
      */
-    private static Document loadXMLFromString(String xml) throws Exception {
+    public static Document loadXMLFromString(String xml) throws Exception {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();

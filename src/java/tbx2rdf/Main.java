@@ -1,7 +1,6 @@
 package tbx2rdf;
 
 import tbx2rdf.types.TBX_Terminology;
-import com.hp.hpl.jena.rdf.model.Model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.log4j.Logger;
@@ -221,7 +221,7 @@ public class Main {
                 System.err.println("output file could not be open");
                 return false;
             }
-            converter.convertAndSerializeLargeFile(input_file, fos, mappings);
+            converter.convertAndSerializeLargeFile(input_file, fos, mappings, Main.DATA_NAMESPACE);
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return false;

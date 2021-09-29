@@ -1,12 +1,12 @@
 package tbx2rdf.types;
 
 import tbx2rdf.vocab.TBX;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.vocabulary.DCTerms;
-import com.hp.hpl.jena.vocabulary.DC_11;
-import com.hp.hpl.jena.vocabulary.RDF;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.DCTerms;
+import org.apache.jena.vocabulary.DC_11;
+import org.apache.jena.vocabulary.RDF;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -68,7 +68,7 @@ public class TBX_Terminology {
             term.toRDF(model, concept);
             for (LexicalEntry le : term.Lex_entries) {
                 if (!lexicons.containsKey(le.lang)) {
-                    final Resource lexicon = model.createResource(Main.DATA_NAMESPACE + le.lang);
+                    final Resource lexicon = model.createResource(resourceURI + le.lang);
                     Resource rlan = LexvoManager.mgr.getLexvoFromISO2(le.lang);
                     //lexicon.addProperty(ONTOLEX.language, rlan);// OLD  
                     lexicon.addProperty(LIME.language, le.lang);   

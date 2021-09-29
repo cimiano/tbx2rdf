@@ -1,9 +1,9 @@
 package tbx2rdf;
 
 //JENA
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.RDFNode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

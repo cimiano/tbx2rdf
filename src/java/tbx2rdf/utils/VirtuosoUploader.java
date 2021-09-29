@@ -1,8 +1,5 @@
 package tbx2rdf.utils;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
