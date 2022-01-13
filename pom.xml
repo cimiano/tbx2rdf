@@ -193,7 +193,7 @@
 								<copy file="tbx2rdfConversion.sh" todir="${project.build.directory}/forZip" />
 								<copy file="tbx2rdfConversion.bat" todir="${project.build.directory}/forZip" />
 								<copy file="mappings.default" todir="${project.build.directory}/forZip" />
-								<copy file="readme.txt" todir="${project.build.directory}/forZip" />
+								<copy file="README.md" todir="${project.build.directory}/forZip" />
 								<copy file="log4j.properties" todir="${project.build.directory}/forZip" />
 
 								<copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" 
