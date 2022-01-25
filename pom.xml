@@ -62,11 +62,9 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>tbxcheck-1.2.9</groupId>
+			<groupId>org.ttt.salt</groupId>
 			<artifactId>tbxcheck</artifactId>
 			<version>1.2.9</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/doc/reference/TBX-resources/tbxcheck-1.2.9.jar</systemPath>
 		</dependency>
 
 	</dependencies>
@@ -212,8 +210,43 @@
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
-
 	</build>
+	<profiles>
+		<profile>
+			<!-- Configure this plugin in a profile, since the repo is in git as well-->
+			<id>init-lib</id>
+			<build>
+				<!-- Define a default goal to be executed when using the profile-->
+				<defaultGoal>initialize</defaultGoal>
+				<plugins>
+					<plugin>
+						<artifactId>maven-install-plugin</artifactId>
+						<version>3.0.0-M1</version>
+						<executions>
+							<!-- One execution per jar-->
+							<execution>
+								<id>install-tbxcheck</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>install-file</goal>
+								</goals>
+								<configuration>
+									<!-- Install to seperate repository. Remove if using local repo-->
+									<localRepositoryPath>${project.basedir}/repo</localRepositoryPath>
+									<file>${project.basedir}/doc/reference/TBX-resources/tbxcheck-1.2.9.jar</file>
+									<!-- These info are taken from the pom packaged in the jar
+									<groupId>org.ttt.salt</groupId>
+									<artifactId>tbxcheck</artifactId>
+									<version>1.2.9</version>
+									<packaging>jar</packaging>
+									-->
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
