@@ -1,8 +1,5 @@
 package tbx2rdf.utils;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -49,7 +46,7 @@ public class VirtuosoUploader {
     public static void deleteAll()
     {
         VirtGraph grafo = new VirtGraph (graph, url, user, passwd);
-        grafo.clear();        
+        //grafo.clear();        
     }
     
 
@@ -105,7 +102,7 @@ public class VirtuosoUploader {
             String str = "INSERT INTO GRAPH <" + graph + "> { " + triples + " }";
             VirtuosoUpdateRequest vur = VirtuosoUpdateFactory.create(str, set);
             vur.exec();
-            set.close();
+            //set.close();
         } else {
             System.err.println("No se ha especificado la configuración de virtuoso");
         }
